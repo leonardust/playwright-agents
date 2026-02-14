@@ -89,6 +89,10 @@ jobs:
               "- 🔗 **Base URL:** $baseURL" >> $env:GITHUB_STEP_SUMMARY
             }
             "- 🤖 **AI Model:** llama3.2-vision:latest" >> $env:GITHUB_STEP_SUMMARY
+            "" >> $env:GITHUB_STEP_SUMMARY
+            
+            "### 📄 Reports" >> $env:GITHUB_STEP_SUMMARY
+            "- 📊 [View HTML Report on GitHub Pages](https://leonardust.github.io/playwright-agents/) (available after deployment)" >> $env:GITHUB_STEP_SUMMARY
           } else {
             "⚠️ No test results found" >> $env:GITHUB_STEP_SUMMARY
           }
