@@ -101,7 +101,9 @@ jobs:
             "" >> $env:GITHUB_STEP_SUMMARY
             
             "### 📄 Reports" >> $env:GITHUB_STEP_SUMMARY
-            "- 📊 [View HTML Report on GitHub Pages](https://leonardust.github.io/playwright-agents/self-hosted/) (available after deployment)" >> $env:GITHUB_STEP_SUMMARY
+            "| Type | Link |" >> $env:GITHUB_STEP_SUMMARY
+            "| ---- | ---- |" >> $env:GITHUB_STEP_SUMMARY
+            "| Playwright | [View HTML Report](https://leonardust.github.io/playwright-agents/self-hosted/) |" >> $env:GITHUB_STEP_SUMMARY
           } else {
             "⚠️ No test results found" >> $env:GITHUB_STEP_SUMMARY
           }

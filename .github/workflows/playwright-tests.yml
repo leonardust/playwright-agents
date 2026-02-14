@@ -93,7 +93,9 @@ jobs:
             echo "" >> $GITHUB_STEP_SUMMARY
             
             echo "### 📄 Reports" >> $GITHUB_STEP_SUMMARY
-            echo "- 📊 [View HTML Report on GitHub Pages](https://leonardust.github.io/playwright-agents/github-hosted/) (available after deployment)" >> $GITHUB_STEP_SUMMARY
+            echo "| Type | Link |" >> $GITHUB_STEP_SUMMARY
+            echo "| ---- | ---- |" >> $GITHUB_STEP_SUMMARY
+            echo "| Playwright | [View HTML Report](https://leonardust.github.io/playwright-agents/github-hosted/) |" >> $GITHUB_STEP_SUMMARY
           else
             echo "⚠️ No test results found" >> $GITHUB_STEP_SUMMARY
           fi
