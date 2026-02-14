@@ -1,7 +1,8 @@
 import fs from 'fs';
+import * as core from '@actions/core';
 
 function getInput(name) {
-  return process.env[`INPUT_${name.toUpperCase().replace(/-/g, '_')}`] || '';
+  return core.getInput(name) || '';
 }
 
 function appendSummary(text) {
