@@ -80,29 +80,46 @@
 
    **Opcje przy konfiguracji:**
    - Runner group: naciśnij Enter (Default)
-   - Run as service:
-     - `Y` - runner będzie działał automatycznie (wymaga uprawnień Administratora)
-     - `N` - runner ręczny (musisz uruchomić `./run.sh` lub `.\run.cmd`)
+   - Run as service: naciśnij `N` (ręczna instalacja, później zainstalujemy jako serwis)
 
-4. **Uruchom runner:**
+4. **Uruchom runner jako serwis Windows (ZALECANE):**
 
-   **Jako serwis (automatycznie po restarcie, wymaga Administrator):**
+   **⚠️ WAŻNE dla Windows:** `svc.cmd` nie istnieje w najnowszych wersjach runnera. Użyj poniższego skryptu:
 
-   Linux/macOS:
+   **Otwórz PowerShell jako Administrator** i wykonaj:
+
+   ```powershell
+   # Przejdź do katalogu runnera
+   cd C:\actions-runner
+
+   # Zainstaluj jako serwis Windows
+   New-Service -Name "actions.runner.leonardust-playwright-agents.local-windows-runner" `
+       -BinaryPathName "C:\actions-runner\bin\Runner.Listener.exe run" `
+       -DisplayName "GitHub Actions Runner (playwright-agents)" `
+       -Description "GitHub Actions self-hosted runner" `
+       -StartupType Automatic
+
+   # Uruchom serwis
+   Start-Service "actions.runner.leonardust-playwright-agents.local-windows-runner"
+
+   # Sprawdź status
+   Get-Service "actions.runner.leonardust-playwright-agents.local-windows-runner"
+   ```
+
+   **Korzyści instalacji jako serwis:**
+   - ✅ Automatyczny start po restarcie komputera
+   - ✅ Automatyczny restart po aktualizacji runnera
+   - ✅ Nie musisz trzymać terminala otwartego
+   - ✅ Job wykona się automatycznie po pushu na GitHub
+
+   **Alternatywnie - Linux/macOS:**
 
    ```bash
    sudo ./svc.sh install
    sudo ./svc.sh start
    ```
 
-   Windows (PowerShell jako Administrator):
-
-   ```powershell
-   .\svc.cmd install
-   .\svc.cmd start
-   ```
-
-   **Ręcznie (w terminalu, musisz zostawić okno otwarte):**
+   **Alternatywnie - uruchomienie ręczne (musisz zostawić okno otwarte):**
 
    Linux/macOS:
 
@@ -127,9 +144,20 @@
 
 **💡 Troubleshooting:**
 
-- **Runner się zatrzymuje po aktualizacji:** Runner automatycznie aktualizuje się do nowszej wersji. Po aktualizacji musisz uruchomić ponownie `./run.sh` lub `.\run.cmd` (lub restart serwisu)
-- **"Waiting for a runner":** Sprawdź czy runner działa: `Get-Process | Where-Object {$_.ProcessName -like "*Runner*"}` (Windows) lub `ps aux | grep Runner` (Linux)
+- **Runner się zatrzymuje po aktualizacji (tylko dla ręcznego uruchamiania):** Jeśli runner NIE jest zainstalowany jako serwis, musisz uruchomić ponownie `./run.sh` lub `.\run.cmd` po aktualizacji. **Rozwiązanie:** Zainstaluj jako serwis (krok 4)
+- **"Waiting for a runner" w GitHub Actions:**
+  - Sprawdź czy runner działa:
+    - Windows: `Get-Service "actions.runner.*"` lub `Get-Process | Where-Object {$_.ProcessName -like "*Runner*"}`
+    - Linux: `ps aux | grep Runner`
+  - Jeśli nie działa, uruchom serwis: `Start-Service "actions.runner.*"` (Windows) lub `sudo ./svc.sh start` (Linux)
+- **"A session for this runner already exists":** Poprzednia sesja wisi. Usuń runnera i skonfiguruj ponownie:
+  ```powershell
+  # Usuń stary runner
+  .\config.cmd remove --token <REMOVE_TOKEN>
+  # Skonfiguruj od nowa (krok 3)
+  ```
 - **Brak uprawnień na Windows:** Uruchom PowerShell jako Administrator dla instalacji jako serwis
+- **Serwis nie startuje:** Sprawdź logi w `C:\actions-runner\_diag\` lub Event Viewer (Windows Logs → Application)
 
 ---
 
