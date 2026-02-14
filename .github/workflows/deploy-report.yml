@@ -39,6 +39,13 @@ jobs:
             echo "report_path=github-hosted" >> $GITHUB_OUTPUT
           fi
 
+      - name: Checkout gh-pages branch to preserve existing reports
+        uses: actions/checkout@v4
+        with:
+          ref: gh-pages
+          path: gh-pages-content
+        continue-on-error: true
+
       - name: Download artifact
         uses: actions/download-artifact@v4
         with:
@@ -47,12 +54,21 @@ jobs:
           run-id: ${{ github.event.workflow_run.id }}
           github-token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Prepare Pages structure
+      - name: Prepare Pages structure (merge with existing)
         run: |
+          # Start with existing gh-pages content if it exists
+          if [ -d "gh-pages-content" ]; then
+            cp -r gh-pages-content pages/
+          else
+            mkdir -p pages
+          fi
+          
+          # Update only the specific report path
           mkdir -p pages/${{ steps.workflow-info.outputs.report_path }}
+          rm -rf pages/${{ steps.workflow-info.outputs.report_path }}/*
           cp -r playwright-report/* pages/${{ steps.workflow-info.outputs.report_path }}/
           
-          # Create index.html for root that links to both reports
+          # Create/update index.html for root that links to both reports
           cat > pages/index.html << 'EOF'
           <!DOCTYPE html>
           <html>
@@ -63,12 +79,19 @@ jobs:
               h1 { color: #2ea44f; }
               .report-link { display: block; padding: 15px; margin: 10px 0; background: #f6f8fa; border-radius: 6px; text-decoration: none; color: #0969da; }
               .report-link:hover { background: #e7edf3; }
+              .timestamp { color: #656d76; font-size: 14px; }
             </style>
           </head>
           <body>
             <h1>🎭 Playwright Test Reports</h1>
-            <a href="self-hosted/" class="report-link">📊 Self-Hosted Runner Tests</a>
-            <a href="github-hosted/" class="report-link">📊 GitHub-Hosted Runner Tests</a>
+            <a href="self-hosted/" class="report-link">
+              📊 Self-Hosted Runner Tests
+              <div class="timestamp">Latest: $(date -u +"%Y-%m-%d %H:%M UTC")</div>
+            </a>
+            <a href="github-hosted/" class="report-link">
+              📊 GitHub-Hosted Runner Tests
+              <div class="timestamp">Latest: $(date -u +"%Y-%m-%d %H:%M UTC")</div>
+            </a>
           </body>
           </html>
           EOF
