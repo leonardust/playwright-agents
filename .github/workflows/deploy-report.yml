@@ -54,7 +54,7 @@ jobs:
           run-id: ${{ github.event.workflow_run.id }}
           github-token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Prepare Pages structure (merge with existing)
+      - name: Prepare Pages structure (with latest symlink)
         run: |
           # Create pages directory
           mkdir -p pages
@@ -63,11 +63,26 @@ jobs:
           if [ -d "gh-pages-content" ] && [ "$(ls -A gh-pages-content 2>/dev/null | grep -v '.git')" ]; then
             echo "Copying existing Pages content..."
             cp -r gh-pages-content/. pages/ 2>/dev/null || true
-            # Remove .git directory
             rm -rf pages/.git
           fi
           
-          # Update only the specific report path
+          # Create report path with timestamp AND update 'latest'
+          TIMESTAMP=$(date +%Y%m%d-%H%M%S)
+          REPORT_TYPE="${{ steps.workflow-info.outputs.report_path }}"
+          
+          echo "Deploying report to: $REPORT_TYPE/latest and $REPORT_TYPE/$TIMESTAMP"
+          
+          # Save report with timestamp
+          mkdir -p "pages/$REPORT_TYPE/$TIMESTAMP"
+          cp -r playwright-report/* "pages/$REPORT_TYPE/$TIMESTAMP/"
+          
+          # Update 'latest' folder (overwrite)
+          mkdir -p "pages/$REPORT_TYPE/latest"
+          rm -rf "pages/$REPORT_TYPE/latest"/*
+          cp -r playwright-report/* "pages/$REPORT_TYPE/latest/"
+          
+          # Create/update index.html for root
+          cat > pages/index.html << 'EOF'
           echo "Updating ${{ steps.workflow-info.outputs.report_path }} report..."
           mkdir -p pages/${{ steps.workflow-info.outputs.report_path }}
           rm -rf pages/${{ steps.workflow-info.outputs.report_path }}/*
