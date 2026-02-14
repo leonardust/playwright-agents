@@ -67,24 +67,28 @@ jobs:
           echo "" >> $GITHUB_STEP_SUMMARY
           
           if [ -f playwright-report/results.json ]; then
-            TOTAL=$(jq '[.suites[].specs[].tests[]] | length' playwright-report/results.json)
-            PASSED=$(jq '[.suites[].specs[].tests[] | select(.status == "expected")] | length' playwright-report/results.json)
-            FAILED=$(jq '[.suites[].specs[].tests[] | select(.status == "unexpected")] | length' playwright-report/results.json)
-            SKIPPED=$(jq '[.suites[].specs[].tests[] | select(.status == "skipped")] | length' playwright-report/results.json)
+            # Parse nested structure: count all tests from nested suites
+            TOTAL=$(jq '[.. | select(.tests? != null) | .tests[]] | length' playwright-report/results.json)
+            PASSED=$(jq '[.. | select(.tests? != null) | .tests[] | select(.status == "expected")] | length' playwright-report/results.json)
+            FAILED=$(jq '[.. | select(.tests? != null) | .tests[] | select(.status == "unexpected")] | length' playwright-report/results.json)
+            SKIPPED=$(jq '[.. | select(.tests? != null) | .tests[] | select(.status == "skipped")] | length' playwright-report/results.json)
+            BROWSER=$(jq -r '[.. | select(.tests? != null) | .tests[0].projectName] | first // "unknown"' playwright-report/results.json)
+            BASE_URL=$(jq -r '.config.projects[0].use.baseURL // "N/A"' playwright-report/results.json)
             
-            echo "### 📊 Summary" >> $GITHUB_STEP_SUMMARY
+            echo "### 📊 Test Summary" >> $GITHUB_STEP_SUMMARY
             echo "- ✅ **Passed:** $PASSED" >> $GITHUB_STEP_SUMMARY
             echo "- ❌ **Failed:** $FAILED" >> $GITHUB_STEP_SUMMARY
             echo "- ⏭️ **Skipped:** $SKIPPED" >> $GITHUB_STEP_SUMMARY
             echo "- 📝 **Total:** $TOTAL" >> $GITHUB_STEP_SUMMARY
             echo "" >> $GITHUB_STEP_SUMMARY
+            
+            echo "### 🌐 Test Environment" >> $GITHUB_STEP_SUMMARY
+            echo "- 🌐 **Browser:** $BROWSER" >> $GITHUB_STEP_SUMMARY
+            echo "- 🔗 **Base URL:** $BASE_URL" >> $GITHUB_STEP_SUMMARY
+            echo "- 🤖 **AI Model:** phi3:mini" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "⚠️ No test results found" >> $GITHUB_STEP_SUMMARY
           fi
-          
-          echo "### 📁 Artifacts" >> $GITHUB_STEP_SUMMARY
-          echo "- 📊 [Download HTML Report](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}#artifacts)" >> $GITHUB_STEP_SUMMARY
-          echo "- 🤖 [Download AI Logs](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}#artifacts)" >> $GITHUB_STEP_SUMMARY
-          echo "" >> $GITHUB_STEP_SUMMARY
-          echo "> 💡 Download artifacts and open \`playwright-report/index.html\` locally" >> $GITHUB_STEP_SUMMARY
 
       - name: Upload test results
         uses: actions/upload-artifact@v4
