@@ -1,5 +1,4 @@
-/* eslint-disable @typescript-eslint/no-require-imports */
-const fs = require('fs');
+import fs from 'fs';
 
 function getInput(name) {
   return process.env[`INPUT_${name.toUpperCase().replace(/-/g, '_')}`] || '';
