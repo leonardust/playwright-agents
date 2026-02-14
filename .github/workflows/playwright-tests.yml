@@ -85,9 +85,11 @@ jobs:
             echo "" >> $GITHUB_STEP_SUMMARY
             
             echo "### 🌐 Test Environment" >> $GITHUB_STEP_SUMMARY
-            echo "- 🌐 **Browser:** $BROWSER" >> $GITHUB_STEP_SUMMARY
-            echo "- 🔗 **Base URL:** $BASE_URL" >> $GITHUB_STEP_SUMMARY
-            echo "- 🤖 **AI Model:** phi3:mini" >> $GITHUB_STEP_SUMMARY
+            echo "| Property | Value |" >> $GITHUB_STEP_SUMMARY
+            echo "| -------- | ----- |" >> $GITHUB_STEP_SUMMARY
+            echo "| 🌐 Browser | $BROWSER |" >> $GITHUB_STEP_SUMMARY
+            echo "| 🔗 Base URL | $BASE_URL |" >> $GITHUB_STEP_SUMMARY
+            echo "| 🤖 AI Model | phi3:mini |" >> $GITHUB_STEP_SUMMARY
             echo "" >> $GITHUB_STEP_SUMMARY
             
             echo "### 📄 Reports" >> $GITHUB_STEP_SUMMARY

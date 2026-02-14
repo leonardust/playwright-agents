@@ -91,11 +91,13 @@ jobs:
             "" >> $env:GITHUB_STEP_SUMMARY
             
             "### 🌐 Test Environment" >> $env:GITHUB_STEP_SUMMARY
+            "| Property | Value |" >> $env:GITHUB_STEP_SUMMARY
+            "| -------- | ----- |" >> $env:GITHUB_STEP_SUMMARY
             if ($browser) {
-              "- 🌐 **Browser:** $browser" >> $env:GITHUB_STEP_SUMMARY
+              "| 🌐 Browser | $browser |" >> $env:GITHUB_STEP_SUMMARY
             }
-            "- 🔗 **Base URL:** $baseURL" >> $env:GITHUB_STEP_SUMMARY
-            "- 🤖 **AI Model:** llama3.2-vision:latest" >> $env:GITHUB_STEP_SUMMARY
+            "| 🔗 Base URL | $baseURL |" >> $env:GITHUB_STEP_SUMMARY
+            "| 🤖 AI Model | llama3.2-vision:latest |" >> $env:GITHUB_STEP_SUMMARY
             "" >> $env:GITHUB_STEP_SUMMARY
             
             "### 📄 Reports" >> $env:GITHUB_STEP_SUMMARY
