@@ -82,10 +82,12 @@ jobs:
             }
             
             "### 📊 Test Summary" >> $env:GITHUB_STEP_SUMMARY
-            "- ✅ **Passed:** $passed" >> $env:GITHUB_STEP_SUMMARY
-            "- ❌ **Failed:** $failed" >> $env:GITHUB_STEP_SUMMARY
-            "- ⏭️ **Skipped:** $skipped" >> $env:GITHUB_STEP_SUMMARY
-            "- 📝 **Total:** $total" >> $env:GITHUB_STEP_SUMMARY
+            "| Metric | Count |" >> $env:GITHUB_STEP_SUMMARY
+            "| ------ | ----- |" >> $env:GITHUB_STEP_SUMMARY
+            "| ✅ Passed | $passed |" >> $env:GITHUB_STEP_SUMMARY
+            "| ❌ Failed | $failed |" >> $env:GITHUB_STEP_SUMMARY
+            "| ⏭️ Skipped | $skipped |" >> $env:GITHUB_STEP_SUMMARY
+            "| 📝 Total | $total |" >> $env:GITHUB_STEP_SUMMARY
             "" >> $env:GITHUB_STEP_SUMMARY
             
             "### 🌐 Test Environment" >> $env:GITHUB_STEP_SUMMARY
