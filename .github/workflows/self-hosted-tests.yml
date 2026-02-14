@@ -28,11 +28,19 @@ jobs:
           curl http://localhost:11434/api/tags
           ollama list
 
+      - name: Debug environment variables
+        shell: pwsh
+        run: |
+          "CI: $env:CI"
+          "GITHUB_ACTIONS: $env:GITHUB_ACTIONS"
+          "RUNNER_ENVIRONMENT: $env:RUNNER_ENVIRONMENT"
+
       - name: Run all tests
         run: npm test
         continue-on-error: true
         env:
           CI: true
+          GITHUB_ACTIONS: true
 
       - name: Generate test summary
         if: always()
