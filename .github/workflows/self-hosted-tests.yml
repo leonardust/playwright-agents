@@ -34,6 +34,7 @@ jobs:
         env:
           CI: true
           GITHUB_ACTIONS: true
+          RUNNER_ENVIRONMENT: self-hosted
 
       - name: Generate test summary
         if: always()
