@@ -15,11 +15,7 @@ export default defineConfig({
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 2 : 0,
   workers: process.env.CI ? 1 : 1,
-  reporter: [
-    ['html'],
-    ['json', { outputFile: 'playwright-report/results.json' }],
-    ...(process.env.RUNNER_ENVIRONMENT !== 'self-hosted' ? [['github']] : []),
-  ],
+  reporter: [['html'], ['json', { outputFile: 'playwright-report/results.json' }]],
 
   timeout: parseInt(process.env.PLAYWRIGHT_TIMEOUT || '90000'),
 

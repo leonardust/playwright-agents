@@ -51,7 +51,6 @@ jobs:
             $skipped = 0
             $browser = ""
             $baseURL = "N/A"
-            $failedTests = @()
             
             # Parse nested structure: suites -> suites -> specs -> tests
             foreach ($suite in $results.suites) {
@@ -61,16 +60,7 @@ jobs:
                     $total += $spec.tests.Count
                     foreach ($test in $spec.tests) {
                       if ($test.status -eq "expected") { $passed++ }
-                      elseif ($test.status -eq "unexpected") { 
-                        $failed++
-                        # Collect failed test details
-                        $failedTests += @{
-                          title = $spec.title
-                          file = $spec.file
-                          line = $spec.line
-                          projectName = $test.projectName
-                        }
-                      }
+                      elseif ($test.status -eq "unexpected") { $failed++ }
                       elseif ($test.status -eq "skipped") { $skipped++ }
                       
                       # Get browser from first test
@@ -109,13 +99,9 @@ jobs:
             "### 📄 Reports" >> $env:GITHUB_STEP_SUMMARY
             "- 📊 [View HTML Report on GitHub Pages](https://leonardust.github.io/playwright-agents/self-hosted/) (available after deployment)" >> $env:GITHUB_STEP_SUMMARY
             
-            # Generate single custom annotation with test details
+            # Simple annotation summary
             if ($failed -gt 0) {
-              $failedDetails = $failedTests | ForEach-Object {
-                "[$($_.projectName)] › $($_.file):$($_.line) › $($_.title)"
-              }
-              $summary = "$failed failed " + ($failedDetails -join ", ")
-              Write-Host "::notice title=🎭 Playwright Run Summary::$summary"
+              Write-Host "::notice title=🎭 Playwright Run Summary::$failed failed, $passed passed ($total total)"
             } else {
               Write-Host "::notice title=🎭 Playwright Run Summary::$passed passed ($total total)"
             }
