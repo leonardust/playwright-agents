@@ -28,13 +28,6 @@ jobs:
           curl http://localhost:11434/api/tags
           ollama list
 
-      - name: Debug environment variables
-        shell: pwsh
-        run: |
-          "CI: $env:CI"
-          "GITHUB_ACTIONS: $env:GITHUB_ACTIONS"
-          "RUNNER_ENVIRONMENT: $env:RUNNER_ENVIRONMENT"
-
       - name: Run all tests
         run: npm test
         continue-on-error: true
@@ -57,6 +50,7 @@ jobs:
             $skipped = 0
             $browser = ""
             $baseURL = "N/A"
+            $failedTests = @()
             
             # Parse nested structure: suites -> suites -> specs -> tests
             foreach ($suite in $results.suites) {
@@ -66,7 +60,16 @@ jobs:
                     $total += $spec.tests.Count
                     foreach ($test in $spec.tests) {
                       if ($test.status -eq "expected") { $passed++ }
-                      elseif ($test.status -eq "unexpected") { $failed++ }
+                      elseif ($test.status -eq "unexpected") { 
+                        $failed++
+                        # Collect failed test details
+                        $failedTests += @{
+                          title = $spec.title
+                          file = $spec.file
+                          line = $spec.line
+                          projectName = $test.projectName
+                        }
+                      }
                       elseif ($test.status -eq "skipped") { $skipped++ }
                       
                       # Get browser from first test
@@ -104,8 +107,20 @@ jobs:
             
             "### 📄 Reports" >> $env:GITHUB_STEP_SUMMARY
             "- 📊 [View HTML Report on GitHub Pages](https://leonardust.github.io/playwright-agents/self-hosted/) (available after deployment)" >> $env:GITHUB_STEP_SUMMARY
+            
+            # Generate GitHub annotations summary (matching github-hosted format)
+            if ($failed -gt 0) {
+              foreach ($failedTest in $failedTests) {
+                $testPath = "[$($failedTest.projectName)] › $($failedTest.file):$($failedTest.line) › $($failedTest.title)"
+                Write-Host "::error file=$($failedTest.file),line=$($failedTest.line),title=Test failed::$testPath"
+              }
+              Write-Host "::notice title=🎭 Playwright Run Summary::$failed failed $testPath"
+            } else {
+              Write-Host "::notice title=🎭 Playwright Run Summary::$passed passed ($total total)"
+            }
           } else {
             "⚠️ No test results found" >> $env:GITHUB_STEP_SUMMARY
+            Write-Host "::warning title=🎭 Playwright Run Summary::No test results found"
           }
 
       - name: Upload test results
