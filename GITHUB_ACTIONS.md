@@ -30,38 +30,106 @@
 
 1. **Zainstaluj GitHub Actions Runner na swoim komputerze:**
 
+   **Linux/macOS:**
+
    ```bash
-   # Pobierz runner
    mkdir actions-runner && cd actions-runner
-
-   # Linux/macOS
-   curl -o actions-runner-linux-x64-2.311.0.tar.gz -L https://github.com/actions/runner/releases/download/v2.311.0/actions-runner-linux-x64-2.311.0.tar.gz
-   tar xzf ./actions-runner-linux-x64-2.311.0.tar.gz
-
-   # Windows PowerShell
-   Invoke-WebRequest -Uri https://github.com/actions/runner/releases/download/v2.311.0/actions-runner-win-x64-2.311.0.zip -OutFile actions-runner-win-x64-2.311.0.zip
-   Expand-Archive -Path ./actions-runner-win-x64-2.311.0.zip -DestinationPath .
+   curl -o actions-runner-linux-x64-2.321.0.tar.gz -L https://github.com/actions/runner/releases/download/v2.321.0/actions-runner-linux-x64-2.321.0.tar.gz
+   tar xzf ./actions-runner-linux-x64-2.321.0.tar.gz
    ```
 
-2. **Konfiguruj runner:**
+   **Windows PowerShell (Uruchom jako Administrator dla instalacji jako serwis):**
+
+   ```powershell
+   # Utwórz katalog dla runnera (najlepiej C:\actions-runner)
+   mkdir C:\actions-runner
+   cd C:\actions-runner
+
+   # Pobierz runner
+   Invoke-WebRequest -Uri https://github.com/actions/runner/releases/download/v2.321.0/actions-runner-win-x64-2.321.0.zip -OutFile actions-runner-win-x64-2.321.0.zip
+
+   # Rozpakuj
+   Expand-Archive -Path actions-runner-win-x64-2.321.0.zip -DestinationPath . -Force
+   ```
+
+2. **Wygeneruj token rejestracyjny:**
+
+   **Opcja A: Przez GitHub CLI (zalecane, automatyczne):**
 
    ```bash
-   # Przejdź do Settings → Actions → Runners → New self-hosted runner
-   # Skopiuj token i uruchom:
-   ./config.sh --url https://github.com/TWOJE_KONTO/REPO --token TWOJ_TOKEN
+   gh api /repos/OWNER/REPO/actions/runners/registration-token -X POST | jq -r .token
+   ```
 
-   # Uruchom runner
+   **Opcja B: Ręcznie przez UI:**
+   - Przejdź do: `Settings → Actions → Runners → New self-hosted runner`
+   - Skopiuj token (zaczyna się od `AAAA...`)
+
+3. **Konfiguruj runner:**
+
+   **Linux/macOS:**
+
+   ```bash
+   ./config.sh --url https://github.com/OWNER/REPO --token TWOJ_TOKEN --name "local-runner"
+   ```
+
+   **Windows:**
+
+   ```powershell
+   .\config.cmd --url https://github.com/OWNER/REPO --token TWOJ_TOKEN --name "local-windows-runner"
+   ```
+
+   **Opcje przy konfiguracji:**
+   - Runner group: naciśnij Enter (Default)
+   - Run as service:
+     - `Y` - runner będzie działał automatycznie (wymaga uprawnień Administratora)
+     - `N` - runner ręczny (musisz uruchomić `./run.sh` lub `.\run.cmd`)
+
+4. **Uruchom runner:**
+
+   **Jako serwis (automatycznie po restarcie, wymaga Administrator):**
+
+   Linux/macOS:
+
+   ```bash
+   sudo ./svc.sh install
+   sudo ./svc.sh start
+   ```
+
+   Windows (PowerShell jako Administrator):
+
+   ```powershell
+   .\svc.cmd install
+   .\svc.cmd start
+   ```
+
+   **Ręcznie (w terminalu, musisz zostawić okno otwarte):**
+
+   Linux/macOS:
+
+   ```bash
    ./run.sh
    ```
 
-3. **Upewnij się że Ollama działa:**
+   Windows:
+
+   ```powershell
+   .\run.cmd
+   ```
+
+5. **Upewnij się że Ollama działa:**
 
    ```bash
-   ollama serve  # W osobnym terminalu
+   ollama serve  # W osobnym terminalu (jeśli nie działa jako serwis)
    ollama pull llama3.2-vision:latest
    ```
 
-4. **Użyj workflow:** `.github/workflows/self-hosted-tests.yml`
+6. **Użyj workflow:** `.github/workflows/self-hosted-tests.yml`
+
+**💡 Troubleshooting:**
+
+- **Runner się zatrzymuje po aktualizacji:** Runner automatycznie aktualizuje się do nowszej wersji. Po aktualizacji musisz uruchomić ponownie `./run.sh` lub `.\run.cmd` (lub restart serwisu)
+- **"Waiting for a runner":** Sprawdź czy runner działa: `Get-Process | Where-Object {$_.ProcessName -like "*Runner*"}` (Windows) lub `ps aux | grep Runner` (Linux)
+- **Brak uprawnień na Windows:** Uruchom PowerShell jako Administrator dla instalacji jako serwis
 
 ---
 
