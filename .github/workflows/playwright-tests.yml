@@ -1,0 +1,80 @@
+name: Playwright Tests
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  test:
+    timeout-minutes: 60
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install Playwright Browsers
+        run: npx playwright install chromium --with-deps
+
+      - name: Setup Ollama
+        run: |
+          # Instalacja Ollama
+          curl -fsSL https://ollama.com/install.sh | sh
+          
+          # Uruchom Ollama w tle
+          nohup ollama serve > ollama.log 2>&1 &
+          
+          # Poczekaj na uruchomienie
+          sleep 5
+          
+          # Pobierz mały model (phi3:mini - ~2.3GB)
+          ollama pull phi3:mini
+          
+          # Sprawdź status
+          ollama list
+
+      - name: Update .env for CI
+        run: |
+          echo "OLLAMA_BASE_URL=http://localhost:11434/v1" > .env
+          echo "OLLAMA_API_KEY=ollama" >> .env
+          echo "OLLAMA_MODEL=phi3:mini" >> .env
+          echo "OLLAMA_TEMPERATURE=0" >> .env
+          echo "OLLAMA_NUM_CTX=8192" >> .env
+          echo "PLAYWRIGHT_TIMEOUT=120000" >> .env
+          echo "PLAYWRIGHT_EXPECT_TIMEOUT=40000" >> .env
+          echo "TEST_PASSWORD=secret_sauce" >> .env
+
+      - name: Run smoke tests
+        run: npm run test:smoke
+
+      - name: Upload test results
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: playwright-report
+          path: playwright-report/
+          retention-days: 7
+
+      - name: Upload AI logs
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: ai-logs
+          path: logs/
+          retention-days: 7
+
+      - name: Show Ollama logs on failure
+        if: failure()
+        run: cat ollama.log

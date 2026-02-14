@@ -1,0 +1,32 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+# Verify commit message format
+# Format: type(scope): message
+# Example: feat(tests): add shopping cart test
+
+commit_msg=$(cat "$1")
+
+# Conventional commits pattern
+pattern="^(feat|fix|docs|style|refactor|test|chore|perf|ci|build|revert)(\(.+\))?: .{1,}"
+
+if ! echo "$commit_msg" | grep -qE "$pattern"; then
+  echo "❌ Commit message format error!"
+  echo ""
+  echo "Format: type(scope): message"
+  echo ""
+  echo "Types:"
+  echo "  feat     - nowa funkcjonalność"
+  echo "  fix      - naprawa błędu"
+  echo "  docs     - dokumentacja"
+  echo "  style    - formatowanie kodu"
+  echo "  refactor - refaktoryzacja"
+  echo "  test     - testy"
+  echo "  chore    - maintanance"
+  echo "  perf     - optymalizacja"
+  echo "  ci       - CI/CD"
+  echo "  build    - build system"
+  echo ""
+  echo "Example: feat(tests): add shopping cart test"
+  exit 1
+fi

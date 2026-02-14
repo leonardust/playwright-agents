@@ -1,0 +1,35 @@
+{
+  "cucumber.features": ["features/**/*.feature"],
+  "cucumber.glue": ["steps/**/*.ts"],
+  "editor.quickSuggestions": {
+    "comments": false,
+    "strings": true,
+    "other": true
+  },
+  "files.autoSave": "afterDelay",
+  "files.autoSaveDelay": 1000,
+  "playwright.reuseBrowser": true,
+  "playwright.showTrace": true,
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true
+  },
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true
+  },
+  "[feature]": {
+    "editor.defaultFormatter": "CucumberOpen.cucumber-official"
+  },
+  "files.associations": {
+    "*.feature": "cucumber"
+  },
+  "search.exclude": {
+    "**/node_modules": true,
+    "**/dist": true,
+    "**/.playwright": true,
+    "**/test-results": true,
+    "**/playwright-report": true,
+    "**/.features-gen": true
+  }
+}
