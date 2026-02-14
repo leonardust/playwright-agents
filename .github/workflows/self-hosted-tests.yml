@@ -96,16 +96,8 @@ jobs:
             
             "### 📄 Reports" >> $env:GITHUB_STEP_SUMMARY
             "- 📊 [View HTML Report on GitHub Pages](https://leonardust.github.io/playwright-agents/self-hosted/) (available after deployment)" >> $env:GITHUB_STEP_SUMMARY
-            
-            # GitHub annotations summary
-            if ($failed -gt 0) {
-              Write-Host "::notice title=🎭 Playwright Run Summary::$failed failed, $passed passed ($total total)"
-            } else {
-              Write-Host "::notice title=🎭 Playwright Run Summary::$passed passed ($total total)"
-            }
           } else {
             "⚠️ No test results found" >> $env:GITHUB_STEP_SUMMARY
-            Write-Host "::warning title=🎭 Playwright Run Summary::No test results found"
           }
 
       - name: Upload test results

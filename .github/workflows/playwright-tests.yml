@@ -90,16 +90,8 @@ jobs:
             
             echo "### 📄 Reports" >> $GITHUB_STEP_SUMMARY
             echo "- 📊 [View HTML Report on GitHub Pages](https://leonardust.github.io/playwright-agents/github-hosted/) (available after deployment)" >> $GITHUB_STEP_SUMMARY
-            
-            # GitHub annotations summary
-            if [ "$FAILED" -gt 0 ]; then
-              echo "::notice title=🎭 Playwright Run Summary::$FAILED failed, $PASSED passed ($TOTAL total)"
-            else
-              echo "::notice title=🎭 Playwright Run Summary::$PASSED passed ($TOTAL total)"
-            fi
           else
             echo "⚠️ No test results found" >> $GITHUB_STEP_SUMMARY
-            echo "::warning title=🎭 Playwright Run Summary::No test results found"
           fi
 
       - name: Upload test results
