@@ -65,7 +65,27 @@ jobs:
         uses: ./.github/actions/generate-test-summary
         with:
           ai-model: 'phi3:mini'
-          report-url: 'https://leonardust.github.io/playwright-agents/github-hosted/'
+          report-url: 'https://github.com/${{ github.repository }}/releases/tag/report-github-hosted-${{ github.run_number }}'
+
+      - name: Create Release with HTML Report
+        if: always()
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: report-github-hosted-${{ github.run_number }}
+          name: GitHub-Hosted Test Report - Run ${{ github.run_number }}
+          body: |
+            ## 🎭 GitHub-Hosted Playwright Test Report
+            
+            **Run:** #${{ github.run_number }}
+            **Commit:** ${{ github.sha }}
+            **Branch:** ${{ github.ref_name }}
+            **Date:** ${{ github.event.head_commit.timestamp }}
+            
+            📊 Download the HTML report from assets below and open `index.html` in your browser.
+          files: |
+            playwright-report/**/*
+          draft: false
+          prerelease: false
 
       - name: Upload test results
         uses: actions/upload-artifact@v4
