@@ -2,7 +2,7 @@ name: Deploy Playwright Report to GitHub Pages
 
 on:
   workflow_run:
-    workflows: ["Self-Hosted Runner Tests"]
+    workflows: ["Self-Hosted Runner Tests", "Playwright Tests"]
     types:
       - completed
 
@@ -28,13 +28,50 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Determine workflow type and artifact name
+        id: workflow-info
+        run: |
+          if [[ "${{ github.event.workflow_run.name }}" == "Self-Hosted Runner Tests" ]]; then
+            echo "artifact_name=playwright-report-selfhosted" >> $GITHUB_OUTPUT
+            echo "report_path=self-hosted" >> $GITHUB_OUTPUT
+          else
+            echo "artifact_name=playwright-report" >> $GITHUB_OUTPUT
+            echo "report_path=github-hosted" >> $GITHUB_OUTPUT
+          fi
+
       - name: Download artifact
         uses: actions/download-artifact@v4
         with:
-          name: playwright-report-selfhosted
+          name: ${{ steps.workflow-info.outputs.artifact_name }}
           path: playwright-report
           run-id: ${{ github.event.workflow_run.id }}
           github-token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Prepare Pages structure
+        run: |
+          mkdir -p pages/${{ steps.workflow-info.outputs.report_path }}
+          cp -r playwright-report/* pages/${{ steps.workflow-info.outputs.report_path }}/
+          
+          # Create index.html for root that links to both reports
+          cat > pages/index.html << 'EOF'
+          <!DOCTYPE html>
+          <html>
+          <head>
+            <title>Playwright Test Reports</title>
+            <style>
+              body { font-family: Arial, sans-serif; max-width: 800px; margin: 50px auto; padding: 20px; }
+              h1 { color: #2ea44f; }
+              .report-link { display: block; padding: 15px; margin: 10px 0; background: #f6f8fa; border-radius: 6px; text-decoration: none; color: #0969da; }
+              .report-link:hover { background: #e7edf3; }
+            </style>
+          </head>
+          <body>
+            <h1>🎭 Playwright Test Reports</h1>
+            <a href="self-hosted/" class="report-link">📊 Self-Hosted Runner Tests</a>
+            <a href="github-hosted/" class="report-link">📊 GitHub-Hosted Runner Tests</a>
+          </body>
+          </html>
+          EOF
 
       - name: Setup Pages
         uses: actions/configure-pages@v4
@@ -42,7 +79,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: playwright-report
+          path: pages
 
       - name: Deploy to GitHub Pages
         id: deployment

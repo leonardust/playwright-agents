@@ -46,7 +46,7 @@ jobs:
             $failed = 0
             $skipped = 0
             $browser = ""
-            $baseURL = ""
+            $baseURL = "N/A"
             
             # Parse nested structure: suites -> suites -> specs -> tests
             foreach ($suite in $results.suites) {
@@ -69,9 +69,12 @@ jobs:
               }
             }
             
-            # Get base URL from config
-            if ($results.config.projects -and $results.config.projects[0].use.baseURL) {
-              $baseURL = $results.config.projects[0].use.baseURL
+            # Get base URL from config (fixed path)
+            if ($results.config.projects -and $results.config.projects.Count -gt 0) {
+              $project = $results.config.projects[0]
+              if ($project.PSObject.Properties['use'] -and $project.use.PSObject.Properties['baseURL']) {
+                $baseURL = $project.use.baseURL
+              }
             }
             
             "### 📊 Test Summary" >> $env:GITHUB_STEP_SUMMARY
@@ -85,16 +88,22 @@ jobs:
             if ($browser) {
               "- 🌐 **Browser:** $browser" >> $env:GITHUB_STEP_SUMMARY
             }
-            if ($baseURL) {
-              "- 🔗 **Base URL:** $baseURL" >> $env:GITHUB_STEP_SUMMARY
-            }
+            "- 🔗 **Base URL:** $baseURL" >> $env:GITHUB_STEP_SUMMARY
             "- 🤖 **AI Model:** llama3.2-vision:latest" >> $env:GITHUB_STEP_SUMMARY
             "" >> $env:GITHUB_STEP_SUMMARY
             
             "### 📄 Reports" >> $env:GITHUB_STEP_SUMMARY
-            "- 📊 [View HTML Report on GitHub Pages](https://leonardust.github.io/playwright-agents/) (available after deployment)" >> $env:GITHUB_STEP_SUMMARY
+            "- 📊 [View HTML Report on GitHub Pages](https://leonardust.github.io/playwright-agents/self-hosted/) (available after deployment)" >> $env:GITHUB_STEP_SUMMARY
+            
+            # GitHub annotations summary
+            if ($failed -gt 0) {
+              Write-Host "::notice title=🎭 Playwright Run Summary::$failed failed, $passed passed ($total total)"
+            } else {
+              Write-Host "::notice title=🎭 Playwright Run Summary::$passed passed ($total total)"
+            }
           } else {
             "⚠️ No test results found" >> $env:GITHUB_STEP_SUMMARY
+            Write-Host "::warning title=🎭 Playwright Run Summary::No test results found"
           }
 
       - name: Upload test results
