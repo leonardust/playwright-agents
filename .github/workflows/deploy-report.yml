@@ -12,7 +12,7 @@ permissions:
   id-token: write
 
 concurrency:
-  group: "pages"
+  group: "pages-deploy"
   cancel-in-progress: false
 
 jobs:
@@ -56,14 +56,19 @@ jobs:
 
       - name: Prepare Pages structure (merge with existing)
         run: |
-          # Start with existing gh-pages content if it exists
-          if [ -d "gh-pages-content" ]; then
-            cp -r gh-pages-content pages/
-          else
-            mkdir -p pages
+          # Create pages directory
+          mkdir -p pages
+          
+          # Copy existing gh-pages content if it exists
+          if [ -d "gh-pages-content" ] && [ "$(ls -A gh-pages-content 2>/dev/null | grep -v '.git')" ]; then
+            echo "Copying existing Pages content..."
+            cp -r gh-pages-content/. pages/ 2>/dev/null || true
+            # Remove .git directory
+            rm -rf pages/.git
           fi
           
           # Update only the specific report path
+          echo "Updating ${{ steps.workflow-info.outputs.report_path }} report..."
           mkdir -p pages/${{ steps.workflow-info.outputs.report_path }}
           rm -rf pages/${{ steps.workflow-info.outputs.report_path }}/*
           cp -r playwright-report/* pages/${{ steps.workflow-info.outputs.report_path }}/
