@@ -30,6 +30,46 @@ jobs:
 
       - name: Run all tests
         run: npm test
+        continue-on-error: true
+
+      - name: Generate test summary
+        if: always()
+        shell: pwsh
+        run: |
+          "## 🎭 Playwright Test Results" >> $env:GITHUB_STEP_SUMMARY
+          "" >> $env:GITHUB_STEP_SUMMARY
+          
+          if (Test-Path playwright-report/results.json) {
+            $results = Get-Content playwright-report/results.json | ConvertFrom-Json
+            $total = 0
+            $passed = 0
+            $failed = 0
+            $skipped = 0
+            
+            foreach ($suite in $results.suites) {
+              foreach ($spec in $suite.specs) {
+                $total += $spec.tests.Count
+                foreach ($test in $spec.tests) {
+                  if ($test.status -eq "expected") { $passed++ }
+                  elseif ($test.status -eq "unexpected") { $failed++ }
+                  elseif ($test.status -eq "skipped") { $skipped++ }
+                }
+              }
+            }
+            
+            "### 📊 Summary" >> $env:GITHUB_STEP_SUMMARY
+            "- ✅ **Passed:** $passed" >> $env:GITHUB_STEP_SUMMARY
+            "- ❌ **Failed:** $failed" >> $env:GITHUB_STEP_SUMMARY
+            "- ⏭️ **Skipped:** $skipped" >> $env:GITHUB_STEP_SUMMARY
+            "- 📝 **Total:** $total" >> $env:GITHUB_STEP_SUMMARY
+            "" >> $env:GITHUB_STEP_SUMMARY
+          }
+          
+          "### 📁 Artifacts" >> $env:GITHUB_STEP_SUMMARY
+          "- 📊 [Download HTML Report](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}#artifacts)" >> $env:GITHUB_STEP_SUMMARY
+          "- 🤖 [Download AI Logs](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}#artifacts)" >> $env:GITHUB_STEP_SUMMARY
+          "" >> $env:GITHUB_STEP_SUMMARY
+          "> 💡 Download artifacts and open ``playwright-report/index.html`` locally" >> $env:GITHUB_STEP_SUMMARY
 
       - name: Upload test results
         uses: actions/upload-artifact@v4

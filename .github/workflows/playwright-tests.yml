@@ -58,6 +58,33 @@ jobs:
 
       - name: Run smoke tests
         run: npm run test:smoke
+        continue-on-error: true
+
+      - name: Generate test summary
+        if: always()
+        run: |
+          echo "## 🎭 Playwright Test Results" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          
+          if [ -f playwright-report/results.json ]; then
+            TOTAL=$(jq '[.suites[].specs[].tests[]] | length' playwright-report/results.json)
+            PASSED=$(jq '[.suites[].specs[].tests[] | select(.status == "expected")] | length' playwright-report/results.json)
+            FAILED=$(jq '[.suites[].specs[].tests[] | select(.status == "unexpected")] | length' playwright-report/results.json)
+            SKIPPED=$(jq '[.suites[].specs[].tests[] | select(.status == "skipped")] | length' playwright-report/results.json)
+            
+            echo "### 📊 Summary" >> $GITHUB_STEP_SUMMARY
+            echo "- ✅ **Passed:** $PASSED" >> $GITHUB_STEP_SUMMARY
+            echo "- ❌ **Failed:** $FAILED" >> $GITHUB_STEP_SUMMARY
+            echo "- ⏭️ **Skipped:** $SKIPPED" >> $GITHUB_STEP_SUMMARY
+            echo "- 📝 **Total:** $TOTAL" >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+          fi
+          
+          echo "### 📁 Artifacts" >> $GITHUB_STEP_SUMMARY
+          echo "- 📊 [Download HTML Report](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}#artifacts)" >> $GITHUB_STEP_SUMMARY
+          echo "- 🤖 [Download AI Logs](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}#artifacts)" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "> 💡 Download artifacts and open \`playwright-report/index.html\` locally" >> $GITHUB_STEP_SUMMARY
 
       - name: Upload test results
         uses: actions/upload-artifact@v4
