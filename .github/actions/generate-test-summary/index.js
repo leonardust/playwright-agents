@@ -65,15 +65,23 @@ function generateSummary() {
   const aiModel = getInput('ai-model');
   const reportUrl = getInput('report-url');
 
+  console.log('Starting test summary generation...');
+  console.log('Results path:', resultsPath);
+  console.log('AI Model:', aiModel);
+  console.log('Report URL:', reportUrl);
+
   appendSummary('## 🎭 Playwright Test Results');
   appendSummary('');
 
   const stats = parseTestResults(resultsPath);
 
   if (!stats) {
+    console.log('No test results found at:', resultsPath);
     appendSummary('⚠️ No test results found');
     return;
   }
+
+  console.log('Test stats:', JSON.stringify(stats));
 
   // Test Summary Table
   appendSummary('### 📊 Test Summary');
