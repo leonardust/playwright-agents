@@ -108,13 +108,13 @@ jobs:
             "### 📄 Reports" >> $env:GITHUB_STEP_SUMMARY
             "- 📊 [View HTML Report on GitHub Pages](https://leonardust.github.io/playwright-agents/self-hosted/) (available after deployment)" >> $env:GITHUB_STEP_SUMMARY
             
-            # Generate GitHub annotations summary (matching github-hosted format)
+            # Generate single custom annotation with test details
             if ($failed -gt 0) {
-              foreach ($failedTest in $failedTests) {
-                $testPath = "[$($failedTest.projectName)] › $($failedTest.file):$($failedTest.line) › $($failedTest.title)"
-                Write-Host "::error file=$($failedTest.file),line=$($failedTest.line),title=Test failed::$testPath"
+              $failedDetails = $failedTests | ForEach-Object {
+                "[$($_.projectName)] › $($_.file):$($_.line) › $($_.title)"
               }
-              Write-Host "::notice title=🎭 Playwright Run Summary::$failed failed $testPath"
+              $summary = "$failed failed " + ($failedDetails -join ", ")
+              Write-Host "::notice title=🎭 Playwright Run Summary::$summary"
             } else {
               Write-Host "::notice title=🎭 Playwright Run Summary::$passed passed ($total total)"
             }
