@@ -1,0 +1,16 @@
+name: 'Generate Test Summary'
+description: 'Generate a formatted test summary from Playwright results.json'
+inputs:
+  results-path:
+    description: 'Path to Playwright results.json file'
+    required: false
+    default: 'playwright-report/results.json'
+  ai-model:
+    description: 'AI model name to display'
+    required: true
+  report-url:
+    description: 'URL to HTML report on GitHub Pages'
+    required: true
+runs:
+  using: 'node20'
+  main: 'index.js'

@@ -62,43 +62,10 @@ jobs:
 
       - name: Generate test summary
         if: always()
-        run: |
-          echo "## 🎭 Playwright Test Results" >> $GITHUB_STEP_SUMMARY
-          echo "" >> $GITHUB_STEP_SUMMARY
-          
-          if [ -f playwright-report/results.json ]; then
-            # Parse nested structure: count all tests from nested suites
-            TOTAL=$(jq '[.. | select(.tests? != null) | .tests[]] | length' playwright-report/results.json)
-            PASSED=$(jq '[.. | select(.tests? != null) | .tests[] | select(.status == "expected")] | length' playwright-report/results.json)
-            FAILED=$(jq '[.. | select(.tests? != null) | .tests[] | select(.status == "unexpected")] | length' playwright-report/results.json)
-            SKIPPED=$(jq '[.. | select(.tests? != null) | .tests[] | select(.status == "skipped")] | length' playwright-report/results.json)
-            BROWSER=$(jq -r '[.. | select(.tests? != null) | .tests[0].projectName] | first // "unknown"' playwright-report/results.json)
-            BASE_URL=$(jq -r '.config.projects[0].use.baseURL // "N/A"' playwright-report/results.json)
-            
-            echo "### 📊 Test Summary" >> $GITHUB_STEP_SUMMARY
-            echo "| Metric | Count |" >> $GITHUB_STEP_SUMMARY
-            echo "| ------ | ----- |" >> $GITHUB_STEP_SUMMARY
-            echo "| ✅ Passed | $PASSED |" >> $GITHUB_STEP_SUMMARY
-            echo "| ❌ Failed | $FAILED |" >> $GITHUB_STEP_SUMMARY
-            echo "| ⏭️ Skipped | $SKIPPED |" >> $GITHUB_STEP_SUMMARY
-            echo "| 📝 Total | $TOTAL |" >> $GITHUB_STEP_SUMMARY
-            echo "" >> $GITHUB_STEP_SUMMARY
-            
-            echo "### 🌐 Test Environment" >> $GITHUB_STEP_SUMMARY
-            echo "| Property | Value |" >> $GITHUB_STEP_SUMMARY
-            echo "| -------- | ----- |" >> $GITHUB_STEP_SUMMARY
-            echo "| 🌐 Browser | $BROWSER |" >> $GITHUB_STEP_SUMMARY
-            echo "| 🔗 Base URL | $BASE_URL |" >> $GITHUB_STEP_SUMMARY
-            echo "| 🤖 AI Model | phi3:mini |" >> $GITHUB_STEP_SUMMARY
-            echo "" >> $GITHUB_STEP_SUMMARY
-            
-            echo "### 📄 Reports" >> $GITHUB_STEP_SUMMARY
-            echo "| Type | Link |" >> $GITHUB_STEP_SUMMARY
-            echo "| ---- | ---- |" >> $GITHUB_STEP_SUMMARY
-            echo "| Playwright | [View HTML Report](https://leonardust.github.io/playwright-agents/github-hosted/) |" >> $GITHUB_STEP_SUMMARY
-          else
-            echo "⚠️ No test results found" >> $GITHUB_STEP_SUMMARY
-          fi
+        uses: ./.github/actions/generate-test-summary
+        with:
+          ai-model: 'phi3:mini'
+          report-url: 'https://leonardust.github.io/playwright-agents/github-hosted/'
 
       - name: Upload test results
         uses: actions/upload-artifact@v4

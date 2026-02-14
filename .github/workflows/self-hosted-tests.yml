@@ -38,75 +38,10 @@ jobs:
 
       - name: Generate test summary
         if: always()
-        shell: pwsh
-        run: |
-          "## 🎭 Playwright Test Results" >> $env:GITHUB_STEP_SUMMARY
-          "" >> $env:GITHUB_STEP_SUMMARY
-          
-          if (Test-Path playwright-report/results.json) {
-            $results = Get-Content playwright-report/results.json | ConvertFrom-Json
-            $total = 0
-            $passed = 0
-            $failed = 0
-            $skipped = 0
-            $browser = ""
-            $baseURL = "N/A"
-            
-            # Parse nested structure: suites -> suites -> specs -> tests
-            foreach ($suite in $results.suites) {
-              if ($suite.suites) {
-                foreach ($nestedSuite in $suite.suites) {
-                  foreach ($spec in $nestedSuite.specs) {
-                    $total += $spec.tests.Count
-                    foreach ($test in $spec.tests) {
-                      if ($test.status -eq "expected") { $passed++ }
-                      elseif ($test.status -eq "unexpected") { $failed++ }
-                      elseif ($test.status -eq "skipped") { $skipped++ }
-                      
-                      # Get browser from first test
-                      if (-not $browser -and $test.projectName) {
-                        $browser = $test.projectName
-                      }
-                    }
-                  }
-                }
-              }
-            }
-            
-            # Get base URL from config (fixed path)
-            if ($results.config.projects -and $results.config.projects.Count -gt 0) {
-              $project = $results.config.projects[0]
-              if ($project.PSObject.Properties['use'] -and $project.use.PSObject.Properties['baseURL']) {
-                $baseURL = $project.use.baseURL
-              }
-            }
-            
-            "### 📊 Test Summary" >> $env:GITHUB_STEP_SUMMARY
-            "| Metric | Count |" >> $env:GITHUB_STEP_SUMMARY
-            "| ------ | ----- |" >> $env:GITHUB_STEP_SUMMARY
-            "| ✅ Passed | $passed |" >> $env:GITHUB_STEP_SUMMARY
-            "| ❌ Failed | $failed |" >> $env:GITHUB_STEP_SUMMARY
-            "| ⏭️ Skipped | $skipped |" >> $env:GITHUB_STEP_SUMMARY
-            "| 📝 Total | $total |" >> $env:GITHUB_STEP_SUMMARY
-            "" >> $env:GITHUB_STEP_SUMMARY
-            
-            "### 🌐 Test Environment" >> $env:GITHUB_STEP_SUMMARY
-            "| Property | Value |" >> $env:GITHUB_STEP_SUMMARY
-            "| -------- | ----- |" >> $env:GITHUB_STEP_SUMMARY
-            if ($browser) {
-              "| 🌐 Browser | $browser |" >> $env:GITHUB_STEP_SUMMARY
-            }
-            "| 🔗 Base URL | $baseURL |" >> $env:GITHUB_STEP_SUMMARY
-            "| 🤖 AI Model | llama3.2-vision:latest |" >> $env:GITHUB_STEP_SUMMARY
-            "" >> $env:GITHUB_STEP_SUMMARY
-            
-            "### 📄 Reports" >> $env:GITHUB_STEP_SUMMARY
-            "| Type | Link |" >> $env:GITHUB_STEP_SUMMARY
-            "| ---- | ---- |" >> $env:GITHUB_STEP_SUMMARY
-            "| Playwright | [View HTML Report](https://leonardust.github.io/playwright-agents/self-hosted/) |" >> $env:GITHUB_STEP_SUMMARY
-          } else {
-            "⚠️ No test results found" >> $env:GITHUB_STEP_SUMMARY
-          }
+        uses: ./.github/actions/generate-test-summary
+        with:
+          ai-model: 'llama3.2-vision:latest'
+          report-url: 'https://leonardust.github.io/playwright-agents/self-hosted/'
 
       - name: Upload test results
         uses: actions/upload-artifact@v4
