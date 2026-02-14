@@ -5,6 +5,9 @@ on:
     branches: [main]
   workflow_dispatch:
 
+permissions:
+  contents: write  # Needed for creating releases
+
 jobs:
   test-with-local-ollama:
     timeout-minutes: 30
