@@ -43,8 +43,8 @@ jobs:
           # Poczekaj na uruchomienie
           sleep 5
           
-          # Pobierz szybki model (llama3.2:3b - ~2.0GB)
-          ollama pull llama3.2:3b
+          # Pobierz wydajny model (llama3.1:8b - ~4.9GB)
+          ollama pull llama3.1:8b
           
           # Sprawdź status
           ollama list
@@ -53,7 +53,7 @@ jobs:
         run: |
           echo "OLLAMA_BASE_URL=http://localhost:11434/v1" > .env
           echo "OLLAMA_API_KEY=ollama" >> .env
-          echo "OLLAMA_MODEL=llama3.2:3b" >> .env
+          echo "OLLAMA_MODEL=llama3.1:8b" >> .env
           echo "OLLAMA_TEMPERATURE=0" >> .env
           echo "OLLAMA_NUM_CTX=8192" >> .env
           echo "PLAYWRIGHT_TIMEOUT=180000" >> .env
@@ -68,7 +68,7 @@ jobs:
         if: always()
         uses: ./.github/actions/generate-test-summary
         with:
-          ai-model: 'llama3.2:3b'
+          ai-model: 'llama3.1:8b'
 
       - name: Upload test results
         uses: actions/upload-artifact@v4
