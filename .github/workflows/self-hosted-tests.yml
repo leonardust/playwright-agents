@@ -5,6 +5,10 @@ on:
     branches: [main]
   workflow_dispatch:
 
+permissions:
+  contents: write
+  pages: write
+
 jobs:
   test-with-local-ollama:
     timeout-minutes: 30
@@ -58,3 +62,19 @@ jobs:
           name: ai-logs-selfhosted
           path: logs/
           retention-days: 30
+
+  deploy:
+    needs: test-with-local-ollama
+    if: always()
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Deploy to GitHub Pages
+        uses: ./.github/actions/deploy-to-pages
+        with:
+          artifact-name: playwright-report-selfhosted
+          report-type: self-hosted
+          github-token: ${{ secrets.GITHUB_TOKEN }}

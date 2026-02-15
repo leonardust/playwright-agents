@@ -7,6 +7,10 @@ on:
     branches: [main]
   workflow_dispatch:
 
+permissions:
+  contents: write
+  pages: write
+
 jobs:
   test:
     timeout-minutes: 60
@@ -86,3 +90,19 @@ jobs:
       - name: Show Ollama logs on failure
         if: failure()
         run: cat ollama.log
+
+  deploy:
+    needs: test
+    if: always()
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Deploy to GitHub Pages
+        uses: ./.github/actions/deploy-to-pages
+        with:
+          artifact-name: playwright-report
+          report-type: github-hosted
+          github-token: ${{ secrets.GITHUB_TOKEN }}

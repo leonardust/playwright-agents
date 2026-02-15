@@ -1,0 +1,35 @@
+name: 'Deploy Report to GitHub Pages'
+description: 'Deploys Playwright report to GitHub Pages'
+inputs:
+  artifact-name:
+    description: 'Name of the artifact to download'
+    required: true
+  report-type:
+    description: 'Type of report (self-hosted or github-hosted)'
+    required: true
+  github-token:
+    description: 'GitHub token for pushing to gh-pages'
+    required: true
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Checkout gh-pages branch
+      uses: actions/checkout@v4
+      with:
+        ref: gh-pages
+        path: gh-pages-content
+      continue-on-error: true
+
+    - name: Download test report
+      uses: actions/download-artifact@v4
+      with:
+        name: ${{ inputs.artifact-name }}
+        path: playwright-report
+
+    - name: Deploy report to gh-pages
+      shell: bash
+      run: |
+        chmod +x scripts/deploy-to-gh-pages.sh
+        ./scripts/deploy-to-gh-pages.sh "${{ inputs.report-type }}" "${{ inputs.github-token }}"
+
