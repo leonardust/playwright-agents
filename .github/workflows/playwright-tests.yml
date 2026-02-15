@@ -32,32 +32,15 @@ jobs:
       - name: Install Playwright Browsers
         run: npx playwright install chromium --with-deps
 
-      - name: Setup Ollama
-        run: |
-          # Instalacja Ollama
-          curl -fsSL https://ollama.com/install.sh | sh
-          
-          # Uruchom Ollama w tle
-          nohup ollama serve > ollama.log 2>&1 &
-          
-          # Poczekaj na uruchomienie
-          sleep 5
-          
-          # Pobierz wydajny model (llama3.1:8b - ~4.9GB)
-          ollama pull llama3.1:8b
-          
-          # Sprawdź status
-          ollama list
-
       - name: Update .env for CI
         run: |
-          echo "OLLAMA_BASE_URL=http://localhost:11434/v1" > .env
-          echo "OLLAMA_API_KEY=ollama" >> .env
-          echo "OLLAMA_MODEL=llama3.1:8b" >> .env
+          echo "OLLAMA_BASE_URL=https://api.groq.com/openai/v1" > .env
+          echo "OLLAMA_API_KEY=${{ secrets.GROQ_API_KEY }}" >> .env
+          echo "OLLAMA_MODEL=llama-3.1-8b-instant" >> .env
           echo "OLLAMA_TEMPERATURE=0" >> .env
           echo "OLLAMA_NUM_CTX=8192" >> .env
-          echo "PLAYWRIGHT_TIMEOUT=180000" >> .env
-          echo "PLAYWRIGHT_EXPECT_TIMEOUT=60000" >> .env
+          echo "PLAYWRIGHT_TIMEOUT=90000" >> .env
+          echo "PLAYWRIGHT_EXPECT_TIMEOUT=30000" >> .env
           echo "TEST_PASSWORD=secret_sauce" >> .env
 
       - name: Run smoke tests
@@ -68,7 +51,7 @@ jobs:
         if: always()
         uses: ./.github/actions/generate-test-summary
         with:
-          ai-model: 'llama3.1:8b'
+          ai-model: 'llama-3.1-8b-instant'
 
       - name: Upload test results
         uses: actions/upload-artifact@v4
@@ -85,10 +68,6 @@ jobs:
           name: ai-logs
           path: logs/
           retention-days: 7
-
-      - name: Show Ollama logs on failure
-        if: failure()
-        run: cat ollama.log
 
   deploy:
     needs: test
