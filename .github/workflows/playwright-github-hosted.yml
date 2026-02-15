@@ -79,6 +79,9 @@ jobs:
     needs: test
     if: always()
     runs-on: ubuntu-latest
+    concurrency:
+      group: gh-pages-deploy
+      cancel-in-progress: false
     
     steps:
       - name: Checkout code
