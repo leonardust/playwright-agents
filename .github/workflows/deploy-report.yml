@@ -7,7 +7,7 @@ on:
       - completed
 
 permissions:
-  contents: read
+  contents: write
   pages: write
   id-token: write
 
@@ -19,10 +19,6 @@ jobs:
   deploy:
     if: ${{ github.event.workflow_run.conclusion == 'success' || github.event.workflow_run.conclusion == 'failure' }}
     runs-on: ubuntu-latest
-    
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
     
     steps:
       - name: Checkout code
@@ -45,7 +41,6 @@ jobs:
           ref: gh-pages
           path: gh-pages-content
         continue-on-error: true
-
       - name: Download artifact
         uses: actions/download-artifact@v4
         with:
@@ -54,7 +49,7 @@ jobs:
           run-id: ${{ github.event.workflow_run.id }}
           github-token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Prepare Pages structure (with latest symlink)
+      - name: Prepare Pages structure and deploy to gh-pages branch
         run: |
           # Create pages directory
           mkdir -p pages
@@ -108,15 +103,13 @@ jobs:
           </body>
           </html>
           EOF
-
-      - name: Setup Pages
-        uses: actions/configure-pages@v4
-
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: pages
-
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+          
+          # Deploy to gh-pages branch
+          cd pages
+          git init
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add .
+          git commit -m "Deploy $REPORT_TYPE report - $TIMESTAMP"
+          git branch -M gh-pages
+          git push -f https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git gh-pages
