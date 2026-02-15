@@ -82,7 +82,7 @@ jobs:
           cp -r playwright-report/* "pages/$REPORT_TYPE/latest/"
           
           # Create/update index.html for root
-          cat > pages/index.html << 'EOF'
+          cat > pages/index.html << EOF
           <!DOCTYPE html>
           <html>
           <head>

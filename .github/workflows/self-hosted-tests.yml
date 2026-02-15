@@ -41,7 +41,7 @@ jobs:
         uses: ./.github/actions/generate-test-summary
         with:
           ai-model: 'llama3.2-vision:latest'
-          report-url: 'https://leonardust.github.io/playwright-agents/self-hosted/'
+          report-url: 'https://leonardust.github.io/playwright-agents/self-hosted/latest/'
 
       - name: Upload test results
         uses: actions/upload-artifact@v4
