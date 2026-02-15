@@ -56,10 +56,11 @@ jobs:
           echo "TEST_PASSWORD=secret_sauce" >> .env
 
       - name: Run smoke tests
+        id: tests
         run: npm run test:smoke
 
       - name: Generate test summary
-        if: always()
+        if: always() && steps.tests.conclusion != 'skipped'
         uses: ./.github/actions/generate-test-summary
         with:
           ai-model: 'llama-3.1-8b-instant'
