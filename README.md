@@ -229,14 +229,16 @@ Zobacz szczegóły: **[HUSKY.md](HUSKY.md)**
 
 Projekt zawiera 2 workflows z automatycznym deploymentem raportów do GitHub Pages:
 
-- **Self-hosted runner** - `.github/workflows/self-hosted-tests.yml`
+- **Playwright - Self-Hosted** - `.github/workflows/playwright-self-hosted.yml`
   - Uruchamia się przy push do `main`
   - Używa modelu `llama3.2-vision:latest`
   - Automatyczny deployment raportu
-- **GitHub-hosted runner** - `.github/workflows/playwright-tests.yml`
+  - ~115s execution time
+- **Playwright - GitHub-Hosted** - `.github/workflows/playwright-github-hosted.yml`
   - Uruchamia się przy push/PR
-  - Używa modelu `phi3:mini`
+  - Używa Groq API `llama-3.1-8b-instant` (ultra-fast)
   - Automatyczny deployment raportu
+  - ~37s execution time
 
 **📊 Raporty testów dostępne na GitHub Pages:**
 

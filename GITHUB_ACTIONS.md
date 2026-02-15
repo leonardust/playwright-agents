@@ -140,7 +140,7 @@
    ollama pull llama3.2-vision:latest
    ```
 
-6. **Użyj workflow:** `.github/workflows/self-hosted-tests.yml`
+6. **Użyj workflow:** `.github/workflows/playwright-self-hosted.yml`
 
 **💡 Troubleshooting:**
 
@@ -161,24 +161,27 @@
 
 ---
 
-### ⚡ Opcja 2: GitHub-Hosted Runner z małym modelem
+### ⚡ Opcja 2: GitHub-Hosted Runner z Groq API
 
 **Zalety:**
 
 - Nie wymaga konfiguracji runnera
 - Bezpłatne dla publicznych repozytoriów
+- **Ultra-szybkie (Groq: ~500 tokens/s)**
 - Automatyczne zarządzanie
+- Stabilne i niezawodne
 
-**Wady:**
+**Konfiguracja:**
 
-- Ograniczone zasoby (2 CPU, 7GB RAM)
-- Brak GPU (wolne działanie CPU)
-- Tylko małe modele (phi3:mini, tinyllama)
-- Timeout 6h dla job
+1. **Zdobądź Groq API Key:** https://console.groq.com
+2. **Dodaj do GitHub Secrets:** `GROQ_API_KEY`
+3. **Użyj workflow:** `.github/workflows/playwright-github-hosted.yml`
+
+Zobacz szczegóły: **[GROQ_SETUP.md](GROQ_SETUP.md)**
 
 **Kroki:**
 
-1. **Użyj workflow:** `.github/workflows/playwright-tests.yml`
+1. **Użyj workflow:** `.github/workflows/playwright-github-hosted.yml`
 
 2. **Dostosuj timeout w playwright.config.ts dla CI:**
 
@@ -313,13 +316,17 @@ Projekt zawiera 2 główne workflows z automatycznym deploymentem raportów:
 
 ### 📊 Test Workflows
 
-- **`.github/workflows/self-hosted-tests.yml`** - Self-hosted runner z Ollama
+- **`.github/workflows/playwright-self-hosted.yml`** - Self-hosted runner z Ollama
+  - **Nazwa:** "Playwright - Self-Hosted"
   - Uruchamia się automatycznie przy push do `main`
   - Używa pełnego modelu `llama3.2-vision:latest`
+  - Execution time: ~115s
   - Po testach automatycznie deployuje raport do GitHub Pages
-- **`.github/workflows/playwright-tests.yml`** - GitHub-hosted runner
+- **`.github/workflows/playwright-github-hosted.yml`** - GitHub-hosted runner
+  - **Nazwa:** "Playwright - GitHub-Hosted"
   - Uruchamia się przy push do `main`/`develop` i pull request
-  - Używa małego modelu `phi3:mini`
+  - Używa Groq API `llama-3.1-8b-instant` (ultra-fast)
+  - Execution time: ~37s
   - Po testach automatycznie deployuje raport do GitHub Pages
 
 ### 🚀 GitHub Pages Deployment
