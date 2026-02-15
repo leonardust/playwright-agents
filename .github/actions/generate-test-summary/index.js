@@ -64,12 +64,10 @@ function parseTestResults(resultsPath) {
 function generateSummary() {
   const resultsPath = getInput('results-path');
   const aiModel = getInput('ai-model');
-  const reportUrl = getInput('report-url');
 
   console.log('Starting test summary generation...');
   console.log('Results path:', resultsPath);
   console.log('AI Model:', aiModel);
-  console.log('Report URL:', reportUrl);
 
   appendSummary('## 🎭 Playwright Test Results');
   appendSummary('');
@@ -103,13 +101,6 @@ function generateSummary() {
   }
   appendSummary(`| 🔗 Base URL | ${stats.baseURL} |`);
   appendSummary(`| 🤖 AI Model | ${aiModel} |`);
-  appendSummary('');
-
-  // Reports Table
-  appendSummary('### 📄 Reports');
-  appendSummary('| Type | Link |');
-  appendSummary('| ---- | ---- |');
-  appendSummary(`| Playwright | [View HTML Report](${reportUrl}) |`);
 }
 
 try {
