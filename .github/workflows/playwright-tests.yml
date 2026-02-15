@@ -43,8 +43,8 @@ jobs:
           # Poczekaj na uruchomienie
           sleep 5
           
-          # Pobierz mały model (phi3:mini - ~2.3GB)
-          ollama pull phi3:mini
+          # Pobierz szybki model (llama3.2:3b - ~2.0GB)
+          ollama pull llama3.2:3b
           
           # Sprawdź status
           ollama list
@@ -53,11 +53,11 @@ jobs:
         run: |
           echo "OLLAMA_BASE_URL=http://localhost:11434/v1" > .env
           echo "OLLAMA_API_KEY=ollama" >> .env
-          echo "OLLAMA_MODEL=phi3:mini" >> .env
+          echo "OLLAMA_MODEL=llama3.2:3b" >> .env
           echo "OLLAMA_TEMPERATURE=0" >> .env
           echo "OLLAMA_NUM_CTX=8192" >> .env
-          echo "PLAYWRIGHT_TIMEOUT=120000" >> .env
-          echo "PLAYWRIGHT_EXPECT_TIMEOUT=40000" >> .env
+          echo "PLAYWRIGHT_TIMEOUT=180000" >> .env
+          echo "PLAYWRIGHT_EXPECT_TIMEOUT=60000" >> .env
           echo "TEST_PASSWORD=secret_sauce" >> .env
 
       - name: Run smoke tests
@@ -68,7 +68,7 @@ jobs:
         if: always()
         uses: ./.github/actions/generate-test-summary
         with:
-          ai-model: 'phi3:mini'
+          ai-model: 'llama3.2:3b'
 
       - name: Upload test results
         uses: actions/upload-artifact@v4
