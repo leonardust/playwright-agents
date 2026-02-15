@@ -38,33 +38,174 @@ mkdir -p "pages/$REPORT_TYPE/latest"
 rm -rf "pages/$REPORT_TYPE/latest"/*
 cp -r playwright-report/* "pages/$REPORT_TYPE/latest/"
 
+# Function to generate report list HTML
+generate_report_list() {
+  local type=$1
+  local reports=""
+  
+  if [ -d "pages/$type" ]; then
+    # Get all timestamped directories, sorted newest first
+    for dir in $(ls -1 "pages/$type" 2>/dev/null | grep -E '^[0-9]{8}-[0-9]{6}$' | sort -r | head -20); do
+      # Parse timestamp to readable format
+      local date_part="${dir:0:8}"
+      local time_part="${dir:9:6}"
+      local formatted_date="${date_part:0:4}-${date_part:4:2}-${date_part:6:2}"
+      local formatted_time="${time_part:0:2}:${time_part:2:2}:${time_part:4:2}"
+      
+      reports+="        <li><a href=\"$type/$dir/\" class=\"history-link\">📅 $formatted_date $formatted_time UTC</a></li>\n"
+    done
+  fi
+  
+  if [ -z "$reports" ]; then
+    reports="        <li class=\"empty-state\">No historical reports yet</li>\n"
+  fi
+  
+  echo -e "$reports"
+}
+
+# Get report lists
+SELF_HOSTED_REPORTS=$(generate_report_list "self-hosted")
+GITHUB_HOSTED_REPORTS=$(generate_report_list "github-hosted")
+
 # Create/update index.html for root
-cat > pages/index.html << EOF
+cat > pages/index.html << 'EOF'
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Playwright Test Reports</title>
   <style>
-    body { font-family: Arial, sans-serif; max-width: 800px; margin: 50px auto; padding: 20px; }
-    h1 { color: #2ea44f; }
-    .report-link { display: block; padding: 15px; margin: 10px 0; background: #f6f8fa; border-radius: 6px; text-decoration: none; color: #0969da; }
-    .report-link:hover { background: #e7edf3; }
-    .timestamp { color: #656d76; font-size: 14px; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { 
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+      max-width: 1200px; 
+      margin: 0 auto; 
+      padding: 40px 20px;
+      background: #f6f8fa;
+      color: #24292f;
+    }
+    h1 { 
+      color: #2ea44f; 
+      margin-bottom: 10px;
+      font-size: 2.5em;
+    }
+    .subtitle {
+      color: #656d76;
+      margin-bottom: 40px;
+      font-size: 1.1em;
+    }
+    .report-section {
+      background: white;
+      border-radius: 12px;
+      padding: 30px;
+      margin-bottom: 30px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.12);
+    }
+    .report-section h2 {
+      color: #24292f;
+      margin-bottom: 20px;
+      font-size: 1.5em;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .latest-link {
+      display: inline-block;
+      padding: 12px 24px;
+      background: #2ea44f;
+      color: white;
+      text-decoration: none;
+      border-radius: 6px;
+      font-weight: 600;
+      transition: background 0.2s;
+      margin-bottom: 20px;
+    }
+    .latest-link:hover {
+      background: #2c974b;
+    }
+    .history-section {
+      margin-top: 20px;
+      padding-top: 20px;
+      border-top: 1px solid #d0d7de;
+    }
+    .history-section h3 {
+      color: #656d76;
+      font-size: 1em;
+      margin-bottom: 15px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .history-list {
+      list-style: none;
+      max-height: 300px;
+      overflow-y: auto;
+    }
+    .history-list li {
+      margin-bottom: 8px;
+    }
+    .history-link {
+      display: block;
+      padding: 10px 15px;
+      background: #f6f8fa;
+      color: #0969da;
+      text-decoration: none;
+      border-radius: 6px;
+      transition: background 0.2s;
+      font-size: 0.95em;
+    }
+    .history-link:hover {
+      background: #e7edf3;
+    }
+    .empty-state {
+      color: #656d76;
+      font-style: italic;
+      padding: 10px 15px;
+    }
+    .timestamp {
+      color: #656d76;
+      font-size: 0.9em;
+      margin-top: 5px;
+    }
   </style>
 </head>
 <body>
   <h1>🎭 Playwright Test Reports</h1>
-  <a href="self-hosted/latest/" class="report-link">
-    📊 Self-Hosted Runner Tests
-    <div class="timestamp">Latest: $CURRENT_TIME</div>
-  </a>
-  <a href="github-hosted/latest/" class="report-link">
-    📊 GitHub-Hosted Runner Tests
-    <div class="timestamp">Latest: $CURRENT_TIME</div>
-  </a>
+  <p class="subtitle">Latest test results and historical reports</p>
+  
+  <div class="report-section">
+    <h2>💻 Self-Hosted Runner Tests</h2>
+    <a href="self-hosted/latest/" class="latest-link">View Latest Report →</a>
+    <div class="timestamp">Last updated: CURRENT_TIME_PLACEHOLDER</div>
+    
+    <div class="history-section">
+      <h3>📚 Report History (Last 20)</h3>
+      <ul class="history-list">
+SELF_HOSTED_REPORTS_PLACEHOLDER
+      </ul>
+    </div>
+  </div>
+  
+  <div class="report-section">
+    <h2>☁️ GitHub-Hosted Runner Tests</h2>
+    <a href="github-hosted/latest/" class="latest-link">View Latest Report →</a>
+    <div class="timestamp">Last updated: CURRENT_TIME_PLACEHOLDER</div>
+    
+    <div class="history-section">
+      <h3>📚 Report History (Last 20)</h3>
+      <ul class="history-list">
+GITHUB_HOSTED_REPORTS_PLACEHOLDER
+      </ul>
+    </div>
+  </div>
 </body>
 </html>
 EOF
+
+# Replace placeholders
+sed -i "s|CURRENT_TIME_PLACEHOLDER|$CURRENT_TIME|g" pages/index.html
+sed -i "s|SELF_HOSTED_REPORTS_PLACEHOLDER|$SELF_HOSTED_REPORTS|g" pages/index.html
+sed -i "s|GITHUB_HOSTED_REPORTS_PLACEHOLDER|$GITHUB_HOSTED_REPORTS|g" pages/index.html
 
 # Deploy to gh-pages branch
 echo "🔧 Configuring git..."
@@ -80,9 +221,15 @@ git branch -M gh-pages
 git push -f "https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" gh-pages
 
 echo "✅ Report deployed successfully!"
-echo "🔗 View at: https://leonardust.github.io/playwright-agents/$REPORT_TYPE/latest/"
+echo "🔗 Latest: https://leonardust.github.io/playwright-agents/$REPORT_TYPE/latest/"
+echo "🔗 All Reports: https://leonardust.github.io/playwright-agents/"
 
 # Add to GitHub Step Summary if available
 if [ -n "$GITHUB_STEP_SUMMARY" ]; then
-  echo "✅ Report deployed to: https://leonardust.github.io/playwright-agents/$REPORT_TYPE/latest/" >> "$GITHUB_STEP_SUMMARY"
+  echo "" >> "$GITHUB_STEP_SUMMARY"
+  echo "✅ Report deployed successfully!" >> "$GITHUB_STEP_SUMMARY"
+  echo "" >> "$GITHUB_STEP_SUMMARY"
+  echo "📊 **Latest Report:** https://leonardust.github.io/playwright-agents/$REPORT_TYPE/latest/" >> "$GITHUB_STEP_SUMMARY"
+  echo "" >> "$GITHUB_STEP_SUMMARY"
+  echo "📚 **All Reports:** https://leonardust.github.io/playwright-agents/" >> "$GITHUB_STEP_SUMMARY"
 fi
