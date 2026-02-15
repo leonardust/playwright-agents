@@ -51,6 +51,28 @@ export class AIHelper {
   }
 
   /**
+   * Czyści odpowiedź AI z markdown code blocks i nadmiarowych znaków
+   */
+  private cleanSelector(selector: string): string {
+    // Usuń markdown code blocks (```css ... ``` lub ``` ... ```)
+    let cleaned = selector.replace(/```(?:css|html|javascript|)?\s*/g, '').replace(/```\s*/g, '');
+
+    // Usuń komentarze CSS
+    cleaned = cleaned.replace(/\/\*[\s\S]*?\*\//g, '');
+
+    // Usuń nawiasy klamrowe i zawartość (reguły CSS)
+    cleaned = cleaned.replace(/\{[\s\S]*?\}/g, '');
+
+    // Weź tylko pierwszą linię (selector), usuń resztę
+    cleaned = cleaned.split('\n')[0].trim();
+
+    // Usuń średniki na końcu
+    cleaned = cleaned.replace(/;+$/, '');
+
+    return cleaned.trim();
+  }
+
+  /**
    * Znajdź element używając AI i kliknij go
    */
   async click(description: string): Promise<void> {
@@ -68,7 +90,7 @@ export class AIHelper {
       For "first": Select the FIRST matching element in DOM order, use :first-child or :nth-child(1).
       For "add to cart button": Look for <button> with text "Add to cart", NOT menu buttons.
       Prefer [data-test="..."] attributes on clickable elements like buttons, links.
-      Return ONLY the CSS selector, nothing else.`;
+      Return ONLY the CSS selector, nothing else. NO markdown, NO code blocks.`;
 
       const response = await this.client.chat.completions.create({
         model: process.env.OLLAMA_MODEL || 'llama3.1:8b',
@@ -76,7 +98,7 @@ export class AIHelper {
           {
             role: 'system',
             content:
-              'You are a CSS selector generator for clickable elements. Distinguish between different button types (menu buttons vs action buttons). For "first add to cart", find the first button with "Add to cart" text in product list. Use button[data-test="add-to-cart"] or .inventory_item button patterns.',
+              'You are a CSS selector generator for clickable elements. Return ONLY a plain CSS selector, NO markdown code blocks, NO explanations. Distinguish between different button types (menu buttons vs action buttons). For "first add to cart", find the first button with "Add to cart" text in product list. Use button[data-test="add-to-cart"] or .inventory_item button patterns.',
           },
           {
             role: 'user',
@@ -87,8 +109,13 @@ export class AIHelper {
         max_tokens: 100,
       });
 
-      const selector = response.choices[0]?.message?.content?.trim() || '';
-      this.logPrompt('AI Response', { selector, description });
+      const rawSelector = response.choices[0]?.message?.content?.trim() || '';
+      const selector = this.cleanSelector(rawSelector);
+      this.logPrompt('AI Response (click)', {
+        rawSelector,
+        cleanedSelector: selector,
+        description,
+      });
 
       if (!selector) {
         throw new Error(`AI could not find selector for: ${description}`);
@@ -178,7 +205,7 @@ export class AIHelper {
       
       Must select <input>, <textarea>, or <select> element directly, NOT wrapper divs.
       Prefer [data-test="..."] attributes on the input element itself.
-      Return ONLY the CSS selector, nothing else.`;
+      Return ONLY the CSS selector, nothing else. NO markdown, NO code blocks.`;
 
       const response = await this.client.chat.completions.create({
         model: process.env.OLLAMA_MODEL || 'llama3.1:8b',
@@ -186,7 +213,7 @@ export class AIHelper {
           {
             role: 'system',
             content:
-              'You are a CSS selector generator for form inputs. Return selector pointing to <input>, <textarea> or <select> elements directly, never to wrapper divs. Look for input elements with data-test attributes.',
+              'You are a CSS selector generator for form inputs. Return ONLY a plain CSS selector, NO markdown code blocks, NO explanations. Return selector pointing to <input>, <textarea> or <select> elements directly, never to wrapper divs. Look for input elements with data-test attributes.',
           },
           {
             role: 'user',
@@ -197,7 +224,9 @@ export class AIHelper {
         max_tokens: 100,
       });
 
-      const selector = response.choices[0]?.message?.content?.trim() || '';
+      const rawSelector = response.choices[0]?.message?.content?.trim() || '';
+      const selector = this.cleanSelector(rawSelector);
+      this.logPrompt('AI Response (fill)', { rawSelector, cleanedSelector: selector, description });
       this.logPrompt('AI Response', { selector, description });
 
       if (!selector) {
@@ -257,7 +286,7 @@ export class AIHelper {
       Page HTML structure: ${this.simplifyHtml(pageContent)}
       
       Prefer data-test attributes, unique IDs, or use :nth-child() for uniqueness.
-      Return ONLY the CSS selector, nothing else.`;
+      Return ONLY the CSS selector, nothing else. NO markdown, NO code blocks.`;
 
       const response = await this.client.chat.completions.create({
         model: process.env.OLLAMA_MODEL || 'llama3.1:8b',
@@ -265,7 +294,7 @@ export class AIHelper {
           {
             role: 'system',
             content:
-              'You are a precise CSS selector generator. Always return a UNIQUE selector that matches only one element. Prefer [data-test="..."] attributes.',
+              'You are a precise CSS selector generator. Return ONLY a plain CSS selector, NO markdown code blocks, NO explanations. Always return a UNIQUE selector that matches only one element. Prefer [data-test="..."] attributes.',
           },
           {
             role: 'user',
@@ -276,7 +305,13 @@ export class AIHelper {
         max_tokens: 100,
       });
 
-      const selector = response.choices[0]?.message?.content?.trim() || '';
+      const rawSelector = response.choices[0]?.message?.content?.trim() || '';
+      const selector = this.cleanSelector(rawSelector);
+      this.logPrompt('AI Response (verify)', {
+        rawSelector,
+        cleanedSelector: selector,
+        description,
+      });
       this.logPrompt('AI Response', { selector, description });
 
       if (!selector) {
