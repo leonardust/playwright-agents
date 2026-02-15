@@ -65,7 +65,7 @@ jobs:
           ai-model: 'llama-3.1-8b-instant'
 
       - name: Upload test artifacts
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         if: always()
         with:
           name: playwright-report-${{ github.run_number }}
