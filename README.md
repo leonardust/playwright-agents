@@ -227,10 +227,30 @@ Zobacz szczegóły: **[HUSKY.md](HUSKY.md)**
 
 ## 🔄 CI/CD
 
-Projekt zawiera gotowe workflow dla GitHub Actions:
+Projekt zawiera 2 workflows z automatycznym deploymentem raportów do GitHub Pages:
 
-- **GitHub-hosted runner** - `.github/workflows/playwright-tests.yml`
 - **Self-hosted runner** - `.github/workflows/self-hosted-tests.yml`
+  - Uruchamia się przy push do `main`
+  - Używa modelu `llama3.2-vision:latest`
+  - Automatyczny deployment raportu
+- **GitHub-hosted runner** - `.github/workflows/playwright-tests.yml`
+  - Uruchamia się przy push/PR
+  - Używa modelu `phi3:mini`
+  - Automatyczny deployment raportu
+
+**📊 Raporty testów dostępne na GitHub Pages:**
+
+Wszystkie raporty są automatycznie publikowane na:
+
+- **Strona główna:** https://leonardust.github.io/playwright-agents/
+- **Self-hosted latest:** https://leonardust.github.io/playwright-agents/self-hosted/latest/
+- **GitHub-hosted latest:** https://leonardust.github.io/playwright-agents/github-hosted/latest/
+
+Strona główna zawiera:
+
+- Przyciski do najnowszych raportów
+- Historię ostatnich 20 raportów dla każdego typu
+- Automatycznie aktualizowane timestamps
 
 Zobacz szczegółowy przewodnik: **[GITHUB_ACTIONS.md](GITHUB_ACTIONS.md)**
 
@@ -238,14 +258,15 @@ Zobacz szczegółowy przewodnik: **[GITHUB_ACTIONS.md](GITHUB_ACTIONS.md)**
 
 ```bash
 # Opcja 1: Self-hosted runner (zalecane)
-# 1. Zainstaluj runner na swoim komputerze
+# 1. Zainstaluj runner na swoim komputerze (jako serwis Windows)
 # 2. Uruchom Ollama lokalnie
 # 3. Push do repo - testy uruchomią się automatycznie
+# 4. Raport pojawi się w workflow summary i na GitHub Pages
 
 # Opcja 2: GitHub-hosted runner
-# 1. Użyj małego modelu (phi3:mini)
-# 2. Uruchom tylko smoke tests
-# 3. Workflow automatycznie instaluje Ollama
+# 1. Workflow automatycznie instaluje Ollama i phi3:mini
+# 2. Uruchom tylko smoke tests (@smoke tag)
+# 3. Raport automatycznie na GitHub Pages
 ```
 
 ## 🛠️ Troubleshooting

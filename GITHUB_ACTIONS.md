@@ -309,12 +309,59 @@ Jeśli Ollama jest zbyt wolna dla CI, użyj OpenAI API tylko w środowisku CI:
 
 ## 📝 Workflow Files
 
-Projekt zawiera 2 gotowe workflows:
+Projekt zawiera 2 główne workflows z automatycznym deploymentem raportów:
 
-- `.github/workflows/playwright-tests.yml` - GitHub-hosted runner
-- `.github/workflows/self-hosted-tests.yml` - Self-hosted runner
+### 📊 Test Workflows
 
-Wybierz odpowiedni dla swoich potrzeb lub użyj obu!
+- **`.github/workflows/self-hosted-tests.yml`** - Self-hosted runner z Ollama
+  - Uruchamia się automatycznie przy push do `main`
+  - Używa pełnego modelu `llama3.2-vision:latest`
+  - Po testach automatycznie deployuje raport do GitHub Pages
+- **`.github/workflows/playwright-tests.yml`** - GitHub-hosted runner
+  - Uruchamia się przy push do `main`/`develop` i pull request
+  - Używa małego modelu `phi3:mini`
+  - Po testach automatycznie deployuje raport do GitHub Pages
+
+### 🚀 GitHub Pages Deployment
+
+Każdy workflow automatycznie publikuje raporty testów na GitHub Pages:
+
+**Struktura raportów:**
+
+```
+https://leonardust.github.io/playwright-agents/
+├── self-hosted/
+│   ├── latest/              # Najnowszy raport self-hosted
+│   ├── 20260215-104909/     # Raport z timestampem
+│   └── 20260215-095528/     # Starsze raporty
+└── github-hosted/
+    ├── latest/              # Najnowszy raport github-hosted
+    └── 20260215-095737/     # Raporty z timestampem
+```
+
+**Dostęp do raportów:**
+
+1. **Strona główna z historią:** https://leonardust.github.io/playwright-agents/
+   - Lista wszystkich raportów (ostatnie 20)
+   - Przyciski do najnowszych raportów
+   - Timestamps w czytelnym formacie
+
+2. **Workflow Summary:**
+   - Po każdym workflow w sekcji `Deploy` znajdziesz linki:
+     - 📊 **Latest Report** - bezpośredni link do raportu z tego run
+     - 📚 **All Reports** - link do strony głównej z historią
+
+3. **GitHub Pages settings:**
+   - Branch: `gh-pages`
+   - URL: https://leonardust.github.io/playwright-agents/
+
+**Komponenty deployment:**
+
+- `.github/actions/deploy-to-pages/` - Reusable action do deploymentu
+- `scripts/deploy-to-gh-pages.sh` - Skrypt bash z logiką deploymentu
+- Automatyczne generowanie strony głównej z listą raportów
+
+Wybierz odpowiedni workflow dla swoich potrzeb lub użyj obu!
 
 ---
 
