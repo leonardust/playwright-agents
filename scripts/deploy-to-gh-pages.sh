@@ -68,7 +68,7 @@ SELF_HOSTED_REPORTS=$(generate_report_list "self-hosted")
 GITHUB_HOSTED_REPORTS=$(generate_report_list "github-hosted")
 
 # Create/update index.html for root
-cat > pages/index.html << 'EOF'
+cat > pages/index.html << EOF
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -176,12 +176,12 @@ cat > pages/index.html << 'EOF'
   <div class="report-section">
     <h2>💻 Self-Hosted Runner Tests</h2>
     <a href="self-hosted/latest/" class="latest-link">View Latest Report →</a>
-    <div class="timestamp">Last updated: CURRENT_TIME_PLACEHOLDER</div>
+    <div class="timestamp">Last updated: $CURRENT_TIME</div>
     
     <div class="history-section">
       <h3>📚 Report History (Last 20)</h3>
       <ul class="history-list">
-SELF_HOSTED_REPORTS_PLACEHOLDER
+$SELF_HOSTED_REPORTS
       </ul>
     </div>
   </div>
@@ -189,23 +189,18 @@ SELF_HOSTED_REPORTS_PLACEHOLDER
   <div class="report-section">
     <h2>☁️ GitHub-Hosted Runner Tests</h2>
     <a href="github-hosted/latest/" class="latest-link">View Latest Report →</a>
-    <div class="timestamp">Last updated: CURRENT_TIME_PLACEHOLDER</div>
+    <div class="timestamp">Last updated: $CURRENT_TIME</div>
     
     <div class="history-section">
       <h3>📚 Report History (Last 20)</h3>
       <ul class="history-list">
-GITHUB_HOSTED_REPORTS_PLACEHOLDER
+$GITHUB_HOSTED_REPORTS
       </ul>
     </div>
   </div>
 </body>
 </html>
 EOF
-
-# Replace placeholders
-sed -i "s|CURRENT_TIME_PLACEHOLDER|$CURRENT_TIME|g" pages/index.html
-sed -i "s|SELF_HOSTED_REPORTS_PLACEHOLDER|$SELF_HOSTED_REPORTS|g" pages/index.html
-sed -i "s|GITHUB_HOSTED_REPORTS_PLACEHOLDER|$GITHUB_HOSTED_REPORTS|g" pages/index.html
 
 # Deploy to gh-pages branch
 echo "🔧 Configuring git..."
