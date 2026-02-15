@@ -29,14 +29,37 @@ CURRENT_TIME=$(date -u +"%Y-%m-%d %H:%M UTC")
 
 echo "📦 Deploying $REPORT_TYPE report with timestamp: $TIMESTAMP"
 
+# Check if downloaded artifact has nested structure
+if [ -d "playwright-report/playwright-report" ]; then
+  echo "📁 Detected nested artifact structure, using inner directory..."
+  REPORT_SOURCE="playwright-report/playwright-report"
+  LOGS_SOURCE="playwright-report/logs"
+else
+  echo "📁 Using flat artifact structure..."
+  REPORT_SOURCE="playwright-report"
+  LOGS_SOURCE=""
+fi
+
 # Save report with timestamp
 mkdir -p "pages/$REPORT_TYPE/$TIMESTAMP"
-cp -r playwright-report/* "pages/$REPORT_TYPE/$TIMESTAMP/"
+cp -r "$REPORT_SOURCE"/* "pages/$REPORT_TYPE/$TIMESTAMP/"
+
+# Copy logs if available
+if [ -n "$LOGS_SOURCE" ] && [ -d "$LOGS_SOURCE" ]; then
+  mkdir -p "pages/$REPORT_TYPE/$TIMESTAMP/logs"
+  cp -r "$LOGS_SOURCE"/* "pages/$REPORT_TYPE/$TIMESTAMP/logs/"
+fi
 
 # Update 'latest' folder (overwrite)
 mkdir -p "pages/$REPORT_TYPE/latest"
 rm -rf "pages/$REPORT_TYPE/latest"/*
-cp -r playwright-report/* "pages/$REPORT_TYPE/latest/"
+cp -r "$REPORT_SOURCE"/* "pages/$REPORT_TYPE/latest/"
+
+# Copy logs to latest if available
+if [ -n "$LOGS_SOURCE" ] && [ -d "$LOGS_SOURCE" ]; then
+  mkdir -p "pages/$REPORT_TYPE/latest/logs"
+  cp -r "$LOGS_SOURCE"/* "pages/$REPORT_TYPE/latest/logs/"
+fi
 
 # Function to generate report list HTML
 generate_report_list() {
