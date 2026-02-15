@@ -37,7 +37,6 @@ jobs:
 
       - name: Run all tests
         run: npm test
-        continue-on-error: true
         env:
           CI: true
           GITHUB_ACTIONS: true

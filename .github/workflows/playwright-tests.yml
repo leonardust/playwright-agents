@@ -57,7 +57,6 @@ jobs:
 
       - name: Run smoke tests
         run: npm run test:smoke
-        continue-on-error: true
 
       - name: Generate test summary
         if: always()
