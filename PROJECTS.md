@@ -4,28 +4,30 @@
 
 Ten GitHub Project zarządza rozwojem frameworka **Playwright Agents** - zaawansowanego systemu automatyzacji testów wykorzystującego AI (Ollama/Groq) do inteligentnego wyszukiwania elementów UI.
 
+**Status**: ✅ Ollama i Groq są już skonfigurowane i działają
+
 ## 🔗 Powiązane Zasoby
 
 - **Repository**: [leonardust/playwright-agents](https://github.com/leonardust/playwright-agents)
 - **GitHub Pages**: [Test Reports](https://leonardust.github.io/playwright-agents/)
-- **CI/CD**: Self-hosted i GitHub-hosted workflows
+- **CI/CD**: 
+  - Self-hosted runner z Ollama (llama3.2-vision)
+  - GitHub-hosted runner z Groq API (llama-3.1-8b-instant)
 
 ## 📊 Struktura Projektu
 
 ### Kolumny Workflow
 
-- **📝 Backlog** - Zaplanowane zadania do realizacji
-- **🚧 In Progress** - Zadania w trakcie realizacji
-- **👀 In Review** - Kod gotowy do przeglądu (PR otwarte)
-- **✅ Done** - Ukończone i zmergowane zadania
+- **📝 Todo** - Zaplanowane zadania do realizacji
+- **🚧 In Progress** - Zadania w trakcie realizacji  
+- **✅ Done** - Ukończone zadania
 
 ## 🏷️ Etykiety
 
 - `enhancement` - Nowe funkcjonalności
 - `bug` - Błędy do naprawy
 - `documentation` - Aktualizacje dokumentacji
-- `ci/cd` - Zmiany w GitHub Actions
-- `dependencies` - Aktualizacje zależności
+- `dependencies` - Aktualizacje zależności (Dependabot)
 - `ai` - Funkcjonalności związane z AI/LLM
 
 ## 🎯 Priorytety
@@ -38,54 +40,90 @@ Issues są priorytetyzowane według:
 
 ## 🔄 Workflow
 
-1. **Utworzenie Issue** → automatycznie trafia do Backlog
-2. **Rozpoczęcie pracy** → przenieś do "In Progress"
-3. **Otwarcie PR** → automatycznie przechodzi do "In Review"
-4. **Merge PR** → automatycznie przenosi się do "Done"
+1. **Utworzenie Issue** → automatycznie trafia do **Todo**
+2. **Rozpoczęcie pracy** → przenieś do **In Progress**
+3. **Ukończenie** → przenieś do **Done**
 
 ## 🤝 Jak Współpracować
 
 ### Dodawanie nowego zadania
 1. Utwórz issue w repozytorium
 2. Dodaj odpowiednie etykiety
-3. Przypisz do projektu
+3. Przypisz do projektu (automatycznie trafi do Todo)
 4. Ustaw priorytet
 
 ### Praca nad zadaniem
 1. Przypisz issue do siebie
-2. Przenieś do "In Progress"
+2. Przenieś do **In Progress**
 3. Utwórz branch: `feat/nazwa-zadania` lub `fix/nazwa-zadania`
 4. Commituj zgodnie z [Conventional Commits](https://www.conventionalcommits.org/)
-5. Otwórz PR i dodaj link do issue
+5. Otwórz PR i dodaj link do issue: `Closes #123`
+6. Po merge przenieś do **Done**
+
+## 🤖 Skonfigurowane AI Providers
+
+### Ollama (Local)
+- ✅ Skonfigurowane i działające
+- Model: `llama3.2-vision:latest`
+- Użycie: Self-hosted CI/CD runner
+- Diagnostyka: `npm run diagnose`
+
+### Groq (Cloud)
+- ✅ Skonfigurowane i działające  
+- Model: `llama-3.1-8b-instant`
+- Użycie: GitHub-hosted CI/CD
+- Ultra-szybkie (~37s execution time)
 
 ## 📈 Metryki
 
 Projekt śledzi:
 - ⏱️ Czas realizacji zadań (cycle time)
 - 📊 Liczba otwartych vs zamkniętych issues
-- 🔥 Burndown velocity
-- 🎯 Postęp względem milestone'ów
+- 🔥 Velocity (zadania per sprint)
+- 🎯 Postęp względem celów
 
 ## 🛠️ Automatyzacje
 
-- **Auto-assignment**: Dependabot PRs automatycznie przypisane do maintainera
-- **Auto-labeling**: PRy otrzymują etykiety na podstawie ścieżek plików
-- **Status sync**: Status PR synchronizuje się z kartą w projekcie
-- **Stale issues**: Nieaktywne issue starsze niż 60 dni otrzymują ostrzeżenie
+- **Dependabot**: Automatyczne PRy dla aktualizacji zależności
+- **Husky**: Pre-commit hooks (ESLint + Prettier)
+- **GitHub Actions**: 
+  - Automatyczne testy przy każdym push/PR
+  - Deployment raportów na GitHub Pages
+  - Scheduled runs
 
-## 📝 Milestones
+## 📝 Roadmap
 
-Aktywne milestony:
-- `v1.0` - Podstawowa funkcjonalność z Ollama
-- `v1.1` - Integracja z Groq Cloud
-- `v2.0` - Advanced AI features (context memory, self-healing)
+### ✅ Completed
+- Podstawowa integracja z Ollama
+- Integracja z Groq Cloud API
+- Self-hosted i GitHub-hosted workflows
+- GitHub Pages deployment
+- BDD z Playwright
+
+### 🚧 In Progress
+- Sprawdź aktualny board projektu
+
+### 📝 Planned
+- Advanced AI features (context memory)
+- Self-healing tests
+- Multi-model support
+- Performance optimizations
 
 ## 💡 Wskazówki
 
-- Używaj draft PR dla pracy w toku (work in progress)
-- Linkuj issues w PR używając: `Closes #123` lub `Fixes #123`
+- Używaj **draft PR** dla pracy w toku
+- Linkuj issues: `Closes #123`, `Fixes #123`, `Relates to #123`
 - Dodawaj screenshoty/logi dla bugów
 - Aktualizuj dokumentację razem z kodem
+- Testy muszą przejść przed merge
+
+## 📚 Dokumentacja
+
+- [README.md](./README.md) - Główna dokumentacja projektu
+- [GITHUB_ACTIONS.md](./GITHUB_ACTIONS.md) - CI/CD i workflows
+- [HUSKY.md](./HUSKY.md) - Git hooks
+- [GROQ_SETUP.md](./GROQ_SETUP.md) - Konfiguracja Groq
+- [DEPENDABOT.md](./DEPENDABOT.md) - Zarządzanie zależnościami
 
 ---
 
