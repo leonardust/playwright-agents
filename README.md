@@ -32,6 +32,7 @@ Projekt automatyzacji testów wykorzystujący:
 - [🪝 Git Hooks](#-git-hooks)
 - [🔄 CI/CD](#-cicd)
   - [Szybki start z CI](#szybki-start-z-ci)
+- [📊 Project Management](#-project-management)
 - [🛠️ Troubleshooting](#️-troubleshooting)
 
 ---
@@ -270,6 +271,14 @@ Zobacz szczegółowy przewodnik: **[GITHUB_ACTIONS.md](GITHUB_ACTIONS.md)**
 # 2. Uruchom tylko smoke tests (@smoke tag)
 # 3. Raport automatycznie na GitHub Pages
 ```
+
+## 📊 Project Management
+
+Projekt używa GitHub Projects do zarządzania zadaniami i workflow. Zobacz [PROJECTS.md](./PROJECTS.md) dla szczegółów dotyczących:
+- Struktury projektu i workflow
+- Etykiet i priorytetów
+- Jak dodawać i zarządzać zadaniami
+- Automatyzacji i metryk
 
 ## 🛠️ Troubleshooting
 
