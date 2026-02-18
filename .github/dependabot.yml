@@ -24,6 +24,13 @@ updates:
       - "leonardust"
     # Grupuj minor/patch updates razem
     groups:
+      eslint:
+        patterns:
+          - "^eslint"
+          - "^@typescript-eslint"
+          - "^@eslint/js"
+          - "^eslint-plugin"
+          - "^@eslint-community"
       playwright:
         patterns:
           - "@playwright/*"
