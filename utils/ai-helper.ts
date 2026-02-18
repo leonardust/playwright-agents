@@ -342,12 +342,19 @@ export class AIHelper {
    * Upraszcza HTML do podstawowej struktury dla zmniejszenia tokenu
    */
   private simplifyHtml(html: string): string {
-    // Usuń style, skrypty i komentarze
-    let simplified = html
-      .replace(/<style[^>]*>[\s\S]*?<\/style>/gi, '')
-      .replace(/<script[^>]*>[\s\S]*?<\/script>/gi, '')
-      .replace(/<!--[\s\S]*?-->/g, '')
-      .replace(/\s+/g, ' ');
+    // Usuń style, skrypty i komentarze - iteracyjnie, aby usunąć wszystkie wystąpienia
+    let simplified = html;
+    let previous: string;
+    do {
+      previous = simplified;
+      simplified = simplified
+        .replace(/<style[^>]*>[\s\S]*?<\/style>/gi, '')
+        .replace(/<script[^>]*>[\s\S]*?<\/script>/gi, '')
+        .replace(/<!--[\s\S]*?-->/g, '');
+    } while (simplified !== previous);
+
+    // Zredukuj białe znaki
+    simplified = simplified.replace(/\s+/g, ' ');
 
     // Ogranicz długość do 4000 znaków (zachowaj miejsce na prompt)
     if (simplified.length > 4000) {
