@@ -1,0 +1,75 @@
+name: Code scanning auto-fix
+
+on:
+  schedule:
+    - cron: '0 2 * * *' # daily at 02:00 UTC
+  workflow_dispatch:
+  code_scanning_alert:
+    types: [created, reopened]
+
+jobs:
+  auto-fix:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run safe automated fixes
+        run: |
+          # apply non-breaking fixes only
+          npm audit fix || true
+          npm run lint:fix || true
+
+      - name: Commit changes if any
+        id: commit
+        run: |
+          if [ -n "$(git status --porcelain)" ]; then
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            BRANCH="fix/code-scanning-auto-fix-${GITHUB_RUN_ID}-$(date +%s)"
+            echo "BRANCH=$BRANCH" >> $GITHUB_ENV
+            git checkout -b "$BRANCH"
+            git add -A
+            git commit -m "chore: automated fixes from code-scanning ($GITHUB_EVENT_NAME)" || true
+            echo "CHANGED=true" >> $GITHUB_ENV
+          else
+            echo "CHANGED=false" >> $GITHUB_ENV
+          fi
+
+      - name: Run tests
+        if: env.CHANGED == 'true'
+        run: npm test
+
+      - name: Create Pull Request
+        if: env.CHANGED == 'true' && success()
+        id: create_pr
+        uses: peter-evans/create-pull-request@v5
+        with:
+          token: ${{ secrets.BOT_PAT }}
+          commit-message: chore: automated fixes from code-scanning
+          branch: ${{ env.BRANCH }}
+          title: "Automated: fixes from code scanning"
+          body: |
+            This PR applies safe automated fixes (npm audit fix, eslint --fix). Please review and run CI.
+          labels: automated, code-scanning, maintenance
+
+      - name: Enable auto-merge
+        if: env.CHANGED == 'true' && success()
+        uses: peter-evans/enable-pull-request-automerge@v2
+        with:
+          token: ${{ secrets.BOT_PAT }}
+          pull-request-number: ${{ steps.create_pr.outputs.pull-request-number }}
+          merge-method: squash
+
+# Notes:
+# - Add a bot PAT to repository secrets as BOT_PAT (recommended) with repo permissions so PRs can be created and workflows can run.
+# - The workflow only applies non-breaking automated fixes. For breaking updates consider manual review.
+# - Tests run on PR because Playwright workflow now triggers on pull_request targeting main/develop.
