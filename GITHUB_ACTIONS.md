@@ -2,15 +2,23 @@
 
 ## 📋 Spis treści
 
-- [🎯 Możliwości użycia Ollama w GitHub Actions](#-możliwości-użycia-ollama-w-github-actions)
-  - [✅ Opcja 1: Self-Hosted Runner (Zalecane)](#-opcja-1-self-hosted-runner-zalecane)
-  - [⚡ Opcja 2: GitHub-Hosted Runner z małym modelem](#-opcja-2-github-hosted-runner-z-małym-modelem)
-  - [🌐 Opcja 3: Zewnętrzny serwis Ollama + Tunel](#-opcja-3-zewnętrzny-serwis-ollama--tunel)
-  - [💡 Opcja 4: OpenAI API dla CI (Fallback)](#-opcja-4-openai-api-dla-ci-fallback)
-- [📊 Porównanie opcji](#-porównanie-opcji)
-- [🚀 Najlepsza praktyka](#-najlepsza-praktyka)
-- [📝 Workflow Files](#-workflow-files)
-- [🔧 Troubleshooting](#-troubleshooting)
+- [GitHub Actions z Ollama - Przewodnik](#github-actions-z-ollama---przewodnik)
+  - [📋 Spis treści](#-spis-treści)
+  - [🎯 Możliwości użycia Ollama w GitHub Actions](#-możliwości-użycia-ollama-w-github-actions)
+    - [✅ Opcja 1: Self-Hosted Runner (Zalecane)](#-opcja-1-self-hosted-runner-zalecane)
+    - [⚡ Opcja 2: GitHub-Hosted Runner z Groq API](#-opcja-2-github-hosted-runner-z-groq-api)
+    - [🌐 Opcja 3: Zewnętrzny serwis Ollama + Tunel](#-opcja-3-zewnętrzny-serwis-ollama--tunel)
+    - [💡 Opcja 4: OpenAI API dla CI (Fallback)](#-opcja-4-openai-api-dla-ci-fallback)
+  - [📊 Porównanie opcji](#-porównanie-opcji)
+  - [🚀 Najlepsza praktyka](#-najlepsza-praktyka)
+  - [📝 Workflow Files](#-workflow-files)
+    - [📊 Test Workflows](#-test-workflows)
+    - [🚀 GitHub Pages Deployment](#-github-pages-deployment)
+  - [🔧 Troubleshooting](#-troubleshooting)
+    - [Problem: Ollama nie startuje w CI](#problem-ollama-nie-startuje-w-ci)
+    - [Problem: Model za duży](#problem-model-za-duży)
+    - [Problem: Timeout testów](#problem-timeout-testów)
+    - [Problem: Brak pamięci](#problem-brak-pamięci)
 
 ---
 
@@ -151,11 +159,13 @@
     - Linux: `ps aux | grep Runner`
   - Jeśli nie działa, uruchom serwis: `Start-Service "actions.runner.*"` (Windows) lub `sudo ./svc.sh start` (Linux)
 - **"A session for this runner already exists":** Poprzednia sesja wisi. Usuń runnera i skonfiguruj ponownie:
+
   ```powershell
   # Usuń stary runner
   .\config.cmd remove --token <REMOVE_TOKEN>
   # Skonfiguruj od nowa (krok 3)
   ```
+
 - **Brak uprawnień na Windows:** Uruchom PowerShell jako Administrator dla instalacji jako serwis
 - **Serwis nie startuje:** Sprawdź logi w `C:\actions-runner\_diag\` lub Event Viewer (Windows Logs → Application)
 
@@ -173,7 +183,7 @@
 
 **Konfiguracja:**
 
-1. **Zdobądź Groq API Key:** https://console.groq.com
+1. **Zdobądź Groq API Key:** <https://console.groq.com>
 2. **Dodaj do GitHub Secrets:** `GROQ_API_KEY`
 3. **Użyj workflow:** `.github/workflows/playwright-github-hosted.yml`
 
@@ -316,6 +326,11 @@ Projekt zawiera 2 główne workflows z automatycznym deploymentem raportów:
 
 ### 📊 Test Workflows
 
+**Polityka dla self-hosted runnerów:**
+
+- Nie używamy globalnego cache dla dużych artefaktów na self-hosted runnerach; zamiast tego workflow self-hosted sprawdza, czy Playwright browsers są zainstalowane i używa `scripts/ensure-playwright.js`, który pominie instalację jeśli przeglądarki są obecne.
+- Zalecane: preinstalować przeglądarki raz na maszynie (`npx playwright install --with-deps`) lub ustawić `PLAYWRIGHT_BROWSERS_PATH`.
+
 - **`.github/workflows/playwright-self-hosted.yml`** - Self-hosted runner z Ollama
   - **Nazwa:** "Playwright - Self-Hosted"
   - Uruchamia się automatycznie przy push do `main`
@@ -335,7 +350,7 @@ Każdy workflow automatycznie publikuje raporty testów na GitHub Pages:
 
 **Struktura raportów:**
 
-```
+```doc
 https://leonardust.github.io/playwright-agents/
 ├── self-hosted/
 │   ├── latest/              # Najnowszy raport self-hosted
@@ -348,7 +363,7 @@ https://leonardust.github.io/playwright-agents/
 
 **Dostęp do raportów:**
 
-1. **Strona główna z historią:** https://leonardust.github.io/playwright-agents/
+1. **Strona główna z historią:** <https://leonardust.github.io/playwright-agents/>
    - Lista wszystkich raportów (ostatnie 20)
    - Przyciski do najnowszych raportów
    - Timestamps w czytelnym formacie
@@ -360,7 +375,7 @@ https://leonardust.github.io/playwright-agents/
 
 3. **GitHub Pages settings:**
    - Branch: `gh-pages`
-   - URL: https://leonardust.github.io/playwright-agents/
+   - URL: <https://leonardust.github.io/playwright-agents/>
 
 **Komponenty deployment:**
 

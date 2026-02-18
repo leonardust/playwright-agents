@@ -16,7 +16,7 @@ Plik: `.github/dependabot.yml`
 ### Co monitoruje?
 
 1. **npm dependencies** (package.json)
-   - Sprawdzanie: **co poniedziałek o 9:00**
+   - Sprawdzanie: **codziennie o 09:00 (Europe/Warsaw)**
    - Grupuje Playwright updates razem
    - Grupuje dev dependencies (minor/patch) razem
 2. **GitHub Actions** (workflows)
@@ -63,7 +63,7 @@ Tests: ✅ Passed
 
 ### Częstotliwość:
 
-- **Weekly** (co poniedziałek)
+- **Daily** (codziennie o 09:00 Europe/Warsaw)
 - Można zmienić na: `daily`, `weekly`, `monthly`
 
 ### Limity:
