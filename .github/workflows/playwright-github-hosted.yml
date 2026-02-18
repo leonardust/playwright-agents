@@ -3,9 +3,12 @@ name: Playwright - GitHub-Hosted
 on:
   push:
     branches: [main, develop]
-  pull_request:
-    branches: [main]
   workflow_dispatch:
+    inputs:
+      pr_head_ref:
+        description: 'PR head ref to checkout'
+        required: false
+        default: ''
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}

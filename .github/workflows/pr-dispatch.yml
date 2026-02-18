@@ -1,0 +1,22 @@
+name: PR Dispatch for Dependabot
+
+on:
+  pull_request_target:
+    types: [opened, synchronize, reopened]
+
+jobs:
+  dispatch:
+    runs-on: ubuntu-latest
+    # Run only for Dependabot to reduce risk
+    if: github.actor == 'dependabot[bot]'
+    steps:
+      - name: Dispatch Playwright workflow on PR head
+        env:
+          REPO: ${{ github.repository }}
+          WORKFLOW_FILE: playwright-github-hosted.yml
+          PR_REF: ${{ github.event.pull_request.head.ref }}
+        run: |
+          echo "Dispatching $WORKFLOW_FILE on ref $PR_REF"
+          curl -s -X POST -H "Accept: application/vnd.github.v3+json" -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+            "https://api.github.com/repos/${REPO}/actions/workflows/${WORKFLOW_FILE}/dispatches" \
+            -d "{\"ref\":\"${PR_REF}\",\"inputs\":{\"pr_head_ref\":\"${PR_REF}\"}}"
