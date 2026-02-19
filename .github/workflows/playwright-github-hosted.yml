@@ -24,6 +24,7 @@ permissions:
 
 jobs:
   test:
+    name: "Test — PR target runs & human PRs only"
     if: ${{ github.event_name == 'pull_request_target' || (github.event_name == 'pull_request' && github.actor != 'dependabot[bot]') }}
     timeout-minutes: 60
     runs-on: ubuntu-latest
