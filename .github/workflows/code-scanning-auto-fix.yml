@@ -53,8 +53,8 @@ jobs:
         id: create_pr
         uses: peter-evans/create-pull-request@v5
         with:
-          token: ${{ secrets.BOT_PAT }}
-          commit-message: chore: automated fixes from code-scanning
+          token: ${{ secrets.PAT }}
+          commit-message: "chore: automated fixes from code-scanning"
           branch: ${{ env.BRANCH }}
           title: "Automated: fixes from code scanning"
           body: |
@@ -65,11 +65,6 @@ jobs:
         if: env.CHANGED == 'true' && success()
         uses: peter-evans/enable-pull-request-automerge@v2
         with:
-          token: ${{ secrets.BOT_PAT }}
+          token: ${{ secrets.PAT }}
           pull-request-number: ${{ steps.create_pr.outputs.pull-request-number }}
           merge-method: squash
-
-# Notes:
-# - Add a bot PAT to repository secrets as BOT_PAT (recommended) with repo permissions so PRs can be created and workflows can run.
-# - The workflow only applies non-breaking automated fixes. For breaking updates consider manual review.
-# - Tests run on PR because Playwright workflow now triggers on pull_request targeting main/develop.
