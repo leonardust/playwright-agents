@@ -17,6 +17,6 @@ jobs:
           PR_REF: ${{ github.event.pull_request.head.ref }}
         run: |
           echo "Dispatching $WORKFLOW_FILE on ref $PR_REF"
-          curl -s -X POST -H "Accept: application/vnd.github.v3+json" -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+          curl -s -X POST -H "Accept: application/vnd.github.v3+json" -H "Authorization: token ${{ secrets.PAT }}" \
             "https://api.github.com/repos/${REPO}/actions/workflows/${WORKFLOW_FILE}/dispatches" \
             -d "{\"ref\":\"${PR_REF}\",\"inputs\":{\"pr_head_ref\":\"${PR_REF}\"}}"
