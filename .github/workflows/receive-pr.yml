@@ -32,7 +32,7 @@ jobs:
           echo "${{ github.event.number }}" > pr/NR
 
       - name: Upload PR artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v6
         with:
           name: pr
           path: pr/
