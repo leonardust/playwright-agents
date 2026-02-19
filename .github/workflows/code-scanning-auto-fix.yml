@@ -1,5 +1,9 @@
 name: Code scanning auto-fix
 
+permissions:
+  contents: write
+  pull-requests: write
+
 on:
   schedule:
     - cron: '0 2 * * *' # daily at 02:00 UTC

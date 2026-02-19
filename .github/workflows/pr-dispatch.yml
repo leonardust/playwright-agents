@@ -1,5 +1,8 @@
 name: PR Dispatch for Dependabot
 
+permissions:
+  contents: read
+
 on:
   pull_request_target:
     types: [opened, synchronize, reopened]
