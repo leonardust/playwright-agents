@@ -1,0 +1,76 @@
+name: "Privileged: Process PR artifacts"
+
+on:
+  workflow_run:
+    workflows: ["Receive PR"]
+    types: [completed]
+
+jobs:
+  process:
+    name: "Process PR artifacts (privileged)"
+    runs-on: ubuntu-latest
+    if: >
+      github.event.workflow_run.event == 'pull_request' &&
+      github.event.workflow_run.conclusion == 'success'
+    permissions:
+      contents: read
+      security-events: write
+
+    steps:
+      - name: Download artifact from workflow run
+        uses: actions/github-script@v6
+        env:
+          RUN_ID: ${{ github.event.workflow_run.id }}
+        with:
+          script: |
+            const run_id = Number(process.env.RUN_ID);
+            const artifacts = await github.actions.listWorkflowRunArtifacts({ owner: context.repo.owner, repo: context.repo.repo, run_id });
+            const match = artifacts.data.artifacts.find(a => a.name === 'pr');
+            if (!match) throw new Error('PR artifact not found');
+            const download = await github.actions.downloadArtifact({ owner: context.repo.owner, repo: context.repo.repo, artifact_id: match.id, archive_format: 'zip' });
+            const fs = require('fs');
+            fs.writeFileSync('pr.zip', Buffer.from(download.data));
+
+      - name: Unpack artifact
+        run: |
+          mkdir -p tmp
+          unzip -q pr.zip -d tmp/
+
+      - name: Validate PR number
+        id: prnum
+        run: |
+          NR=$(cat tmp/pr/NR || true)
+          echo "PR_NUMBER=$NR" >> $GITHUB_ENV
+          if ! echo "$NR" | grep -qE '^[0-9]+$'; then
+            echo "Invalid PR number in artifact: $NR"
+            exit 1
+          fi
+
+      - name: Validate GROQ key via API
+        env:
+          OLLAMA_API_KEY: ${{ secrets.GROQ_API_KEY }}
+        run: |
+          status=$(curl -s -o /dev/null -w "%{http_code}" -H "Authorization: Bearer $OLLAMA_API_KEY" https://api.groq.com/openai/v1/models || echo "000")
+          echo "GROQ API HTTP status: $status"
+          if [ "$status" = "401" ]; then
+            echo "GROQ key appears invalid (401)"
+            exit 1
+          fi
+
+      - name: Comment on PR
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const fs = require('fs');
+            const issue_number = Number(process.env.PR_NUMBER || github.event.workflow_run.head_branch || 0);
+            if (!issue_number) throw new Error('PR number missing');
+            await github.issues.createComment({ owner: context.repo.owner, repo: context.repo.repo, issue_number, body: 'Automated checks passed (unprivileged). Privileged processing complete.' });
+        env:
+          PR_NUMBER: ${{ env.PR_NUMBER }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: (Placeholder) Deploy or perform privileged actions
+        run: |
+          echo "Perform privileged operations here (use secrets)"
+        env:
+          SOME_SECRET: ${{ secrets.SOME_SECRET }}

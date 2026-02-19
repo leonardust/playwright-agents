@@ -1,0 +1,39 @@
+name: "Receive PR"
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+jobs:
+  build:
+    name: "Build & Test (unprivileged)"
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run tests
+        run: npm test
+
+      - name: Save PR number
+        run: |
+          mkdir -p pr
+          echo "${{ github.event.number }}" > pr/NR
+
+      - name: Upload PR artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: pr
+          path: pr/
+          retention-days: 7
