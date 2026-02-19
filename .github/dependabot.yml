@@ -59,4 +59,5 @@ updates:
       - "leonardust"
     assignees:
       - "leonardust"
+    # trigger re-eval at 2026-02-19T15:53:09.289Z
     # trigger re-eval: added comment to force a config change for dependabot auto-scan
