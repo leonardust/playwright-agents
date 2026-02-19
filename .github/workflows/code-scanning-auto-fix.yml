@@ -4,8 +4,6 @@ on:
   schedule:
     - cron: '0 2 * * *' # daily at 02:00 UTC
   workflow_dispatch:
-  code_scanning_alert:
-    types: [created, reopened]
 
 jobs:
   auto-fix:
@@ -54,9 +52,9 @@ jobs:
         uses: peter-evans/create-pull-request@v5
         with:
           token: ${{ secrets.PAT }}
-          commit-message: "chore: automated fixes from code-scanning"
+          commit-message: 'chore: automated fixes from code-scanning'
           branch: ${{ env.BRANCH }}
-          title: "Automated: fixes from code scanning"
+          title: 'Automated: fixes from code scanning'
           body: |
             This PR applies safe automated fixes (npm audit fix, eslint --fix). Please review and run CI.
           labels: automated, code-scanning, maintenance
