@@ -5,6 +5,8 @@ on:
     branches: [main, develop]
   pull_request:
     branches: [main, develop]
+  pull_request_target:
+    types: [opened, synchronize, reopened]
   workflow_dispatch:
     inputs:
       pr_head_ref:
@@ -61,6 +63,14 @@ jobs:
           echo "PLAYWRIGHT_TIMEOUT=90000" >> .env
           echo "PLAYWRIGHT_EXPECT_TIMEOUT=30000" >> .env
           echo "TEST_PASSWORD=secret_sauce" >> .env
+
+      - name: Debug OLLAMA key presence
+        run: |
+          if [ -f .env ] && grep -q '^OLLAMA_API_KEY=' .env; then
+            echo "OLLAMA_API_KEY present in .env (value masked)"
+          else
+            echo "OLLAMA_API_KEY MISSING in .env"
+          fi
 
       - name: Run smoke tests
         id: tests
