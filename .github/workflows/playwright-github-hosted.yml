@@ -24,6 +24,7 @@ permissions:
 
 jobs:
   test:
+    if: ${{ github.event_name == 'pull_request_target' || (github.event_name == 'pull_request' && github.actor != 'dependabot[bot]') }}
     timeout-minutes: 60
     runs-on: ubuntu-latest
     
@@ -105,7 +106,7 @@ jobs:
 
   deploy:
     needs: test
-    if: always()
+    if: ${{ (github.event_name == 'pull_request_target' || (github.event_name == 'pull_request' && github.actor != 'dependabot[bot]')) && true }}
     runs-on: ubuntu-latest
     concurrency:
       group: gh-pages-deploy
