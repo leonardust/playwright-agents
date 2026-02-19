@@ -105,6 +105,7 @@ jobs:
           retention-days: 7
 
   deploy:
+    name: "Deploy test report — PR target runs & human PRs only"
     needs: test
     if: ${{ (github.event_name == 'pull_request_target' || (github.event_name == 'pull_request' && github.actor != 'dependabot[bot]')) && true }}
     runs-on: ubuntu-latest
