@@ -53,7 +53,7 @@ jobs:
       - name: Create Pull Request
         if: env.CHANGED == 'true' && success()
         id: create_pr
-        uses: peter-evans/create-pull-request@v5
+        uses: peter-evans/create-pull-request@v8
         with:
           token: ${{ secrets.PAT }}
           commit-message: 'chore: automated fixes from code-scanning'
