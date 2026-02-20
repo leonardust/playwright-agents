@@ -386,9 +386,13 @@ export class AIHelper {
       } while (simplified !== previous);
 
       // Upewnij się, że żadne pozostałe delimitery komentarzy nie zostaną w tekście.
-      simplified = simplified
-        .replace(/<!--/g, ' ')
-        .replace(/--!?>/g, ' ');
+      let prevComments = '';
+      do {
+        prevComments = simplified;
+        simplified = simplified
+          .replace(/<!--/g, ' ')
+          .replace(/--!?>/g, ' ');
+      } while (simplified !== prevComments);
 
       // Ostatecznie usuń wszelkie pozostałe fragmenty <script>/<style> oraz znaczniki HTML
       simplified = simplified
