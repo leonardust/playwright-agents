@@ -399,17 +399,10 @@ export class AIHelper {
         previous = simplified;
 
         simplified = simplified
-          // Usuń komentarze HTML (uwzględniając warianty typu `--!>`).
-          // Najpierw usuń całe bloki komentarzy, a następnie ewentualne
-          // pozostałe samodzielne znaczniki otwierające/zamykające.
-          .replace(/<!--[\s\S]*?--!?>/g, '')
-          .replace(/<!--|--!?>/g, '')
-          // usuń otwierające tagi <script> i <style>
-          .replace(/<\s*script[^>]*>/gi, '')
-          .replace(/<\s*style[^>]*>/gi, '')
-          // usuń ewentualne kończące tagi (mogą być niekompletne)
-          .replace(/<\s*\/\s*script[^>]*/gi, '')
-          .replace(/<\s*\/\s*style[^>]*/gi, '')
+          // Usuń komentarze HTML.
+          .replace(/<!--[\s\S]*?-->/g, '')
+          // Usuń wszystkie nawiasy ostre, aby uniemożliwić tworzenie znaczników.
+          .replace(/[<>]/g, ' ')
           // Zredukuj białe znaki
           .replace(/\s+/g, ' ');
       } while (simplified !== previous);
