@@ -1,8 +1,7 @@
 name: Playwright - Self-Hosted
 
 on:
-  push:
-    branches: [main]
+  workflow_dispatch: 
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -15,7 +14,7 @@ permissions:
 jobs:
   test-with-local-ollama:
     timeout-minutes: 30
-    runs-on: self-hosted  # Używa twojego lokalnego runnera
+    runs-on: self-hosted  
     
     steps:
       - name: Checkout code
