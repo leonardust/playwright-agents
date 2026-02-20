@@ -353,6 +353,21 @@ export class AIHelper {
         .replace(/<!--[\s\S]*?-->/g, '');
     } while (simplified !== previous);
 
+    // Dodatkowo usuń wszelkie pozostałe (np. niezamknięte lub zniekształcone) tagi
+    // <style> i <script>, aby nie pozostawić w treści żadnego "<style" lub "<script".
+    do {
+      previous = simplified;
+      simplified = simplified
+        // usuń otwierające tagi <style ...>
+        .replace(/<style\b[^>]*>/gi, '')
+        // usuń otwierające tagi <script ...>
+        .replace(/<script\b[^>]*>/gi, '')
+        // usuń ewentualne pojedyncze kończące tagi </style>
+        .replace(/<\/style\b[^>]*>/gi, '')
+        // usuń ewentualne pojedyncze kończące tagi </script>
+        .replace(/<\/script\b[^>]*>/gi, '');
+    } while (simplified !== previous);
+
     // Dodatkowo usuń wszelkie pozostałe fragmenty znaczników <script
     // (np. w przypadku nietypowo sformatowanego lub zagnieżdżonego HTML)
     do {
