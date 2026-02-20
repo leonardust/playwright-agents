@@ -384,18 +384,29 @@ export class AIHelper {
     } catch (e) {
       void e;
       // W razie problemów z parserem, zastosuj uproszczone czyszczenie
-      let simplified = html.replace(/<!--[\s\S]*?--\s*>/g, '');
+      let simplified = html;
+      let previous = '';
 
-      simplified = simplified
-        .replace(/<\s*script[^>]*>/gi, '')
-        .replace(/<\s*\/\s*script/gi, '')
-        .replace(/<\s*style[^>]*>/gi, '')
-        .replace(/<\s*\/\s*style/gi, '')
-        .replace(/\s+/g, ' ');
+      do {
+        previous = simplified;
 
-      if (simplified.length > 4000) {
-        simplified = simplified.substring(0, 4000) + '...';
-      }
+        simplified = simplified
+          // Usuń komentarze HTML (uwzględniając warianty typu `--!>`)
+          .replace(/<!--[\s\S]*?--\s*>/g, '')
+          // usuń otwierające tagi <script> i <style>
+          .replace(/<\s*script[^>]*>/gi, '')
+          .replace(/<\s*style[^>]*>/gi, '')
+          // usuń ewentualne kończące tagi
+          .replace(/<\s*\/\s*script/gi, '')
+          .replace(/<\s*\/\s*style/gi, '')
+          // Zredukuj białe znaki
+          .replace(/\s+/g, ' ');
+
+        // Ogranicz długość do 4000 znaków (zachowaj miejsce na prompt)
+        if (simplified.length > 4000) {
+          simplified = simplified.substring(0, 4000) + '...';
+        }
+      } while (simplified !== previous);
 
       return simplified;
     }
