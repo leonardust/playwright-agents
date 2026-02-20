@@ -359,17 +359,8 @@ export class AIHelper {
       do {
         previous = simplified;
         simplified = simplified
-          // usuń otwierające tagi <script> i <style>
-          .replace(/<\s*script[^>]*>/gi, '')
-          .replace(/<\s*style[^>]*>/gi, '')
           // Usuń komentarze HTML (uwzględniając warianty typu `--!>`)
-          .replace(/<!--[\s\S]*?--\s*>/g, '')
-          // usuń ewentualne kończące tagi
-          .replace(/<\/style\b[^>]*>/gi, '')
-          .replace(/<\/script\b[^>]*>/gi, '')
-          // usuń fragmenty pozostawione przez nietypowe formatowanie
-          .replace(/<\s*script/gi, '')
-          .replace(/<\s*\/\s*script/gi, '');
+          .replace(/<!--[\s\S]*?--\s*>/g, ' ');
 
         // Zredukuj białe znaki
         simplified = simplified.replace(/\s+/g, ' ');
