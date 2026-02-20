@@ -380,10 +380,14 @@ export class AIHelper {
         }
       } while (simplified !== previous);
 
-      // Ostatecznie usuń wszelkie pozostałe fragmenty <script>/<style> oraz znaczniki HTML
+      // Ostatecznie usuń wszelkie pozostałe fragmenty <script>/<style>, znaczniki HTML
+      // oraz ewentualne resztki komentarzy HTML.
       simplified = simplified
         .replace(/<\s*\/?\s*script/gi, ' ')
         .replace(/<\s*\/?\s*style/gi, ' ')
+        // Usuń wszelkie sekwencje komentarzy HTML, które mogły pozostać jako tekst
+        .replace(/<!--/g, ' ')
+        .replace(/-->/g, ' ')
         .replace(/[<>]/g, ' ');
       // Ponownie zredukuj białe znaki po ostatecznym czyszczeniu
       simplified = simplified.replace(/\s+/g, ' ').trim();
