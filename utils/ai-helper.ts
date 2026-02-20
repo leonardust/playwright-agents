@@ -380,6 +380,14 @@ export class AIHelper {
         }
       } while (simplified !== previous);
 
+      // Ostatecznie usuń wszelkie pozostałe fragmenty <script>/<style> oraz znaczniki HTML
+      simplified = simplified
+        .replace(/<\s*\/?\s*script/gi, ' ')
+        .replace(/<\s*\/?\s*style/gi, ' ')
+        .replace(/[<>]/g, ' ');
+      // Ponownie zredukuj białe znaki po ostatecznym czyszczeniu
+      simplified = simplified.replace(/\s+/g, ' ').trim();
+
       return simplified;
     } catch (e) {
       void e;
@@ -407,6 +415,14 @@ export class AIHelper {
           simplified = simplified.substring(0, 4000) + '...';
         }
       } while (simplified !== previous);
+
+      // Ostatecznie usuń wszelkie pozostałe fragmenty <script>/<style> oraz znaczniki HTML
+      simplified = simplified
+        .replace(/<\s*\/?\s*script/gi, ' ')
+        .replace(/<\s*\/?\s*style/gi, ' ')
+        .replace(/[<>]/g, ' ');
+      // Ponownie zredukuj białe znaki po ostatecznym czyszczeniu
+      simplified = simplified.replace(/\s+/g, ' ').trim();
 
       return simplified;
     }
