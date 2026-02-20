@@ -383,16 +383,23 @@ export class AIHelper {
       return simplified;
     } catch (e) {
       void e;
-      // W razie problemów z parserem, zastosuj uproszczone czyszczenie
-      let simplified = html.replace(/<!--[\s\S]*?--\s*>/g, '');
-
-      simplified = simplified
+      // Fallback: usuń całe bloki <script>...</script>, <style>...</style> i komentarze,
+      // aby nie pozostawić fragmentów, które mogą ominąć sanitację.
+      let simplified = html
+        // Usuń komentarze HTML
+        .replace(/<!--[\s\S]*?-->/g, '')
+        // Usuń całe bloki <script>...</script> i <style>...</style>
+        .replace(/<script\b[^>]*>[\s\S]*?<\/script\s*>/gi, '')
+        .replace(/<style\b[^>]*>[\s\S]*?<\/style\s*>/gi, '')
+        // Usuń ewentualne pojedyncze otwierające/zamykające tagi
         .replace(/<\s*script[^>]*>/gi, '')
         .replace(/<\s*\/\s*script/gi, '')
         .replace(/<\s*style[^>]*>/gi, '')
         .replace(/<\s*\/\s*style/gi, '')
+        // Zredukuj białe znaki
         .replace(/\s+/g, ' ');
 
+      // Ogranicz długość do 4000 znaków (zachowaj miejsce na prompt)
       if (simplified.length > 4000) {
         simplified = simplified.substring(0, 4000) + '...';
       }
