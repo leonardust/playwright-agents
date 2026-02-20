@@ -352,41 +352,19 @@ export class AIHelper {
       // Usuń wszystkie elementy <script> i <style>
       document.querySelectorAll('script, style').forEach(el => el.remove());
 
-      // Zserializuj z powrotem do HTML i iteracyjnie czyść aż do ustabilizowania
+      // Zserializuj z powrotem do HTML
       let simplified = dom.serialize();
-      let previous = '';
 
-      do {
-        previous = simplified;
-        simplified = simplified
-          // usuń otwierające tagi <script> i <style>
-          .replace(/<\s*script[^>]*>/gi, '')
-          .replace(/<\s*style[^>]*>/gi, '')
-          // Usuń komentarze HTML (uwzględniając warianty typu `--!>`)
-          .replace(/<!--[\s\S]*?--\s*>/g, '')
-          // usuń ewentualne kończące tagi
-          .replace(/<\/style\b[^>]*>/gi, '')
-          .replace(/<\/script\b[^>]*>/gi, '')
-          // usuń fragmenty pozostawione przez nietypowe formatowanie
-          .replace(/<\s*script/gi, '')
-          .replace(/<\s*\/\s*script/gi, '');
+      // Usuń znaczniki HTML poprzez usunięcie znaków `<` i `>`
+      simplified = simplified.replace(/[<>]/g, ' ');
 
-        // Zredukuj białe znaki
-        simplified = simplified.replace(/\s+/g, ' ');
-
-        // Ogranicz długość do 4000 znaków (zachowaj miejsce na prompt)
-        if (simplified.length > 4000) {
-          simplified = simplified.substring(0, 4000) + '...';
-        }
-      } while (simplified !== previous);
-
-      // Ostatecznie usuń wszelkie pozostałe fragmenty <script>/<style> oraz znaczniki HTML
-      simplified = simplified
-        .replace(/<\s*\/?\s*script/gi, ' ')
-        .replace(/<\s*\/?\s*style/gi, ' ')
-        .replace(/[<>]/g, ' ');
-      // Ponownie zredukuj białe znaki po ostatecznym czyszczeniu
+      // Zredukuj białe znaki
       simplified = simplified.replace(/\s+/g, ' ').trim();
+
+      // Ogranicz długość do 4000 znaków (zachowaj miejsce na prompt)
+      if (simplified.length > 4000) {
+        simplified = simplified.substring(0, 4000) + '...';
+      }
 
       return simplified;
     } catch (e) {
