@@ -373,11 +373,6 @@ export class AIHelper {
 
         // Zredukuj białe znaki
         simplified = simplified.replace(/\s+/g, ' ');
-
-        // Ogranicz długość do 4000 znaków (zachowaj miejsce na prompt)
-        if (simplified.length > 4000) {
-          simplified = simplified.substring(0, 4000) + '...';
-        }
       } while (simplified !== previous);
 
       // Ostatecznie usuń wszelkie pozostałe fragmenty <script>/<style> oraz znaczniki HTML
@@ -387,6 +382,11 @@ export class AIHelper {
         .replace(/[<>]/g, ' ');
       // Ponownie zredukuj białe znaki po ostatecznym czyszczeniu
       simplified = simplified.replace(/\s+/g, ' ').trim();
+
+      // Ogranicz długość do 4000 znaków (zachowaj miejsce na prompt)
+      if (simplified.length > 4000) {
+        simplified = simplified.substring(0, 4000) + '...';
+      }
 
       return simplified;
     } catch (e) {
