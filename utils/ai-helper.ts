@@ -393,9 +393,10 @@ export class AIHelper {
       let simplified = html;
       let previous = '';
 
-      do {
-        previous = simplified;
-        simplified = simplified
+          // Usuń całe bloki <script>...</script> i <style>...</style>,
+          // dopuszczając niepoprawne, ale akceptowane przez przeglądarki znaczniki kończące.
+          .replace(/<script\b[^>]*>[\s\S]*?<\/script[^>]*>/gi, '')
+          .replace(/<style\b[^>]*>[\s\S]*?<\/style[^>]*>/gi, '')
           // Usuń komentarze HTML
           .replace(/<!--[\s\S]*?-->/g, '')
           // Usuń całe bloki <script>...</script> i <style>...</style>
