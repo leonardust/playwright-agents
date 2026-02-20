@@ -353,6 +353,15 @@ export class AIHelper {
         .replace(/<!--[\s\S]*?-->/g, '');
     } while (simplified !== previous);
 
+    // Dodatkowo usuń wszelkie pozostałe fragmenty znaczników <script
+    // (np. w przypadku nietypowo sformatowanego lub zagnieżdżonego HTML)
+    do {
+      previous = simplified;
+      simplified = simplified
+        .replace(/<\s*script/gi, '')
+        .replace(/<\s*\/\s*script/gi, '');
+    } while (simplified !== previous);
+
     // Zredukuj białe znaki
     simplified = simplified.replace(/\s+/g, ' ');
 
