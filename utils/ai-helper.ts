@@ -370,15 +370,20 @@ export class AIHelper {
           // usuń fragmenty pozostawione przez nietypowe formatowanie
           .replace(/<\s*script/gi, '')
           .replace(/<\s*\/\s*script/gi, '');
-
-        // Zredukuj białe znaki
-        simplified = simplified.replace(/\s+/g, ' ');
-
-        // Ogranicz długość do 4000 znaków (zachowaj miejsce na prompt)
-        if (simplified.length > 4000) {
-          simplified = simplified.substring(0, 4000) + '...';
-        }
       } while (simplified !== previous);
+
+      // Po ustabilizowaniu: usuń wszystkie potencjalne znaczniki HTML,
+      // aby całkowicie uniemożliwić wstrzyknięcie HTML/JS.
+      simplified = simplified
+        // Usuń wszystkie znaki '<' oraz '>', żeby żaden tag nie mógł zostać zinterpretowany.
+        .replace(/[<>]/g, '')
+        // Zredukuj białe znaki
+        .replace(/\s+/g, ' ');
+
+      // Ogranicz długość do 4000 znaków (zachowaj miejsce na prompt)
+      if (simplified.length > 4000) {
+        simplified = simplified.substring(0, 4000) + '...';
+      }
 
       return simplified;
     } catch (e) {
