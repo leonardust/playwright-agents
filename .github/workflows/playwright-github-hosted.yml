@@ -24,8 +24,10 @@ permissions:
 
 jobs:
   test:
-    name: "Test — PR target runs & human PRs only"
-    if: ${{ github.event_name == 'push' || github.event_name == 'pull_request_target' || github.event_name == 'workflow_dispatch' || (github.event_name == 'pull_request' && github.actor != 'dependabot[bot]') }}
+    if: ${{ github.event_name == 'push'
+      || github.event_name == 'workflow_dispatch'
+      || (github.event_name == 'pull_request' && github.actor != 'dependabot[bot]')
+      || (github.event_name == 'pull_request_target' && github.actor == 'dependabot[bot]') }}
     timeout-minutes: 60
     runs-on: ubuntu-latest
     
@@ -66,25 +68,6 @@ jobs:
           echo "PLAYWRIGHT_EXPECT_TIMEOUT=30000" >> .env
           echo "TEST_PASSWORD=secret_sauce" >> .env
 
-      - name: Debug OLLAMA key presence
-        run: |
-          if [ -f .env ] && grep -q '^OLLAMA_API_KEY=' .env; then
-            echo "OLLAMA_API_KEY present in .env (value masked)"
-          else
-            echo "OLLAMA_API_KEY MISSING in .env"
-          fi
-
-      - name: Validate GROQ key via API
-        env:
-          OLLAMA_API_KEY: ${{ secrets.GROQ_API_KEY }}
-        run: |
-          status=$(curl -s -o /dev/null -w "%{http_code}" -H "Authorization: Bearer $OLLAMA_API_KEY" https://api.groq.com/openai/v1/models || echo "000")
-          echo "GROQ API HTTP status: $status"
-          if [ "$status" = "401" ]; then
-            echo "GROQ key appears invalid (401)"
-            exit 1
-          fi
-
       - name: Run smoke tests
         id: tests
         run: npm run test:smoke
@@ -106,9 +89,11 @@ jobs:
           retention-days: 7
 
   deploy:
-    name: "Deploy test report — PR target runs & human PRs only"
     needs: test
-    if: ${{ (github.event_name == 'push' || github.event_name == 'pull_request_target' || (github.event_name == 'pull_request' && github.actor != 'dependabot[bot]')) && true }}
+    if: ${{ github.event_name == 'push'
+      || github.event_name == 'workflow_dispatch'
+      || (github.event_name == 'pull_request' && github.actor != 'dependabot[bot]')
+      || (github.event_name == 'pull_request_target' && github.actor == 'dependabot[bot]') }}
     runs-on: ubuntu-latest
     concurrency:
       group: gh-pages-deploy
