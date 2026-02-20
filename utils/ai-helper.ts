@@ -407,6 +407,11 @@ export class AIHelper {
           .replace(/\s+/g, ' ');
       } while (simplified !== previous);
 
+      // Upewnij się, że żadne pozostałe delimitery komentarzy nie zostaną w tekście.
+      simplified = simplified
+        .replace(/<!--/g, ' ')
+        .replace(/-->/g, ' ');
+
       // Ostatecznie usuń wszelkie pozostałe fragmenty <script>/<style> oraz znaczniki HTML
       simplified = simplified
         // dodatkowe zabezpieczenie przed pozostałościami nazw tagów
