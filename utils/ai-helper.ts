@@ -350,29 +350,48 @@ export class AIHelper {
       const { document } = dom.window;
 
       // Usuń wszystkie elementy <script> i <style>
-      document.querySelectorAll('script, style').forEach((el) => el.remove());
-    do {
-      // Zserializuj z powrotem do HTML
+      document.querySelectorAll('script, style').forEach(el => el.remove());
+
+      // Zserializuj z powrotem do HTML i iteracyjnie czyść aż do ustabilizowania
       let simplified = dom.serialize();
-        // usuń otwierające tagi <script ...>
-      // Usuń komentarze HTML (uwzględniając warianty typu `--!>`)
-      simplified = simplified.replace(/<!--[\s\S]*?--\s*>/g, '');
+      let previous = '';
 
-      // Zredukuj białe znaki
-      simplified = simplified.replace(/\s+/g, ' ');
+      do {
+        previous = simplified;
+        simplified = simplified
+          // usuń otwierające tagi <script> i <style>
+          .replace(/<\s*script[^>]*>/gi, '')
+          .replace(/<\s*style[^>]*>/gi, '')
+          // Usuń komentarze HTML (uwzględniając warianty typu `--!>`)
+          .replace(/<!--[\s\S]*?--\s*>/g, '')
+          // usuń ewentualne kończące tagi
+          .replace(/<\/style\b[^>]*>/gi, '')
+          .replace(/<\/script\b[^>]*>/gi, '')
+          // usuń fragmenty pozostawione przez nietypowe formatowanie
+          .replace(/<\s*script/gi, '')
+          .replace(/<\s*\/\s*script/gi, '');
 
-      // Ogranicz długość do 4000 znaków (zachowaj miejsce na prompt)
-      if (simplified.length > 4000) {
-        simplified = simplified.substring(0, 4000) + '...';
-      }
+        // Zredukuj białe znaki
+        simplified = simplified.replace(/\s+/g, ' ');
+
+        // Ogranicz długość do 4000 znaków (zachowaj miejsce na prompt)
+        if (simplified.length > 4000) {
+          simplified = simplified.substring(0, 4000) + '...';
+        }
+      } while (simplified !== previous);
 
       return simplified;
-    } catch {
+    } catch (e) {
+      void e;
       // W razie problemów z parserem, zastosuj uproszczone czyszczenie
-      let simplified = html
-        .replace(/<!--[\s\S]*?--\s*>/g, '');
+      let simplified = html.replace(/<!--[\s\S]*?--\s*>/g, '');
 
-      simplified = simplified.replace(/\s+/g, ' ');
+      simplified = simplified
+        .replace(/<\s*script[^>]*>/gi, '')
+        .replace(/<\s*\/\s*script/gi, '')
+        .replace(/<\s*style[^>]*>/gi, '')
+        .replace(/<\s*\/\s*style/gi, '')
+        .replace(/\s+/g, ' ');
 
       if (simplified.length > 4000) {
         simplified = simplified.substring(0, 4000) + '...';
@@ -380,29 +399,5 @@ export class AIHelper {
 
       return simplified;
     }
-        // usuń ewentualne pojedyncze kończące tagi </style>
-        .replace(/<\/style\b[^>]*>/gi, '')
-        // usuń ewentualne pojedyncze kończące tagi </script>
-        .replace(/<\/script\b[^>]*>/gi, '');
-    } while (simplified !== previous);
-
-    // Dodatkowo usuń wszelkie pozostałe fragmenty znaczników <script
-    // (np. w przypadku nietypowo sformatowanego lub zagnieżdżonego HTML)
-    do {
-      previous = simplified;
-      simplified = simplified
-        .replace(/<\s*script/gi, '')
-        .replace(/<\s*\/\s*script/gi, '');
-    } while (simplified !== previous);
-
-    // Zredukuj białe znaki
-    simplified = simplified.replace(/\s+/g, ' ');
-
-    // Ogranicz długość do 4000 znaków (zachowaj miejsce na prompt)
-    if (simplified.length > 4000) {
-      simplified = simplified.substring(0, 4000) + '...';
-    }
-
-    return simplified;
   }
 }

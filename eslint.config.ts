@@ -11,6 +11,7 @@ export default [
       'test-results/**',
       'playwright-report/**',
       '.playwright/**',
+      '.features-gen/**',
       '*.config.js',
     ],
   },
