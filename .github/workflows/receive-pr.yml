@@ -6,6 +6,7 @@ on:
 
 jobs:
   build:
+    if: ${{ github.actor != 'dependabot[bot]' && !startsWith(github.actor, 'dependabot/') }}
     name: "Build & Test (unprivileged)"
     runs-on: ubuntu-latest
     permissions:
