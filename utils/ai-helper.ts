@@ -2,6 +2,7 @@ import { Page } from '@playwright/test';
 import { OpenAI } from 'openai';
 import * as fs from 'fs';
 import * as path from 'path';
+import { JSDOM } from 'jsdom';
 
 /**
  * AIHelper - wrapper dla lokalnego LLM (Ollama) do automatyzacji UI
@@ -342,12 +343,60 @@ export class AIHelper {
    * Upraszcza HTML do podstawowej struktury dla zmniejszenia tokenu
    */
   private simplifyHtml(html: string): string {
-    // Usuń style, skrypty i komentarze
-    let simplified = html
-      .replace(/<style[^>]*>[\s\S]*?<\/style>/gi, '')
-      .replace(/<script[^>]*>[\s\S]*?<\/script>/gi, '')
-      .replace(/<!--[\s\S]*?-->/g, '')
-      .replace(/\s+/g, ' ');
+    // Usuń style, skrypty i komentarze z użyciem parsera HTML,
+    // aby poprawnie obsłużyć różne formy znaczników kończących.
+    try {
+      const dom = new JSDOM(html);
+      const { document } = dom.window;
+
+      // Usuń wszystkie elementy <script> i <style>
+      document.querySelectorAll('script, style').forEach((el) => el.remove());
+    do {
+      // Zserializuj z powrotem do HTML
+      let simplified = dom.serialize();
+        // usuń otwierające tagi <script ...>
+      // Usuń komentarze HTML (uwzględniając warianty typu `--!>`)
+      simplified = simplified.replace(/<!--[\s\S]*?--\s*>/g, '');
+
+      // Zredukuj białe znaki
+      simplified = simplified.replace(/\s+/g, ' ');
+
+      // Ogranicz długość do 4000 znaków (zachowaj miejsce na prompt)
+      if (simplified.length > 4000) {
+        simplified = simplified.substring(0, 4000) + '...';
+      }
+
+      return simplified;
+    } catch {
+      // W razie problemów z parserem, zastosuj uproszczone czyszczenie
+      let simplified = html
+        .replace(/<!--[\s\S]*?--\s*>/g, '');
+
+      simplified = simplified.replace(/\s+/g, ' ');
+
+      if (simplified.length > 4000) {
+        simplified = simplified.substring(0, 4000) + '...';
+      }
+
+      return simplified;
+    }
+        // usuń ewentualne pojedyncze kończące tagi </style>
+        .replace(/<\/style\b[^>]*>/gi, '')
+        // usuń ewentualne pojedyncze kończące tagi </script>
+        .replace(/<\/script\b[^>]*>/gi, '');
+    } while (simplified !== previous);
+
+    // Dodatkowo usuń wszelkie pozostałe fragmenty znaczników <script
+    // (np. w przypadku nietypowo sformatowanego lub zagnieżdżonego HTML)
+    do {
+      previous = simplified;
+      simplified = simplified
+        .replace(/<\s*script/gi, '')
+        .replace(/<\s*\/\s*script/gi, '');
+    } while (simplified !== previous);
+
+    // Zredukuj białe znaki
+    simplified = simplified.replace(/\s+/g, ' ');
 
     // Ogranicz długość do 4000 znaków (zachowaj miejsce na prompt)
     if (simplified.length > 4000) {
