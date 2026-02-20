@@ -405,6 +405,16 @@ export class AIHelper {
           .replace(/\s+/g, ' ');
       } while (simplified !== previous);
 
+      // Dodatkowe zabezpieczenie: usuń wszelkie pozostałe fragmenty <script>/<style>
+      // oraz ewentualne niedomknięte znaczniki otwierające.
+      simplified = simplified
+        .replace(/<\s*script/gi, '')
+        .replace(/<\s*\/\s*script/gi, '')
+        .replace(/<\s*style/gi, '')
+        .replace(/<\s*\/\s*style/gi, '')
+        // Opcjonalnie usuń wszystkie znaki '<', aby uniemożliwić wstrzyknięcie HTML.
+        .replace(/</g, '');
+
       // Ogranicz długość do 4000 znaków (zachowaj miejsce na prompt)
       if (simplified.length > 4000) {
         simplified = simplified.substring(0, 4000) + '...';
