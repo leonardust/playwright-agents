@@ -403,6 +403,10 @@ export class AIHelper {
           .replace(/<style\b[^>]*>[\s\S]*?<\/style\s*>/gi, '')
           // Usuń ewentualne pojedyncze otwierające/zamykające tagi
           .replace(/<\s*script[^>]*>/gi, '')
+      // Dodatkowo usuń wszelkie pozostałe wystąpienia słowa "script",
+      // aby uniknąć pozostawienia fragmentów mogących zostać zinterpretowanych jako skrypt.
+      simplified = simplified.replace(/script/gi, '');
+
           .replace(/<\s*\/\s*script/gi, '')
           .replace(/<\s*style[^>]*>/gi, '')
           .replace(/<\s*\/\s*style/gi, '');
