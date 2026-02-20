@@ -380,19 +380,48 @@ export class AIHelper {
         }
       } while (simplified !== previous);
 
+      // Ostatecznie usuń wszelkie pozostałe fragmenty <script>/<style> oraz znaczniki HTML
+      simplified = simplified
+        .replace(/<\s*\/?\s*script/gi, ' ')
+        .replace(/<\s*\/?\s*style/gi, ' ')
+        .replace(/[<>]/g, ' ');
+      // Ponownie zredukuj białe znaki po ostatecznym czyszczeniu
+      simplified = simplified.replace(/\s+/g, ' ').trim();
+
       return simplified;
     } catch (e) {
       void e;
       // W razie problemów z parserem, zastosuj uproszczone czyszczenie
-      let simplified = html.replace(/<!--[\s\S]*?--\s*>/g, '');
+      let simplified = html;
+      let previous = '';
 
+      do {
+        previous = simplified;
+
+        simplified = simplified
+          // Usuń komentarze HTML.
+          .replace(/<!--[\s\S]*?-->/g, '')
+          // Usuń wszystkie nawiasy ostre, aby uniemożliwić tworzenie znaczników.
+          .replace(/[<>]/g, ' ')
+          // Zredukuj białe znaki
+          .replace(/\s+/g, ' ');
+      } while (simplified !== previous);
+
+      // Upewnij się, że żadne pozostałe delimitery komentarzy nie zostaną w tekście.
       simplified = simplified
-        .replace(/<\s*script[^>]*>/gi, '')
-        .replace(/<\s*\/\s*script/gi, '')
-        .replace(/<\s*style[^>]*>/gi, '')
-        .replace(/<\s*\/\s*style/gi, '')
-        .replace(/\s+/g, ' ');
+        .replace(/<!--/g, ' ')
+        .replace(/--!?>/g, ' ');
 
+      // Ostatecznie usuń wszelkie pozostałe fragmenty <script>/<style> oraz znaczniki HTML
+      simplified = simplified
+        // dodatkowe zabezpieczenie przed pozostałościami nazw tagów
+        .replace(/script\b/gi, ' ')
+        .replace(/style\b/gi, ' ')
+        .replace(/[<>]/g, ' ');
+      // Ponownie zredukuj białe znaki po ostatecznym czyszczeniu
+      simplified = simplified.replace(/\s+/g, ' ').trim();
+
+      // Ogranicz długość do 4000 znaków (zachowaj miejsce na prompt)
       if (simplified.length > 4000) {
         simplified = simplified.substring(0, 4000) + '...';
       }
