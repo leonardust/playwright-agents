@@ -399,18 +399,16 @@ export class AIHelper {
         previous = simplified;
 
         simplified = simplified
-          // Usuń komentarze HTML.
+          // Usuń komentarze HTML (wraz z ich zawartością).
           .replace(/<!--[\s\S]*?-->/g, '')
+          // Upewnij się, że żadne pozostałe delimitery komentarzy nie zostaną w tekście.
+          .replace(/<!--/g, ' ')
+          .replace(/--!?>/g, ' ')
           // Usuń wszystkie nawiasy ostre, aby uniemożliwić tworzenie znaczników.
           .replace(/[<>]/g, ' ')
           // Zredukuj białe znaki
           .replace(/\s+/g, ' ');
       } while (simplified !== previous);
-
-      // Upewnij się, że żadne pozostałe delimitery komentarzy nie zostaną w tekście.
-      simplified = simplified
-        .replace(/<!--/g, ' ')
-        .replace(/--!?>/g, ' ');
 
       // Ostatecznie usuń wszelkie pozostałe fragmenty <script>/<style> oraz znaczniki HTML
       simplified = simplified
