@@ -400,20 +400,16 @@ export class AIHelper {
           .replace(/<\s*script[^>]*>/gi, '')
           .replace(/<\s*\/\s*script/gi, '')
           .replace(/<\s*style[^>]*>/gi, '')
-          .replace(/<\s*\/\s*style/gi, '')
-          // Zredukuj białe znaki
-          .replace(/\s+/g, ' ');
+          .replace(/<\s*\/\s*style/gi, '');
       } while (simplified !== previous);
 
-      // Dodatkowe zabezpieczenie: usuń wszelkie pozostałe fragmenty <script>/<style>
-      // oraz ewentualne niedomknięte znaczniki otwierające.
+      // Po ustabilizowaniu: usuń wszystkie potencjalne znaczniki HTML,
+      // aby całkowicie uniemożliwić wstrzyknięcie HTML/JS.
       simplified = simplified
-        .replace(/<\s*script/gi, '')
-        .replace(/<\s*\/\s*script/gi, '')
-        .replace(/<\s*style/gi, '')
-        .replace(/<\s*\/\s*style/gi, '')
-        // Opcjonalnie usuń wszystkie znaki '<', aby uniemożliwić wstrzyknięcie HTML.
-        .replace(/</g, '');
+        // Usuń wszystkie znaki '<' oraz '>', żeby żaden tag nie mógł zostać zinterpretowany.
+        .replace(/[<>]/g, '')
+        // Zredukuj białe znaki
+        .replace(/\s+/g, ' ');
 
       // Ogranicz długość do 4000 znaków (zachowaj miejsce na prompt)
       if (simplified.length > 4000) {
