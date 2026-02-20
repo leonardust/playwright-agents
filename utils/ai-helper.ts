@@ -389,9 +389,7 @@ export class AIHelper {
       let prevComments = '';
       do {
         prevComments = simplified;
-        simplified = simplified
-          .replace(/<!--/g, ' ')
-          .replace(/--!?>/g, ' ');
+        simplified = simplified.replace(/<!--/g, ' ').replace(/--!?>/g, ' ');
       } while (simplified !== prevComments);
 
       // Ostatecznie usuń wszelkie pozostałe fragmenty <script>/<style> oraz znaczniki HTML
