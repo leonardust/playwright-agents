@@ -410,7 +410,7 @@ export class AIHelper {
       // Upewnij się, że żadne pozostałe delimitery komentarzy nie zostaną w tekście.
       simplified = simplified
         .replace(/<!--/g, ' ')
-        .replace(/-->/g, ' ');
+        .replace(/--!?>/g, ' ');
 
       // Ostatecznie usuń wszelkie pozostałe fragmenty <script>/<style> oraz znaczniki HTML
       simplified = simplified
