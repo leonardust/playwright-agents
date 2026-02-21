@@ -278,6 +278,94 @@ export class AIHelper {
   }
 
   /**
+   * Wybierz opcję z elementu <select> używając AI
+   */
+  async selectDropdown(description: string, option: string): Promise<void> {
+    this.logPrompt(`AI SelectDropdown: ${description} -> ${option}`, { description, option });
+
+    try {
+      const pageContent = await this.page.content();
+
+      const prompt = `Find a UNIQUE CSS selector for a DROPDOWN (<select>) element: "${description}". 
+      Page HTML structure: ${this.simplifyHtml(pageContent)}
+      
+      Must select the <select> element itself, not its wrapper. Return ONLY the CSS selector, nothing else. NO markdown, NO code blocks.`;
+
+      const response = await this.client.chat.completions.create({
+        model: process.env.OLLAMA_MODEL || 'llama3.1:8b',
+        messages: [
+          {
+            role: 'system',
+            content:
+              'You are a CSS selector generator for <select> dropdown elements. Return ONLY a plain CSS selector, NO markdown code blocks, NO explanations. Prefer [data-test="..."] or unique ids. For the Saucedemo inventory page specifically, the sort dropdown has class "product_sort_container" so selectors like ".product_sort_container" or "select.product_sort_container" are ideal. If description mentions "dropdown" or "sort" look for a <select> tag.',
+          },
+          {
+            role: 'user',
+            content: prompt,
+          },
+        ],
+        temperature: parseFloat(process.env.OLLAMA_TEMPERATURE || '0'),
+        max_tokens: 100,
+      });
+
+      const rawSelector = response.choices[0]?.message?.content?.trim() || '';
+      const selector = this.cleanSelector(rawSelector);
+      this.logPrompt('AI Response (selectDropdown)', {
+        rawSelector,
+        cleanedSelector: selector,
+        description,
+        option,
+      });
+
+      if (!selector) {
+        throw new Error(`AI could not find selector for dropdown: ${description}`);
+      }
+
+      let locator = this.page.locator(selector);
+      const count = await locator.count();
+
+      if (count === 0) {
+        // fallback: try accessible combobox by name
+        this.logPrompt('Selector not found, trying dropdown fallback', { selector, description });
+        locator = this.page.getByRole('combobox', { name: new RegExp(description, 'i') });
+        let fallbackCount = await locator.count();
+
+        // if still nothing, look for known container or any select
+        if (fallbackCount === 0) {
+          locator = this.page.locator(
+            'select.product_sort_container, .product_sort_container select, select',
+          );
+          fallbackCount = await locator.count();
+        }
+
+        if (fallbackCount === 0) {
+          throw new Error(`Dropdown selector ${selector} not found and fallback failed`);
+        }
+      } else if (count > 1) {
+        this.logPrompt('Multiple dropdowns found, using .first()', { selector, count });
+        locator = locator.first();
+      }
+
+      // attempt selection by label then by value
+      try {
+        await locator.selectOption({ label: option });
+      } catch (e1) {
+        try {
+          await locator.selectOption({ value: option });
+        } catch (e2) {
+          this.logPrompt('Dropdown selectOption error', { error1: String(e1), error2: String(e2) });
+          throw e2;
+        }
+      }
+
+      this.logPrompt('SelectDropdown successful', { selector, option });
+    } catch (error) {
+      this.logPrompt('SelectDropdown failed', { description, option, error: String(error) });
+      throw error;
+    }
+  }
+
+  /**
    * Weryfikuj obecność elementu używając AI
    */
   async verify(description: string): Promise<boolean> {
