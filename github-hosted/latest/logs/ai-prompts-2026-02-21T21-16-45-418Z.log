@@ -1,0 +1,129 @@
+[2026-02-21T21:16:45.728Z] AI Fill: username field = standard_user
+{
+  "timestamp": "2026-02-21T21:16:45.728Z",
+  "action": "AI Fill: username field = standard_user",
+  "context": {
+    "description": "username field",
+    "value": "standard_user"
+  },
+  "url": "https://www.saucedemo.com/"
+}
+
+[2026-02-21T21:16:51.919Z] AI Response (fill)
+{
+  "timestamp": "2026-02-21T21:16:51.919Z",
+  "action": "AI Response (fill)",
+  "context": {
+    "rawSelector": "input[data-test=\"username\"]",
+    "cleanedSelector": "input[data-test=\"username\"]",
+    "description": "username field"
+  },
+  "url": "https://www.saucedemo.com/"
+}
+
+[2026-02-21T21:16:51.919Z] AI Response
+{
+  "timestamp": "2026-02-21T21:16:51.919Z",
+  "action": "AI Response",
+  "context": {
+    "selector": "input[data-test=\"username\"]",
+    "description": "username field"
+  },
+  "url": "https://www.saucedemo.com/"
+}
+
+[2026-02-21T21:16:51.966Z] Fill successful
+{
+  "timestamp": "2026-02-21T21:16:51.966Z",
+  "action": "Fill successful",
+  "context": {
+    "selector": "input[data-test=\"username\"]",
+    "value": "standard_user"
+  },
+  "url": "https://www.saucedemo.com/"
+}
+
+[2026-02-21T21:16:51.966Z] AI Fill: password field = secret_sauce
+{
+  "timestamp": "2026-02-21T21:16:51.966Z",
+  "action": "AI Fill: password field = secret_sauce",
+  "context": {
+    "description": "password field",
+    "value": "secret_sauce"
+  },
+  "url": "https://www.saucedemo.com/"
+}
+
+[2026-02-21T21:16:59.143Z] AI Response (fill)
+{
+  "timestamp": "2026-02-21T21:16:59.143Z",
+  "action": "AI Response (fill)",
+  "context": {
+    "rawSelector": "input[data-test=\"password\"]",
+    "cleanedSelector": "input[data-test=\"password\"]",
+    "description": "password field"
+  },
+  "url": "https://www.saucedemo.com/"
+}
+
+[2026-02-21T21:16:59.143Z] AI Response
+{
+  "timestamp": "2026-02-21T21:16:59.143Z",
+  "action": "AI Response",
+  "context": {
+    "selector": "input[data-test=\"password\"]",
+    "description": "password field"
+  },
+  "url": "https://www.saucedemo.com/"
+}
+
+[2026-02-21T21:16:59.166Z] Fill successful
+{
+  "timestamp": "2026-02-21T21:16:59.166Z",
+  "action": "Fill successful",
+  "context": {
+    "selector": "input[data-test=\"password\"]",
+    "value": "secret_sauce"
+  },
+  "url": "https://www.saucedemo.com/"
+}
+
+[2026-02-21T21:16:59.166Z] AI Click: login button
+{
+  "timestamp": "2026-02-21T21:16:59.166Z",
+  "action": "AI Click: login button",
+  "context": {
+    "description": "login button"
+  },
+  "url": "https://www.saucedemo.com/"
+}
+
+[2026-02-21T21:17:06.394Z] AI Response (click)
+{
+  "timestamp": "2026-02-21T21:17:06.394Z",
+  "action": "AI Response (click)",
+  "context": {
+    "rawSelector": "#login-button \n\nbutton[data-test=\"login-button\"] \n\nbutton[value=\"Login\"] \n\nbutton[type=\"submit\"]",
+    "cleanedSelector": "#login-button",
+    "description": "login button"
+  },
+  "url": "https://www.saucedemo.com/"
+}
+
+[2026-02-21T21:17:06.453Z] Click successful
+{
+  "timestamp": "2026-02-21T21:17:06.453Z",
+  "action": "Click successful",
+  "context": {
+    "selector": "#login-button"
+  },
+  "url": "https://www.saucedemo.com/inventory.html"
+}
+
+[2026-02-21T21:17:06.455Z] Logged in as standard_user and navigated to products page
+{
+  "timestamp": "2026-02-21T21:17:06.455Z",
+  "action": "Logged in as standard_user and navigated to products page",
+  "url": "https://www.saucedemo.com/inventory.html"
+}
+

@@ -1,0 +1,402 @@
+{
+  "config": {
+    "configFile": "/home/runner/work/playwright-agents/playwright-agents/playwright.config.ts",
+    "rootDir": "/home/runner/work/playwright-agents/playwright-agents/.features-gen",
+    "forbidOnly": true,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "ci": {
+        "commitHref": "https://github.com/leonardust/playwright-agents/commit/fa966d5e9ec3be15ed1411847e689cc7abe801d8",
+        "commitHash": "fa966d5e9ec3be15ed1411847e689cc7abe801d8",
+        "prHref": "https://github.com/leonardust/playwright-agents/pull/24",
+        "prTitle": "chore(ci)(deps): bump peter-evans/enable-pull-request-automerge from 2 to 3",
+        "prBaseHash": "5288b928930370dde043106d1dd476766ee72587",
+        "buildHref": "https://github.com/leonardust/playwright-agents/actions/runs/22188799245"
+      },
+      "gitCommit": {
+        "shortHash": "fa966d5",
+        "hash": "fa966d5e9ec3be15ed1411847e689cc7abe801d8",
+        "subject": "Merge 7154c50a17f50c34263d293c59a0ce0dee3b0db0 into 5288b928930370dde043106d1dd476766ee72587",
+        "body": "Merge 7154c50a17f50c34263d293c59a0ce0dee3b0db0 into 5288b928930370dde043106d1dd476766ee72587\n",
+        "author": {
+          "name": "dependabot[bot]",
+          "email": "49699333+dependabot[bot]@users.noreply.github.com",
+          "time": 1771515909000
+        },
+        "committer": {
+          "name": "GitHub",
+          "email": "noreply@github.com",
+          "time": 1771515909000
+        },
+        "branch": "HEAD"
+      },
+      "gitDiff": "diff --git a/.github/workflows/code-scanning-auto-fix.yml b/.github/workflows/code-scanning-auto-fix.yml\nindex 1653109..b949ee7 100644\n--- a/.github/workflows/code-scanning-auto-fix.yml\n+++ b/.github/workflows/code-scanning-auto-fix.yml\n@@ -65,7 +65,7 @@ jobs:\n \n       - name: Enable auto-merge\n         if: env.CHANGED == 'true' && success()\n-        uses: peter-evans/enable-pull-request-automerge@v2\n+        uses: peter-evans/enable-pull-request-automerge@v3\n         with:\n           token: ${{ secrets.PAT }}\n           pull-request-number: ${{ steps.create_pr.outputs.pull-request-number }}",
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/home/runner/work/playwright-agents/playwright-agents/test-results",
+        "repeatEach": 1,
+        "retries": 2,
+        "metadata": {
+          "ci": {
+            "commitHref": "https://github.com/leonardust/playwright-agents/commit/fa966d5e9ec3be15ed1411847e689cc7abe801d8",
+            "commitHash": "fa966d5e9ec3be15ed1411847e689cc7abe801d8",
+            "prHref": "https://github.com/leonardust/playwright-agents/pull/24",
+            "prTitle": "chore(ci)(deps): bump peter-evans/enable-pull-request-automerge from 2 to 3",
+            "prBaseHash": "5288b928930370dde043106d1dd476766ee72587",
+            "buildHref": "https://github.com/leonardust/playwright-agents/actions/runs/22188799245"
+          },
+          "gitCommit": {
+            "shortHash": "fa966d5",
+            "hash": "fa966d5e9ec3be15ed1411847e689cc7abe801d8",
+            "subject": "Merge 7154c50a17f50c34263d293c59a0ce0dee3b0db0 into 5288b928930370dde043106d1dd476766ee72587",
+            "body": "Merge 7154c50a17f50c34263d293c59a0ce0dee3b0db0 into 5288b928930370dde043106d1dd476766ee72587\n",
+            "author": {
+              "name": "dependabot[bot]",
+              "email": "49699333+dependabot[bot]@users.noreply.github.com",
+              "time": 1771515909000
+            },
+            "committer": {
+              "name": "GitHub",
+              "email": "noreply@github.com",
+              "time": 1771515909000
+            },
+            "branch": "HEAD"
+          },
+          "gitDiff": "diff --git a/.github/workflows/code-scanning-auto-fix.yml b/.github/workflows/code-scanning-auto-fix.yml\nindex 1653109..b949ee7 100644\n--- a/.github/workflows/code-scanning-auto-fix.yml\n+++ b/.github/workflows/code-scanning-auto-fix.yml\n@@ -65,7 +65,7 @@ jobs:\n \n       - name: Enable auto-merge\n         if: env.CHANGED == 'true' && success()\n-        uses: peter-evans/enable-pull-request-automerge@v2\n+        uses: peter-evans/enable-pull-request-automerge@v3\n         with:\n           token: ${{ secrets.PAT }}\n           pull-request-number: ${{ steps.create_pr.outputs.pull-request-number }}",
+          "actualWorkers": 1
+        },
+        "id": "chromium",
+        "name": "chromium",
+        "testDir": "/home/runner/work/playwright-agents/playwright-agents/.features-gen",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 90000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "html",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "playwright-report/results.json"
+        }
+      ],
+      [
+        "github",
+        null
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "runAgents": "none",
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.58.2",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "features/shopping.feature.spec.js",
+      "file": "features/shopping.feature.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Shopping Cart",
+          "file": "features/shopping.feature.spec.js",
+          "line": 4,
+          "column": 6,
+          "specs": [
+            {
+              "title": "Add product to cart",
+              "ok": false,
+              "tags": [
+                "smoke",
+                "critical"
+              ],
+              "tests": [
+                {
+                  "timeout": 90000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "failed",
+                      "duration": 966,
+                      "error": {
+                        "message": "Error: 401 Invalid API Key",
+                        "stack": "Error: 401 Invalid API Key\n    at Function.generate (/home/runner/work/playwright-agents/playwright-agents/node_modules/openai/src/core/error.ts:76:14)\n    at OpenAI.makeStatusError (/home/runner/work/playwright-agents/playwright-agents/node_modules/openai/src/client.ts:478:28)\n    at OpenAI.makeRequest (/home/runner/work/playwright-agents/playwright-agents/node_modules/openai/src/client.ts:728:24)\n    at AIHelper.fill (/home/runner/work/playwright-agents/playwright-agents/utils/ai-helper.ts:210:24)\n    at Object.<anonymous> (/home/runner/work/playwright-agents/playwright-agents/steps/shopping.steps.ts:16:3)\n    at /home/runner/work/playwright-agents/playwright-agents/.features-gen/features/shopping.feature.spec.js:7:5",
+                        "location": {
+                          "file": "/home/runner/work/playwright-agents/playwright-agents/utils/ai-helper.ts",
+                          "column": 24,
+                          "line": 210
+                        },
+                        "snippet": "   at ../utils/ai-helper.ts:210\n\n\u001b[0m \u001b[90m 208 |\u001b[39m \u001b[32m      Return ONLY the CSS selector, nothing else. NO markdown, NO code blocks.`\u001b[39m\u001b[33m;\u001b[39m\n \u001b[90m 209 |\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 210 |\u001b[39m       \u001b[36mconst\u001b[39m response \u001b[33m=\u001b[39m \u001b[36mawait\u001b[39m \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mclient\u001b[33m.\u001b[39mchat\u001b[33m.\u001b[39mcompletions\u001b[33m.\u001b[39mcreate({\n \u001b[90m     |\u001b[39m                        \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 211 |\u001b[39m         model\u001b[33m:\u001b[39m process\u001b[33m.\u001b[39menv\u001b[33m.\u001b[39m\u001b[33mOLLAMA_MODEL\u001b[39m \u001b[33m||\u001b[39m \u001b[32m'llama3.1:8b'\u001b[39m\u001b[33m,\u001b[39m\n \u001b[90m 212 |\u001b[39m         messages\u001b[33m:\u001b[39m [\n \u001b[90m 213 |\u001b[39m           {\u001b[0m"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/home/runner/work/playwright-agents/playwright-agents/utils/ai-helper.ts",
+                            "column": 24,
+                            "line": 210
+                          },
+                          "message": "Error: 401 Invalid API Key\n\n   at ../utils/ai-helper.ts:210\n\n  208 |       Return ONLY the CSS selector, nothing else. NO markdown, NO code blocks.`;\n  209 |\n> 210 |       const response = await this.client.chat.completions.create({\n      |                        ^\n  211 |         model: process.env.OLLAMA_MODEL || 'llama3.1:8b',\n  212 |         messages: [\n  213 |           {\n    at Function.generate (/home/runner/work/playwright-agents/playwright-agents/node_modules/openai/src/core/error.ts:76:14)\n    at OpenAI.makeStatusError (/home/runner/work/playwright-agents/playwright-agents/node_modules/openai/src/client.ts:478:28)\n    at OpenAI.makeRequest (/home/runner/work/playwright-agents/playwright-agents/node_modules/openai/src/client.ts:728:24)\n    at AIHelper.fill (/home/runner/work/playwright-agents/playwright-agents/utils/ai-helper.ts:210:24)\n    at Object.<anonymous> (/home/runner/work/playwright-agents/playwright-agents/steps/shopping.steps.ts:16:3)\n    at /home/runner/work/playwright-agents/playwright-agents/.features-gen/features/shopping.feature.spec.js:7:5"
+                        }
+                      ],
+                      "stdout": [
+                        {
+                          "text": "📝 AI Log: AI Fill: username field = standard_user\n"
+                        },
+                        {
+                          "text": "📝 AI Log: Fill failed\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "steps": [
+                        {
+                          "title": "Given I am logged in as \"standard_user\"",
+                          "duration": 730,
+                          "error": {
+                            "message": "Error: 401 Invalid API Key",
+                            "stack": "Error: 401 Invalid API Key\n    at Function.generate (/home/runner/work/playwright-agents/playwright-agents/node_modules/openai/src/core/error.ts:76:14)\n    at OpenAI.makeStatusError (/home/runner/work/playwright-agents/playwright-agents/node_modules/openai/src/client.ts:478:28)\n    at OpenAI.makeRequest (/home/runner/work/playwright-agents/playwright-agents/node_modules/openai/src/client.ts:728:24)\n    at AIHelper.fill (/home/runner/work/playwright-agents/playwright-agents/utils/ai-helper.ts:210:24)\n    at Object.<anonymous> (/home/runner/work/playwright-agents/playwright-agents/steps/shopping.steps.ts:16:3)\n    at /home/runner/work/playwright-agents/playwright-agents/.features-gen/features/shopping.feature.spec.js:7:5",
+                            "location": {
+                              "file": "/home/runner/work/playwright-agents/playwright-agents/utils/ai-helper.ts",
+                              "column": 24,
+                              "line": 210
+                            },
+                            "snippet": "   at ../utils/ai-helper.ts:210\n\n\u001b[0m \u001b[90m 208 |\u001b[39m \u001b[32m      Return ONLY the CSS selector, nothing else. NO markdown, NO code blocks.`\u001b[39m\u001b[33m;\u001b[39m\n \u001b[90m 209 |\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 210 |\u001b[39m       \u001b[36mconst\u001b[39m response \u001b[33m=\u001b[39m \u001b[36mawait\u001b[39m \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mclient\u001b[33m.\u001b[39mchat\u001b[33m.\u001b[39mcompletions\u001b[33m.\u001b[39mcreate({\n \u001b[90m     |\u001b[39m                        \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 211 |\u001b[39m         model\u001b[33m:\u001b[39m process\u001b[33m.\u001b[39menv\u001b[33m.\u001b[39m\u001b[33mOLLAMA_MODEL\u001b[39m \u001b[33m||\u001b[39m \u001b[32m'llama3.1:8b'\u001b[39m\u001b[33m,\u001b[39m\n \u001b[90m 212 |\u001b[39m         messages\u001b[33m:\u001b[39m [\n \u001b[90m 213 |\u001b[39m           {\u001b[0m"
+                          }
+                        }
+                      ],
+                      "startTime": "2026-02-19T15:56:23.189Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/home/runner/work/playwright-agents/playwright-agents/test-results/features-shopping.feature-Shopping-Cart-Add-product-to-cart-chromium/test-failed-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "/home/runner/work/playwright-agents/playwright-agents/test-results/features-shopping.feature-Shopping-Cart-Add-product-to-cart-chromium/video.webm"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/home/runner/work/playwright-agents/playwright-agents/test-results/features-shopping.feature-Shopping-Cart-Add-product-to-cart-chromium/error-context.md"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/home/runner/work/playwright-agents/playwright-agents/utils/ai-helper.ts",
+                        "column": 24,
+                        "line": 210
+                      }
+                    },
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "failed",
+                      "duration": 813,
+                      "error": {
+                        "message": "Error: 401 Invalid API Key",
+                        "stack": "Error: 401 Invalid API Key\n    at Function.generate (/home/runner/work/playwright-agents/playwright-agents/node_modules/openai/src/core/error.ts:76:14)\n    at OpenAI.makeStatusError (/home/runner/work/playwright-agents/playwright-agents/node_modules/openai/src/client.ts:478:28)\n    at OpenAI.makeRequest (/home/runner/work/playwright-agents/playwright-agents/node_modules/openai/src/client.ts:728:24)\n    at AIHelper.fill (/home/runner/work/playwright-agents/playwright-agents/utils/ai-helper.ts:210:24)\n    at Object.<anonymous> (/home/runner/work/playwright-agents/playwright-agents/steps/shopping.steps.ts:16:3)\n    at /home/runner/work/playwright-agents/playwright-agents/.features-gen/features/shopping.feature.spec.js:7:5",
+                        "location": {
+                          "file": "/home/runner/work/playwright-agents/playwright-agents/utils/ai-helper.ts",
+                          "column": 24,
+                          "line": 210
+                        },
+                        "snippet": "   at ../utils/ai-helper.ts:210\n\n\u001b[0m \u001b[90m 208 |\u001b[39m \u001b[32m      Return ONLY the CSS selector, nothing else. NO markdown, NO code blocks.`\u001b[39m\u001b[33m;\u001b[39m\n \u001b[90m 209 |\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 210 |\u001b[39m       \u001b[36mconst\u001b[39m response \u001b[33m=\u001b[39m \u001b[36mawait\u001b[39m \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mclient\u001b[33m.\u001b[39mchat\u001b[33m.\u001b[39mcompletions\u001b[33m.\u001b[39mcreate({\n \u001b[90m     |\u001b[39m                        \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 211 |\u001b[39m         model\u001b[33m:\u001b[39m process\u001b[33m.\u001b[39menv\u001b[33m.\u001b[39m\u001b[33mOLLAMA_MODEL\u001b[39m \u001b[33m||\u001b[39m \u001b[32m'llama3.1:8b'\u001b[39m\u001b[33m,\u001b[39m\n \u001b[90m 212 |\u001b[39m         messages\u001b[33m:\u001b[39m [\n \u001b[90m 213 |\u001b[39m           {\u001b[0m"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/home/runner/work/playwright-agents/playwright-agents/utils/ai-helper.ts",
+                            "column": 24,
+                            "line": 210
+                          },
+                          "message": "Error: 401 Invalid API Key\n\n   at ../utils/ai-helper.ts:210\n\n  208 |       Return ONLY the CSS selector, nothing else. NO markdown, NO code blocks.`;\n  209 |\n> 210 |       const response = await this.client.chat.completions.create({\n      |                        ^\n  211 |         model: process.env.OLLAMA_MODEL || 'llama3.1:8b',\n  212 |         messages: [\n  213 |           {\n    at Function.generate (/home/runner/work/playwright-agents/playwright-agents/node_modules/openai/src/core/error.ts:76:14)\n    at OpenAI.makeStatusError (/home/runner/work/playwright-agents/playwright-agents/node_modules/openai/src/client.ts:478:28)\n    at OpenAI.makeRequest (/home/runner/work/playwright-agents/playwright-agents/node_modules/openai/src/client.ts:728:24)\n    at AIHelper.fill (/home/runner/work/playwright-agents/playwright-agents/utils/ai-helper.ts:210:24)\n    at Object.<anonymous> (/home/runner/work/playwright-agents/playwright-agents/steps/shopping.steps.ts:16:3)\n    at /home/runner/work/playwright-agents/playwright-agents/.features-gen/features/shopping.feature.spec.js:7:5"
+                        }
+                      ],
+                      "stdout": [
+                        {
+                          "text": "📝 AI Log: AI Fill: username field = standard_user\n"
+                        },
+                        {
+                          "text": "📝 AI Log: Fill failed\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 1,
+                      "steps": [
+                        {
+                          "title": "Given I am logged in as \"standard_user\"",
+                          "duration": 492,
+                          "error": {
+                            "message": "Error: 401 Invalid API Key",
+                            "stack": "Error: 401 Invalid API Key\n    at Function.generate (/home/runner/work/playwright-agents/playwright-agents/node_modules/openai/src/core/error.ts:76:14)\n    at OpenAI.makeStatusError (/home/runner/work/playwright-agents/playwright-agents/node_modules/openai/src/client.ts:478:28)\n    at OpenAI.makeRequest (/home/runner/work/playwright-agents/playwright-agents/node_modules/openai/src/client.ts:728:24)\n    at AIHelper.fill (/home/runner/work/playwright-agents/playwright-agents/utils/ai-helper.ts:210:24)\n    at Object.<anonymous> (/home/runner/work/playwright-agents/playwright-agents/steps/shopping.steps.ts:16:3)\n    at /home/runner/work/playwright-agents/playwright-agents/.features-gen/features/shopping.feature.spec.js:7:5",
+                            "location": {
+                              "file": "/home/runner/work/playwright-agents/playwright-agents/utils/ai-helper.ts",
+                              "column": 24,
+                              "line": 210
+                            },
+                            "snippet": "   at ../utils/ai-helper.ts:210\n\n\u001b[0m \u001b[90m 208 |\u001b[39m \u001b[32m      Return ONLY the CSS selector, nothing else. NO markdown, NO code blocks.`\u001b[39m\u001b[33m;\u001b[39m\n \u001b[90m 209 |\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 210 |\u001b[39m       \u001b[36mconst\u001b[39m response \u001b[33m=\u001b[39m \u001b[36mawait\u001b[39m \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mclient\u001b[33m.\u001b[39mchat\u001b[33m.\u001b[39mcompletions\u001b[33m.\u001b[39mcreate({\n \u001b[90m     |\u001b[39m                        \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 211 |\u001b[39m         model\u001b[33m:\u001b[39m process\u001b[33m.\u001b[39menv\u001b[33m.\u001b[39m\u001b[33mOLLAMA_MODEL\u001b[39m \u001b[33m||\u001b[39m \u001b[32m'llama3.1:8b'\u001b[39m\u001b[33m,\u001b[39m\n \u001b[90m 212 |\u001b[39m         messages\u001b[33m:\u001b[39m [\n \u001b[90m 213 |\u001b[39m           {\u001b[0m"
+                          }
+                        }
+                      ],
+                      "startTime": "2026-02-19T15:56:26.569Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/home/runner/work/playwright-agents/playwright-agents/test-results/features-shopping.feature-Shopping-Cart-Add-product-to-cart-chromium-retry1/test-failed-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "/home/runner/work/playwright-agents/playwright-agents/test-results/features-shopping.feature-Shopping-Cart-Add-product-to-cart-chromium-retry1/video.webm"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/home/runner/work/playwright-agents/playwright-agents/test-results/features-shopping.feature-Shopping-Cart-Add-product-to-cart-chromium-retry1/error-context.md"
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/home/runner/work/playwright-agents/playwright-agents/test-results/features-shopping.feature-Shopping-Cart-Add-product-to-cart-chromium-retry1/trace.zip"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/home/runner/work/playwright-agents/playwright-agents/utils/ai-helper.ts",
+                        "column": 24,
+                        "line": 210
+                      }
+                    },
+                    {
+                      "workerIndex": 2,
+                      "parallelIndex": 0,
+                      "status": "failed",
+                      "duration": 724,
+                      "error": {
+                        "message": "Error: 401 Invalid API Key",
+                        "stack": "Error: 401 Invalid API Key\n    at Function.generate (/home/runner/work/playwright-agents/playwright-agents/node_modules/openai/src/core/error.ts:76:14)\n    at OpenAI.makeStatusError (/home/runner/work/playwright-agents/playwright-agents/node_modules/openai/src/client.ts:478:28)\n    at OpenAI.makeRequest (/home/runner/work/playwright-agents/playwright-agents/node_modules/openai/src/client.ts:728:24)\n    at AIHelper.fill (/home/runner/work/playwright-agents/playwright-agents/utils/ai-helper.ts:210:24)\n    at Object.<anonymous> (/home/runner/work/playwright-agents/playwright-agents/steps/shopping.steps.ts:16:3)\n    at /home/runner/work/playwright-agents/playwright-agents/.features-gen/features/shopping.feature.spec.js:7:5",
+                        "location": {
+                          "file": "/home/runner/work/playwright-agents/playwright-agents/utils/ai-helper.ts",
+                          "column": 24,
+                          "line": 210
+                        },
+                        "snippet": "   at ../utils/ai-helper.ts:210\n\n\u001b[0m \u001b[90m 208 |\u001b[39m \u001b[32m      Return ONLY the CSS selector, nothing else. NO markdown, NO code blocks.`\u001b[39m\u001b[33m;\u001b[39m\n \u001b[90m 209 |\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 210 |\u001b[39m       \u001b[36mconst\u001b[39m response \u001b[33m=\u001b[39m \u001b[36mawait\u001b[39m \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mclient\u001b[33m.\u001b[39mchat\u001b[33m.\u001b[39mcompletions\u001b[33m.\u001b[39mcreate({\n \u001b[90m     |\u001b[39m                        \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 211 |\u001b[39m         model\u001b[33m:\u001b[39m process\u001b[33m.\u001b[39menv\u001b[33m.\u001b[39m\u001b[33mOLLAMA_MODEL\u001b[39m \u001b[33m||\u001b[39m \u001b[32m'llama3.1:8b'\u001b[39m\u001b[33m,\u001b[39m\n \u001b[90m 212 |\u001b[39m         messages\u001b[33m:\u001b[39m [\n \u001b[90m 213 |\u001b[39m           {\u001b[0m"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/home/runner/work/playwright-agents/playwright-agents/utils/ai-helper.ts",
+                            "column": 24,
+                            "line": 210
+                          },
+                          "message": "Error: 401 Invalid API Key\n\n   at ../utils/ai-helper.ts:210\n\n  208 |       Return ONLY the CSS selector, nothing else. NO markdown, NO code blocks.`;\n  209 |\n> 210 |       const response = await this.client.chat.completions.create({\n      |                        ^\n  211 |         model: process.env.OLLAMA_MODEL || 'llama3.1:8b',\n  212 |         messages: [\n  213 |           {\n    at Function.generate (/home/runner/work/playwright-agents/playwright-agents/node_modules/openai/src/core/error.ts:76:14)\n    at OpenAI.makeStatusError (/home/runner/work/playwright-agents/playwright-agents/node_modules/openai/src/client.ts:478:28)\n    at OpenAI.makeRequest (/home/runner/work/playwright-agents/playwright-agents/node_modules/openai/src/client.ts:728:24)\n    at AIHelper.fill (/home/runner/work/playwright-agents/playwright-agents/utils/ai-helper.ts:210:24)\n    at Object.<anonymous> (/home/runner/work/playwright-agents/playwright-agents/steps/shopping.steps.ts:16:3)\n    at /home/runner/work/playwright-agents/playwright-agents/.features-gen/features/shopping.feature.spec.js:7:5"
+                        }
+                      ],
+                      "stdout": [
+                        {
+                          "text": "📝 AI Log: AI Fill: username field = standard_user\n"
+                        },
+                        {
+                          "text": "📝 AI Log: Fill failed\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 2,
+                      "steps": [
+                        {
+                          "title": "Given I am logged in as \"standard_user\"",
+                          "duration": 470,
+                          "error": {
+                            "message": "Error: 401 Invalid API Key",
+                            "stack": "Error: 401 Invalid API Key\n    at Function.generate (/home/runner/work/playwright-agents/playwright-agents/node_modules/openai/src/core/error.ts:76:14)\n    at OpenAI.makeStatusError (/home/runner/work/playwright-agents/playwright-agents/node_modules/openai/src/client.ts:478:28)\n    at OpenAI.makeRequest (/home/runner/work/playwright-agents/playwright-agents/node_modules/openai/src/client.ts:728:24)\n    at AIHelper.fill (/home/runner/work/playwright-agents/playwright-agents/utils/ai-helper.ts:210:24)\n    at Object.<anonymous> (/home/runner/work/playwright-agents/playwright-agents/steps/shopping.steps.ts:16:3)\n    at /home/runner/work/playwright-agents/playwright-agents/.features-gen/features/shopping.feature.spec.js:7:5",
+                            "location": {
+                              "file": "/home/runner/work/playwright-agents/playwright-agents/utils/ai-helper.ts",
+                              "column": 24,
+                              "line": 210
+                            },
+                            "snippet": "   at ../utils/ai-helper.ts:210\n\n\u001b[0m \u001b[90m 208 |\u001b[39m \u001b[32m      Return ONLY the CSS selector, nothing else. NO markdown, NO code blocks.`\u001b[39m\u001b[33m;\u001b[39m\n \u001b[90m 209 |\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 210 |\u001b[39m       \u001b[36mconst\u001b[39m response \u001b[33m=\u001b[39m \u001b[36mawait\u001b[39m \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mclient\u001b[33m.\u001b[39mchat\u001b[33m.\u001b[39mcompletions\u001b[33m.\u001b[39mcreate({\n \u001b[90m     |\u001b[39m                        \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 211 |\u001b[39m         model\u001b[33m:\u001b[39m process\u001b[33m.\u001b[39menv\u001b[33m.\u001b[39m\u001b[33mOLLAMA_MODEL\u001b[39m \u001b[33m||\u001b[39m \u001b[32m'llama3.1:8b'\u001b[39m\u001b[33m,\u001b[39m\n \u001b[90m 212 |\u001b[39m         messages\u001b[33m:\u001b[39m [\n \u001b[90m 213 |\u001b[39m           {\u001b[0m"
+                          }
+                        }
+                      ],
+                      "startTime": "2026-02-19T15:56:28.799Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/home/runner/work/playwright-agents/playwright-agents/test-results/features-shopping.feature-Shopping-Cart-Add-product-to-cart-chromium-retry2/test-failed-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "/home/runner/work/playwright-agents/playwright-agents/test-results/features-shopping.feature-Shopping-Cart-Add-product-to-cart-chromium-retry2/video.webm"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/home/runner/work/playwright-agents/playwright-agents/test-results/features-shopping.feature-Shopping-Cart-Add-product-to-cart-chromium-retry2/error-context.md"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/home/runner/work/playwright-agents/playwright-agents/utils/ai-helper.ts",
+                        "column": 24,
+                        "line": 210
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "c14a68548b5beb0557e1-6b735f2a547f903121fe",
+              "file": "features/shopping.feature.spec.js",
+              "line": 6,
+              "column": 3
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-02-19T15:56:21.615Z",
+    "duration": 8200.258,
+    "expected": 0,
+    "skipped": 0,
+    "unexpected": 1,
+    "flaky": 0
+  }
+}

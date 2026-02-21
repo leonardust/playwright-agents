@@ -1,0 +1,402 @@
+{
+  "config": {
+    "configFile": "/home/runner/work/playwright-agents/playwright-agents/playwright.config.ts",
+    "rootDir": "/home/runner/work/playwright-agents/playwright-agents/.features-gen",
+    "forbidOnly": true,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "ci": {
+        "commitHref": "https://github.com/leonardust/playwright-agents/commit/e00aaa4544225fd16fb616ee3c906f8c4d706f86",
+        "commitHash": "e00aaa4544225fd16fb616ee3c906f8c4d706f86",
+        "prHref": "https://github.com/leonardust/playwright-agents/pull/10",
+        "prTitle": "chore(deps)(deps-dev): bump rimraf from 6.1.2 to 6.1.3 in the development group",
+        "prBaseHash": "42d50ab0f15006eb12035ddbea5a8a962923b00a",
+        "buildHref": "https://github.com/leonardust/playwright-agents/actions/runs/22137018155"
+      },
+      "gitCommit": {
+        "shortHash": "e00aaa4",
+        "hash": "e00aaa4544225fd16fb616ee3c906f8c4d706f86",
+        "subject": "Merge fc6622a2a21083e60424d3d0f8769e1b728a1630 into 42d50ab0f15006eb12035ddbea5a8a962923b00a",
+        "body": "Merge fc6622a2a21083e60424d3d0f8769e1b728a1630 into 42d50ab0f15006eb12035ddbea5a8a962923b00a\n",
+        "author": {
+          "name": "dependabot[bot]",
+          "email": "49699333+dependabot[bot]@users.noreply.github.com",
+          "time": 1771412405000
+        },
+        "committer": {
+          "name": "GitHub",
+          "email": "noreply@github.com",
+          "time": 1771412405000
+        },
+        "branch": "HEAD"
+      },
+      "gitDiff": "diff --git a/package-lock.json b/package-lock.json\nindex a456cdb..a30e386 100644\n--- a/package-lock.json\n+++ b/package-lock.json\n@@ -31,7 +31,7 @@\n         \"playwright\": \"^1.58.0\",\n         \"playwright-bdd\": \"^8.4.2\",\n         \"prettier\": \"^3.8.1\",\n-        \"rimraf\": \"^6.1.2\",\n+        \"rimraf\": \"^6.1.3\",\n         \"typescript\": \"^5.9.3\",\n         \"typescript-eslint\": \"^8.55.0\"\n       }\n@@ -617,29 +617,6 @@\n         \"url\": \"https://github.com/sponsors/nzakas\"\n       }\n     },\n-    \"node_modules/@isaacs/balanced-match\": {\n-      \"version\": \"4.0.1\",\n-      \"resolved\": \"https://registry.npmjs.org/@isaacs/balanced-match/-/balanced-match-4.0.1.tgz\",\n-      \"integrity\": \"sha512-yzMTt9lEb8Gv7zRioUilSglI0c0smZ9k5D65677DLWLtWJaXIS3CqcGyUFByYKlnUj6TkjLVs54fBl6+TiGQDQ==\",\n-      \"dev\": true,\n-      \"license\": \"MIT\",\n-      \"engines\": {\n-        \"node\": \"20 || >=22\"\n-      }\n-    },\n-    \"node_modules/@isaacs/brace-expansion\": {\n-      \"version\": \"5.0.1\",\n-      \"resolved\": \"https://registry.npmjs.org/@isaacs/brace-expansion/-/brace-expansion-5.0.1.tgz\",\n-      \"integrity\": \"sha512-WMz71T1JS624nWj2n2fnYAuPovhv7EUhk69R6i9dsVyzxt5eM3bjwvgk9L+APE1TRscGysAVMANkB0jh0LQZrQ==\",\n-      \"dev\": true,\n-      \"license\": \"MIT\",\n-      \"dependencies\": {\n-        \"@isaacs/balanced-match\": \"^4.0.1\"\n-      },\n-      \"engines\": {\n-        \"node\": \"20 || >=22\"\n-      }\n-    },\n     \"node_modules/@nodelib/fs.scandir\": {\n       \"version\": \"2.1.5\",\n       \"resolved\": \"https://registry.npmjs.org/@nodelib/fs.scandir/-/fs.scandir-2.1.5.tgz\",\n@@ -1944,13 +1921,13 @@\n       }\n     },\n     \"node_modules/glob\": {\n-      \"version\": \"13.0.0\",\n-      \"resolved\": \"https://registry.npmjs.org/glob/-/glob-13.0.0.tgz\",\n-      \"integrity\": \"sha512-tvZgpqk6fz4BaNZ66ZsRaZnbHvP/jG3uKJvAZOwEVUL4RTA5nJeeLYfyN9/VA8NX/V3IBG+hkeuGpKjvELkVhA==\",\n+      \"version\": \"13.0.5\",\n+      \"resolved\": \"https://registry.npmjs.org/glob/-/glob-13.0.5.tgz\",\n+      \"integrity\": \"sha512-BzXxZg24Ibra1pbQ/zE7Kys4Ua1ks7Bn6pKLkVPZ9FZe4JQS6/Q7ef3LG1H+k7lUf5l4T3PLSyYyYJVYUvfgTw==\",\n       \"dev\": true,\n       \"license\": \"BlueOak-1.0.0\",\n       \"dependencies\": {\n-        \"minimatch\": \"^10.1.1\",\n+        \"minimatch\": \"^10.2.1\",\n         \"minipass\": \"^7.1.2\",\n         \"path-scurry\": \"^2.0.0\"\n       },\n@@ -2547,13 +2524,13 @@\n       }\n     },\n     \"node_modules/minimatch\": {\n-      \"version\": \"10.1.1\",\n-      \"resolved\": \"https://registry.npmjs.org/minimatch/-/minimatch-10.1.1.tgz\",\n-      \"integrity\": \"sha512-enIvLvRAFZYXJzkCYG5RKmPfrFArdLv+R+lbQ53BmIMLIry74bjKzX6iHAm8WYamJkhSSEabrWN5D97XnKObjQ==\",\n+      \"version\": \"10.2.1\",\n+      \"resolved\": \"https://registry.npmjs.org/minimatch/-/minimatch-10.2.1.tgz\",\n+      \"integrity\": \"sha512-MClCe8IL5nRRmawL6ib/eT4oLyeKMGCghibcDWK+J0hh0Q8kqSdia6BvbRMVk6mPa6WqUa5uR2oxt6C5jd533A==\",\n       \"dev\": true,\n       \"license\": \"BlueOak-1.0.0\",\n       \"dependencies\": {\n-        \"@isaacs/brace-expansion\": \"^5.0.0\"\n+        \"brace-expansion\": \"^5.0.2\"\n       },\n       \"engines\": {\n         \"node\": \"20 || >=22\"\n@@ -2562,6 +2539,29 @@\n         \"url\": \"https://github.com/sponsors/isaacs\"\n       }\n     },\n+    \"node_modules/minimatch/node_modules/balanced-match\": {\n+      \"version\": \"4.0.3\",\n+      \"resolved\": \"https://registry.npmjs.org/balanced-match/-/balanced-match-4.0.3.tgz\",\n+      \"integrity\": \"sha512-1pHv8LX9CpKut1Zp4EXey7Z8OfH11ONNH6Dhi2WDUt31VVZFXZzKwXcysBgqSumFCmR+0dqjMK5v5JiFHzi0+g==\",\n+      \"dev\": true,\n+      \"license\": \"MIT\",\n+      \"engines\": {\n+        \"node\": \"20 || >=22\"\n+      }\n+    },\n+    \"node_modules/minimatch/node_modules/brace-expansion\": {\n+      \"version\": \"5.0.2\",\n+      \"resolved\": \"https://registry.npmjs.org/brace-expansion/-/brace-expansion-5.0.2.tgz\",\n+      \"integrity\": \"sha512-Pdk8c9poy+YhOgVWw1JNN22/HcivgKWwpxKq04M/jTmHyCZn12WPJebZxdjSa5TmBqISrUSgNYU3eRORljfCCw==\",\n+      \"dev\": true,\n+      \"license\": \"MIT\",\n+      \"dependencies\": {\n+        \"balanced-match\": \"^4.0.2\"\n+      },\n+      \"engines\": {\n+        \"node\": \"20 || >=22\"\n+      }\n+    },\n     \"node_modules/minipass\": {\n       \"version\": \"7.1.2\",\n       \"resolved\": \"https://registry.npmjs.org/minipass/-/minipass-7.1.2.tgz\",\n@@ -3320,13 +3320,13 @@\n       \"license\": \"MIT\"\n     },\n     \"node_modules/rimraf\": {\n-      \"version\": \"6.1.2\",\n-      \"resolved\": \"https://registry.npmjs.org/rimraf/-/rimraf-6.1.2.tgz\",\n-      \"integrity\": \"sha512-cFCkPslJv7BAXJsYlK1dZsbP8/ZNLkCAQ0bi1hf5EKX2QHegmDFEFA6QhuYJlk7UDdc+02JjO80YSOrWPpw06g==\",\n+      \"version\": \"6.1.3\",\n+      \"resolved\": \"https://registry.npmjs.org/rimraf/-/rimraf-6.1.3.tgz\",\n+      \"integrity\": \"sha512-LKg+Cr2ZF61fkcaK1UdkH2yEBBKnYjTyWzTJT6KNPcSPaiT7HSdhtMXQuN5wkTX0Xu72KQ1l8S42rlmexS2hSA==\",\n       \"dev\": true,\n       \"license\": \"BlueOak-1.0.0\",\n       \"dependencies\": {\n-        \"glob\": \"^13.0.0\",\n+        \"glob\": \"^13.0.3\",\n         \"package-json-from-dist\": \"^1.0.1\"\n       },\n       \"bin\": {\ndiff --git a/package.json b/package.json\nindex 3ba308c..2cd129c 100644\n--- a/package.json\n+++ b/package.json\n@@ -46,7 +46,7 @@\n     \"playwright\": \"^1.58.0\",\n     \"playwright-bdd\": \"^8.4.2\",\n     \"prettier\": \"^3.8.1\",\n-    \"rimraf\": \"^6.1.2\",\n+    \"rimraf\": \"^6.1.3\",\n     \"typescript\": \"^5.9.3\",\n     \"typescript-eslint\": \"^8.55.0\"\n   },",
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/home/runner/work/playwright-agents/playwright-agents/test-results",
+        "repeatEach": 1,
+        "retries": 2,
+        "metadata": {
+          "ci": {
+            "commitHref": "https://github.com/leonardust/playwright-agents/commit/e00aaa4544225fd16fb616ee3c906f8c4d706f86",
+            "commitHash": "e00aaa4544225fd16fb616ee3c906f8c4d706f86",
+            "prHref": "https://github.com/leonardust/playwright-agents/pull/10",
+            "prTitle": "chore(deps)(deps-dev): bump rimraf from 6.1.2 to 6.1.3 in the development group",
+            "prBaseHash": "42d50ab0f15006eb12035ddbea5a8a962923b00a",
+            "buildHref": "https://github.com/leonardust/playwright-agents/actions/runs/22137018155"
+          },
+          "gitCommit": {
+            "shortHash": "e00aaa4",
+            "hash": "e00aaa4544225fd16fb616ee3c906f8c4d706f86",
+            "subject": "Merge fc6622a2a21083e60424d3d0f8769e1b728a1630 into 42d50ab0f15006eb12035ddbea5a8a962923b00a",
+            "body": "Merge fc6622a2a21083e60424d3d0f8769e1b728a1630 into 42d50ab0f15006eb12035ddbea5a8a962923b00a\n",
+            "author": {
+              "name": "dependabot[bot]",
+              "email": "49699333+dependabot[bot]@users.noreply.github.com",
+              "time": 1771412405000
+            },
+            "committer": {
+              "name": "GitHub",
+              "email": "noreply@github.com",
+              "time": 1771412405000
+            },
+            "branch": "HEAD"
+          },
+          "gitDiff": "diff --git a/package-lock.json b/package-lock.json\nindex a456cdb..a30e386 100644\n--- a/package-lock.json\n+++ b/package-lock.json\n@@ -31,7 +31,7 @@\n         \"playwright\": \"^1.58.0\",\n         \"playwright-bdd\": \"^8.4.2\",\n         \"prettier\": \"^3.8.1\",\n-        \"rimraf\": \"^6.1.2\",\n+        \"rimraf\": \"^6.1.3\",\n         \"typescript\": \"^5.9.3\",\n         \"typescript-eslint\": \"^8.55.0\"\n       }\n@@ -617,29 +617,6 @@\n         \"url\": \"https://github.com/sponsors/nzakas\"\n       }\n     },\n-    \"node_modules/@isaacs/balanced-match\": {\n-      \"version\": \"4.0.1\",\n-      \"resolved\": \"https://registry.npmjs.org/@isaacs/balanced-match/-/balanced-match-4.0.1.tgz\",\n-      \"integrity\": \"sha512-yzMTt9lEb8Gv7zRioUilSglI0c0smZ9k5D65677DLWLtWJaXIS3CqcGyUFByYKlnUj6TkjLVs54fBl6+TiGQDQ==\",\n-      \"dev\": true,\n-      \"license\": \"MIT\",\n-      \"engines\": {\n-        \"node\": \"20 || >=22\"\n-      }\n-    },\n-    \"node_modules/@isaacs/brace-expansion\": {\n-      \"version\": \"5.0.1\",\n-      \"resolved\": \"https://registry.npmjs.org/@isaacs/brace-expansion/-/brace-expansion-5.0.1.tgz\",\n-      \"integrity\": \"sha512-WMz71T1JS624nWj2n2fnYAuPovhv7EUhk69R6i9dsVyzxt5eM3bjwvgk9L+APE1TRscGysAVMANkB0jh0LQZrQ==\",\n-      \"dev\": true,\n-      \"license\": \"MIT\",\n-      \"dependencies\": {\n-        \"@isaacs/balanced-match\": \"^4.0.1\"\n-      },\n-      \"engines\": {\n-        \"node\": \"20 || >=22\"\n-      }\n-    },\n     \"node_modules/@nodelib/fs.scandir\": {\n       \"version\": \"2.1.5\",\n       \"resolved\": \"https://registry.npmjs.org/@nodelib/fs.scandir/-/fs.scandir-2.1.5.tgz\",\n@@ -1944,13 +1921,13 @@\n       }\n     },\n     \"node_modules/glob\": {\n-      \"version\": \"13.0.0\",\n-      \"resolved\": \"https://registry.npmjs.org/glob/-/glob-13.0.0.tgz\",\n-      \"integrity\": \"sha512-tvZgpqk6fz4BaNZ66ZsRaZnbHvP/jG3uKJvAZOwEVUL4RTA5nJeeLYfyN9/VA8NX/V3IBG+hkeuGpKjvELkVhA==\",\n+      \"version\": \"13.0.5\",\n+      \"resolved\": \"https://registry.npmjs.org/glob/-/glob-13.0.5.tgz\",\n+      \"integrity\": \"sha512-BzXxZg24Ibra1pbQ/zE7Kys4Ua1ks7Bn6pKLkVPZ9FZe4JQS6/Q7ef3LG1H+k7lUf5l4T3PLSyYyYJVYUvfgTw==\",\n       \"dev\": true,\n       \"license\": \"BlueOak-1.0.0\",\n       \"dependencies\": {\n-        \"minimatch\": \"^10.1.1\",\n+        \"minimatch\": \"^10.2.1\",\n         \"minipass\": \"^7.1.2\",\n         \"path-scurry\": \"^2.0.0\"\n       },\n@@ -2547,13 +2524,13 @@\n       }\n     },\n     \"node_modules/minimatch\": {\n-      \"version\": \"10.1.1\",\n-      \"resolved\": \"https://registry.npmjs.org/minimatch/-/minimatch-10.1.1.tgz\",\n-      \"integrity\": \"sha512-enIvLvRAFZYXJzkCYG5RKmPfrFArdLv+R+lbQ53BmIMLIry74bjKzX6iHAm8WYamJkhSSEabrWN5D97XnKObjQ==\",\n+      \"version\": \"10.2.1\",\n+      \"resolved\": \"https://registry.npmjs.org/minimatch/-/minimatch-10.2.1.tgz\",\n+      \"integrity\": \"sha512-MClCe8IL5nRRmawL6ib/eT4oLyeKMGCghibcDWK+J0hh0Q8kqSdia6BvbRMVk6mPa6WqUa5uR2oxt6C5jd533A==\",\n       \"dev\": true,\n       \"license\": \"BlueOak-1.0.0\",\n       \"dependencies\": {\n-        \"@isaacs/brace-expansion\": \"^5.0.0\"\n+        \"brace-expansion\": \"^5.0.2\"\n       },\n       \"engines\": {\n         \"node\": \"20 || >=22\"\n@@ -2562,6 +2539,29 @@\n         \"url\": \"https://github.com/sponsors/isaacs\"\n       }\n     },\n+    \"node_modules/minimatch/node_modules/balanced-match\": {\n+      \"version\": \"4.0.3\",\n+      \"resolved\": \"https://registry.npmjs.org/balanced-match/-/balanced-match-4.0.3.tgz\",\n+      \"integrity\": \"sha512-1pHv8LX9CpKut1Zp4EXey7Z8OfH11ONNH6Dhi2WDUt31VVZFXZzKwXcysBgqSumFCmR+0dqjMK5v5JiFHzi0+g==\",\n+      \"dev\": true,\n+      \"license\": \"MIT\",\n+      \"engines\": {\n+        \"node\": \"20 || >=22\"\n+      }\n+    },\n+    \"node_modules/minimatch/node_modules/brace-expansion\": {\n+      \"version\": \"5.0.2\",\n+      \"resolved\": \"https://registry.npmjs.org/brace-expansion/-/brace-expansion-5.0.2.tgz\",\n+      \"integrity\": \"sha512-Pdk8c9poy+YhOgVWw1JNN22/HcivgKWwpxKq04M/jTmHyCZn12WPJebZxdjSa5TmBqISrUSgNYU3eRORljfCCw==\",\n+      \"dev\": true,\n+      \"license\": \"MIT\",\n+      \"dependencies\": {\n+        \"balanced-match\": \"^4.0.2\"\n+      },\n+      \"engines\": {\n+        \"node\": \"20 || >=22\"\n+      }\n+    },\n     \"node_modules/minipass\": {\n       \"version\": \"7.1.2\",\n       \"resolved\": \"https://registry.npmjs.org/minipass/-/minipass-7.1.2.tgz\",\n@@ -3320,13 +3320,13 @@\n       \"license\": \"MIT\"\n     },\n     \"node_modules/rimraf\": {\n-      \"version\": \"6.1.2\",\n-      \"resolved\": \"https://registry.npmjs.org/rimraf/-/rimraf-6.1.2.tgz\",\n-      \"integrity\": \"sha512-cFCkPslJv7BAXJsYlK1dZsbP8/ZNLkCAQ0bi1hf5EKX2QHegmDFEFA6QhuYJlk7UDdc+02JjO80YSOrWPpw06g==\",\n+      \"version\": \"6.1.3\",\n+      \"resolved\": \"https://registry.npmjs.org/rimraf/-/rimraf-6.1.3.tgz\",\n+      \"integrity\": \"sha512-LKg+Cr2ZF61fkcaK1UdkH2yEBBKnYjTyWzTJT6KNPcSPaiT7HSdhtMXQuN5wkTX0Xu72KQ1l8S42rlmexS2hSA==\",\n       \"dev\": true,\n       \"license\": \"BlueOak-1.0.0\",\n       \"dependencies\": {\n-        \"glob\": \"^13.0.0\",\n+        \"glob\": \"^13.0.3\",\n         \"package-json-from-dist\": \"^1.0.1\"\n       },\n       \"bin\": {\ndiff --git a/package.json b/package.json\nindex 3ba308c..2cd129c 100644\n--- a/package.json\n+++ b/package.json\n@@ -46,7 +46,7 @@\n     \"playwright\": \"^1.58.0\",\n     \"playwright-bdd\": \"^8.4.2\",\n     \"prettier\": \"^3.8.1\",\n-    \"rimraf\": \"^6.1.2\",\n+    \"rimraf\": \"^6.1.3\",\n     \"typescript\": \"^5.9.3\",\n     \"typescript-eslint\": \"^8.55.0\"\n   },",
+          "actualWorkers": 1
+        },
+        "id": "chromium",
+        "name": "chromium",
+        "testDir": "/home/runner/work/playwright-agents/playwright-agents/.features-gen",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 90000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "html",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "playwright-report/results.json"
+        }
+      ],
+      [
+        "github",
+        null
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "runAgents": "none",
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.58.2",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "features/shopping.feature.spec.js",
+      "file": "features/shopping.feature.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Shopping Cart",
+          "file": "features/shopping.feature.spec.js",
+          "line": 4,
+          "column": 6,
+          "specs": [
+            {
+              "title": "Add product to cart",
+              "ok": false,
+              "tags": [
+                "smoke",
+                "critical"
+              ],
+              "tests": [
+                {
+                  "timeout": 90000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "failed",
+                      "duration": 751,
+                      "error": {
+                        "message": "Error: 401 Invalid API Key",
+                        "stack": "Error: 401 Invalid API Key\n    at Function.generate (/home/runner/work/playwright-agents/playwright-agents/node_modules/openai/src/core/error.ts:76:14)\n    at OpenAI.makeStatusError (/home/runner/work/playwright-agents/playwright-agents/node_modules/openai/src/client.ts:478:28)\n    at OpenAI.makeRequest (/home/runner/work/playwright-agents/playwright-agents/node_modules/openai/src/client.ts:728:24)\n    at AIHelper.fill (/home/runner/work/playwright-agents/playwright-agents/utils/ai-helper.ts:210:24)\n    at Object.<anonymous> (/home/runner/work/playwright-agents/playwright-agents/steps/shopping.steps.ts:16:3)\n    at /home/runner/work/playwright-agents/playwright-agents/.features-gen/features/shopping.feature.spec.js:7:5",
+                        "location": {
+                          "file": "/home/runner/work/playwright-agents/playwright-agents/utils/ai-helper.ts",
+                          "column": 24,
+                          "line": 210
+                        },
+                        "snippet": "   at ../utils/ai-helper.ts:210\n\n\u001b[0m \u001b[90m 208 |\u001b[39m \u001b[32m      Return ONLY the CSS selector, nothing else. NO markdown, NO code blocks.`\u001b[39m\u001b[33m;\u001b[39m\n \u001b[90m 209 |\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 210 |\u001b[39m       \u001b[36mconst\u001b[39m response \u001b[33m=\u001b[39m \u001b[36mawait\u001b[39m \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mclient\u001b[33m.\u001b[39mchat\u001b[33m.\u001b[39mcompletions\u001b[33m.\u001b[39mcreate({\n \u001b[90m     |\u001b[39m                        \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 211 |\u001b[39m         model\u001b[33m:\u001b[39m process\u001b[33m.\u001b[39menv\u001b[33m.\u001b[39m\u001b[33mOLLAMA_MODEL\u001b[39m \u001b[33m||\u001b[39m \u001b[32m'llama3.1:8b'\u001b[39m\u001b[33m,\u001b[39m\n \u001b[90m 212 |\u001b[39m         messages\u001b[33m:\u001b[39m [\n \u001b[90m 213 |\u001b[39m           {\u001b[0m"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/home/runner/work/playwright-agents/playwright-agents/utils/ai-helper.ts",
+                            "column": 24,
+                            "line": 210
+                          },
+                          "message": "Error: 401 Invalid API Key\n\n   at ../utils/ai-helper.ts:210\n\n  208 |       Return ONLY the CSS selector, nothing else. NO markdown, NO code blocks.`;\n  209 |\n> 210 |       const response = await this.client.chat.completions.create({\n      |                        ^\n  211 |         model: process.env.OLLAMA_MODEL || 'llama3.1:8b',\n  212 |         messages: [\n  213 |           {\n    at Function.generate (/home/runner/work/playwright-agents/playwright-agents/node_modules/openai/src/core/error.ts:76:14)\n    at OpenAI.makeStatusError (/home/runner/work/playwright-agents/playwright-agents/node_modules/openai/src/client.ts:478:28)\n    at OpenAI.makeRequest (/home/runner/work/playwright-agents/playwright-agents/node_modules/openai/src/client.ts:728:24)\n    at AIHelper.fill (/home/runner/work/playwright-agents/playwright-agents/utils/ai-helper.ts:210:24)\n    at Object.<anonymous> (/home/runner/work/playwright-agents/playwright-agents/steps/shopping.steps.ts:16:3)\n    at /home/runner/work/playwright-agents/playwright-agents/.features-gen/features/shopping.feature.spec.js:7:5"
+                        }
+                      ],
+                      "stdout": [
+                        {
+                          "text": "📝 AI Log: AI Fill: username field = standard_user\n"
+                        },
+                        {
+                          "text": "📝 AI Log: Fill failed\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "steps": [
+                        {
+                          "title": "Given I am logged in as \"standard_user\"",
+                          "duration": 478,
+                          "error": {
+                            "message": "Error: 401 Invalid API Key",
+                            "stack": "Error: 401 Invalid API Key\n    at Function.generate (/home/runner/work/playwright-agents/playwright-agents/node_modules/openai/src/core/error.ts:76:14)\n    at OpenAI.makeStatusError (/home/runner/work/playwright-agents/playwright-agents/node_modules/openai/src/client.ts:478:28)\n    at OpenAI.makeRequest (/home/runner/work/playwright-agents/playwright-agents/node_modules/openai/src/client.ts:728:24)\n    at AIHelper.fill (/home/runner/work/playwright-agents/playwright-agents/utils/ai-helper.ts:210:24)\n    at Object.<anonymous> (/home/runner/work/playwright-agents/playwright-agents/steps/shopping.steps.ts:16:3)\n    at /home/runner/work/playwright-agents/playwright-agents/.features-gen/features/shopping.feature.spec.js:7:5",
+                            "location": {
+                              "file": "/home/runner/work/playwright-agents/playwright-agents/utils/ai-helper.ts",
+                              "column": 24,
+                              "line": 210
+                            },
+                            "snippet": "   at ../utils/ai-helper.ts:210\n\n\u001b[0m \u001b[90m 208 |\u001b[39m \u001b[32m      Return ONLY the CSS selector, nothing else. NO markdown, NO code blocks.`\u001b[39m\u001b[33m;\u001b[39m\n \u001b[90m 209 |\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 210 |\u001b[39m       \u001b[36mconst\u001b[39m response \u001b[33m=\u001b[39m \u001b[36mawait\u001b[39m \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mclient\u001b[33m.\u001b[39mchat\u001b[33m.\u001b[39mcompletions\u001b[33m.\u001b[39mcreate({\n \u001b[90m     |\u001b[39m                        \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 211 |\u001b[39m         model\u001b[33m:\u001b[39m process\u001b[33m.\u001b[39menv\u001b[33m.\u001b[39m\u001b[33mOLLAMA_MODEL\u001b[39m \u001b[33m||\u001b[39m \u001b[32m'llama3.1:8b'\u001b[39m\u001b[33m,\u001b[39m\n \u001b[90m 212 |\u001b[39m         messages\u001b[33m:\u001b[39m [\n \u001b[90m 213 |\u001b[39m           {\u001b[0m"
+                          }
+                        }
+                      ],
+                      "startTime": "2026-02-18T11:03:58.710Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/home/runner/work/playwright-agents/playwright-agents/test-results/features-shopping.feature-Shopping-Cart-Add-product-to-cart-chromium/test-failed-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "/home/runner/work/playwright-agents/playwright-agents/test-results/features-shopping.feature-Shopping-Cart-Add-product-to-cart-chromium/video.webm"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/home/runner/work/playwright-agents/playwright-agents/test-results/features-shopping.feature-Shopping-Cart-Add-product-to-cart-chromium/error-context.md"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/home/runner/work/playwright-agents/playwright-agents/utils/ai-helper.ts",
+                        "column": 24,
+                        "line": 210
+                      }
+                    },
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "failed",
+                      "duration": 710,
+                      "error": {
+                        "message": "Error: 401 Invalid API Key",
+                        "stack": "Error: 401 Invalid API Key\n    at Function.generate (/home/runner/work/playwright-agents/playwright-agents/node_modules/openai/src/core/error.ts:76:14)\n    at OpenAI.makeStatusError (/home/runner/work/playwright-agents/playwright-agents/node_modules/openai/src/client.ts:478:28)\n    at OpenAI.makeRequest (/home/runner/work/playwright-agents/playwright-agents/node_modules/openai/src/client.ts:728:24)\n    at AIHelper.fill (/home/runner/work/playwright-agents/playwright-agents/utils/ai-helper.ts:210:24)\n    at Object.<anonymous> (/home/runner/work/playwright-agents/playwright-agents/steps/shopping.steps.ts:16:3)\n    at /home/runner/work/playwright-agents/playwright-agents/.features-gen/features/shopping.feature.spec.js:7:5",
+                        "location": {
+                          "file": "/home/runner/work/playwright-agents/playwright-agents/utils/ai-helper.ts",
+                          "column": 24,
+                          "line": 210
+                        },
+                        "snippet": "   at ../utils/ai-helper.ts:210\n\n\u001b[0m \u001b[90m 208 |\u001b[39m \u001b[32m      Return ONLY the CSS selector, nothing else. NO markdown, NO code blocks.`\u001b[39m\u001b[33m;\u001b[39m\n \u001b[90m 209 |\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 210 |\u001b[39m       \u001b[36mconst\u001b[39m response \u001b[33m=\u001b[39m \u001b[36mawait\u001b[39m \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mclient\u001b[33m.\u001b[39mchat\u001b[33m.\u001b[39mcompletions\u001b[33m.\u001b[39mcreate({\n \u001b[90m     |\u001b[39m                        \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 211 |\u001b[39m         model\u001b[33m:\u001b[39m process\u001b[33m.\u001b[39menv\u001b[33m.\u001b[39m\u001b[33mOLLAMA_MODEL\u001b[39m \u001b[33m||\u001b[39m \u001b[32m'llama3.1:8b'\u001b[39m\u001b[33m,\u001b[39m\n \u001b[90m 212 |\u001b[39m         messages\u001b[33m:\u001b[39m [\n \u001b[90m 213 |\u001b[39m           {\u001b[0m"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/home/runner/work/playwright-agents/playwright-agents/utils/ai-helper.ts",
+                            "column": 24,
+                            "line": 210
+                          },
+                          "message": "Error: 401 Invalid API Key\n\n   at ../utils/ai-helper.ts:210\n\n  208 |       Return ONLY the CSS selector, nothing else. NO markdown, NO code blocks.`;\n  209 |\n> 210 |       const response = await this.client.chat.completions.create({\n      |                        ^\n  211 |         model: process.env.OLLAMA_MODEL || 'llama3.1:8b',\n  212 |         messages: [\n  213 |           {\n    at Function.generate (/home/runner/work/playwright-agents/playwright-agents/node_modules/openai/src/core/error.ts:76:14)\n    at OpenAI.makeStatusError (/home/runner/work/playwright-agents/playwright-agents/node_modules/openai/src/client.ts:478:28)\n    at OpenAI.makeRequest (/home/runner/work/playwright-agents/playwright-agents/node_modules/openai/src/client.ts:728:24)\n    at AIHelper.fill (/home/runner/work/playwright-agents/playwright-agents/utils/ai-helper.ts:210:24)\n    at Object.<anonymous> (/home/runner/work/playwright-agents/playwright-agents/steps/shopping.steps.ts:16:3)\n    at /home/runner/work/playwright-agents/playwright-agents/.features-gen/features/shopping.feature.spec.js:7:5"
+                        }
+                      ],
+                      "stdout": [
+                        {
+                          "text": "📝 AI Log: AI Fill: username field = standard_user\n"
+                        },
+                        {
+                          "text": "📝 AI Log: Fill failed\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 1,
+                      "steps": [
+                        {
+                          "title": "Given I am logged in as \"standard_user\"",
+                          "duration": 344,
+                          "error": {
+                            "message": "Error: 401 Invalid API Key",
+                            "stack": "Error: 401 Invalid API Key\n    at Function.generate (/home/runner/work/playwright-agents/playwright-agents/node_modules/openai/src/core/error.ts:76:14)\n    at OpenAI.makeStatusError (/home/runner/work/playwright-agents/playwright-agents/node_modules/openai/src/client.ts:478:28)\n    at OpenAI.makeRequest (/home/runner/work/playwright-agents/playwright-agents/node_modules/openai/src/client.ts:728:24)\n    at AIHelper.fill (/home/runner/work/playwright-agents/playwright-agents/utils/ai-helper.ts:210:24)\n    at Object.<anonymous> (/home/runner/work/playwright-agents/playwright-agents/steps/shopping.steps.ts:16:3)\n    at /home/runner/work/playwright-agents/playwright-agents/.features-gen/features/shopping.feature.spec.js:7:5",
+                            "location": {
+                              "file": "/home/runner/work/playwright-agents/playwright-agents/utils/ai-helper.ts",
+                              "column": 24,
+                              "line": 210
+                            },
+                            "snippet": "   at ../utils/ai-helper.ts:210\n\n\u001b[0m \u001b[90m 208 |\u001b[39m \u001b[32m      Return ONLY the CSS selector, nothing else. NO markdown, NO code blocks.`\u001b[39m\u001b[33m;\u001b[39m\n \u001b[90m 209 |\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 210 |\u001b[39m       \u001b[36mconst\u001b[39m response \u001b[33m=\u001b[39m \u001b[36mawait\u001b[39m \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mclient\u001b[33m.\u001b[39mchat\u001b[33m.\u001b[39mcompletions\u001b[33m.\u001b[39mcreate({\n \u001b[90m     |\u001b[39m                        \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 211 |\u001b[39m         model\u001b[33m:\u001b[39m process\u001b[33m.\u001b[39menv\u001b[33m.\u001b[39m\u001b[33mOLLAMA_MODEL\u001b[39m \u001b[33m||\u001b[39m \u001b[32m'llama3.1:8b'\u001b[39m\u001b[33m,\u001b[39m\n \u001b[90m 212 |\u001b[39m         messages\u001b[33m:\u001b[39m [\n \u001b[90m 213 |\u001b[39m           {\u001b[0m"
+                          }
+                        }
+                      ],
+                      "startTime": "2026-02-18T11:04:01.044Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/home/runner/work/playwright-agents/playwright-agents/test-results/features-shopping.feature-Shopping-Cart-Add-product-to-cart-chromium-retry1/test-failed-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "/home/runner/work/playwright-agents/playwright-agents/test-results/features-shopping.feature-Shopping-Cart-Add-product-to-cart-chromium-retry1/video.webm"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/home/runner/work/playwright-agents/playwright-agents/test-results/features-shopping.feature-Shopping-Cart-Add-product-to-cart-chromium-retry1/error-context.md"
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/home/runner/work/playwright-agents/playwright-agents/test-results/features-shopping.feature-Shopping-Cart-Add-product-to-cart-chromium-retry1/trace.zip"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/home/runner/work/playwright-agents/playwright-agents/utils/ai-helper.ts",
+                        "column": 24,
+                        "line": 210
+                      }
+                    },
+                    {
+                      "workerIndex": 2,
+                      "parallelIndex": 0,
+                      "status": "failed",
+                      "duration": 597,
+                      "error": {
+                        "message": "Error: 401 Invalid API Key",
+                        "stack": "Error: 401 Invalid API Key\n    at Function.generate (/home/runner/work/playwright-agents/playwright-agents/node_modules/openai/src/core/error.ts:76:14)\n    at OpenAI.makeStatusError (/home/runner/work/playwright-agents/playwright-agents/node_modules/openai/src/client.ts:478:28)\n    at OpenAI.makeRequest (/home/runner/work/playwright-agents/playwright-agents/node_modules/openai/src/client.ts:728:24)\n    at AIHelper.fill (/home/runner/work/playwright-agents/playwright-agents/utils/ai-helper.ts:210:24)\n    at Object.<anonymous> (/home/runner/work/playwright-agents/playwright-agents/steps/shopping.steps.ts:16:3)\n    at /home/runner/work/playwright-agents/playwright-agents/.features-gen/features/shopping.feature.spec.js:7:5",
+                        "location": {
+                          "file": "/home/runner/work/playwright-agents/playwright-agents/utils/ai-helper.ts",
+                          "column": 24,
+                          "line": 210
+                        },
+                        "snippet": "   at ../utils/ai-helper.ts:210\n\n\u001b[0m \u001b[90m 208 |\u001b[39m \u001b[32m      Return ONLY the CSS selector, nothing else. NO markdown, NO code blocks.`\u001b[39m\u001b[33m;\u001b[39m\n \u001b[90m 209 |\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 210 |\u001b[39m       \u001b[36mconst\u001b[39m response \u001b[33m=\u001b[39m \u001b[36mawait\u001b[39m \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mclient\u001b[33m.\u001b[39mchat\u001b[33m.\u001b[39mcompletions\u001b[33m.\u001b[39mcreate({\n \u001b[90m     |\u001b[39m                        \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 211 |\u001b[39m         model\u001b[33m:\u001b[39m process\u001b[33m.\u001b[39menv\u001b[33m.\u001b[39m\u001b[33mOLLAMA_MODEL\u001b[39m \u001b[33m||\u001b[39m \u001b[32m'llama3.1:8b'\u001b[39m\u001b[33m,\u001b[39m\n \u001b[90m 212 |\u001b[39m         messages\u001b[33m:\u001b[39m [\n \u001b[90m 213 |\u001b[39m           {\u001b[0m"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/home/runner/work/playwright-agents/playwright-agents/utils/ai-helper.ts",
+                            "column": 24,
+                            "line": 210
+                          },
+                          "message": "Error: 401 Invalid API Key\n\n   at ../utils/ai-helper.ts:210\n\n  208 |       Return ONLY the CSS selector, nothing else. NO markdown, NO code blocks.`;\n  209 |\n> 210 |       const response = await this.client.chat.completions.create({\n      |                        ^\n  211 |         model: process.env.OLLAMA_MODEL || 'llama3.1:8b',\n  212 |         messages: [\n  213 |           {\n    at Function.generate (/home/runner/work/playwright-agents/playwright-agents/node_modules/openai/src/core/error.ts:76:14)\n    at OpenAI.makeStatusError (/home/runner/work/playwright-agents/playwright-agents/node_modules/openai/src/client.ts:478:28)\n    at OpenAI.makeRequest (/home/runner/work/playwright-agents/playwright-agents/node_modules/openai/src/client.ts:728:24)\n    at AIHelper.fill (/home/runner/work/playwright-agents/playwright-agents/utils/ai-helper.ts:210:24)\n    at Object.<anonymous> (/home/runner/work/playwright-agents/playwright-agents/steps/shopping.steps.ts:16:3)\n    at /home/runner/work/playwright-agents/playwright-agents/.features-gen/features/shopping.feature.spec.js:7:5"
+                        }
+                      ],
+                      "stdout": [
+                        {
+                          "text": "📝 AI Log: AI Fill: username field = standard_user\n"
+                        },
+                        {
+                          "text": "📝 AI Log: Fill failed\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 2,
+                      "steps": [
+                        {
+                          "title": "Given I am logged in as \"standard_user\"",
+                          "duration": 314,
+                          "error": {
+                            "message": "Error: 401 Invalid API Key",
+                            "stack": "Error: 401 Invalid API Key\n    at Function.generate (/home/runner/work/playwright-agents/playwright-agents/node_modules/openai/src/core/error.ts:76:14)\n    at OpenAI.makeStatusError (/home/runner/work/playwright-agents/playwright-agents/node_modules/openai/src/client.ts:478:28)\n    at OpenAI.makeRequest (/home/runner/work/playwright-agents/playwright-agents/node_modules/openai/src/client.ts:728:24)\n    at AIHelper.fill (/home/runner/work/playwright-agents/playwright-agents/utils/ai-helper.ts:210:24)\n    at Object.<anonymous> (/home/runner/work/playwright-agents/playwright-agents/steps/shopping.steps.ts:16:3)\n    at /home/runner/work/playwright-agents/playwright-agents/.features-gen/features/shopping.feature.spec.js:7:5",
+                            "location": {
+                              "file": "/home/runner/work/playwright-agents/playwright-agents/utils/ai-helper.ts",
+                              "column": 24,
+                              "line": 210
+                            },
+                            "snippet": "   at ../utils/ai-helper.ts:210\n\n\u001b[0m \u001b[90m 208 |\u001b[39m \u001b[32m      Return ONLY the CSS selector, nothing else. NO markdown, NO code blocks.`\u001b[39m\u001b[33m;\u001b[39m\n \u001b[90m 209 |\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 210 |\u001b[39m       \u001b[36mconst\u001b[39m response \u001b[33m=\u001b[39m \u001b[36mawait\u001b[39m \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mclient\u001b[33m.\u001b[39mchat\u001b[33m.\u001b[39mcompletions\u001b[33m.\u001b[39mcreate({\n \u001b[90m     |\u001b[39m                        \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 211 |\u001b[39m         model\u001b[33m:\u001b[39m process\u001b[33m.\u001b[39menv\u001b[33m.\u001b[39m\u001b[33mOLLAMA_MODEL\u001b[39m \u001b[33m||\u001b[39m \u001b[32m'llama3.1:8b'\u001b[39m\u001b[33m,\u001b[39m\n \u001b[90m 212 |\u001b[39m         messages\u001b[33m:\u001b[39m [\n \u001b[90m 213 |\u001b[39m           {\u001b[0m"
+                          }
+                        }
+                      ],
+                      "startTime": "2026-02-18T11:04:03.287Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/home/runner/work/playwright-agents/playwright-agents/test-results/features-shopping.feature-Shopping-Cart-Add-product-to-cart-chromium-retry2/test-failed-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "/home/runner/work/playwright-agents/playwright-agents/test-results/features-shopping.feature-Shopping-Cart-Add-product-to-cart-chromium-retry2/video.webm"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/home/runner/work/playwright-agents/playwright-agents/test-results/features-shopping.feature-Shopping-Cart-Add-product-to-cart-chromium-retry2/error-context.md"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/home/runner/work/playwright-agents/playwright-agents/utils/ai-helper.ts",
+                        "column": 24,
+                        "line": 210
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "c14a68548b5beb0557e1-6b735f2a547f903121fe",
+              "file": "features/shopping.feature.spec.js",
+              "line": 6,
+              "column": 3
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-02-18T11:03:57.222Z",
+    "duration": 6972.451,
+    "expected": 0,
+    "skipped": 0,
+    "unexpected": 1,
+    "flaky": 0
+  }
+}

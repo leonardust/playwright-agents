@@ -1,0 +1,403 @@
+{
+  "config": {
+    "configFile": "C:\\actions-runner\\_work\\playwright-agents\\playwright-agents\\playwright.config.ts",
+    "rootDir": "C:/actions-runner/_work/playwright-agents/playwright-agents/.features-gen",
+    "forbidOnly": true,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "ci": {
+        "commitHref": "https://github.com/leonardust/playwright-agents/commit/f18026e1823acff423863ff4b3ad5f3e695f3da8",
+        "commitHash": "f18026e1823acff423863ff4b3ad5f3e695f3da8",
+        "buildHref": "https://github.com/leonardust/playwright-agents/actions/runs/22034639810"
+      },
+      "gitCommit": {
+        "shortHash": "f18026e",
+        "hash": "f18026e1823acff423863ff4b3ad5f3e695f3da8",
+        "subject": "docs: update documentation with GitHub Pages deployment info",
+        "body": "docs: update documentation with GitHub Pages deployment info\n",
+        "author": {
+          "name": "Łukasz Komorowski",
+          "email": "luk.komorowski@gmail.com",
+          "time": 1771153879000
+        },
+        "committer": {
+          "name": "Łukasz Komorowski",
+          "email": "luk.komorowski@gmail.com",
+          "time": 1771153879000
+        },
+        "branch": "main"
+      },
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "C:/actions-runner/_work/playwright-agents/playwright-agents/test-results",
+        "repeatEach": 1,
+        "retries": 2,
+        "metadata": {
+          "ci": {
+            "commitHref": "https://github.com/leonardust/playwright-agents/commit/f18026e1823acff423863ff4b3ad5f3e695f3da8",
+            "commitHash": "f18026e1823acff423863ff4b3ad5f3e695f3da8",
+            "buildHref": "https://github.com/leonardust/playwright-agents/actions/runs/22034639810"
+          },
+          "gitCommit": {
+            "shortHash": "f18026e",
+            "hash": "f18026e1823acff423863ff4b3ad5f3e695f3da8",
+            "subject": "docs: update documentation with GitHub Pages deployment info",
+            "body": "docs: update documentation with GitHub Pages deployment info\n",
+            "author": {
+              "name": "Łukasz Komorowski",
+              "email": "luk.komorowski@gmail.com",
+              "time": 1771153879000
+            },
+            "committer": {
+              "name": "Łukasz Komorowski",
+              "email": "luk.komorowski@gmail.com",
+              "time": 1771153879000
+            },
+            "branch": "main"
+          },
+          "actualWorkers": 1
+        },
+        "id": "chromium",
+        "name": "chromium",
+        "testDir": "C:/actions-runner/_work/playwright-agents/playwright-agents/.features-gen",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 90000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "html",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "playwright-report/results.json"
+        }
+      ],
+      [
+        "github",
+        null
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "runAgents": "none",
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.58.0",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "features\\shopping.feature.spec.js",
+      "file": "features/shopping.feature.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Shopping Cart",
+          "file": "features/shopping.feature.spec.js",
+          "line": 4,
+          "column": 6,
+          "specs": [
+            {
+              "title": "Add product to cart",
+              "ok": false,
+              "tags": [
+                "smoke",
+                "critical"
+              ],
+              "tests": [
+                {
+                  "timeout": 90000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "failed",
+                      "duration": 15496,
+                      "error": {
+                        "message": "Error: locator.count: Unexpected token \"`\" while parsing css selector \"`[data-test=\"username\"]`\". Did you mean to CSS.escape it?",
+                        "stack": "Error: locator.count: Unexpected token \"`\" while parsing css selector \"`[data-test=\"username\"]`\". Did you mean to CSS.escape it?\n    at AIHelper.fill (C:\\actions-runner\\_work\\playwright-agents\\playwright-agents\\utils\\ai-helper.ts:209:35)\n    at Object.<anonymous> (C:\\actions-runner\\_work\\playwright-agents\\playwright-agents\\steps\\shopping.steps.ts:16:3)\n    at C:\\actions-runner\\_work\\playwright-agents\\playwright-agents\\.features-gen\\features\\shopping.feature.spec.js:7:5",
+                        "location": {
+                          "file": "C:\\actions-runner\\_work\\playwright-agents\\playwright-agents\\utils\\ai-helper.ts",
+                          "column": 35,
+                          "line": 209
+                        },
+                        "snippet": "\u001b[90m   at \u001b[39m..\\utils\\ai-helper.ts:209\n\n\u001b[0m \u001b[90m 207 |\u001b[39m       \u001b[90m// Wybierz locator\u001b[39m\n \u001b[90m 208 |\u001b[39m       \u001b[36mlet\u001b[39m locator \u001b[33m=\u001b[39m \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mpage\u001b[33m.\u001b[39mlocator(selector)\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 209 |\u001b[39m       \u001b[36mconst\u001b[39m count \u001b[33m=\u001b[39m \u001b[36mawait\u001b[39m locator\u001b[33m.\u001b[39mcount()\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                                   \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 210 |\u001b[39m\n \u001b[90m 211 |\u001b[39m       \u001b[36mif\u001b[39m (count \u001b[33m>\u001b[39m \u001b[35m1\u001b[39m) {\n \u001b[90m 212 |\u001b[39m         \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mlogPrompt(\u001b[32m'Multiple elements found, using .first()'\u001b[39m\u001b[33m,\u001b[39m { selector\u001b[33m,\u001b[39m count })\u001b[33m;\u001b[39m\u001b[0m"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "C:\\actions-runner\\_work\\playwright-agents\\playwright-agents\\utils\\ai-helper.ts",
+                            "column": 35,
+                            "line": 209
+                          },
+                          "message": "Error: locator.count: Unexpected token \"`\" while parsing css selector \"`[data-test=\"username\"]`\". Did you mean to CSS.escape it?\n\n   at ..\\utils\\ai-helper.ts:209\n\n  207 |       // Wybierz locator\n  208 |       let locator = this.page.locator(selector);\n> 209 |       const count = await locator.count();\n      |                                   ^\n  210 |\n  211 |       if (count > 1) {\n  212 |         this.logPrompt('Multiple elements found, using .first()', { selector, count });\n    at AIHelper.fill (C:\\actions-runner\\_work\\playwright-agents\\playwright-agents\\utils\\ai-helper.ts:209:35)\n    at Object.<anonymous> (C:\\actions-runner\\_work\\playwright-agents\\playwright-agents\\steps\\shopping.steps.ts:16:3)\n    at C:\\actions-runner\\_work\\playwright-agents\\playwright-agents\\.features-gen\\features\\shopping.feature.spec.js:7:5"
+                        }
+                      ],
+                      "stdout": [
+                        {
+                          "text": "📝 AI Log: AI Fill: username field = standard_user\n"
+                        },
+                        {
+                          "text": "📝 AI Log: AI Response\n"
+                        },
+                        {
+                          "text": "📝 AI Log: Fill failed\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "steps": [
+                        {
+                          "title": "Given I am logged in as \"standard_user\"",
+                          "duration": 14686,
+                          "error": {
+                            "message": "Error: locator.count: Unexpected token \"`\" while parsing css selector \"`[data-test=\"username\"]`\". Did you mean to CSS.escape it?",
+                            "stack": "Error: locator.count: Unexpected token \"`\" while parsing css selector \"`[data-test=\"username\"]`\". Did you mean to CSS.escape it?\n    at AIHelper.fill (C:\\actions-runner\\_work\\playwright-agents\\playwright-agents\\utils\\ai-helper.ts:209:35)\n    at Object.<anonymous> (C:\\actions-runner\\_work\\playwright-agents\\playwright-agents\\steps\\shopping.steps.ts:16:3)\n    at C:\\actions-runner\\_work\\playwright-agents\\playwright-agents\\.features-gen\\features\\shopping.feature.spec.js:7:5",
+                            "location": {
+                              "file": "C:\\actions-runner\\_work\\playwright-agents\\playwright-agents\\utils\\ai-helper.ts",
+                              "column": 35,
+                              "line": 209
+                            },
+                            "snippet": "\u001b[90m   at \u001b[39m..\\utils\\ai-helper.ts:209\n\n\u001b[0m \u001b[90m 207 |\u001b[39m       \u001b[90m// Wybierz locator\u001b[39m\n \u001b[90m 208 |\u001b[39m       \u001b[36mlet\u001b[39m locator \u001b[33m=\u001b[39m \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mpage\u001b[33m.\u001b[39mlocator(selector)\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 209 |\u001b[39m       \u001b[36mconst\u001b[39m count \u001b[33m=\u001b[39m \u001b[36mawait\u001b[39m locator\u001b[33m.\u001b[39mcount()\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                                   \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 210 |\u001b[39m\n \u001b[90m 211 |\u001b[39m       \u001b[36mif\u001b[39m (count \u001b[33m>\u001b[39m \u001b[35m1\u001b[39m) {\n \u001b[90m 212 |\u001b[39m         \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mlogPrompt(\u001b[32m'Multiple elements found, using .first()'\u001b[39m\u001b[33m,\u001b[39m { selector\u001b[33m,\u001b[39m count })\u001b[33m;\u001b[39m\u001b[0m"
+                          }
+                        }
+                      ],
+                      "startTime": "2026-02-15T11:12:02.690Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "C:\\actions-runner\\_work\\playwright-agents\\playwright-agents\\test-results\\features-shopping.feature-Shopping-Cart-Add-product-to-cart-chromium\\test-failed-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "C:\\actions-runner\\_work\\playwright-agents\\playwright-agents\\test-results\\features-shopping.feature-Shopping-Cart-Add-product-to-cart-chromium\\video.webm"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "C:\\actions-runner\\_work\\playwright-agents\\playwright-agents\\test-results\\features-shopping.feature-Shopping-Cart-Add-product-to-cart-chromium\\error-context.md"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "C:\\actions-runner\\_work\\playwright-agents\\playwright-agents\\utils\\ai-helper.ts",
+                        "column": 35,
+                        "line": 209
+                      }
+                    },
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "failed",
+                      "duration": 1945,
+                      "error": {
+                        "message": "Error: locator.count: Unexpected token \"`\" while parsing css selector \"`[data-test=\"username\"]`\". Did you mean to CSS.escape it?",
+                        "stack": "Error: locator.count: Unexpected token \"`\" while parsing css selector \"`[data-test=\"username\"]`\". Did you mean to CSS.escape it?\n    at AIHelper.fill (C:\\actions-runner\\_work\\playwright-agents\\playwright-agents\\utils\\ai-helper.ts:209:35)\n    at Object.<anonymous> (C:\\actions-runner\\_work\\playwright-agents\\playwright-agents\\steps\\shopping.steps.ts:16:3)\n    at C:\\actions-runner\\_work\\playwright-agents\\playwright-agents\\.features-gen\\features\\shopping.feature.spec.js:7:5",
+                        "location": {
+                          "file": "C:\\actions-runner\\_work\\playwright-agents\\playwright-agents\\utils\\ai-helper.ts",
+                          "column": 35,
+                          "line": 209
+                        },
+                        "snippet": "\u001b[90m   at \u001b[39m..\\utils\\ai-helper.ts:209\n\n\u001b[0m \u001b[90m 207 |\u001b[39m       \u001b[90m// Wybierz locator\u001b[39m\n \u001b[90m 208 |\u001b[39m       \u001b[36mlet\u001b[39m locator \u001b[33m=\u001b[39m \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mpage\u001b[33m.\u001b[39mlocator(selector)\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 209 |\u001b[39m       \u001b[36mconst\u001b[39m count \u001b[33m=\u001b[39m \u001b[36mawait\u001b[39m locator\u001b[33m.\u001b[39mcount()\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                                   \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 210 |\u001b[39m\n \u001b[90m 211 |\u001b[39m       \u001b[36mif\u001b[39m (count \u001b[33m>\u001b[39m \u001b[35m1\u001b[39m) {\n \u001b[90m 212 |\u001b[39m         \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mlogPrompt(\u001b[32m'Multiple elements found, using .first()'\u001b[39m\u001b[33m,\u001b[39m { selector\u001b[33m,\u001b[39m count })\u001b[33m;\u001b[39m\u001b[0m"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "C:\\actions-runner\\_work\\playwright-agents\\playwright-agents\\utils\\ai-helper.ts",
+                            "column": 35,
+                            "line": 209
+                          },
+                          "message": "Error: locator.count: Unexpected token \"`\" while parsing css selector \"`[data-test=\"username\"]`\". Did you mean to CSS.escape it?\n\n   at ..\\utils\\ai-helper.ts:209\n\n  207 |       // Wybierz locator\n  208 |       let locator = this.page.locator(selector);\n> 209 |       const count = await locator.count();\n      |                                   ^\n  210 |\n  211 |       if (count > 1) {\n  212 |         this.logPrompt('Multiple elements found, using .first()', { selector, count });\n    at AIHelper.fill (C:\\actions-runner\\_work\\playwright-agents\\playwright-agents\\utils\\ai-helper.ts:209:35)\n    at Object.<anonymous> (C:\\actions-runner\\_work\\playwright-agents\\playwright-agents\\steps\\shopping.steps.ts:16:3)\n    at C:\\actions-runner\\_work\\playwright-agents\\playwright-agents\\.features-gen\\features\\shopping.feature.spec.js:7:5"
+                        }
+                      ],
+                      "stdout": [
+                        {
+                          "text": "📝 AI Log: AI Fill: username field = standard_user\n"
+                        },
+                        {
+                          "text": "📝 AI Log: AI Response\n"
+                        },
+                        {
+                          "text": "📝 AI Log: Fill failed\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 1,
+                      "steps": [
+                        {
+                          "title": "Given I am logged in as \"standard_user\"",
+                          "duration": 1553,
+                          "error": {
+                            "message": "Error: locator.count: Unexpected token \"`\" while parsing css selector \"`[data-test=\"username\"]`\". Did you mean to CSS.escape it?",
+                            "stack": "Error: locator.count: Unexpected token \"`\" while parsing css selector \"`[data-test=\"username\"]`\". Did you mean to CSS.escape it?\n    at AIHelper.fill (C:\\actions-runner\\_work\\playwright-agents\\playwright-agents\\utils\\ai-helper.ts:209:35)\n    at Object.<anonymous> (C:\\actions-runner\\_work\\playwright-agents\\playwright-agents\\steps\\shopping.steps.ts:16:3)\n    at C:\\actions-runner\\_work\\playwright-agents\\playwright-agents\\.features-gen\\features\\shopping.feature.spec.js:7:5",
+                            "location": {
+                              "file": "C:\\actions-runner\\_work\\playwright-agents\\playwright-agents\\utils\\ai-helper.ts",
+                              "column": 35,
+                              "line": 209
+                            },
+                            "snippet": "\u001b[90m   at \u001b[39m..\\utils\\ai-helper.ts:209\n\n\u001b[0m \u001b[90m 207 |\u001b[39m       \u001b[90m// Wybierz locator\u001b[39m\n \u001b[90m 208 |\u001b[39m       \u001b[36mlet\u001b[39m locator \u001b[33m=\u001b[39m \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mpage\u001b[33m.\u001b[39mlocator(selector)\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 209 |\u001b[39m       \u001b[36mconst\u001b[39m count \u001b[33m=\u001b[39m \u001b[36mawait\u001b[39m locator\u001b[33m.\u001b[39mcount()\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                                   \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 210 |\u001b[39m\n \u001b[90m 211 |\u001b[39m       \u001b[36mif\u001b[39m (count \u001b[33m>\u001b[39m \u001b[35m1\u001b[39m) {\n \u001b[90m 212 |\u001b[39m         \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mlogPrompt(\u001b[32m'Multiple elements found, using .first()'\u001b[39m\u001b[33m,\u001b[39m { selector\u001b[33m,\u001b[39m count })\u001b[33m;\u001b[39m\u001b[0m"
+                          }
+                        }
+                      ],
+                      "startTime": "2026-02-15T11:12:20.009Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "C:\\actions-runner\\_work\\playwright-agents\\playwright-agents\\test-results\\features-shopping.feature-Shopping-Cart-Add-product-to-cart-chromium-retry1\\test-failed-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "C:\\actions-runner\\_work\\playwright-agents\\playwright-agents\\test-results\\features-shopping.feature-Shopping-Cart-Add-product-to-cart-chromium-retry1\\video.webm"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "C:\\actions-runner\\_work\\playwright-agents\\playwright-agents\\test-results\\features-shopping.feature-Shopping-Cart-Add-product-to-cart-chromium-retry1\\error-context.md"
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "C:\\actions-runner\\_work\\playwright-agents\\playwright-agents\\test-results\\features-shopping.feature-Shopping-Cart-Add-product-to-cart-chromium-retry1\\trace.zip"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "C:\\actions-runner\\_work\\playwright-agents\\playwright-agents\\utils\\ai-helper.ts",
+                        "column": 35,
+                        "line": 209
+                      }
+                    },
+                    {
+                      "workerIndex": 2,
+                      "parallelIndex": 0,
+                      "status": "failed",
+                      "duration": 1901,
+                      "error": {
+                        "message": "Error: locator.count: Unexpected token \"`\" while parsing css selector \"`[data-test=\"username\"]`\". Did you mean to CSS.escape it?",
+                        "stack": "Error: locator.count: Unexpected token \"`\" while parsing css selector \"`[data-test=\"username\"]`\". Did you mean to CSS.escape it?\n    at AIHelper.fill (C:\\actions-runner\\_work\\playwright-agents\\playwright-agents\\utils\\ai-helper.ts:209:35)\n    at Object.<anonymous> (C:\\actions-runner\\_work\\playwright-agents\\playwright-agents\\steps\\shopping.steps.ts:16:3)\n    at C:\\actions-runner\\_work\\playwright-agents\\playwright-agents\\.features-gen\\features\\shopping.feature.spec.js:7:5",
+                        "location": {
+                          "file": "C:\\actions-runner\\_work\\playwright-agents\\playwright-agents\\utils\\ai-helper.ts",
+                          "column": 35,
+                          "line": 209
+                        },
+                        "snippet": "\u001b[90m   at \u001b[39m..\\utils\\ai-helper.ts:209\n\n\u001b[0m \u001b[90m 207 |\u001b[39m       \u001b[90m// Wybierz locator\u001b[39m\n \u001b[90m 208 |\u001b[39m       \u001b[36mlet\u001b[39m locator \u001b[33m=\u001b[39m \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mpage\u001b[33m.\u001b[39mlocator(selector)\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 209 |\u001b[39m       \u001b[36mconst\u001b[39m count \u001b[33m=\u001b[39m \u001b[36mawait\u001b[39m locator\u001b[33m.\u001b[39mcount()\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                                   \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 210 |\u001b[39m\n \u001b[90m 211 |\u001b[39m       \u001b[36mif\u001b[39m (count \u001b[33m>\u001b[39m \u001b[35m1\u001b[39m) {\n \u001b[90m 212 |\u001b[39m         \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mlogPrompt(\u001b[32m'Multiple elements found, using .first()'\u001b[39m\u001b[33m,\u001b[39m { selector\u001b[33m,\u001b[39m count })\u001b[33m;\u001b[39m\u001b[0m"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "C:\\actions-runner\\_work\\playwright-agents\\playwright-agents\\utils\\ai-helper.ts",
+                            "column": 35,
+                            "line": 209
+                          },
+                          "message": "Error: locator.count: Unexpected token \"`\" while parsing css selector \"`[data-test=\"username\"]`\". Did you mean to CSS.escape it?\n\n   at ..\\utils\\ai-helper.ts:209\n\n  207 |       // Wybierz locator\n  208 |       let locator = this.page.locator(selector);\n> 209 |       const count = await locator.count();\n      |                                   ^\n  210 |\n  211 |       if (count > 1) {\n  212 |         this.logPrompt('Multiple elements found, using .first()', { selector, count });\n    at AIHelper.fill (C:\\actions-runner\\_work\\playwright-agents\\playwright-agents\\utils\\ai-helper.ts:209:35)\n    at Object.<anonymous> (C:\\actions-runner\\_work\\playwright-agents\\playwright-agents\\steps\\shopping.steps.ts:16:3)\n    at C:\\actions-runner\\_work\\playwright-agents\\playwright-agents\\.features-gen\\features\\shopping.feature.spec.js:7:5"
+                        }
+                      ],
+                      "stdout": [
+                        {
+                          "text": "📝 AI Log: AI Fill: username field = standard_user\n"
+                        },
+                        {
+                          "text": "📝 AI Log: AI Response\n"
+                        },
+                        {
+                          "text": "📝 AI Log: Fill failed\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 2,
+                      "steps": [
+                        {
+                          "title": "Given I am logged in as \"standard_user\"",
+                          "duration": 1651,
+                          "error": {
+                            "message": "Error: locator.count: Unexpected token \"`\" while parsing css selector \"`[data-test=\"username\"]`\". Did you mean to CSS.escape it?",
+                            "stack": "Error: locator.count: Unexpected token \"`\" while parsing css selector \"`[data-test=\"username\"]`\". Did you mean to CSS.escape it?\n    at AIHelper.fill (C:\\actions-runner\\_work\\playwright-agents\\playwright-agents\\utils\\ai-helper.ts:209:35)\n    at Object.<anonymous> (C:\\actions-runner\\_work\\playwright-agents\\playwright-agents\\steps\\shopping.steps.ts:16:3)\n    at C:\\actions-runner\\_work\\playwright-agents\\playwright-agents\\.features-gen\\features\\shopping.feature.spec.js:7:5",
+                            "location": {
+                              "file": "C:\\actions-runner\\_work\\playwright-agents\\playwright-agents\\utils\\ai-helper.ts",
+                              "column": 35,
+                              "line": 209
+                            },
+                            "snippet": "\u001b[90m   at \u001b[39m..\\utils\\ai-helper.ts:209\n\n\u001b[0m \u001b[90m 207 |\u001b[39m       \u001b[90m// Wybierz locator\u001b[39m\n \u001b[90m 208 |\u001b[39m       \u001b[36mlet\u001b[39m locator \u001b[33m=\u001b[39m \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mpage\u001b[33m.\u001b[39mlocator(selector)\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 209 |\u001b[39m       \u001b[36mconst\u001b[39m count \u001b[33m=\u001b[39m \u001b[36mawait\u001b[39m locator\u001b[33m.\u001b[39mcount()\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                                   \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 210 |\u001b[39m\n \u001b[90m 211 |\u001b[39m       \u001b[36mif\u001b[39m (count \u001b[33m>\u001b[39m \u001b[35m1\u001b[39m) {\n \u001b[90m 212 |\u001b[39m         \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mlogPrompt(\u001b[32m'Multiple elements found, using .first()'\u001b[39m\u001b[33m,\u001b[39m { selector\u001b[33m,\u001b[39m count })\u001b[33m;\u001b[39m\u001b[0m"
+                          }
+                        }
+                      ],
+                      "startTime": "2026-02-15T11:12:23.861Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "C:\\actions-runner\\_work\\playwright-agents\\playwright-agents\\test-results\\features-shopping.feature-Shopping-Cart-Add-product-to-cart-chromium-retry2\\test-failed-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "C:\\actions-runner\\_work\\playwright-agents\\playwright-agents\\test-results\\features-shopping.feature-Shopping-Cart-Add-product-to-cart-chromium-retry2\\video.webm"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "C:\\actions-runner\\_work\\playwright-agents\\playwright-agents\\test-results\\features-shopping.feature-Shopping-Cart-Add-product-to-cart-chromium-retry2\\error-context.md"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "C:\\actions-runner\\_work\\playwright-agents\\playwright-agents\\utils\\ai-helper.ts",
+                        "column": 35,
+                        "line": 209
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "c14a68548b5beb0557e1-6b735f2a547f903121fe",
+              "file": "features/shopping.feature.spec.js",
+              "line": 6,
+              "column": 3
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-02-15T11:12:01.069Z",
+    "duration": 25072.502,
+    "expected": 0,
+    "skipped": 0,
+    "unexpected": 1,
+    "flaky": 0
+  }
+}

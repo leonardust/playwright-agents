@@ -1,0 +1,274 @@
+{
+  "config": {
+    "configFile": "C:\\actions-runner\\_work\\playwright-agents\\playwright-agents\\playwright.config.ts",
+    "rootDir": "C:/actions-runner/_work/playwright-agents/playwright-agents/.features-gen",
+    "forbidOnly": true,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "ci": {
+        "commitHref": "https://github.com/leonardust/playwright-agents/commit/08b757a0a3f33b0ae43cbcb31bb242f7408ca930",
+        "commitHash": "08b757a0a3f33b0ae43cbcb31bb242f7408ca930",
+        "buildHref": "https://github.com/leonardust/playwright-agents/actions/runs/22042717728"
+      },
+      "gitCommit": {
+        "shortHash": "08b757a",
+        "hash": "08b757a0a3f33b0ae43cbcb31bb242f7408ca930",
+        "subject": "fix(deploy): handle nested artifact structure",
+        "body": "fix(deploy): handle nested artifact structure\n\n- Detect if artifact has nested playwright-report/ directory\n- Copy from correct source path\n- Also copy logs/ directory if present\n- Maintains backward compatibility with flat structure\n",
+        "author": {
+          "name": "Łukasz Komorowski",
+          "email": "luk.komorowski@gmail.com",
+          "time": 1771188111000
+        },
+        "committer": {
+          "name": "Łukasz Komorowski",
+          "email": "luk.komorowski@gmail.com",
+          "time": 1771188111000
+        },
+        "branch": "main"
+      },
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "C:/actions-runner/_work/playwright-agents/playwright-agents/test-results",
+        "repeatEach": 1,
+        "retries": 2,
+        "metadata": {
+          "ci": {
+            "commitHref": "https://github.com/leonardust/playwright-agents/commit/08b757a0a3f33b0ae43cbcb31bb242f7408ca930",
+            "commitHash": "08b757a0a3f33b0ae43cbcb31bb242f7408ca930",
+            "buildHref": "https://github.com/leonardust/playwright-agents/actions/runs/22042717728"
+          },
+          "gitCommit": {
+            "shortHash": "08b757a",
+            "hash": "08b757a0a3f33b0ae43cbcb31bb242f7408ca930",
+            "subject": "fix(deploy): handle nested artifact structure",
+            "body": "fix(deploy): handle nested artifact structure\n\n- Detect if artifact has nested playwright-report/ directory\n- Copy from correct source path\n- Also copy logs/ directory if present\n- Maintains backward compatibility with flat structure\n",
+            "author": {
+              "name": "Łukasz Komorowski",
+              "email": "luk.komorowski@gmail.com",
+              "time": 1771188111000
+            },
+            "committer": {
+              "name": "Łukasz Komorowski",
+              "email": "luk.komorowski@gmail.com",
+              "time": 1771188111000
+            },
+            "branch": "main"
+          },
+          "actualWorkers": 1
+        },
+        "id": "chromium",
+        "name": "chromium",
+        "testDir": "C:/actions-runner/_work/playwright-agents/playwright-agents/.features-gen",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 90000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "html",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "playwright-report/results.json"
+        }
+      ],
+      [
+        "github",
+        null
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "runAgents": "none",
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.58.0",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "features\\shopping.feature.spec.js",
+      "file": "features/shopping.feature.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Shopping Cart",
+          "file": "features/shopping.feature.spec.js",
+          "line": 4,
+          "column": 6,
+          "specs": [
+            {
+              "title": "Add product to cart",
+              "ok": true,
+              "tags": [
+                "smoke",
+                "critical"
+              ],
+              "tests": [
+                {
+                  "timeout": 90000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 68140,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "📝 AI Log: AI Fill: username field = standard_user\n"
+                        },
+                        {
+                          "text": "📝 AI Log: AI Response (fill)\n"
+                        },
+                        {
+                          "text": "📝 AI Log: AI Response\n"
+                        },
+                        {
+                          "text": "📝 AI Log: Fill successful\n"
+                        },
+                        {
+                          "text": "📝 AI Log: AI Fill: password field = secret_sauce\n"
+                        },
+                        {
+                          "text": "📝 AI Log: AI Response (fill)\n"
+                        },
+                        {
+                          "text": "📝 AI Log: AI Response\n"
+                        },
+                        {
+                          "text": "📝 AI Log: Fill successful\n"
+                        },
+                        {
+                          "text": "📝 AI Log: AI Click: login button\n"
+                        },
+                        {
+                          "text": "📝 AI Log: AI Response (click)\n"
+                        },
+                        {
+                          "text": "📝 AI Log: Selector not found, trying fallback strategies\n"
+                        },
+                        {
+                          "text": "📝 AI Log: Trying getByRole button\n"
+                        },
+                        {
+                          "text": "📝 AI Log: Click successful\n"
+                        },
+                        {
+                          "text": "📝 AI Log: Logged in as standard_user and navigated to products page\n"
+                        },
+                        {
+                          "text": "📝 AI Log: AI Click: first add to cart button\n"
+                        },
+                        {
+                          "text": "📝 AI Log: AI Response (click)\n"
+                        },
+                        {
+                          "text": "📝 AI Log: Selector not found, trying fallback strategies\n"
+                        },
+                        {
+                          "text": "📝 AI Log: Trying getByRole button\n"
+                        },
+                        {
+                          "text": "📝 AI Log: Click successful\n"
+                        },
+                        {
+                          "text": "📝 AI Log: Clicked add to cart for first product\n"
+                        },
+                        {
+                          "text": "📝 AI Log: Cart counter shows: 1\n"
+                        },
+                        {
+                          "text": "📝 AI Log: AI Click: shopping cart icon\n"
+                        },
+                        {
+                          "text": "📝 AI Log: AI Response (click)\n"
+                        },
+                        {
+                          "text": "📝 AI Log: Selector not found, trying fallback strategies\n"
+                        },
+                        {
+                          "text": "📝 AI Log: Trying cart/icon fallback\n"
+                        },
+                        {
+                          "text": "📝 AI Log: Click successful\n"
+                        },
+                        {
+                          "text": "📝 AI Log: Verified product appears in cart\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "steps": [
+                        {
+                          "title": "Given I am logged in as \"standard_user\"",
+                          "duration": 31997
+                        },
+                        {
+                          "title": "When I click on \"Add to cart\" button for the first product",
+                          "duration": 16801
+                        },
+                        {
+                          "title": "Then I should see the cart counter increase",
+                          "duration": 29
+                        },
+                        {
+                          "title": "And the product should appear in the cart",
+                          "duration": 18328
+                        }
+                      ],
+                      "startTime": "2026-02-15T20:42:38.235Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "c14a68548b5beb0557e1-6b735f2a547f903121fe",
+              "file": "features/shopping.feature.spec.js",
+              "line": 6,
+              "column": 3
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-02-15T20:42:36.475Z",
+    "duration": 70291.513,
+    "expected": 1,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

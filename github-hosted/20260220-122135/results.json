@@ -1,0 +1,276 @@
+{
+  "config": {
+    "configFile": "/home/runner/work/playwright-agents/playwright-agents/playwright.config.ts",
+    "rootDir": "/home/runner/work/playwright-agents/playwright-agents/.features-gen",
+    "forbidOnly": true,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "ci": {
+        "commitHref": "https://github.com/leonardust/playwright-agents/commit/82c88cd6a909e22602d0def7e8bede744be026bb",
+        "commitHash": "82c88cd6a909e22602d0def7e8bede744be026bb",
+        "prHref": "https://github.com/leonardust/playwright-agents/pull/32",
+        "prTitle": "fix(security): robustly sanitize HTML fallback to remove full script/…",
+        "prBaseHash": "701787e9af026b72408089c6f590704abf477d9a",
+        "buildHref": "https://github.com/leonardust/playwright-agents/actions/runs/22223863905"
+      },
+      "gitCommit": {
+        "shortHash": "82c88cd",
+        "hash": "82c88cd6a909e22602d0def7e8bede744be026bb",
+        "subject": "Merge 5ba2f8c2c23d6df662af26c2c774df244938217a into 701787e9af026b72408089c6f590704abf477d9a",
+        "body": "Merge 5ba2f8c2c23d6df662af26c2c774df244938217a into 701787e9af026b72408089c6f590704abf477d9a\n",
+        "author": {
+          "name": "Łukasz Komorowski",
+          "email": "luk.komorowski@gmail.com",
+          "time": 1771590008000
+        },
+        "committer": {
+          "name": "GitHub",
+          "email": "noreply@github.com",
+          "time": 1771590008000
+        },
+        "branch": "HEAD"
+      },
+      "gitDiff": "diff --git a/utils/ai-helper.ts b/utils/ai-helper.ts\nindex 8865a83..3b20abb 100644\n--- a/utils/ai-helper.ts\n+++ b/utils/ai-helper.ts\n@@ -383,16 +383,23 @@ export class AIHelper {\n       return simplified;\n     } catch (e) {\n       void e;\n-      // W razie problemów z parserem, zastosuj uproszczone czyszczenie\n-      let simplified = html.replace(/<!--[\\s\\S]*?--\\s*>/g, '');\n-\n-      simplified = simplified\n+      // Fallback: usuń całe bloki <script>...</script>, <style>...</style> i komentarze,\n+      // aby nie pozostawić fragmentów, które mogą ominąć sanitację.\n+      let simplified = html\n+        // Usuń komentarze HTML\n+        .replace(/<!--[\\s\\S]*?-->/g, '')\n+        // Usuń całe bloki <script>...</script> i <style>...</style>\n+        .replace(/<script\\b[^>]*>[\\s\\S]*?<\\/script\\s*>/gi, '')\n+        .replace(/<style\\b[^>]*>[\\s\\S]*?<\\/style\\s*>/gi, '')\n+        // Usuń ewentualne pojedyncze otwierające/zamykające tagi\n         .replace(/<\\s*script[^>]*>/gi, '')\n         .replace(/<\\s*\\/\\s*script/gi, '')\n         .replace(/<\\s*style[^>]*>/gi, '')\n         .replace(/<\\s*\\/\\s*style/gi, '')\n+        // Zredukuj białe znaki\n         .replace(/\\s+/g, ' ');\n \n+      // Ogranicz długość do 4000 znaków (zachowaj miejsce na prompt)\n       if (simplified.length > 4000) {\n         simplified = simplified.substring(0, 4000) + '...';\n       }",
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/home/runner/work/playwright-agents/playwright-agents/test-results",
+        "repeatEach": 1,
+        "retries": 2,
+        "metadata": {
+          "ci": {
+            "commitHref": "https://github.com/leonardust/playwright-agents/commit/82c88cd6a909e22602d0def7e8bede744be026bb",
+            "commitHash": "82c88cd6a909e22602d0def7e8bede744be026bb",
+            "prHref": "https://github.com/leonardust/playwright-agents/pull/32",
+            "prTitle": "fix(security): robustly sanitize HTML fallback to remove full script/…",
+            "prBaseHash": "701787e9af026b72408089c6f590704abf477d9a",
+            "buildHref": "https://github.com/leonardust/playwright-agents/actions/runs/22223863905"
+          },
+          "gitCommit": {
+            "shortHash": "82c88cd",
+            "hash": "82c88cd6a909e22602d0def7e8bede744be026bb",
+            "subject": "Merge 5ba2f8c2c23d6df662af26c2c774df244938217a into 701787e9af026b72408089c6f590704abf477d9a",
+            "body": "Merge 5ba2f8c2c23d6df662af26c2c774df244938217a into 701787e9af026b72408089c6f590704abf477d9a\n",
+            "author": {
+              "name": "Łukasz Komorowski",
+              "email": "luk.komorowski@gmail.com",
+              "time": 1771590008000
+            },
+            "committer": {
+              "name": "GitHub",
+              "email": "noreply@github.com",
+              "time": 1771590008000
+            },
+            "branch": "HEAD"
+          },
+          "gitDiff": "diff --git a/utils/ai-helper.ts b/utils/ai-helper.ts\nindex 8865a83..3b20abb 100644\n--- a/utils/ai-helper.ts\n+++ b/utils/ai-helper.ts\n@@ -383,16 +383,23 @@ export class AIHelper {\n       return simplified;\n     } catch (e) {\n       void e;\n-      // W razie problemów z parserem, zastosuj uproszczone czyszczenie\n-      let simplified = html.replace(/<!--[\\s\\S]*?--\\s*>/g, '');\n-\n-      simplified = simplified\n+      // Fallback: usuń całe bloki <script>...</script>, <style>...</style> i komentarze,\n+      // aby nie pozostawić fragmentów, które mogą ominąć sanitację.\n+      let simplified = html\n+        // Usuń komentarze HTML\n+        .replace(/<!--[\\s\\S]*?-->/g, '')\n+        // Usuń całe bloki <script>...</script> i <style>...</style>\n+        .replace(/<script\\b[^>]*>[\\s\\S]*?<\\/script\\s*>/gi, '')\n+        .replace(/<style\\b[^>]*>[\\s\\S]*?<\\/style\\s*>/gi, '')\n+        // Usuń ewentualne pojedyncze otwierające/zamykające tagi\n         .replace(/<\\s*script[^>]*>/gi, '')\n         .replace(/<\\s*\\/\\s*script/gi, '')\n         .replace(/<\\s*style[^>]*>/gi, '')\n         .replace(/<\\s*\\/\\s*style/gi, '')\n+        // Zredukuj białe znaki\n         .replace(/\\s+/g, ' ');\n \n+      // Ogranicz długość do 4000 znaków (zachowaj miejsce na prompt)\n       if (simplified.length > 4000) {\n         simplified = simplified.substring(0, 4000) + '...';\n       }",
+          "actualWorkers": 1
+        },
+        "id": "chromium",
+        "name": "chromium",
+        "testDir": "/home/runner/work/playwright-agents/playwright-agents/.features-gen",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 90000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "html",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "playwright-report/results.json"
+        }
+      ],
+      [
+        "github",
+        null
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "runAgents": "none",
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.58.2",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "features/shopping.feature.spec.js",
+      "file": "features/shopping.feature.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Shopping Cart",
+          "file": "features/shopping.feature.spec.js",
+          "line": 4,
+          "column": 6,
+          "specs": [
+            {
+              "title": "Add product to cart",
+              "ok": true,
+              "tags": [
+                "smoke",
+                "critical"
+              ],
+              "tests": [
+                {
+                  "timeout": 90000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 43731,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "📝 AI Log: AI Fill: username field = standard_user\n"
+                        },
+                        {
+                          "text": "📝 AI Log: AI Response (fill)\n"
+                        },
+                        {
+                          "text": "📝 AI Log: AI Response\n"
+                        },
+                        {
+                          "text": "📝 AI Log: Fill successful\n"
+                        },
+                        {
+                          "text": "📝 AI Log: AI Fill: password field = secret_sauce\n"
+                        },
+                        {
+                          "text": "📝 AI Log: AI Response (fill)\n"
+                        },
+                        {
+                          "text": "📝 AI Log: AI Response\n"
+                        },
+                        {
+                          "text": "📝 AI Log: Fill successful\n"
+                        },
+                        {
+                          "text": "📝 AI Log: AI Click: login button\n"
+                        },
+                        {
+                          "text": "📝 AI Log: AI Response (click)\n"
+                        },
+                        {
+                          "text": "📝 AI Log: Click successful\n"
+                        },
+                        {
+                          "text": "📝 AI Log: Logged in as standard_user and navigated to products page\n"
+                        },
+                        {
+                          "text": "📝 AI Log: AI Click: first add to cart button\n"
+                        },
+                        {
+                          "text": "📝 AI Log: AI Response (click)\n"
+                        },
+                        {
+                          "text": "📝 AI Log: Selector not found, trying fallback strategies\n"
+                        },
+                        {
+                          "text": "📝 AI Log: Trying getByRole button\n"
+                        },
+                        {
+                          "text": "📝 AI Log: Click successful\n"
+                        },
+                        {
+                          "text": "📝 AI Log: Clicked add to cart for first product\n"
+                        },
+                        {
+                          "text": "📝 AI Log: Cart counter shows: 1\n"
+                        },
+                        {
+                          "text": "📝 AI Log: AI Click: shopping cart icon\n"
+                        },
+                        {
+                          "text": "📝 AI Log: AI Response (click)\n"
+                        },
+                        {
+                          "text": "📝 AI Log: Selector not found, trying fallback strategies\n"
+                        },
+                        {
+                          "text": "📝 AI Log: Trying cart/icon fallback\n"
+                        },
+                        {
+                          "text": "📝 AI Log: Click successful\n"
+                        },
+                        {
+                          "text": "📝 AI Log: Verified product appears in cart\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "steps": [
+                        {
+                          "title": "Given I am logged in as \"standard_user\"",
+                          "duration": 1656
+                        },
+                        {
+                          "title": "When I click on \"Add to cart\" button for the first product",
+                          "duration": 20400
+                        },
+                        {
+                          "title": "Then I should see the cart counter increase",
+                          "duration": 15
+                        },
+                        {
+                          "title": "And the product should appear in the cart",
+                          "duration": 20492
+                        }
+                      ],
+                      "startTime": "2026-02-20T12:20:37.888Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "c14a68548b5beb0557e1-6b735f2a547f903121fe",
+              "file": "features/shopping.feature.spec.js",
+              "line": 6,
+              "column": 3
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-02-20T12:20:36.497Z",
+    "duration": 46684.694,
+    "expected": 1,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

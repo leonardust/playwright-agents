@@ -1,0 +1,276 @@
+{
+  "config": {
+    "configFile": "/home/runner/work/playwright-agents/playwright-agents/playwright.config.ts",
+    "rootDir": "/home/runner/work/playwright-agents/playwright-agents/.features-gen",
+    "forbidOnly": true,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "ci": {
+        "commitHref": "https://github.com/leonardust/playwright-agents/commit/6f6cd7a099bda20672ba1b6913ca517934c33df1",
+        "commitHash": "6f6cd7a099bda20672ba1b6913ca517934c33df1",
+        "prHref": "https://github.com/leonardust/playwright-agents/pull/46",
+        "prTitle": "chore: pin ajv to >=8.18.0 via overrides",
+        "prBaseHash": "1c37c217e37689d496d699bddbce7a938c8c597c",
+        "buildHref": "https://github.com/leonardust/playwright-agents/actions/runs/22239593539"
+      },
+      "gitCommit": {
+        "shortHash": "6f6cd7a",
+        "hash": "6f6cd7a099bda20672ba1b6913ca517934c33df1",
+        "subject": "Merge 9a1550274affcabbe6d55ce259e471ee4e5aede1 into 1c37c217e37689d496d699bddbce7a938c8c597c",
+        "body": "Merge 9a1550274affcabbe6d55ce259e471ee4e5aede1 into 1c37c217e37689d496d699bddbce7a938c8c597c\n",
+        "author": {
+          "name": "Łukasz Komorowski",
+          "email": "luk.komorowski@gmail.com",
+          "time": 1771618535000
+        },
+        "committer": {
+          "name": "GitHub",
+          "email": "noreply@github.com",
+          "time": 1771618535000
+        },
+        "branch": "HEAD"
+      },
+      "gitDiff": "diff --git a/package-lock.json b/package-lock.json\nindex 5540ef7..8464d05 100644\n--- a/package-lock.json\n+++ b/package-lock.json\n@@ -1170,16 +1170,16 @@\n       }\n     },\n     \"node_modules/ajv\": {\n-      \"version\": \"6.14.0\",\n-      \"resolved\": \"https://registry.npmjs.org/ajv/-/ajv-6.14.0.tgz\",\n-      \"integrity\": \"sha512-IWrosm/yrn43eiKqkfkHis7QioDleaXQHdDVPKg0FSwwd/DuvyX79TZnFOnYpB7dcsFAMmtFztZuXPDvSePkFw==\",\n+      \"version\": \"8.18.0\",\n+      \"resolved\": \"https://registry.npmjs.org/ajv/-/ajv-8.18.0.tgz\",\n+      \"integrity\": \"sha512-PlXPeEWMXMZ7sPYOHqmDyCJzcfNrUr3fGNKtezX14ykXOEIvyK81d+qydx89KY5O71FKMPaQ2vBfBFI5NHR63A==\",\n       \"dev\": true,\n       \"license\": \"MIT\",\n       \"dependencies\": {\n-        \"fast-deep-equal\": \"^3.1.1\",\n-        \"fast-json-stable-stringify\": \"^2.0.0\",\n-        \"json-schema-traverse\": \"^0.4.1\",\n-        \"uri-js\": \"^4.2.2\"\n+        \"fast-deep-equal\": \"^3.1.3\",\n+        \"fast-uri\": \"^3.0.1\",\n+        \"json-schema-traverse\": \"^1.0.0\",\n+        \"require-from-string\": \"^2.0.2\"\n       },\n       \"funding\": {\n         \"type\": \"github\",\n@@ -1929,13 +1929,6 @@\n         \"node\": \">=8.6.0\"\n       }\n     },\n-    \"node_modules/fast-json-stable-stringify\": {\n-      \"version\": \"2.1.0\",\n-      \"resolved\": \"https://registry.npmjs.org/fast-json-stable-stringify/-/fast-json-stable-stringify-2.1.0.tgz\",\n-      \"integrity\": \"sha512-lhd/wF+Lk98HZoTCtlVraHtfh5XYijIjalXck7saUtuanSDyLMxnHhSXEDJqHxD7msR8D0uCmqlkwjCV8xvwHw==\",\n-      \"dev\": true,\n-      \"license\": \"MIT\"\n-    },\n     \"node_modules/fast-levenshtein\": {\n       \"version\": \"2.0.6\",\n       \"resolved\": \"https://registry.npmjs.org/fast-levenshtein/-/fast-levenshtein-2.0.6.tgz\",\n@@ -1943,6 +1936,23 @@\n       \"dev\": true,\n       \"license\": \"MIT\"\n     },\n+    \"node_modules/fast-uri\": {\n+      \"version\": \"3.1.0\",\n+      \"resolved\": \"https://registry.npmjs.org/fast-uri/-/fast-uri-3.1.0.tgz\",\n+      \"integrity\": \"sha512-iPeeDKJSWf4IEOasVVrknXpaBV0IApz/gp7S2bb7Z4Lljbl2MGJRqInZiUrQwV16cpzw/D3S5j5Julj/gT52AA==\",\n+      \"dev\": true,\n+      \"funding\": [\n+        {\n+          \"type\": \"github\",\n+          \"url\": \"https://github.com/sponsors/fastify\"\n+        },\n+        {\n+          \"type\": \"opencollective\",\n+          \"url\": \"https://opencollective.com/fastify\"\n+        }\n+      ],\n+      \"license\": \"BSD-3-Clause\"\n+    },\n     \"node_modules/fastq\": {\n       \"version\": \"1.20.1\",\n       \"resolved\": \"https://registry.npmjs.org/fastq/-/fastq-1.20.1.tgz\",\n@@ -2447,9 +2457,9 @@\n       \"license\": \"MIT\"\n     },\n     \"node_modules/json-schema-traverse\": {\n-      \"version\": \"0.4.1\",\n-      \"resolved\": \"https://registry.npmjs.org/json-schema-traverse/-/json-schema-traverse-0.4.1.tgz\",\n-      \"integrity\": \"sha512-xbbCH5dCYU5T8LcEhhuh7HJ88HXuW3qsI3Y0zOZFKfZEHcpWiHU/Jxzk629Brsab/mMiHQti9wMP+845RPe3Vg==\",\n+      \"version\": \"1.0.0\",\n+      \"resolved\": \"https://registry.npmjs.org/json-schema-traverse/-/json-schema-traverse-1.0.0.tgz\",\n+      \"integrity\": \"sha512-NM8/P9n3XjXhIZn1lLhkFaACTOURQXjWhV4BA/RnOv8xvgqtqpAX9IO4mRQxSx1Rlo4tqzeqb0sOlruaOy3dug==\",\n       \"dev\": true,\n       \"license\": \"MIT\"\n     },\n@@ -4151,16 +4161,6 @@\n         \"tslib\": \"^2.0.3\"\n       }\n     },\n-    \"node_modules/uri-js\": {\n-      \"version\": \"4.4.1\",\n-      \"resolved\": \"https://registry.npmjs.org/uri-js/-/uri-js-4.4.1.tgz\",\n-      \"integrity\": \"sha512-7rKUyy33Q1yc98pQ1DAmLtwX109F7TIfWlW1Ydo8Wl1ii1SeHieeh0HHfPeL2fMXK6z0s8ecKs9frCuLJvndBg==\",\n-      \"dev\": true,\n-      \"license\": \"BSD-2-Clause\",\n-      \"dependencies\": {\n-        \"punycode\": \"^2.1.0\"\n-      }\n-    },\n     \"node_modules/util-arity\": {\n       \"version\": \"1.1.0\",\n       \"resolved\": \"https://registry.npmjs.org/util-arity/-/util-arity-1.1.0.tgz\",\ndiff --git a/package.json b/package.json\nindex 1c950fe..9c1a39c 100644\n--- a/package.json\n+++ b/package.json\n@@ -57,7 +57,8 @@\n     \"openai\": \"^6.16.0\"\n   },\n   \"overrides\": {\n-    \"minimatch\": \">=10.2.1\"\n+    \"minimatch\": \">=10.2.1\",\n+    \"ajv\": \">=8.18.0\"\n   },\n   \"lint-staged\": {\n     \"*.{ts,js}\": [",
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/home/runner/work/playwright-agents/playwright-agents/test-results",
+        "repeatEach": 1,
+        "retries": 2,
+        "metadata": {
+          "ci": {
+            "commitHref": "https://github.com/leonardust/playwright-agents/commit/6f6cd7a099bda20672ba1b6913ca517934c33df1",
+            "commitHash": "6f6cd7a099bda20672ba1b6913ca517934c33df1",
+            "prHref": "https://github.com/leonardust/playwright-agents/pull/46",
+            "prTitle": "chore: pin ajv to >=8.18.0 via overrides",
+            "prBaseHash": "1c37c217e37689d496d699bddbce7a938c8c597c",
+            "buildHref": "https://github.com/leonardust/playwright-agents/actions/runs/22239593539"
+          },
+          "gitCommit": {
+            "shortHash": "6f6cd7a",
+            "hash": "6f6cd7a099bda20672ba1b6913ca517934c33df1",
+            "subject": "Merge 9a1550274affcabbe6d55ce259e471ee4e5aede1 into 1c37c217e37689d496d699bddbce7a938c8c597c",
+            "body": "Merge 9a1550274affcabbe6d55ce259e471ee4e5aede1 into 1c37c217e37689d496d699bddbce7a938c8c597c\n",
+            "author": {
+              "name": "Łukasz Komorowski",
+              "email": "luk.komorowski@gmail.com",
+              "time": 1771618535000
+            },
+            "committer": {
+              "name": "GitHub",
+              "email": "noreply@github.com",
+              "time": 1771618535000
+            },
+            "branch": "HEAD"
+          },
+          "gitDiff": "diff --git a/package-lock.json b/package-lock.json\nindex 5540ef7..8464d05 100644\n--- a/package-lock.json\n+++ b/package-lock.json\n@@ -1170,16 +1170,16 @@\n       }\n     },\n     \"node_modules/ajv\": {\n-      \"version\": \"6.14.0\",\n-      \"resolved\": \"https://registry.npmjs.org/ajv/-/ajv-6.14.0.tgz\",\n-      \"integrity\": \"sha512-IWrosm/yrn43eiKqkfkHis7QioDleaXQHdDVPKg0FSwwd/DuvyX79TZnFOnYpB7dcsFAMmtFztZuXPDvSePkFw==\",\n+      \"version\": \"8.18.0\",\n+      \"resolved\": \"https://registry.npmjs.org/ajv/-/ajv-8.18.0.tgz\",\n+      \"integrity\": \"sha512-PlXPeEWMXMZ7sPYOHqmDyCJzcfNrUr3fGNKtezX14ykXOEIvyK81d+qydx89KY5O71FKMPaQ2vBfBFI5NHR63A==\",\n       \"dev\": true,\n       \"license\": \"MIT\",\n       \"dependencies\": {\n-        \"fast-deep-equal\": \"^3.1.1\",\n-        \"fast-json-stable-stringify\": \"^2.0.0\",\n-        \"json-schema-traverse\": \"^0.4.1\",\n-        \"uri-js\": \"^4.2.2\"\n+        \"fast-deep-equal\": \"^3.1.3\",\n+        \"fast-uri\": \"^3.0.1\",\n+        \"json-schema-traverse\": \"^1.0.0\",\n+        \"require-from-string\": \"^2.0.2\"\n       },\n       \"funding\": {\n         \"type\": \"github\",\n@@ -1929,13 +1929,6 @@\n         \"node\": \">=8.6.0\"\n       }\n     },\n-    \"node_modules/fast-json-stable-stringify\": {\n-      \"version\": \"2.1.0\",\n-      \"resolved\": \"https://registry.npmjs.org/fast-json-stable-stringify/-/fast-json-stable-stringify-2.1.0.tgz\",\n-      \"integrity\": \"sha512-lhd/wF+Lk98HZoTCtlVraHtfh5XYijIjalXck7saUtuanSDyLMxnHhSXEDJqHxD7msR8D0uCmqlkwjCV8xvwHw==\",\n-      \"dev\": true,\n-      \"license\": \"MIT\"\n-    },\n     \"node_modules/fast-levenshtein\": {\n       \"version\": \"2.0.6\",\n       \"resolved\": \"https://registry.npmjs.org/fast-levenshtein/-/fast-levenshtein-2.0.6.tgz\",\n@@ -1943,6 +1936,23 @@\n       \"dev\": true,\n       \"license\": \"MIT\"\n     },\n+    \"node_modules/fast-uri\": {\n+      \"version\": \"3.1.0\",\n+      \"resolved\": \"https://registry.npmjs.org/fast-uri/-/fast-uri-3.1.0.tgz\",\n+      \"integrity\": \"sha512-iPeeDKJSWf4IEOasVVrknXpaBV0IApz/gp7S2bb7Z4Lljbl2MGJRqInZiUrQwV16cpzw/D3S5j5Julj/gT52AA==\",\n+      \"dev\": true,\n+      \"funding\": [\n+        {\n+          \"type\": \"github\",\n+          \"url\": \"https://github.com/sponsors/fastify\"\n+        },\n+        {\n+          \"type\": \"opencollective\",\n+          \"url\": \"https://opencollective.com/fastify\"\n+        }\n+      ],\n+      \"license\": \"BSD-3-Clause\"\n+    },\n     \"node_modules/fastq\": {\n       \"version\": \"1.20.1\",\n       \"resolved\": \"https://registry.npmjs.org/fastq/-/fastq-1.20.1.tgz\",\n@@ -2447,9 +2457,9 @@\n       \"license\": \"MIT\"\n     },\n     \"node_modules/json-schema-traverse\": {\n-      \"version\": \"0.4.1\",\n-      \"resolved\": \"https://registry.npmjs.org/json-schema-traverse/-/json-schema-traverse-0.4.1.tgz\",\n-      \"integrity\": \"sha512-xbbCH5dCYU5T8LcEhhuh7HJ88HXuW3qsI3Y0zOZFKfZEHcpWiHU/Jxzk629Brsab/mMiHQti9wMP+845RPe3Vg==\",\n+      \"version\": \"1.0.0\",\n+      \"resolved\": \"https://registry.npmjs.org/json-schema-traverse/-/json-schema-traverse-1.0.0.tgz\",\n+      \"integrity\": \"sha512-NM8/P9n3XjXhIZn1lLhkFaACTOURQXjWhV4BA/RnOv8xvgqtqpAX9IO4mRQxSx1Rlo4tqzeqb0sOlruaOy3dug==\",\n       \"dev\": true,\n       \"license\": \"MIT\"\n     },\n@@ -4151,16 +4161,6 @@\n         \"tslib\": \"^2.0.3\"\n       }\n     },\n-    \"node_modules/uri-js\": {\n-      \"version\": \"4.4.1\",\n-      \"resolved\": \"https://registry.npmjs.org/uri-js/-/uri-js-4.4.1.tgz\",\n-      \"integrity\": \"sha512-7rKUyy33Q1yc98pQ1DAmLtwX109F7TIfWlW1Ydo8Wl1ii1SeHieeh0HHfPeL2fMXK6z0s8ecKs9frCuLJvndBg==\",\n-      \"dev\": true,\n-      \"license\": \"BSD-2-Clause\",\n-      \"dependencies\": {\n-        \"punycode\": \"^2.1.0\"\n-      }\n-    },\n     \"node_modules/util-arity\": {\n       \"version\": \"1.1.0\",\n       \"resolved\": \"https://registry.npmjs.org/util-arity/-/util-arity-1.1.0.tgz\",\ndiff --git a/package.json b/package.json\nindex 1c950fe..9c1a39c 100644\n--- a/package.json\n+++ b/package.json\n@@ -57,7 +57,8 @@\n     \"openai\": \"^6.16.0\"\n   },\n   \"overrides\": {\n-    \"minimatch\": \">=10.2.1\"\n+    \"minimatch\": \">=10.2.1\",\n+    \"ajv\": \">=8.18.0\"\n   },\n   \"lint-staged\": {\n     \"*.{ts,js}\": [",
+          "actualWorkers": 1
+        },
+        "id": "chromium",
+        "name": "chromium",
+        "testDir": "/home/runner/work/playwright-agents/playwright-agents/.features-gen",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 90000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "html",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "playwright-report/results.json"
+        }
+      ],
+      [
+        "github",
+        null
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "runAgents": "none",
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.58.2",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "features/shopping.feature.spec.js",
+      "file": "features/shopping.feature.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Shopping Cart",
+          "file": "features/shopping.feature.spec.js",
+          "line": 4,
+          "column": 6,
+          "specs": [
+            {
+              "title": "Add product to cart",
+              "ok": true,
+              "tags": [
+                "smoke",
+                "critical"
+              ],
+              "tests": [
+                {
+                  "timeout": 90000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 5571,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "📝 AI Log: AI Fill: username field = standard_user\n"
+                        },
+                        {
+                          "text": "📝 AI Log: AI Response (fill)\n"
+                        },
+                        {
+                          "text": "📝 AI Log: AI Response\n"
+                        },
+                        {
+                          "text": "📝 AI Log: Fill successful\n"
+                        },
+                        {
+                          "text": "📝 AI Log: AI Fill: password field = secret_sauce\n"
+                        },
+                        {
+                          "text": "📝 AI Log: AI Response (fill)\n"
+                        },
+                        {
+                          "text": "📝 AI Log: AI Response\n"
+                        },
+                        {
+                          "text": "📝 AI Log: Fill successful\n"
+                        },
+                        {
+                          "text": "📝 AI Log: AI Click: login button\n"
+                        },
+                        {
+                          "text": "📝 AI Log: AI Response (click)\n"
+                        },
+                        {
+                          "text": "📝 AI Log: Click successful\n"
+                        },
+                        {
+                          "text": "📝 AI Log: Logged in as standard_user and navigated to products page\n"
+                        },
+                        {
+                          "text": "📝 AI Log: AI Click: first add to cart button\n"
+                        },
+                        {
+                          "text": "📝 AI Log: AI Response (click)\n"
+                        },
+                        {
+                          "text": "📝 AI Log: Selector not found, trying fallback strategies\n"
+                        },
+                        {
+                          "text": "📝 AI Log: Trying getByRole button\n"
+                        },
+                        {
+                          "text": "📝 AI Log: Click successful\n"
+                        },
+                        {
+                          "text": "📝 AI Log: Clicked add to cart for first product\n"
+                        },
+                        {
+                          "text": "📝 AI Log: Cart counter shows: 1\n"
+                        },
+                        {
+                          "text": "📝 AI Log: AI Click: shopping cart icon\n"
+                        },
+                        {
+                          "text": "📝 AI Log: AI Response (click)\n"
+                        },
+                        {
+                          "text": "📝 AI Log: Selector not found, trying fallback strategies\n"
+                        },
+                        {
+                          "text": "📝 AI Log: Trying cart/icon fallback\n"
+                        },
+                        {
+                          "text": "📝 AI Log: Click successful\n"
+                        },
+                        {
+                          "text": "📝 AI Log: Verified product appears in cart\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "steps": [
+                        {
+                          "title": "Given I am logged in as \"standard_user\"",
+                          "duration": 1288
+                        },
+                        {
+                          "title": "When I click on \"Add to cart\" button for the first product",
+                          "duration": 412
+                        },
+                        {
+                          "title": "Then I should see the cart counter increase",
+                          "duration": 11
+                        },
+                        {
+                          "title": "And the product should appear in the cart",
+                          "duration": 3444
+                        }
+                      ],
+                      "startTime": "2026-02-20T20:16:24.476Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "c14a68548b5beb0557e1-6b735f2a547f903121fe",
+              "file": "features/shopping.feature.spec.js",
+              "line": 6,
+              "column": 3
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-02-20T20:16:23.163Z",
+    "duration": 9112.213,
+    "expected": 1,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

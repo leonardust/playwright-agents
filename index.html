@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Playwright Test Reports</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { 
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+      max-width: 1200px; 
+      margin: 0 auto; 
+      padding: 40px 20px;
+      background: #f6f8fa;
+      color: #24292f;
+    }
+    h1 { 
+      color: #2ea44f; 
+      margin-bottom: 10px;
+      font-size: 2.5em;
+    }
+    .subtitle {
+      color: #656d76;
+      margin-bottom: 40px;
+      font-size: 1.1em;
+    }
+    .report-section {
+      background: white;
+      border-radius: 12px;
+      padding: 30px;
+      margin-bottom: 30px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.12);
+    }
+    .report-section h2 {
+      color: #24292f;
+      margin-bottom: 20px;
+      font-size: 1.5em;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .latest-link {
+      display: inline-block;
+      padding: 12px 24px;
+      background: #2ea44f;
+      color: white;
+      text-decoration: none;
+      border-radius: 6px;
+      font-weight: 600;
+      transition: background 0.2s;
+      margin-bottom: 20px;
+    }
+    .latest-link:hover {
+      background: #2c974b;
+    }
+    .history-section {
+      margin-top: 20px;
+      padding-top: 20px;
+      border-top: 1px solid #d0d7de;
+    }
+    .history-section h3 {
+      color: #656d76;
+      font-size: 1em;
+      margin-bottom: 15px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .history-list {
+      list-style: none;
+      max-height: 300px;
+      overflow-y: auto;
+    }
+    .history-list li {
+      margin-bottom: 8px;
+    }
+    .history-link {
+      display: block;
+      padding: 10px 15px;
+      background: #f6f8fa;
+      color: #0969da;
+      text-decoration: none;
+      border-radius: 6px;
+      transition: background 0.2s;
+      font-size: 0.95em;
+    }
+    .history-link:hover {
+      background: #e7edf3;
+    }
+    .empty-state {
+      color: #656d76;
+      font-style: italic;
+      padding: 10px 15px;
+    }
+    .timestamp {
+      color: #656d76;
+      font-size: 0.9em;
+      margin-top: 5px;
+    }
+  </style>
+</head>
+<body>
+  <h1>🎭 Playwright Test Reports</h1>
+  <p class="subtitle">Latest test results and historical reports</p>
+  
+  <div class="report-section">
+    <h2>💻 Self-Hosted Runner Tests</h2>
+    <a href="self-hosted/latest/" class="latest-link">View Latest Report →</a>
+    <div class="timestamp">Last updated: 2026-02-21 21:17 UTC</div>
+    
+    <div class="history-section">
+      <h3>📚 Report History (Last 20)</h3>
+      <ul class="history-list">
+        <li><a href="self-hosted/20260220-120343/" class="history-link">📅 2026-02-20 12:03:43 UTC</a></li>
+        <li><a href="self-hosted/20260219-173044/" class="history-link">📅 2026-02-19 17:30:44 UTC</a></li>
+        <li><a href="self-hosted/20260219-171307/" class="history-link">📅 2026-02-19 17:13:07 UTC</a></li>
+        <li><a href="self-hosted/20260219-170034/" class="history-link">📅 2026-02-19 17:00:34 UTC</a></li>
+        <li><a href="self-hosted/20260219-165126/" class="history-link">📅 2026-02-19 16:51:26 UTC</a></li>
+        <li><a href="self-hosted/20260219-163428/" class="history-link">📅 2026-02-19 16:34:28 UTC</a></li>
+        <li><a href="self-hosted/20260219-160744/" class="history-link">📅 2026-02-19 16:07:44 UTC</a></li>
+        <li><a href="self-hosted/20260219-160145/" class="history-link">📅 2026-02-19 16:01:45 UTC</a></li>
+        <li><a href="self-hosted/20260219-155543/" class="history-link">📅 2026-02-19 15:55:43 UTC</a></li>
+        <li><a href="self-hosted/20260219-155341/" class="history-link">📅 2026-02-19 15:53:41 UTC</a></li>
+        <li><a href="self-hosted/20260219-154622/" class="history-link">📅 2026-02-19 15:46:22 UTC</a></li>
+        <li><a href="self-hosted/20260219-152919/" class="history-link">📅 2026-02-19 15:29:19 UTC</a></li>
+        <li><a href="self-hosted/20260219-151851/" class="history-link">📅 2026-02-19 15:18:51 UTC</a></li>
+        <li><a href="self-hosted/20260219-151437/" class="history-link">📅 2026-02-19 15:14:37 UTC</a></li>
+        <li><a href="self-hosted/20260219-150934/" class="history-link">📅 2026-02-19 15:09:34 UTC</a></li>
+        <li><a href="self-hosted/20260218-143557/" class="history-link">📅 2026-02-18 14:35:57 UTC</a></li>
+        <li><a href="self-hosted/20260218-141904/" class="history-link">📅 2026-02-18 14:19:04 UTC</a></li>
+        <li><a href="self-hosted/20260218-140927/" class="history-link">📅 2026-02-18 14:09:27 UTC</a></li>
+        <li><a href="self-hosted/20260218-140647/" class="history-link">📅 2026-02-18 14:06:47 UTC</a></li>
+        <li><a href="self-hosted/20260218-125456/" class="history-link">📅 2026-02-18 12:54:56 UTC</a></li>
+      </ul>
+    </div>
+  </div>
+  
+  <div class="report-section">
+    <h2>☁️ GitHub-Hosted Runner Tests</h2>
+    <a href="github-hosted/latest/" class="latest-link">View Latest Report →</a>
+    <div class="timestamp">Last updated: 2026-02-21 21:17 UTC</div>
+    
+    <div class="history-section">
+      <h3>📚 Report History (Last 20)</h3>
+      <ul class="history-list">
+        <li><a href="github-hosted/20260221-211740/" class="history-link">📅 2026-02-21 21:17:40 UTC</a></li>
+        <li><a href="github-hosted/20260221-211534/" class="history-link">📅 2026-02-21 21:15:34 UTC</a></li>
+        <li><a href="github-hosted/20260221-200700/" class="history-link">📅 2026-02-21 20:07:00 UTC</a></li>
+        <li><a href="github-hosted/20260220-202048/" class="history-link">📅 2026-02-20 20:20:48 UTC</a></li>
+        <li><a href="github-hosted/20260220-201853/" class="history-link">📅 2026-02-20 20:18:53 UTC</a></li>
+        <li><a href="github-hosted/20260220-201646/" class="history-link">📅 2026-02-20 20:16:46 UTC</a></li>
+        <li><a href="github-hosted/20260220-200902/" class="history-link">📅 2026-02-20 20:09:02 UTC</a></li>
+        <li><a href="github-hosted/20260220-200248/" class="history-link">📅 2026-02-20 20:02:48 UTC</a></li>
+        <li><a href="github-hosted/20260220-195133/" class="history-link">📅 2026-02-20 19:51:33 UTC</a></li>
+        <li><a href="github-hosted/20260220-194856/" class="history-link">📅 2026-02-20 19:48:56 UTC</a></li>
+        <li><a href="github-hosted/20260220-193423/" class="history-link">📅 2026-02-20 19:34:23 UTC</a></li>
+        <li><a href="github-hosted/20260220-192359/" class="history-link">📅 2026-02-20 19:23:59 UTC</a></li>
+        <li><a href="github-hosted/20260220-192151/" class="history-link">📅 2026-02-20 19:21:51 UTC</a></li>
+        <li><a href="github-hosted/20260220-190753/" class="history-link">📅 2026-02-20 19:07:53 UTC</a></li>
+        <li><a href="github-hosted/20260220-190542/" class="history-link">📅 2026-02-20 19:05:42 UTC</a></li>
+        <li><a href="github-hosted/20260220-190336/" class="history-link">📅 2026-02-20 19:03:36 UTC</a></li>
+        <li><a href="github-hosted/20260220-190229/" class="history-link">📅 2026-02-20 19:02:29 UTC</a></li>
+        <li><a href="github-hosted/20260220-185522/" class="history-link">📅 2026-02-20 18:55:22 UTC</a></li>
+        <li><a href="github-hosted/20260220-185336/" class="history-link">📅 2026-02-20 18:53:36 UTC</a></li>
+        <li><a href="github-hosted/20260220-184959/" class="history-link">📅 2026-02-20 18:49:59 UTC</a></li>
+      </ul>
+    </div>
+  </div>
+</body>
+</html>
