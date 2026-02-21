@@ -70,6 +70,9 @@ export class AIHelper {
     // Usuń średniki na końcu
     cleaned = cleaned.replace(/;+$/, '');
 
+    // Usuń przypadkowe spacje wokół dwukropków (np. ": nth-child" -> ":nth-child")
+    cleaned = cleaned.replace(/\s*:\s*/g, ':');
+
     return cleaned.trim();
   }
 
