@@ -26,6 +26,16 @@ When('I click on "Add to cart" button for the first product', async () => {
   aiHelper.logPrompt('Clicked add to cart for first product');
 });
 
+When(
+  'I select {string} from {string} dropdown',
+  async ({ page }, option: string, dropdown: string) => {
+    aiHelper = new AIHelper(page);
+    // description includes the word dropdown so AI knows what to look for
+    await aiHelper.selectDropdown(dropdown, option);
+    aiHelper.logPrompt(`Selected '${option}' from '${dropdown}' dropdown`);
+  },
+);
+
 Then('I should see the cart counter increase', async ({ page }) => {
   const cartBadge = page.locator('.shopping_cart_badge');
   await expect(cartBadge).toBeVisible({ timeout: 10000 });
@@ -45,4 +55,12 @@ Then('the product should appear in the cart', async ({ page }) => {
   await expect(cartItems).toHaveCount(1, { timeout: 10000 });
 
   aiHelper.logPrompt('Verified product appears in cart');
+});
+
+Then('the first product price should be {string}', async ({ page }, expectedPrice: string) => {
+  const priceLocator = page.locator('.inventory_item_price').first();
+  const text = await priceLocator.textContent();
+  const actual = text?.trim();
+  aiHelper.logPrompt('Checked first product price', { actual, expectedPrice });
+  expect(actual).toBe(expectedPrice);
 });
