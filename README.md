@@ -1,5 +1,7 @@
 # Playwright AI Agents - Test Automation
 
+> This line was added in a feature branch for testing purposes.
+
 Projekt automatyzacji testów wykorzystujący:
 
 - **Playwright** - framework do testów E2E
