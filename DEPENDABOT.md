@@ -99,10 +99,47 @@ ignore:
     update-types: ['version-update:semver-major']
 ```
 
-### Auto-merge dla patch updates:
+### Auto-merge dla Dependabot PR-ów
 
-GitHub może automatycznie mergować "bezpieczne" update'y.
-**Nie włączone** - wolę ręczny review.
+Wcześniej korzystaliśmy z prostego workflowu, który poprawiał PR-y od Dependabota
+bez sprawdzania czegokolwiek. Wprowadziliśmy zmiany:
+
+- auto-merge nadal jest dozwolone, ale **tylko jeśli wszystkie wymagane
+  statusy są zielone**
+- nie liczymy do listy wymaganych statusów żadnego kroku deploy
+- workflow nie uruchamia deploymentu raportu dla PR-ów od Dependabota
+
+Obowiązkowe checks w tym repozytorium to:
+
+1. **GitGuardian Security Checks** – zewnętrzny skaner bezpieczeństwa.
+2. **CodeQL Advanced** – analiza kodu z pomocą GitHub CodeQL.
+3. **Playwright - GitHub-Hosted / test** – wszystkie nasze testy E2E uruchamiane
+   przez workflow `playwright-github-hosted.yml`.
+
+Dodatkowo: **workflow `playwright-github-hosted.yml` nie uruchamia jobu deploy dla żadnego PR-a**,
+więc status „deploy” nigdy nie jest brany pod uwagę przy auto-merge. Oznacza to, że
+przeprowadzenie aktualizacji zależności nie skutkuje wdrożeniem raportu, a jedynie
+sprawdzeniem kodu i testów.
+
+Dlatego w `.github/workflows/dependabot-auto-merge.yml` zobaczysz logikę,
+która czeka na te trzy statusy i dopiero wtedy squashuje PR, jeśli nie ma konfliktów.
+Jeżeli któryś check nie pojawi się (np. deploy), auto-merge się nie zacznie.
+
+W razie potrzeby możesz też użyć komend:
+
+```bash
+@dependabot rebase          # Rebase PR
+@dependabot recreate        # Odtwórz PR od zera
+@dependabot merge           # Merge jeśli testy przeszły
+@dependabot squash and merge
+@dependabot cancel merge
+@dependabot close           # Zamknij ten PR
+@dependabot ignore this major version
+@dependabot ignore this minor version
+@dependabot ignore this dependency
+```
+
+Szczegóły workflowa znajdują się w `.github/workflows/dependabot-auto-merge.yml`.
 
 ## 📚 Użyteczne komendy
 
