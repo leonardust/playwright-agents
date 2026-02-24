@@ -19,8 +19,11 @@ jobs:
           script: |
             const requiredChecks = [
               "GitGuardian Security Checks",
-              "CodeQL Advanced",
-              "Playwright - GitHub-Hosted / test"
+              "CodeQL",
+              "Analyze (actions)",
+              "Analyze (javascript-typescript)",
+              "Analyze (python)",
+              "test"
             ];
 
             const pr_number = context.payload.pull_request.number;
