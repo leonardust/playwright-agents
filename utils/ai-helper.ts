@@ -10,17 +10,28 @@ import { JSDOM } from 'jsdom';
  */
 export class AIHelper {
   private page: Page;
-  private client: OpenAI;
+  private client: any;
   private logFile: string;
 
   constructor(page: Page) {
     this.page = page;
 
     // Konfiguracja klienta OpenAI dla Ollama
-    this.client = new OpenAI({
-      baseURL: process.env.OLLAMA_BASE_URL || 'http://localhost:11434/v1',
-      apiKey: process.env.OLLAMA_API_KEY || 'ollama',
-    });
+    if (process.env.GITHUB_ACTOR && process.env.GITHUB_ACTOR.includes('dependabot')) {
+      // W środowisku Dependabot tests nie mają dostępu do sekretów — użyj stub'a, aby uniknąć 401
+      this.client = {
+        chat: {
+          completions: {
+            create: async (_opts: any) => ({ choices: [{ message: { content: '' } }] }),
+          },
+        },
+      };
+    } else {
+      this.client = new OpenAI({
+        baseURL: process.env.OLLAMA_BASE_URL || 'http://localhost:11434/v1',
+        apiKey: process.env.OLLAMA_API_KEY || 'ollama',
+      });
+    }
 
     // Utwórz katalog dla logów jeśli nie istnieje
     const logsDir = path.join(process.cwd(), 'logs');
