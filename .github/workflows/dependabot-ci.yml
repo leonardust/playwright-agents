@@ -24,13 +24,36 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '18'
+          node-version: '20'
 
       - name: Install dependencies
         run: npm ci
 
+      - name: Cache Playwright Browsers
+        uses: actions/cache@v4
+        id: playwright-cache
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-${{ runner.os }}-${{ hashFiles('package-lock.json') }}
+
+      - name: Install Playwright Browsers
+        if: steps.playwright-cache.outputs.cache-hit != 'true'
+        run: npx playwright install chromium --with-deps
+
+      - name: Update .env for CI
+        run: |
+          echo "OLLAMA_BASE_URL=https://api.groq.com/openai/v1" > .env
+          echo "OLLAMA_API_KEY=${{ secrets.GROQ_API_KEY }}" >> .env
+          echo "OLLAMA_MODEL=llama-3.1-8b-instant" >> .env
+          echo "OLLAMA_TEMPERATURE=0" >> .env
+          echo "OLLAMA_NUM_CTX=8192" >> .env
+          echo "PLAYWRIGHT_TIMEOUT=90000" >> .env
+          echo "PLAYWRIGHT_EXPECT_TIMEOUT=30000" >> .env
+          echo "TEST_PASSWORD=secret_sauce" >> .env
+
       - name: Run tests
+        id: tests
         env:
           OLLAMA_API_KEY: ${{ secrets.GROQ_API_KEY }}
           OLLAMA_BASE_URL: ${{ secrets.OLLAMA_BASE_URL }}
-        run: npm test
+        run: npm run test:smoke
