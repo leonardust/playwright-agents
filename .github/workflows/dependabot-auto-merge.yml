@@ -23,7 +23,7 @@ jobs:
               "Analyze (actions)",
               "Analyze (javascript-typescript)",
               "Analyze (python)",
-              "test"
+              "dependabot-tests"
             ];
 
             const pr_number = context.payload.pull_request.number;

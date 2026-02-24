@@ -23,9 +23,7 @@ permissions:
 jobs:
   test:
     # run on push, manual dispatch, or any pull request (including Dependabot)
-    if: ${{ github.event_name == 'push'
-      || github.event_name == 'workflow_dispatch'
-      || github.event_name == 'pull_request' }}
+    if: ${{ github.event_name == 'push' || github.event_name == 'workflow_dispatch' || (github.event_name == 'pull_request' && !contains(github.actor, 'dependabot')) }}
     timeout-minutes: 60
     runs-on: ubuntu-latest
 
