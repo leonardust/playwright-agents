@@ -40,6 +40,7 @@ jobs:
               });
 
               let prettyLog = [];
+              let anyFailed = false;
               const checkStatuses = requiredChecks.map(name => {
                 const check = checksData.check_runs.find(c => c.name === name);
                 let result;
@@ -48,6 +49,7 @@ jobs:
                     result = '✅ SUCCESS';
                   } else if (check.conclusion === 'failure') {
                     result = '❌ FAILED';
+                    anyFailed = true;
                   } else {
                     result = `⏳ ${check.conclusion ? check.conclusion.toUpperCase() : 'PENDING'}`;
                   }
@@ -63,6 +65,10 @@ jobs:
                 console.log(`- ${entry.name}: ${entry.result}`);
               });
               console.log('================================');
+
+              if (anyFailed) {
+                throw new Error('At least one required check has failed. Auto-merge stopped.');
+              }
 
               const allChecksPassed = checkStatuses.every(Boolean);
               if (
