@@ -1,0 +1,36 @@
+# Workflow to run tests for Dependabot PRs with access to secrets.
+# SECURITY: This uses pull_request_target to allow access to repository secrets for Dependabot PRs.
+# Only enable if you accept the security implications (PR code will be checked out while secrets are available).
+# Triggers on pull_request_target for opened/synchronize/reopened events and only runs when actor contains "dependabot".
+
+name: Dependabot CI with secrets
+
+on:
+  pull_request_target:
+    types: [opened, synchronize, reopened]
+
+jobs:
+  dependabot-tests:
+    if: contains(github.actor, 'dependabot')
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout PR head
+        uses: actions/checkout@v4
+        with:
+          # Checkout the PR head commit so tests run against the proposed changes
+          ref: ${{ github.event.pull_request.head.sha }}
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run tests
+        env:
+          OLLAMA_API_KEY: ${{ secrets.OLLAMA_API_KEY }}
+          OLLAMA_BASE_URL: ${{ secrets.OLLAMA_BASE_URL }}
+        run: npm test
