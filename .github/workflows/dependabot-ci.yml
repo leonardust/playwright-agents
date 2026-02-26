@@ -6,16 +6,14 @@
 name: Dependabot CI with secrets
 
 permissions:
-  contents: write # needed for deploy step to push pages artifact
-  pages: write # allow publishing to GitHub Pages
+  contents: read
 
 on:
   pull_request_target:
     types: [opened, synchronize, reopened]
 
 jobs:
-  dependabot-ci:
-    # single job handles both testing and deploy; only run on Dependabot PRs
+  dependabot-tests:
     if: contains(github.actor, 'dependabot')
     runs-on: ubuntu-latest
     steps:
@@ -65,7 +63,7 @@ jobs:
 
       - name: Upload test artifacts for debugging
         uses: actions/upload-artifact@v6
-        if: ${{ steps.tests.outcome == 'failure' }}
+        if: steps.tests.outcome == 'success' || steps.tests.outcome == 'failure'
         with:
           name: dependabot-playwright-report-${{ github.run_number }}
           path: |
@@ -74,9 +72,19 @@ jobs:
             logs/
           retention-days: 7
 
+  deploy:
+    needs: dependabot-tests
+    runs-on: ubuntu-latest
+    # only run on dependabot PRs when tests failed (avoid noise on green runs/skips)
+    if: ${{ needs.dependabot-tests.result == 'failure' }}
+    concurrency:
+      group: gh-pages-deploy-dependabot
+      cancel-in-progress: false
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
       - name: Deploy to GitHub Pages
-        # deploy only if tests actually failed
-        if: ${{ steps.tests.outcome == 'failure' }}
         uses: ./.github/actions/deploy-to-pages
         with:
           artifact-name: dependabot-playwright-report-${{ github.run_number }}
