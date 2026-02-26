@@ -14,7 +14,8 @@ on:
     types: [opened, synchronize, reopened]
 
 jobs:
-  dependabot-tests:
+  dependabot-ci:
+    # single job handles both testing and deploy; only run on Dependabot PRs
     if: contains(github.actor, 'dependabot')
     runs-on: ubuntu-latest
     steps:
@@ -64,7 +65,7 @@ jobs:
 
       - name: Upload test artifacts for debugging
         uses: actions/upload-artifact@v6
-        if: always()
+        if: ${{ steps.tests.outcome == 'failure' }}
         with:
           name: dependabot-playwright-report-${{ github.run_number }}
           path: |
@@ -73,20 +74,9 @@ jobs:
             logs/
           retention-days: 7
 
-  deploy:
-    needs: dependabot-tests
-    runs-on: ubuntu-latest
-    # only run on dependabot PRs when tests failed (avoid noise on green runs)
-    # simpler: actor must contain dependabot and previous job must not succeed
-    if: ${{ contains(github.actor, 'dependabot') && needs.dependabot-tests.result != 'success'}}
-    concurrency:
-      group: gh-pages-deploy-dependabot
-      cancel-in-progress: false
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
       - name: Deploy to GitHub Pages
+        # deploy only if tests actually failed
+        if: ${{ steps.tests.outcome == 'failure' }}
         uses: ./.github/actions/deploy-to-pages
         with:
           artifact-name: dependabot-playwright-report-${{ github.run_number }}
