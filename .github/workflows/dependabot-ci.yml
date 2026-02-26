@@ -5,9 +5,6 @@
 
 name: Dependabot CI with secrets
 
-permissions:
-  contents: read
-
 on:
   pull_request_target:
     types: [opened, synchronize, reopened]
@@ -16,6 +13,8 @@ jobs:
   dependabot-tests:
     if: contains(github.actor, 'dependabot')
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     steps:
       - name: Checkout PR head
         uses: actions/checkout@v4
@@ -75,6 +74,8 @@ jobs:
   deploy:
     needs: dependabot-tests
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     # only run on dependabot PRs when tests failed (avoid noise on green runs/skips)
     if: always() && needs.dependabot-tests.result == 'failure'
     concurrency:
