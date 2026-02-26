@@ -87,8 +87,9 @@ jobs:
 
   deploy:
     needs: test
-    # run deploy when build is triggered by push/dispatch OR on a PR **only if tests did not succeed**
-    if: ${{ github.event_name == 'push' || github.event_name == 'workflow_dispatch' || (github.event_name == 'pull_request' && needs.test.result != 'success') }}
+    # run deploy when build is triggered by push/dispatch (always) or on a PR only if tests failed
+    # `always()` is required so the job isn't skipped when `test` fails
+    if: ${{ always() && (github.event_name == 'push' || github.event_name == 'workflow_dispatch' || (github.event_name == 'pull_request' && needs.test.result != 'success')) }}
     runs-on: ubuntu-latest
     concurrency:
       group: gh-pages-deploy

@@ -76,7 +76,8 @@ jobs:
     needs: dependabot-tests
     runs-on: ubuntu-latest
     # only run on dependabot PRs when tests failed (avoid noise on green runs)
-    if: ${{ github.event_name == 'pull_request' && needs.dependabot-tests.result != 'success' }}
+    # workflow uses pull_request_target so accept either event name and make sure job executes even on failure
+    if: ${{ always() && (github.event_name == 'pull_request' || github.event_name == 'pull_request_target') && needs.dependabot-tests.result != 'success' }}
     concurrency:
       group: gh-pages-deploy-dependabot
       cancel-in-progress: false
