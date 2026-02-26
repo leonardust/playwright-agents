@@ -5,6 +5,9 @@
 
 name: Dependabot CI with secrets
 
+permissions:
+  contents: read
+
 on:
   pull_request_target:
     types: [opened, synchronize, reopened]
@@ -72,6 +75,8 @@ jobs:
   deploy:
     needs: dependabot-tests
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     # only run on dependabot PRs (workflow is already limited) and avoid spamming by use if
     if: always()
     concurrency:
