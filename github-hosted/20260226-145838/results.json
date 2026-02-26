@@ -1,0 +1,695 @@
+{
+  "config": {
+    "configFile": "/home/runner/work/playwright-agents/playwright-agents/playwright.config.ts",
+    "rootDir": "/home/runner/work/playwright-agents/playwright-agents/.features-gen",
+    "forbidOnly": true,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "ci": {
+        "commitHref": "https://github.com/leonardust/playwright-agents/commit/5f5cfe3dff8ccb0ad43714095403db8c7da11a9e",
+        "commitHash": "5f5cfe3dff8ccb0ad43714095403db8c7da11a9e",
+        "buildHref": "https://github.com/leonardust/playwright-agents/actions/runs/22447297007"
+      },
+      "gitCommit": {
+        "shortHash": "5f5cfe3",
+        "hash": "5f5cfe3dff8ccb0ad43714095403db8c7da11a9e",
+        "subject": "fix: eslint",
+        "body": "fix: eslint\n",
+        "author": {
+          "name": "Łukasz Komorowski",
+          "email": "luk.komorowski@gmail.com",
+          "time": 1772117471000
+        },
+        "committer": {
+          "name": "Łukasz Komorowski",
+          "email": "luk.komorowski@gmail.com",
+          "time": 1772117471000
+        },
+        "branch": "main"
+      },
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/home/runner/work/playwright-agents/playwright-agents/test-results",
+        "repeatEach": 1,
+        "retries": 2,
+        "metadata": {
+          "ci": {
+            "commitHref": "https://github.com/leonardust/playwright-agents/commit/5f5cfe3dff8ccb0ad43714095403db8c7da11a9e",
+            "commitHash": "5f5cfe3dff8ccb0ad43714095403db8c7da11a9e",
+            "buildHref": "https://github.com/leonardust/playwright-agents/actions/runs/22447297007"
+          },
+          "gitCommit": {
+            "shortHash": "5f5cfe3",
+            "hash": "5f5cfe3dff8ccb0ad43714095403db8c7da11a9e",
+            "subject": "fix: eslint",
+            "body": "fix: eslint\n",
+            "author": {
+              "name": "Łukasz Komorowski",
+              "email": "luk.komorowski@gmail.com",
+              "time": 1772117471000
+            },
+            "committer": {
+              "name": "Łukasz Komorowski",
+              "email": "luk.komorowski@gmail.com",
+              "time": 1772117471000
+            },
+            "branch": "main"
+          },
+          "actualWorkers": 1
+        },
+        "id": "chromium",
+        "name": "chromium",
+        "testDir": "/home/runner/work/playwright-agents/playwright-agents/.features-gen",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 90000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "html",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "playwright-report/results.json"
+        }
+      ],
+      [
+        "github",
+        null
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "runAgents": "none",
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.58.2",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "features/shopping.feature.spec.js",
+      "file": "features/shopping.feature.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Shopping Cart",
+          "file": "features/shopping.feature.spec.js",
+          "line": 4,
+          "column": 6,
+          "specs": [
+            {
+              "title": "Add product to cart",
+              "ok": false,
+              "tags": [
+                "smoke",
+                "critical"
+              ],
+              "tests": [
+                {
+                  "timeout": 90000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "failed",
+                      "duration": 64999,
+                      "error": {
+                        "message": "TimeoutError: locator.fill: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('input[data-test=\"username-field\"]')\u001b[22m\n",
+                        "stack": "TimeoutError: locator.fill: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('input[data-test=\"username-field\"]')\u001b[22m\n\n    at AIHelper.fill (/home/runner/work/playwright-agents/playwright-agents/utils/ai-helper.ts:297:21)\n    at Object.<anonymous> (/home/runner/work/playwright-agents/playwright-agents/steps/shopping.steps.ts:14:3)\n    at /home/runner/work/playwright-agents/playwright-agents/.features-gen/features/shopping.feature.spec.js:7:5",
+                        "location": {
+                          "file": "/home/runner/work/playwright-agents/playwright-agents/utils/ai-helper.ts",
+                          "column": 21,
+                          "line": 297
+                        },
+                        "snippet": "   at ../utils/ai-helper.ts:297\n\n\u001b[0m \u001b[90m 295 |\u001b[39m       }\n \u001b[90m 296 |\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 297 |\u001b[39m       \u001b[36mawait\u001b[39m locator\u001b[33m.\u001b[39mfill(value\u001b[33m,\u001b[39m { timeout\u001b[33m:\u001b[39m \u001b[35m30000\u001b[39m })\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                     \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 298 |\u001b[39m       \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mlogPrompt(\u001b[32m'Fill successful'\u001b[39m\u001b[33m,\u001b[39m { selector\u001b[33m,\u001b[39m value })\u001b[33m;\u001b[39m\n \u001b[90m 299 |\u001b[39m     } \u001b[36mcatch\u001b[39m (error) {\n \u001b[90m 300 |\u001b[39m       \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mlogPrompt(\u001b[32m'Fill failed'\u001b[39m\u001b[33m,\u001b[39m { description\u001b[33m,\u001b[39m value\u001b[33m,\u001b[39m error\u001b[33m:\u001b[39m \u001b[33mString\u001b[39m(error) })\u001b[33m;\u001b[39m\u001b[0m"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/home/runner/work/playwright-agents/playwright-agents/utils/ai-helper.ts",
+                            "column": 21,
+                            "line": 297
+                          },
+                          "message": "TimeoutError: locator.fill: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('input[data-test=\"username-field\"]')\u001b[22m\n\n\n   at ../utils/ai-helper.ts:297\n\n  295 |       }\n  296 |\n> 297 |       await locator.fill(value, { timeout: 30000 });\n      |                     ^\n  298 |       this.logPrompt('Fill successful', { selector, value });\n  299 |     } catch (error) {\n  300 |       this.logPrompt('Fill failed', { description, value, error: String(error) });\n    at AIHelper.fill (/home/runner/work/playwright-agents/playwright-agents/utils/ai-helper.ts:297:21)\n    at Object.<anonymous> (/home/runner/work/playwright-agents/playwright-agents/steps/shopping.steps.ts:14:3)\n    at /home/runner/work/playwright-agents/playwright-agents/.features-gen/features/shopping.feature.spec.js:7:5"
+                        }
+                      ],
+                      "stdout": [
+                        {
+                          "text": "📝 AI Log: AI Fill: username field = standard_user\n"
+                        },
+                        {
+                          "text": "📝 AI Log: AI Response (fill)\n"
+                        },
+                        {
+                          "text": "📝 AI Log: AI Response\n"
+                        },
+                        {
+                          "text": "📝 AI Log: Element check failed, trying direct fill\n"
+                        },
+                        {
+                          "text": "📝 AI Log: Fill failed\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "steps": [
+                        {
+                          "title": "Given I am logged in as \"standard_user\"",
+                          "duration": 60358,
+                          "error": {
+                            "message": "TimeoutError: locator.fill: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('input[data-test=\"username-field\"]')\u001b[22m\n",
+                            "stack": "TimeoutError: locator.fill: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('input[data-test=\"username-field\"]')\u001b[22m\n\n    at AIHelper.fill (/home/runner/work/playwright-agents/playwright-agents/utils/ai-helper.ts:297:21)\n    at Object.<anonymous> (/home/runner/work/playwright-agents/playwright-agents/steps/shopping.steps.ts:14:3)\n    at /home/runner/work/playwright-agents/playwright-agents/.features-gen/features/shopping.feature.spec.js:7:5",
+                            "location": {
+                              "file": "/home/runner/work/playwright-agents/playwright-agents/utils/ai-helper.ts",
+                              "column": 21,
+                              "line": 297
+                            },
+                            "snippet": "   at ../utils/ai-helper.ts:297\n\n\u001b[0m \u001b[90m 295 |\u001b[39m       }\n \u001b[90m 296 |\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 297 |\u001b[39m       \u001b[36mawait\u001b[39m locator\u001b[33m.\u001b[39mfill(value\u001b[33m,\u001b[39m { timeout\u001b[33m:\u001b[39m \u001b[35m30000\u001b[39m })\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                     \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 298 |\u001b[39m       \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mlogPrompt(\u001b[32m'Fill successful'\u001b[39m\u001b[33m,\u001b[39m { selector\u001b[33m,\u001b[39m value })\u001b[33m;\u001b[39m\n \u001b[90m 299 |\u001b[39m     } \u001b[36mcatch\u001b[39m (error) {\n \u001b[90m 300 |\u001b[39m       \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mlogPrompt(\u001b[32m'Fill failed'\u001b[39m\u001b[33m,\u001b[39m { description\u001b[33m,\u001b[39m value\u001b[33m,\u001b[39m error\u001b[33m:\u001b[39m \u001b[33mString\u001b[39m(error) })\u001b[33m;\u001b[39m\u001b[0m"
+                          }
+                        }
+                      ],
+                      "startTime": "2026-02-26T14:51:45.917Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/home/runner/work/playwright-agents/playwright-agents/test-results/features-shopping.feature-Shopping-Cart-Add-product-to-cart-chromium/test-failed-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "/home/runner/work/playwright-agents/playwright-agents/test-results/features-shopping.feature-Shopping-Cart-Add-product-to-cart-chromium/video.webm"
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/home/runner/work/playwright-agents/playwright-agents/test-results/features-shopping.feature-Shopping-Cart-Add-product-to-cart-chromium/trace.zip"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/home/runner/work/playwright-agents/playwright-agents/utils/ai-helper.ts",
+                        "column": 21,
+                        "line": 297
+                      }
+                    },
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "failed",
+                      "duration": 64579,
+                      "error": {
+                        "message": "TimeoutError: locator.fill: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('input[data-test=\"username-field\"]')\u001b[22m\n",
+                        "stack": "TimeoutError: locator.fill: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('input[data-test=\"username-field\"]')\u001b[22m\n\n    at AIHelper.fill (/home/runner/work/playwright-agents/playwright-agents/utils/ai-helper.ts:297:21)\n    at Object.<anonymous> (/home/runner/work/playwright-agents/playwright-agents/steps/shopping.steps.ts:14:3)\n    at /home/runner/work/playwright-agents/playwright-agents/.features-gen/features/shopping.feature.spec.js:7:5",
+                        "location": {
+                          "file": "/home/runner/work/playwright-agents/playwright-agents/utils/ai-helper.ts",
+                          "column": 21,
+                          "line": 297
+                        },
+                        "snippet": "   at ../utils/ai-helper.ts:297\n\n\u001b[0m \u001b[90m 295 |\u001b[39m       }\n \u001b[90m 296 |\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 297 |\u001b[39m       \u001b[36mawait\u001b[39m locator\u001b[33m.\u001b[39mfill(value\u001b[33m,\u001b[39m { timeout\u001b[33m:\u001b[39m \u001b[35m30000\u001b[39m })\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                     \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 298 |\u001b[39m       \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mlogPrompt(\u001b[32m'Fill successful'\u001b[39m\u001b[33m,\u001b[39m { selector\u001b[33m,\u001b[39m value })\u001b[33m;\u001b[39m\n \u001b[90m 299 |\u001b[39m     } \u001b[36mcatch\u001b[39m (error) {\n \u001b[90m 300 |\u001b[39m       \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mlogPrompt(\u001b[32m'Fill failed'\u001b[39m\u001b[33m,\u001b[39m { description\u001b[33m,\u001b[39m value\u001b[33m,\u001b[39m error\u001b[33m:\u001b[39m \u001b[33mString\u001b[39m(error) })\u001b[33m;\u001b[39m\u001b[0m"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/home/runner/work/playwright-agents/playwright-agents/utils/ai-helper.ts",
+                            "column": 21,
+                            "line": 297
+                          },
+                          "message": "TimeoutError: locator.fill: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('input[data-test=\"username-field\"]')\u001b[22m\n\n\n   at ../utils/ai-helper.ts:297\n\n  295 |       }\n  296 |\n> 297 |       await locator.fill(value, { timeout: 30000 });\n      |                     ^\n  298 |       this.logPrompt('Fill successful', { selector, value });\n  299 |     } catch (error) {\n  300 |       this.logPrompt('Fill failed', { description, value, error: String(error) });\n    at AIHelper.fill (/home/runner/work/playwright-agents/playwright-agents/utils/ai-helper.ts:297:21)\n    at Object.<anonymous> (/home/runner/work/playwright-agents/playwright-agents/steps/shopping.steps.ts:14:3)\n    at /home/runner/work/playwright-agents/playwright-agents/.features-gen/features/shopping.feature.spec.js:7:5"
+                        }
+                      ],
+                      "stdout": [
+                        {
+                          "text": "📝 AI Log: AI Fill: username field = standard_user\n"
+                        },
+                        {
+                          "text": "📝 AI Log: AI Response (fill)\n"
+                        },
+                        {
+                          "text": "📝 AI Log: AI Response\n"
+                        },
+                        {
+                          "text": "📝 AI Log: Element check failed, trying direct fill\n"
+                        },
+                        {
+                          "text": "📝 AI Log: Fill failed\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 1,
+                      "steps": [
+                        {
+                          "title": "Given I am logged in as \"standard_user\"",
+                          "duration": 60314,
+                          "error": {
+                            "message": "TimeoutError: locator.fill: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('input[data-test=\"username-field\"]')\u001b[22m\n",
+                            "stack": "TimeoutError: locator.fill: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('input[data-test=\"username-field\"]')\u001b[22m\n\n    at AIHelper.fill (/home/runner/work/playwright-agents/playwright-agents/utils/ai-helper.ts:297:21)\n    at Object.<anonymous> (/home/runner/work/playwright-agents/playwright-agents/steps/shopping.steps.ts:14:3)\n    at /home/runner/work/playwright-agents/playwright-agents/.features-gen/features/shopping.feature.spec.js:7:5",
+                            "location": {
+                              "file": "/home/runner/work/playwright-agents/playwright-agents/utils/ai-helper.ts",
+                              "column": 21,
+                              "line": 297
+                            },
+                            "snippet": "   at ../utils/ai-helper.ts:297\n\n\u001b[0m \u001b[90m 295 |\u001b[39m       }\n \u001b[90m 296 |\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 297 |\u001b[39m       \u001b[36mawait\u001b[39m locator\u001b[33m.\u001b[39mfill(value\u001b[33m,\u001b[39m { timeout\u001b[33m:\u001b[39m \u001b[35m30000\u001b[39m })\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                     \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 298 |\u001b[39m       \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mlogPrompt(\u001b[32m'Fill successful'\u001b[39m\u001b[33m,\u001b[39m { selector\u001b[33m,\u001b[39m value })\u001b[33m;\u001b[39m\n \u001b[90m 299 |\u001b[39m     } \u001b[36mcatch\u001b[39m (error) {\n \u001b[90m 300 |\u001b[39m       \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mlogPrompt(\u001b[32m'Fill failed'\u001b[39m\u001b[33m,\u001b[39m { description\u001b[33m,\u001b[39m value\u001b[33m,\u001b[39m error\u001b[33m:\u001b[39m \u001b[33mString\u001b[39m(error) })\u001b[33m;\u001b[39m\u001b[0m"
+                          }
+                        }
+                      ],
+                      "startTime": "2026-02-26T14:52:52.880Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/home/runner/work/playwright-agents/playwright-agents/test-results/features-shopping.feature-Shopping-Cart-Add-product-to-cart-chromium-retry1/test-failed-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "/home/runner/work/playwright-agents/playwright-agents/test-results/features-shopping.feature-Shopping-Cart-Add-product-to-cart-chromium-retry1/video.webm"
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/home/runner/work/playwright-agents/playwright-agents/test-results/features-shopping.feature-Shopping-Cart-Add-product-to-cart-chromium-retry1/trace.zip"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/home/runner/work/playwright-agents/playwright-agents/utils/ai-helper.ts",
+                        "column": 21,
+                        "line": 297
+                      }
+                    },
+                    {
+                      "workerIndex": 2,
+                      "parallelIndex": 0,
+                      "status": "failed",
+                      "duration": 64716,
+                      "error": {
+                        "message": "TimeoutError: locator.fill: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('input[data-test=\"username-field\"]')\u001b[22m\n",
+                        "stack": "TimeoutError: locator.fill: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('input[data-test=\"username-field\"]')\u001b[22m\n\n    at AIHelper.fill (/home/runner/work/playwright-agents/playwright-agents/utils/ai-helper.ts:297:21)\n    at Object.<anonymous> (/home/runner/work/playwright-agents/playwright-agents/steps/shopping.steps.ts:14:3)\n    at /home/runner/work/playwright-agents/playwright-agents/.features-gen/features/shopping.feature.spec.js:7:5",
+                        "location": {
+                          "file": "/home/runner/work/playwright-agents/playwright-agents/utils/ai-helper.ts",
+                          "column": 21,
+                          "line": 297
+                        },
+                        "snippet": "   at ../utils/ai-helper.ts:297\n\n\u001b[0m \u001b[90m 295 |\u001b[39m       }\n \u001b[90m 296 |\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 297 |\u001b[39m       \u001b[36mawait\u001b[39m locator\u001b[33m.\u001b[39mfill(value\u001b[33m,\u001b[39m { timeout\u001b[33m:\u001b[39m \u001b[35m30000\u001b[39m })\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                     \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 298 |\u001b[39m       \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mlogPrompt(\u001b[32m'Fill successful'\u001b[39m\u001b[33m,\u001b[39m { selector\u001b[33m,\u001b[39m value })\u001b[33m;\u001b[39m\n \u001b[90m 299 |\u001b[39m     } \u001b[36mcatch\u001b[39m (error) {\n \u001b[90m 300 |\u001b[39m       \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mlogPrompt(\u001b[32m'Fill failed'\u001b[39m\u001b[33m,\u001b[39m { description\u001b[33m,\u001b[39m value\u001b[33m,\u001b[39m error\u001b[33m:\u001b[39m \u001b[33mString\u001b[39m(error) })\u001b[33m;\u001b[39m\u001b[0m"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/home/runner/work/playwright-agents/playwright-agents/utils/ai-helper.ts",
+                            "column": 21,
+                            "line": 297
+                          },
+                          "message": "TimeoutError: locator.fill: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('input[data-test=\"username-field\"]')\u001b[22m\n\n\n   at ../utils/ai-helper.ts:297\n\n  295 |       }\n  296 |\n> 297 |       await locator.fill(value, { timeout: 30000 });\n      |                     ^\n  298 |       this.logPrompt('Fill successful', { selector, value });\n  299 |     } catch (error) {\n  300 |       this.logPrompt('Fill failed', { description, value, error: String(error) });\n    at AIHelper.fill (/home/runner/work/playwright-agents/playwright-agents/utils/ai-helper.ts:297:21)\n    at Object.<anonymous> (/home/runner/work/playwright-agents/playwright-agents/steps/shopping.steps.ts:14:3)\n    at /home/runner/work/playwright-agents/playwright-agents/.features-gen/features/shopping.feature.spec.js:7:5"
+                        }
+                      ],
+                      "stdout": [
+                        {
+                          "text": "📝 AI Log: AI Fill: username field = standard_user\n"
+                        },
+                        {
+                          "text": "📝 AI Log: AI Response (fill)\n"
+                        },
+                        {
+                          "text": "📝 AI Log: AI Response\n"
+                        },
+                        {
+                          "text": "📝 AI Log: Element check failed, trying direct fill\n"
+                        },
+                        {
+                          "text": "📝 AI Log: Fill failed\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 2,
+                      "steps": [
+                        {
+                          "title": "Given I am logged in as \"standard_user\"",
+                          "duration": 60343,
+                          "error": {
+                            "message": "TimeoutError: locator.fill: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('input[data-test=\"username-field\"]')\u001b[22m\n",
+                            "stack": "TimeoutError: locator.fill: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('input[data-test=\"username-field\"]')\u001b[22m\n\n    at AIHelper.fill (/home/runner/work/playwright-agents/playwright-agents/utils/ai-helper.ts:297:21)\n    at Object.<anonymous> (/home/runner/work/playwright-agents/playwright-agents/steps/shopping.steps.ts:14:3)\n    at /home/runner/work/playwright-agents/playwright-agents/.features-gen/features/shopping.feature.spec.js:7:5",
+                            "location": {
+                              "file": "/home/runner/work/playwright-agents/playwright-agents/utils/ai-helper.ts",
+                              "column": 21,
+                              "line": 297
+                            },
+                            "snippet": "   at ../utils/ai-helper.ts:297\n\n\u001b[0m \u001b[90m 295 |\u001b[39m       }\n \u001b[90m 296 |\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 297 |\u001b[39m       \u001b[36mawait\u001b[39m locator\u001b[33m.\u001b[39mfill(value\u001b[33m,\u001b[39m { timeout\u001b[33m:\u001b[39m \u001b[35m30000\u001b[39m })\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                     \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 298 |\u001b[39m       \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mlogPrompt(\u001b[32m'Fill successful'\u001b[39m\u001b[33m,\u001b[39m { selector\u001b[33m,\u001b[39m value })\u001b[33m;\u001b[39m\n \u001b[90m 299 |\u001b[39m     } \u001b[36mcatch\u001b[39m (error) {\n \u001b[90m 300 |\u001b[39m       \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mlogPrompt(\u001b[32m'Fill failed'\u001b[39m\u001b[33m,\u001b[39m { description\u001b[33m,\u001b[39m value\u001b[33m,\u001b[39m error\u001b[33m:\u001b[39m \u001b[33mString\u001b[39m(error) })\u001b[33m;\u001b[39m\u001b[0m"
+                          }
+                        }
+                      ],
+                      "startTime": "2026-02-26T14:53:59.289Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/home/runner/work/playwright-agents/playwright-agents/test-results/features-shopping.feature-Shopping-Cart-Add-product-to-cart-chromium-retry2/test-failed-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "/home/runner/work/playwright-agents/playwright-agents/test-results/features-shopping.feature-Shopping-Cart-Add-product-to-cart-chromium-retry2/video.webm"
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/home/runner/work/playwright-agents/playwright-agents/test-results/features-shopping.feature-Shopping-Cart-Add-product-to-cart-chromium-retry2/trace.zip"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/home/runner/work/playwright-agents/playwright-agents/utils/ai-helper.ts",
+                        "column": 21,
+                        "line": 297
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "c14a68548b5beb0557e1-6b735f2a547f903121fe",
+              "file": "features/shopping.feature.spec.js",
+              "line": 6,
+              "column": 3
+            },
+            {
+              "title": "Sort products using dropdown",
+              "ok": false,
+              "tags": [
+                "smoke",
+                "dropdown"
+              ],
+              "tests": [
+                {
+                  "timeout": 90000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 3,
+                      "parallelIndex": 0,
+                      "status": "failed",
+                      "duration": 64655,
+                      "error": {
+                        "message": "TimeoutError: locator.fill: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('input[data-test=\"username-field\"]')\u001b[22m\n",
+                        "stack": "TimeoutError: locator.fill: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('input[data-test=\"username-field\"]')\u001b[22m\n\n    at AIHelper.fill (/home/runner/work/playwright-agents/playwright-agents/utils/ai-helper.ts:297:21)\n    at Object.<anonymous> (/home/runner/work/playwright-agents/playwright-agents/steps/shopping.steps.ts:14:3)\n    at /home/runner/work/playwright-agents/playwright-agents/.features-gen/features/shopping.feature.spec.js:14:5",
+                        "location": {
+                          "file": "/home/runner/work/playwright-agents/playwright-agents/utils/ai-helper.ts",
+                          "column": 21,
+                          "line": 297
+                        },
+                        "snippet": "   at ../utils/ai-helper.ts:297\n\n\u001b[0m \u001b[90m 295 |\u001b[39m       }\n \u001b[90m 296 |\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 297 |\u001b[39m       \u001b[36mawait\u001b[39m locator\u001b[33m.\u001b[39mfill(value\u001b[33m,\u001b[39m { timeout\u001b[33m:\u001b[39m \u001b[35m30000\u001b[39m })\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                     \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 298 |\u001b[39m       \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mlogPrompt(\u001b[32m'Fill successful'\u001b[39m\u001b[33m,\u001b[39m { selector\u001b[33m,\u001b[39m value })\u001b[33m;\u001b[39m\n \u001b[90m 299 |\u001b[39m     } \u001b[36mcatch\u001b[39m (error) {\n \u001b[90m 300 |\u001b[39m       \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mlogPrompt(\u001b[32m'Fill failed'\u001b[39m\u001b[33m,\u001b[39m { description\u001b[33m,\u001b[39m value\u001b[33m,\u001b[39m error\u001b[33m:\u001b[39m \u001b[33mString\u001b[39m(error) })\u001b[33m;\u001b[39m\u001b[0m"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/home/runner/work/playwright-agents/playwright-agents/utils/ai-helper.ts",
+                            "column": 21,
+                            "line": 297
+                          },
+                          "message": "TimeoutError: locator.fill: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('input[data-test=\"username-field\"]')\u001b[22m\n\n\n   at ../utils/ai-helper.ts:297\n\n  295 |       }\n  296 |\n> 297 |       await locator.fill(value, { timeout: 30000 });\n      |                     ^\n  298 |       this.logPrompt('Fill successful', { selector, value });\n  299 |     } catch (error) {\n  300 |       this.logPrompt('Fill failed', { description, value, error: String(error) });\n    at AIHelper.fill (/home/runner/work/playwright-agents/playwright-agents/utils/ai-helper.ts:297:21)\n    at Object.<anonymous> (/home/runner/work/playwright-agents/playwright-agents/steps/shopping.steps.ts:14:3)\n    at /home/runner/work/playwright-agents/playwright-agents/.features-gen/features/shopping.feature.spec.js:14:5"
+                        }
+                      ],
+                      "stdout": [
+                        {
+                          "text": "📝 AI Log: AI Fill: username field = standard_user\n"
+                        },
+                        {
+                          "text": "📝 AI Log: AI Response (fill)\n"
+                        },
+                        {
+                          "text": "📝 AI Log: AI Response\n"
+                        },
+                        {
+                          "text": "📝 AI Log: Element check failed, trying direct fill\n"
+                        },
+                        {
+                          "text": "📝 AI Log: Fill failed\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "steps": [
+                        {
+                          "title": "Given I am logged in as \"standard_user\"",
+                          "duration": 60327,
+                          "error": {
+                            "message": "TimeoutError: locator.fill: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('input[data-test=\"username-field\"]')\u001b[22m\n",
+                            "stack": "TimeoutError: locator.fill: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('input[data-test=\"username-field\"]')\u001b[22m\n\n    at AIHelper.fill (/home/runner/work/playwright-agents/playwright-agents/utils/ai-helper.ts:297:21)\n    at Object.<anonymous> (/home/runner/work/playwright-agents/playwright-agents/steps/shopping.steps.ts:14:3)\n    at /home/runner/work/playwright-agents/playwright-agents/.features-gen/features/shopping.feature.spec.js:14:5",
+                            "location": {
+                              "file": "/home/runner/work/playwright-agents/playwright-agents/utils/ai-helper.ts",
+                              "column": 21,
+                              "line": 297
+                            },
+                            "snippet": "   at ../utils/ai-helper.ts:297\n\n\u001b[0m \u001b[90m 295 |\u001b[39m       }\n \u001b[90m 296 |\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 297 |\u001b[39m       \u001b[36mawait\u001b[39m locator\u001b[33m.\u001b[39mfill(value\u001b[33m,\u001b[39m { timeout\u001b[33m:\u001b[39m \u001b[35m30000\u001b[39m })\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                     \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 298 |\u001b[39m       \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mlogPrompt(\u001b[32m'Fill successful'\u001b[39m\u001b[33m,\u001b[39m { selector\u001b[33m,\u001b[39m value })\u001b[33m;\u001b[39m\n \u001b[90m 299 |\u001b[39m     } \u001b[36mcatch\u001b[39m (error) {\n \u001b[90m 300 |\u001b[39m       \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mlogPrompt(\u001b[32m'Fill failed'\u001b[39m\u001b[33m,\u001b[39m { description\u001b[33m,\u001b[39m value\u001b[33m,\u001b[39m error\u001b[33m:\u001b[39m \u001b[33mString\u001b[39m(error) })\u001b[33m;\u001b[39m\u001b[0m"
+                          }
+                        }
+                      ],
+                      "startTime": "2026-02-26T14:55:05.818Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/home/runner/work/playwright-agents/playwright-agents/test-results/features-shopping.feature--19c71-ort-products-using-dropdown-chromium/test-failed-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "/home/runner/work/playwright-agents/playwright-agents/test-results/features-shopping.feature--19c71-ort-products-using-dropdown-chromium/video.webm"
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/home/runner/work/playwright-agents/playwright-agents/test-results/features-shopping.feature--19c71-ort-products-using-dropdown-chromium/trace.zip"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/home/runner/work/playwright-agents/playwright-agents/utils/ai-helper.ts",
+                        "column": 21,
+                        "line": 297
+                      }
+                    },
+                    {
+                      "workerIndex": 4,
+                      "parallelIndex": 0,
+                      "status": "failed",
+                      "duration": 64832,
+                      "error": {
+                        "message": "TimeoutError: locator.fill: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('input[data-test=\"username-field\"]')\u001b[22m\n",
+                        "stack": "TimeoutError: locator.fill: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('input[data-test=\"username-field\"]')\u001b[22m\n\n    at AIHelper.fill (/home/runner/work/playwright-agents/playwright-agents/utils/ai-helper.ts:297:21)\n    at Object.<anonymous> (/home/runner/work/playwright-agents/playwright-agents/steps/shopping.steps.ts:14:3)\n    at /home/runner/work/playwright-agents/playwright-agents/.features-gen/features/shopping.feature.spec.js:14:5",
+                        "location": {
+                          "file": "/home/runner/work/playwright-agents/playwright-agents/utils/ai-helper.ts",
+                          "column": 21,
+                          "line": 297
+                        },
+                        "snippet": "   at ../utils/ai-helper.ts:297\n\n\u001b[0m \u001b[90m 295 |\u001b[39m       }\n \u001b[90m 296 |\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 297 |\u001b[39m       \u001b[36mawait\u001b[39m locator\u001b[33m.\u001b[39mfill(value\u001b[33m,\u001b[39m { timeout\u001b[33m:\u001b[39m \u001b[35m30000\u001b[39m })\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                     \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 298 |\u001b[39m       \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mlogPrompt(\u001b[32m'Fill successful'\u001b[39m\u001b[33m,\u001b[39m { selector\u001b[33m,\u001b[39m value })\u001b[33m;\u001b[39m\n \u001b[90m 299 |\u001b[39m     } \u001b[36mcatch\u001b[39m (error) {\n \u001b[90m 300 |\u001b[39m       \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mlogPrompt(\u001b[32m'Fill failed'\u001b[39m\u001b[33m,\u001b[39m { description\u001b[33m,\u001b[39m value\u001b[33m,\u001b[39m error\u001b[33m:\u001b[39m \u001b[33mString\u001b[39m(error) })\u001b[33m;\u001b[39m\u001b[0m"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/home/runner/work/playwright-agents/playwright-agents/utils/ai-helper.ts",
+                            "column": 21,
+                            "line": 297
+                          },
+                          "message": "TimeoutError: locator.fill: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('input[data-test=\"username-field\"]')\u001b[22m\n\n\n   at ../utils/ai-helper.ts:297\n\n  295 |       }\n  296 |\n> 297 |       await locator.fill(value, { timeout: 30000 });\n      |                     ^\n  298 |       this.logPrompt('Fill successful', { selector, value });\n  299 |     } catch (error) {\n  300 |       this.logPrompt('Fill failed', { description, value, error: String(error) });\n    at AIHelper.fill (/home/runner/work/playwright-agents/playwright-agents/utils/ai-helper.ts:297:21)\n    at Object.<anonymous> (/home/runner/work/playwright-agents/playwright-agents/steps/shopping.steps.ts:14:3)\n    at /home/runner/work/playwright-agents/playwright-agents/.features-gen/features/shopping.feature.spec.js:14:5"
+                        }
+                      ],
+                      "stdout": [
+                        {
+                          "text": "📝 AI Log: AI Fill: username field = standard_user\n"
+                        },
+                        {
+                          "text": "📝 AI Log: AI Response (fill)\n"
+                        },
+                        {
+                          "text": "📝 AI Log: AI Response\n"
+                        },
+                        {
+                          "text": "📝 AI Log: Element check failed, trying direct fill\n"
+                        },
+                        {
+                          "text": "📝 AI Log: Fill failed\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 1,
+                      "steps": [
+                        {
+                          "title": "Given I am logged in as \"standard_user\"",
+                          "duration": 60418,
+                          "error": {
+                            "message": "TimeoutError: locator.fill: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('input[data-test=\"username-field\"]')\u001b[22m\n",
+                            "stack": "TimeoutError: locator.fill: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('input[data-test=\"username-field\"]')\u001b[22m\n\n    at AIHelper.fill (/home/runner/work/playwright-agents/playwright-agents/utils/ai-helper.ts:297:21)\n    at Object.<anonymous> (/home/runner/work/playwright-agents/playwright-agents/steps/shopping.steps.ts:14:3)\n    at /home/runner/work/playwright-agents/playwright-agents/.features-gen/features/shopping.feature.spec.js:14:5",
+                            "location": {
+                              "file": "/home/runner/work/playwright-agents/playwright-agents/utils/ai-helper.ts",
+                              "column": 21,
+                              "line": 297
+                            },
+                            "snippet": "   at ../utils/ai-helper.ts:297\n\n\u001b[0m \u001b[90m 295 |\u001b[39m       }\n \u001b[90m 296 |\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 297 |\u001b[39m       \u001b[36mawait\u001b[39m locator\u001b[33m.\u001b[39mfill(value\u001b[33m,\u001b[39m { timeout\u001b[33m:\u001b[39m \u001b[35m30000\u001b[39m })\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                     \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 298 |\u001b[39m       \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mlogPrompt(\u001b[32m'Fill successful'\u001b[39m\u001b[33m,\u001b[39m { selector\u001b[33m,\u001b[39m value })\u001b[33m;\u001b[39m\n \u001b[90m 299 |\u001b[39m     } \u001b[36mcatch\u001b[39m (error) {\n \u001b[90m 300 |\u001b[39m       \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mlogPrompt(\u001b[32m'Fill failed'\u001b[39m\u001b[33m,\u001b[39m { description\u001b[33m,\u001b[39m value\u001b[33m,\u001b[39m error\u001b[33m:\u001b[39m \u001b[33mString\u001b[39m(error) })\u001b[33m;\u001b[39m\u001b[0m"
+                          }
+                        }
+                      ],
+                      "startTime": "2026-02-26T14:56:12.288Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/home/runner/work/playwright-agents/playwright-agents/test-results/features-shopping.feature--19c71-ort-products-using-dropdown-chromium-retry1/test-failed-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "/home/runner/work/playwright-agents/playwright-agents/test-results/features-shopping.feature--19c71-ort-products-using-dropdown-chromium-retry1/video.webm"
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/home/runner/work/playwright-agents/playwright-agents/test-results/features-shopping.feature--19c71-ort-products-using-dropdown-chromium-retry1/trace.zip"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/home/runner/work/playwright-agents/playwright-agents/utils/ai-helper.ts",
+                        "column": 21,
+                        "line": 297
+                      }
+                    },
+                    {
+                      "workerIndex": 5,
+                      "parallelIndex": 0,
+                      "status": "failed",
+                      "duration": 64646,
+                      "error": {
+                        "message": "TimeoutError: locator.fill: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('input[data-test=\"username-field\"]')\u001b[22m\n",
+                        "stack": "TimeoutError: locator.fill: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('input[data-test=\"username-field\"]')\u001b[22m\n\n    at AIHelper.fill (/home/runner/work/playwright-agents/playwright-agents/utils/ai-helper.ts:297:21)\n    at Object.<anonymous> (/home/runner/work/playwright-agents/playwright-agents/steps/shopping.steps.ts:14:3)\n    at /home/runner/work/playwright-agents/playwright-agents/.features-gen/features/shopping.feature.spec.js:14:5",
+                        "location": {
+                          "file": "/home/runner/work/playwright-agents/playwright-agents/utils/ai-helper.ts",
+                          "column": 21,
+                          "line": 297
+                        },
+                        "snippet": "   at ../utils/ai-helper.ts:297\n\n\u001b[0m \u001b[90m 295 |\u001b[39m       }\n \u001b[90m 296 |\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 297 |\u001b[39m       \u001b[36mawait\u001b[39m locator\u001b[33m.\u001b[39mfill(value\u001b[33m,\u001b[39m { timeout\u001b[33m:\u001b[39m \u001b[35m30000\u001b[39m })\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                     \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 298 |\u001b[39m       \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mlogPrompt(\u001b[32m'Fill successful'\u001b[39m\u001b[33m,\u001b[39m { selector\u001b[33m,\u001b[39m value })\u001b[33m;\u001b[39m\n \u001b[90m 299 |\u001b[39m     } \u001b[36mcatch\u001b[39m (error) {\n \u001b[90m 300 |\u001b[39m       \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mlogPrompt(\u001b[32m'Fill failed'\u001b[39m\u001b[33m,\u001b[39m { description\u001b[33m,\u001b[39m value\u001b[33m,\u001b[39m error\u001b[33m:\u001b[39m \u001b[33mString\u001b[39m(error) })\u001b[33m;\u001b[39m\u001b[0m"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/home/runner/work/playwright-agents/playwright-agents/utils/ai-helper.ts",
+                            "column": 21,
+                            "line": 297
+                          },
+                          "message": "TimeoutError: locator.fill: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('input[data-test=\"username-field\"]')\u001b[22m\n\n\n   at ../utils/ai-helper.ts:297\n\n  295 |       }\n  296 |\n> 297 |       await locator.fill(value, { timeout: 30000 });\n      |                     ^\n  298 |       this.logPrompt('Fill successful', { selector, value });\n  299 |     } catch (error) {\n  300 |       this.logPrompt('Fill failed', { description, value, error: String(error) });\n    at AIHelper.fill (/home/runner/work/playwright-agents/playwright-agents/utils/ai-helper.ts:297:21)\n    at Object.<anonymous> (/home/runner/work/playwright-agents/playwright-agents/steps/shopping.steps.ts:14:3)\n    at /home/runner/work/playwright-agents/playwright-agents/.features-gen/features/shopping.feature.spec.js:14:5"
+                        }
+                      ],
+                      "stdout": [
+                        {
+                          "text": "📝 AI Log: AI Fill: username field = standard_user\n"
+                        },
+                        {
+                          "text": "📝 AI Log: AI Response (fill)\n"
+                        },
+                        {
+                          "text": "📝 AI Log: AI Response\n"
+                        },
+                        {
+                          "text": "📝 AI Log: Element check failed, trying direct fill\n"
+                        },
+                        {
+                          "text": "📝 AI Log: Fill failed\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 2,
+                      "steps": [
+                        {
+                          "title": "Given I am logged in as \"standard_user\"",
+                          "duration": 60332,
+                          "error": {
+                            "message": "TimeoutError: locator.fill: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('input[data-test=\"username-field\"]')\u001b[22m\n",
+                            "stack": "TimeoutError: locator.fill: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('input[data-test=\"username-field\"]')\u001b[22m\n\n    at AIHelper.fill (/home/runner/work/playwright-agents/playwright-agents/utils/ai-helper.ts:297:21)\n    at Object.<anonymous> (/home/runner/work/playwright-agents/playwright-agents/steps/shopping.steps.ts:14:3)\n    at /home/runner/work/playwright-agents/playwright-agents/.features-gen/features/shopping.feature.spec.js:14:5",
+                            "location": {
+                              "file": "/home/runner/work/playwright-agents/playwright-agents/utils/ai-helper.ts",
+                              "column": 21,
+                              "line": 297
+                            },
+                            "snippet": "   at ../utils/ai-helper.ts:297\n\n\u001b[0m \u001b[90m 295 |\u001b[39m       }\n \u001b[90m 296 |\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 297 |\u001b[39m       \u001b[36mawait\u001b[39m locator\u001b[33m.\u001b[39mfill(value\u001b[33m,\u001b[39m { timeout\u001b[33m:\u001b[39m \u001b[35m30000\u001b[39m })\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                     \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 298 |\u001b[39m       \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mlogPrompt(\u001b[32m'Fill successful'\u001b[39m\u001b[33m,\u001b[39m { selector\u001b[33m,\u001b[39m value })\u001b[33m;\u001b[39m\n \u001b[90m 299 |\u001b[39m     } \u001b[36mcatch\u001b[39m (error) {\n \u001b[90m 300 |\u001b[39m       \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mlogPrompt(\u001b[32m'Fill failed'\u001b[39m\u001b[33m,\u001b[39m { description\u001b[33m,\u001b[39m value\u001b[33m,\u001b[39m error\u001b[33m:\u001b[39m \u001b[33mString\u001b[39m(error) })\u001b[33m;\u001b[39m\u001b[0m"
+                          }
+                        }
+                      ],
+                      "startTime": "2026-02-26T14:57:18.944Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/home/runner/work/playwright-agents/playwright-agents/test-results/features-shopping.feature--19c71-ort-products-using-dropdown-chromium-retry2/test-failed-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "/home/runner/work/playwright-agents/playwright-agents/test-results/features-shopping.feature--19c71-ort-products-using-dropdown-chromium-retry2/video.webm"
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/home/runner/work/playwright-agents/playwright-agents/test-results/features-shopping.feature--19c71-ort-products-using-dropdown-chromium-retry2/trace.zip"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/home/runner/work/playwright-agents/playwright-agents/utils/ai-helper.ts",
+                        "column": 21,
+                        "line": 297
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "c14a68548b5beb0557e1-11500b2876215929671f",
+              "file": "features/shopping.feature.spec.js",
+              "line": 13,
+              "column": 3
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-02-26T14:51:44.706Z",
+    "duration": 399621,
+    "expected": 0,
+    "skipped": 0,
+    "unexpected": 2,
+    "flaky": 0
+  }
+}

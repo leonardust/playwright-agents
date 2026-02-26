@@ -1,0 +1,46 @@
+[2026-02-26T15:39:25.589Z] AI Fill: username field = standard_user
+{
+  "timestamp": "2026-02-26T15:39:25.589Z",
+  "action": "AI Fill: username field = standard_user",
+  "context": {
+    "description": "username field",
+    "value": "standard_user"
+  },
+  "url": "https://www.saucedemo.com/"
+}
+
+[2026-02-26T15:39:25.707Z] AI Response (fill)
+{
+  "timestamp": "2026-02-26T15:39:25.707Z",
+  "action": "AI Response (fill)",
+  "context": {
+    "rawSelector": "",
+    "cleanedSelector": "",
+    "description": "username field"
+  },
+  "url": "https://www.saucedemo.com/"
+}
+
+[2026-02-26T15:39:25.707Z] AI Response
+{
+  "timestamp": "2026-02-26T15:39:25.707Z",
+  "action": "AI Response",
+  "context": {
+    "selector": "",
+    "description": "username field"
+  },
+  "url": "https://www.saucedemo.com/"
+}
+
+[2026-02-26T15:39:25.707Z] Fill failed
+{
+  "timestamp": "2026-02-26T15:39:25.707Z",
+  "action": "Fill failed",
+  "context": {
+    "description": "username field",
+    "value": "standard_user",
+    "error": "Error: AI could not find selector for: username field"
+  },
+  "url": "https://www.saucedemo.com/"
+}
+

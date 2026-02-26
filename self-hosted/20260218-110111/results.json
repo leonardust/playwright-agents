@@ -1,0 +1,356 @@
+{
+  "config": {
+    "configFile": "C:\\actions-runner\\_work\\playwright-agents\\playwright-agents\\playwright.config.ts",
+    "rootDir": "C:/actions-runner/_work/playwright-agents/playwright-agents/.features-gen",
+    "forbidOnly": true,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "ci": {
+        "commitHref": "https://github.com/leonardust/playwright-agents/commit/42d50ab0f15006eb12035ddbea5a8a962923b00a",
+        "commitHash": "42d50ab0f15006eb12035ddbea5a8a962923b00a",
+        "buildHref": "https://github.com/leonardust/playwright-agents/actions/runs/22136979260"
+      },
+      "gitCommit": {
+        "shortHash": "42d50ab",
+        "hash": "42d50ab0f15006eb12035ddbea5a8a962923b00a",
+        "subject": "docs(github): pull project and readme updates",
+        "body": "docs(github): pull project and readme updates\n",
+        "author": {
+          "name": "Łukasz Komorowski",
+          "email": "luk.komorowski@gmail.com",
+          "time": 1771412323000
+        },
+        "committer": {
+          "name": "Łukasz Komorowski",
+          "email": "luk.komorowski@gmail.com",
+          "time": 1771412323000
+        },
+        "branch": "main"
+      },
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "C:/actions-runner/_work/playwright-agents/playwright-agents/test-results",
+        "repeatEach": 1,
+        "retries": 2,
+        "metadata": {
+          "ci": {
+            "commitHref": "https://github.com/leonardust/playwright-agents/commit/42d50ab0f15006eb12035ddbea5a8a962923b00a",
+            "commitHash": "42d50ab0f15006eb12035ddbea5a8a962923b00a",
+            "buildHref": "https://github.com/leonardust/playwright-agents/actions/runs/22136979260"
+          },
+          "gitCommit": {
+            "shortHash": "42d50ab",
+            "hash": "42d50ab0f15006eb12035ddbea5a8a962923b00a",
+            "subject": "docs(github): pull project and readme updates",
+            "body": "docs(github): pull project and readme updates\n",
+            "author": {
+              "name": "Łukasz Komorowski",
+              "email": "luk.komorowski@gmail.com",
+              "time": 1771412323000
+            },
+            "committer": {
+              "name": "Łukasz Komorowski",
+              "email": "luk.komorowski@gmail.com",
+              "time": 1771412323000
+            },
+            "branch": "main"
+          },
+          "actualWorkers": 1
+        },
+        "id": "chromium",
+        "name": "chromium",
+        "testDir": "C:/actions-runner/_work/playwright-agents/playwright-agents/.features-gen",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 90000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "html",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "playwright-report/results.json"
+        }
+      ],
+      [
+        "github",
+        null
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "runAgents": "none",
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.58.2",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "features\\shopping.feature.spec.js",
+      "file": "features/shopping.feature.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Shopping Cart",
+          "file": "features/shopping.feature.spec.js",
+          "line": 4,
+          "column": 6,
+          "specs": [
+            {
+              "title": "Add product to cart",
+              "ok": true,
+              "tags": [
+                "smoke",
+                "critical"
+              ],
+              "tests": [
+                {
+                  "timeout": 90000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "failed",
+                      "duration": 15427,
+                      "error": {
+                        "message": "Error: 500 llama runner process has terminated: CUDA error",
+                        "stack": "Error: 500 llama runner process has terminated: CUDA error\n    at Function.generate (C:\\actions-runner\\_work\\playwright-agents\\playwright-agents\\node_modules\\openai\\src\\core\\error.ts:100:14)\n    at OpenAI.makeStatusError (C:\\actions-runner\\_work\\playwright-agents\\playwright-agents\\node_modules\\openai\\src\\client.ts:478:28)\n    at OpenAI.makeRequest (C:\\actions-runner\\_work\\playwright-agents\\playwright-agents\\node_modules\\openai\\src\\client.ts:728:24)\n    at AIHelper.fill (C:\\actions-runner\\_work\\playwright-agents\\playwright-agents\\utils\\ai-helper.ts:210:24)\n    at Object.<anonymous> (C:\\actions-runner\\_work\\playwright-agents\\playwright-agents\\steps\\shopping.steps.ts:16:3)\n    at C:\\actions-runner\\_work\\playwright-agents\\playwright-agents\\.features-gen\\features\\shopping.feature.spec.js:7:5",
+                        "location": {
+                          "file": "C:\\actions-runner\\_work\\playwright-agents\\playwright-agents\\utils\\ai-helper.ts",
+                          "column": 24,
+                          "line": 210
+                        },
+                        "snippet": "\u001b[90m   at \u001b[39m..\\utils\\ai-helper.ts:210\n\n\u001b[0m \u001b[90m 208 |\u001b[39m \u001b[32m      Return ONLY the CSS selector, nothing else. NO markdown, NO code blocks.`\u001b[39m\u001b[33m;\u001b[39m\n \u001b[90m 209 |\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 210 |\u001b[39m       \u001b[36mconst\u001b[39m response \u001b[33m=\u001b[39m \u001b[36mawait\u001b[39m \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mclient\u001b[33m.\u001b[39mchat\u001b[33m.\u001b[39mcompletions\u001b[33m.\u001b[39mcreate({\n \u001b[90m     |\u001b[39m                        \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 211 |\u001b[39m         model\u001b[33m:\u001b[39m process\u001b[33m.\u001b[39menv\u001b[33m.\u001b[39m\u001b[33mOLLAMA_MODEL\u001b[39m \u001b[33m||\u001b[39m \u001b[32m'llama3.1:8b'\u001b[39m\u001b[33m,\u001b[39m\n \u001b[90m 212 |\u001b[39m         messages\u001b[33m:\u001b[39m [\n \u001b[90m 213 |\u001b[39m           {\u001b[0m"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "C:\\actions-runner\\_work\\playwright-agents\\playwright-agents\\utils\\ai-helper.ts",
+                            "column": 24,
+                            "line": 210
+                          },
+                          "message": "Error: 500 llama runner process has terminated: CUDA error\n\n   at ..\\utils\\ai-helper.ts:210\n\n  208 |       Return ONLY the CSS selector, nothing else. NO markdown, NO code blocks.`;\n  209 |\n> 210 |       const response = await this.client.chat.completions.create({\n      |                        ^\n  211 |         model: process.env.OLLAMA_MODEL || 'llama3.1:8b',\n  212 |         messages: [\n  213 |           {\n    at Function.generate (C:\\actions-runner\\_work\\playwright-agents\\playwright-agents\\node_modules\\openai\\src\\core\\error.ts:100:14)\n    at OpenAI.makeStatusError (C:\\actions-runner\\_work\\playwright-agents\\playwright-agents\\node_modules\\openai\\src\\client.ts:478:28)\n    at OpenAI.makeRequest (C:\\actions-runner\\_work\\playwright-agents\\playwright-agents\\node_modules\\openai\\src\\client.ts:728:24)\n    at AIHelper.fill (C:\\actions-runner\\_work\\playwright-agents\\playwright-agents\\utils\\ai-helper.ts:210:24)\n    at Object.<anonymous> (C:\\actions-runner\\_work\\playwright-agents\\playwright-agents\\steps\\shopping.steps.ts:16:3)\n    at C:\\actions-runner\\_work\\playwright-agents\\playwright-agents\\.features-gen\\features\\shopping.feature.spec.js:7:5"
+                        }
+                      ],
+                      "stdout": [
+                        {
+                          "text": "📝 AI Log: AI Fill: username field = standard_user\n"
+                        },
+                        {
+                          "text": "📝 AI Log: Fill failed\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "steps": [
+                        {
+                          "title": "Given I am logged in as \"standard_user\"",
+                          "duration": 14613,
+                          "error": {
+                            "message": "Error: 500 llama runner process has terminated: CUDA error",
+                            "stack": "Error: 500 llama runner process has terminated: CUDA error\n    at Function.generate (C:\\actions-runner\\_work\\playwright-agents\\playwright-agents\\node_modules\\openai\\src\\core\\error.ts:100:14)\n    at OpenAI.makeStatusError (C:\\actions-runner\\_work\\playwright-agents\\playwright-agents\\node_modules\\openai\\src\\client.ts:478:28)\n    at OpenAI.makeRequest (C:\\actions-runner\\_work\\playwright-agents\\playwright-agents\\node_modules\\openai\\src\\client.ts:728:24)\n    at AIHelper.fill (C:\\actions-runner\\_work\\playwright-agents\\playwright-agents\\utils\\ai-helper.ts:210:24)\n    at Object.<anonymous> (C:\\actions-runner\\_work\\playwright-agents\\playwright-agents\\steps\\shopping.steps.ts:16:3)\n    at C:\\actions-runner\\_work\\playwright-agents\\playwright-agents\\.features-gen\\features\\shopping.feature.spec.js:7:5",
+                            "location": {
+                              "file": "C:\\actions-runner\\_work\\playwright-agents\\playwright-agents\\utils\\ai-helper.ts",
+                              "column": 24,
+                              "line": 210
+                            },
+                            "snippet": "\u001b[90m   at \u001b[39m..\\utils\\ai-helper.ts:210\n\n\u001b[0m \u001b[90m 208 |\u001b[39m \u001b[32m      Return ONLY the CSS selector, nothing else. NO markdown, NO code blocks.`\u001b[39m\u001b[33m;\u001b[39m\n \u001b[90m 209 |\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 210 |\u001b[39m       \u001b[36mconst\u001b[39m response \u001b[33m=\u001b[39m \u001b[36mawait\u001b[39m \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mclient\u001b[33m.\u001b[39mchat\u001b[33m.\u001b[39mcompletions\u001b[33m.\u001b[39mcreate({\n \u001b[90m     |\u001b[39m                        \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 211 |\u001b[39m         model\u001b[33m:\u001b[39m process\u001b[33m.\u001b[39menv\u001b[33m.\u001b[39m\u001b[33mOLLAMA_MODEL\u001b[39m \u001b[33m||\u001b[39m \u001b[32m'llama3.1:8b'\u001b[39m\u001b[33m,\u001b[39m\n \u001b[90m 212 |\u001b[39m         messages\u001b[33m:\u001b[39m [\n \u001b[90m 213 |\u001b[39m           {\u001b[0m"
+                          }
+                        }
+                      ],
+                      "startTime": "2026-02-18T10:59:37.053Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "C:\\actions-runner\\_work\\playwright-agents\\playwright-agents\\test-results\\features-shopping.feature-Shopping-Cart-Add-product-to-cart-chromium\\test-failed-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "C:\\actions-runner\\_work\\playwright-agents\\playwright-agents\\test-results\\features-shopping.feature-Shopping-Cart-Add-product-to-cart-chromium\\video.webm"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "C:\\actions-runner\\_work\\playwright-agents\\playwright-agents\\test-results\\features-shopping.feature-Shopping-Cart-Add-product-to-cart-chromium\\error-context.md"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "C:\\actions-runner\\_work\\playwright-agents\\playwright-agents\\utils\\ai-helper.ts",
+                        "column": 24,
+                        "line": 210
+                      }
+                    },
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 58335,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "📝 AI Log: AI Fill: username field = standard_user\n"
+                        },
+                        {
+                          "text": "📝 AI Log: AI Response (fill)\n"
+                        },
+                        {
+                          "text": "📝 AI Log: AI Response\n"
+                        },
+                        {
+                          "text": "📝 AI Log: Fill successful\n"
+                        },
+                        {
+                          "text": "📝 AI Log: AI Fill: password field = secret_sauce\n"
+                        },
+                        {
+                          "text": "📝 AI Log: AI Response (fill)\n"
+                        },
+                        {
+                          "text": "📝 AI Log: AI Response\n"
+                        },
+                        {
+                          "text": "📝 AI Log: Fill successful\n"
+                        },
+                        {
+                          "text": "📝 AI Log: AI Click: login button\n"
+                        },
+                        {
+                          "text": "📝 AI Log: AI Response (click)\n"
+                        },
+                        {
+                          "text": "📝 AI Log: Selector not found, trying fallback strategies\n"
+                        },
+                        {
+                          "text": "📝 AI Log: Trying getByRole button\n"
+                        },
+                        {
+                          "text": "📝 AI Log: Click successful\n"
+                        },
+                        {
+                          "text": "📝 AI Log: Logged in as standard_user and navigated to products page\n"
+                        },
+                        {
+                          "text": "📝 AI Log: AI Click: first add to cart button\n"
+                        },
+                        {
+                          "text": "📝 AI Log: AI Response (click)\n"
+                        },
+                        {
+                          "text": "📝 AI Log: Selector not found, trying fallback strategies\n"
+                        },
+                        {
+                          "text": "📝 AI Log: Trying getByRole button\n"
+                        },
+                        {
+                          "text": "📝 AI Log: Click successful\n"
+                        },
+                        {
+                          "text": "📝 AI Log: Clicked add to cart for first product\n"
+                        },
+                        {
+                          "text": "📝 AI Log: Cart counter shows: 1\n"
+                        },
+                        {
+                          "text": "📝 AI Log: AI Click: shopping cart icon\n"
+                        },
+                        {
+                          "text": "📝 AI Log: AI Response (click)\n"
+                        },
+                        {
+                          "text": "📝 AI Log: Selector not found, trying fallback strategies\n"
+                        },
+                        {
+                          "text": "📝 AI Log: Trying cart/icon fallback\n"
+                        },
+                        {
+                          "text": "📝 AI Log: Click successful\n"
+                        },
+                        {
+                          "text": "📝 AI Log: Verified product appears in cart\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 1,
+                      "steps": [
+                        {
+                          "title": "Given I am logged in as \"standard_user\"",
+                          "duration": 24822
+                        },
+                        {
+                          "title": "When I click on \"Add to cart\" button for the first product",
+                          "duration": 16120
+                        },
+                        {
+                          "title": "Then I should see the cart counter increase",
+                          "duration": 30
+                        },
+                        {
+                          "title": "And the product should appear in the cart",
+                          "duration": 16416
+                        }
+                      ],
+                      "startTime": "2026-02-18T10:59:54.309Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "C:\\actions-runner\\_work\\playwright-agents\\playwright-agents\\test-results\\features-shopping.feature-Shopping-Cart-Add-product-to-cart-chromium-retry1\\trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "flaky"
+                }
+              ],
+              "id": "c14a68548b5beb0557e1-6b735f2a547f903121fe",
+              "file": "features/shopping.feature.spec.js",
+              "line": 6,
+              "column": 3
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-02-18T10:59:35.441Z",
+    "duration": 77700.81300000001,
+    "expected": 0,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 1
+  }
+}

@@ -1,0 +1,276 @@
+{
+  "config": {
+    "configFile": "/home/runner/work/playwright-agents/playwright-agents/playwright.config.ts",
+    "rootDir": "/home/runner/work/playwright-agents/playwright-agents/.features-gen",
+    "forbidOnly": true,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "ci": {
+        "commitHref": "https://github.com/leonardust/playwright-agents/commit/1aa6a3ffc3c69854068b00e35fcdcbc39ae96ae3",
+        "commitHash": "1aa6a3ffc3c69854068b00e35fcdcbc39ae96ae3",
+        "prHref": "https://github.com/leonardust/playwright-agents/pull/13",
+        "prTitle": "[WIP] Add updated PROJECTS.md file with project management documentation",
+        "prBaseHash": "da56c6466da2ff77d79355502e180e1406aa5600",
+        "buildHref": "https://github.com/leonardust/playwright-agents/actions/runs/22115359046"
+      },
+      "gitCommit": {
+        "shortHash": "1aa6a3f",
+        "hash": "1aa6a3ffc3c69854068b00e35fcdcbc39ae96ae3",
+        "subject": "Merge 683316751e9bca33d29204c8d1a61fce06987a5a into da56c6466da2ff77d79355502e180e1406aa5600",
+        "body": "Merge 683316751e9bca33d29204c8d1a61fce06987a5a into da56c6466da2ff77d79355502e180e1406aa5600\n",
+        "author": {
+          "name": "Copilot",
+          "email": "198982749+Copilot@users.noreply.github.com",
+          "time": 1771361729000
+        },
+        "committer": {
+          "name": "GitHub",
+          "email": "noreply@github.com",
+          "time": 1771361729000
+        },
+        "branch": "HEAD"
+      },
+      "gitDiff": "diff --git a/PROJECTS.md b/PROJECTS.md\nindex f54ee87..bf8f903 100644\n--- a/PROJECTS.md\n+++ b/PROJECTS.md\n@@ -4,28 +4,30 @@\n \n Ten GitHub Project zarządza rozwojem frameworka **Playwright Agents** - zaawansowanego systemu automatyzacji testów wykorzystującego AI (Ollama/Groq) do inteligentnego wyszukiwania elementów UI.\n \n+**Status**: ✅ Ollama i Groq są już skonfigurowane i działają\n+\n ## 🔗 Powiązane Zasoby\n \n - **Repository**: [leonardust/playwright-agents](https://github.com/leonardust/playwright-agents)\n - **GitHub Pages**: [Test Reports](https://leonardust.github.io/playwright-agents/)\n-- **CI/CD**: Self-hosted i GitHub-hosted workflows\n+- **CI/CD**: \n+  - Self-hosted runner z Ollama (llama3.2-vision)\n+  - GitHub-hosted runner z Groq API (llama-3.1-8b-instant)\n \n ## 📊 Struktura Projektu\n \n ### Kolumny Workflow\n \n-- **📝 Backlog** - Zaplanowane zadania do realizacji\n-- **🚧 In Progress** - Zadania w trakcie realizacji\n-- **👀 In Review** - Kod gotowy do przeglądu (PR otwarte)\n-- **✅ Done** - Ukończone i zmergowane zadania\n+- **📝 Todo** - Zaplanowane zadania do realizacji\n+- **🚧 In Progress** - Zadania w trakcie realizacji  \n+- **✅ Done** - Ukończone zadania\n \n ## 🏷️ Etykiety\n \n - `enhancement` - Nowe funkcjonalności\n - `bug` - Błędy do naprawy\n - `documentation` - Aktualizacje dokumentacji\n-- `ci/cd` - Zmiany w GitHub Actions\n-- `dependencies` - Aktualizacje zależności\n+- `dependencies` - Aktualizacje zależności (Dependabot)\n - `ai` - Funkcjonalności związane z AI/LLM\n \n ## 🎯 Priorytety\n@@ -38,54 +40,90 @@ Issues są priorytetyzowane według:\n \n ## 🔄 Workflow\n \n-1. **Utworzenie Issue** → automatycznie trafia do Backlog\n-2. **Rozpoczęcie pracy** → przenieś do \"In Progress\"\n-3. **Otwarcie PR** → automatycznie przechodzi do \"In Review\"\n-4. **Merge PR** → automatycznie przenosi się do \"Done\"\n+1. **Utworzenie Issue** → automatycznie trafia do **Todo**\n+2. **Rozpoczęcie pracy** → przenieś do **In Progress**\n+3. **Ukończenie** → przenieś do **Done**\n \n ## 🤝 Jak Współpracować\n \n ### Dodawanie nowego zadania\n 1. Utwórz issue w repozytorium\n 2. Dodaj odpowiednie etykiety\n-3. Przypisz do projektu\n+3. Przypisz do projektu (automatycznie trafi do Todo)\n 4. Ustaw priorytet\n \n ### Praca nad zadaniem\n 1. Przypisz issue do siebie\n-2. Przenieś do \"In Progress\"\n+2. Przenieś do **In Progress**\n 3. Utwórz branch: `feat/nazwa-zadania` lub `fix/nazwa-zadania`\n 4. Commituj zgodnie z [Conventional Commits](https://www.conventionalcommits.org/)\n-5. Otwórz PR i dodaj link do issue\n+5. Otwórz PR i dodaj link do issue: `Closes #123`\n+6. Po merge przenieś do **Done**\n+\n+## 🤖 Skonfigurowane AI Providers\n+\n+### Ollama (Local)\n+- ✅ Skonfigurowane i działające\n+- Model: `llama3.2-vision:latest`\n+- Użycie: Self-hosted CI/CD runner\n+- Diagnostyka: `npm run diagnose`\n+\n+### Groq (Cloud)\n+- ✅ Skonfigurowane i działające  \n+- Model: `llama-3.1-8b-instant`\n+- Użycie: GitHub-hosted CI/CD\n+- Ultra-szybkie (~37s execution time)\n \n ## 📈 Metryki\n \n Projekt śledzi:\n - ⏱️ Czas realizacji zadań (cycle time)\n - 📊 Liczba otwartych vs zamkniętych issues\n-- 🔥 Burndown velocity\n-- 🎯 Postęp względem milestone'ów\n+- 🔥 Velocity (zadania per sprint)\n+- 🎯 Postęp względem celów\n \n ## 🛠️ Automatyzacje\n \n-- **Auto-assignment**: Dependabot PRs automatycznie przypisane do maintainera\n-- **Auto-labeling**: PRy otrzymują etykiety na podstawie ścieżek plików\n-- **Status sync**: Status PR synchronizuje się z kartą w projekcie\n-- **Stale issues**: Nieaktywne issue starsze niż 60 dni otrzymują ostrzeżenie\n+- **Dependabot**: Automatyczne PRy dla aktualizacji zależności\n+- **Husky**: Pre-commit hooks (ESLint + Prettier)\n+- **GitHub Actions**: \n+  - Automatyczne testy przy każdym push/PR\n+  - Deployment raportów na GitHub Pages\n+  - Scheduled runs\n \n-## 📝 Milestones\n+## 📝 Roadmap\n \n-Aktywne milestony:\n-- `v1.0` - Podstawowa funkcjonalność z Ollama\n-- `v1.1` - Integracja z Groq Cloud\n-- `v2.0` - Advanced AI features (context memory, self-healing)\n+### ✅ Completed\n+- Podstawowa integracja z Ollama\n+- Integracja z Groq Cloud API\n+- Self-hosted i GitHub-hosted workflows\n+- GitHub Pages deployment\n+- BDD z Playwright\n+\n+### 🚧 In Progress\n+- Sprawdź aktualny board projektu\n+\n+### 📝 Planned\n+- Advanced AI features (context memory)\n+- Self-healing tests\n+- Multi-model support\n+- Performance optimizations\n \n ## 💡 Wskazówki\n \n-- Używaj draft PR dla pracy w toku (work in progress)\n-- Linkuj issues w PR używając: `Closes #123` lub `Fixes #123`\n+- Używaj **draft PR** dla pracy w toku\n+- Linkuj issues: `Closes #123`, `Fixes #123`, `Relates to #123`\n - Dodawaj screenshoty/logi dla bugów\n - Aktualizuj dokumentację razem z kodem\n+- Testy muszą przejść przed merge\n+\n+## 📚 Dokumentacja\n+\n+- [README.md](./README.md) - Główna dokumentacja projektu\n+- [GITHUB_ACTIONS.md](./GITHUB_ACTIONS.md) - CI/CD i workflows\n+- [HUSKY.md](./HUSKY.md) - Git hooks\n+- [GROQ_SETUP.md](./GROQ_SETUP.md) - Konfiguracja Groq\n+- [DEPENDABOT.md](./DEPENDABOT.md) - Zarządzanie zależnościami\n \n ---\n \ndiff --git a/README.md b/README.md\nindex 7c51f16..225d763 100644\n--- a/README.md\n+++ b/README.md\n@@ -275,9 +275,10 @@ Zobacz szczegółowy przewodnik: **[GITHUB_ACTIONS.md](GITHUB_ACTIONS.md)**\n ## 📊 Project Management\n \n Projekt używa GitHub Projects do zarządzania zadaniami i workflow. Zobacz [PROJECTS.md](./PROJECTS.md) dla szczegółów dotyczących:\n-- Struktury projektu i workflow\n+- Struktury projektu i workflow (Todo → In Progress → Done)\n - Etykiet i priorytetów\n - Jak dodawać i zarządzać zadaniami\n+- Skonfigurowanych AI providers (Ollama + Groq)\n - Automatyzacji i metryk\n \n ## 🛠️ Troubleshooting",
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/home/runner/work/playwright-agents/playwright-agents/test-results",
+        "repeatEach": 1,
+        "retries": 2,
+        "metadata": {
+          "ci": {
+            "commitHref": "https://github.com/leonardust/playwright-agents/commit/1aa6a3ffc3c69854068b00e35fcdcbc39ae96ae3",
+            "commitHash": "1aa6a3ffc3c69854068b00e35fcdcbc39ae96ae3",
+            "prHref": "https://github.com/leonardust/playwright-agents/pull/13",
+            "prTitle": "[WIP] Add updated PROJECTS.md file with project management documentation",
+            "prBaseHash": "da56c6466da2ff77d79355502e180e1406aa5600",
+            "buildHref": "https://github.com/leonardust/playwright-agents/actions/runs/22115359046"
+          },
+          "gitCommit": {
+            "shortHash": "1aa6a3f",
+            "hash": "1aa6a3ffc3c69854068b00e35fcdcbc39ae96ae3",
+            "subject": "Merge 683316751e9bca33d29204c8d1a61fce06987a5a into da56c6466da2ff77d79355502e180e1406aa5600",
+            "body": "Merge 683316751e9bca33d29204c8d1a61fce06987a5a into da56c6466da2ff77d79355502e180e1406aa5600\n",
+            "author": {
+              "name": "Copilot",
+              "email": "198982749+Copilot@users.noreply.github.com",
+              "time": 1771361729000
+            },
+            "committer": {
+              "name": "GitHub",
+              "email": "noreply@github.com",
+              "time": 1771361729000
+            },
+            "branch": "HEAD"
+          },
+          "gitDiff": "diff --git a/PROJECTS.md b/PROJECTS.md\nindex f54ee87..bf8f903 100644\n--- a/PROJECTS.md\n+++ b/PROJECTS.md\n@@ -4,28 +4,30 @@\n \n Ten GitHub Project zarządza rozwojem frameworka **Playwright Agents** - zaawansowanego systemu automatyzacji testów wykorzystującego AI (Ollama/Groq) do inteligentnego wyszukiwania elementów UI.\n \n+**Status**: ✅ Ollama i Groq są już skonfigurowane i działają\n+\n ## 🔗 Powiązane Zasoby\n \n - **Repository**: [leonardust/playwright-agents](https://github.com/leonardust/playwright-agents)\n - **GitHub Pages**: [Test Reports](https://leonardust.github.io/playwright-agents/)\n-- **CI/CD**: Self-hosted i GitHub-hosted workflows\n+- **CI/CD**: \n+  - Self-hosted runner z Ollama (llama3.2-vision)\n+  - GitHub-hosted runner z Groq API (llama-3.1-8b-instant)\n \n ## 📊 Struktura Projektu\n \n ### Kolumny Workflow\n \n-- **📝 Backlog** - Zaplanowane zadania do realizacji\n-- **🚧 In Progress** - Zadania w trakcie realizacji\n-- **👀 In Review** - Kod gotowy do przeglądu (PR otwarte)\n-- **✅ Done** - Ukończone i zmergowane zadania\n+- **📝 Todo** - Zaplanowane zadania do realizacji\n+- **🚧 In Progress** - Zadania w trakcie realizacji  \n+- **✅ Done** - Ukończone zadania\n \n ## 🏷️ Etykiety\n \n - `enhancement` - Nowe funkcjonalności\n - `bug` - Błędy do naprawy\n - `documentation` - Aktualizacje dokumentacji\n-- `ci/cd` - Zmiany w GitHub Actions\n-- `dependencies` - Aktualizacje zależności\n+- `dependencies` - Aktualizacje zależności (Dependabot)\n - `ai` - Funkcjonalności związane z AI/LLM\n \n ## 🎯 Priorytety\n@@ -38,54 +40,90 @@ Issues są priorytetyzowane według:\n \n ## 🔄 Workflow\n \n-1. **Utworzenie Issue** → automatycznie trafia do Backlog\n-2. **Rozpoczęcie pracy** → przenieś do \"In Progress\"\n-3. **Otwarcie PR** → automatycznie przechodzi do \"In Review\"\n-4. **Merge PR** → automatycznie przenosi się do \"Done\"\n+1. **Utworzenie Issue** → automatycznie trafia do **Todo**\n+2. **Rozpoczęcie pracy** → przenieś do **In Progress**\n+3. **Ukończenie** → przenieś do **Done**\n \n ## 🤝 Jak Współpracować\n \n ### Dodawanie nowego zadania\n 1. Utwórz issue w repozytorium\n 2. Dodaj odpowiednie etykiety\n-3. Przypisz do projektu\n+3. Przypisz do projektu (automatycznie trafi do Todo)\n 4. Ustaw priorytet\n \n ### Praca nad zadaniem\n 1. Przypisz issue do siebie\n-2. Przenieś do \"In Progress\"\n+2. Przenieś do **In Progress**\n 3. Utwórz branch: `feat/nazwa-zadania` lub `fix/nazwa-zadania`\n 4. Commituj zgodnie z [Conventional Commits](https://www.conventionalcommits.org/)\n-5. Otwórz PR i dodaj link do issue\n+5. Otwórz PR i dodaj link do issue: `Closes #123`\n+6. Po merge przenieś do **Done**\n+\n+## 🤖 Skonfigurowane AI Providers\n+\n+### Ollama (Local)\n+- ✅ Skonfigurowane i działające\n+- Model: `llama3.2-vision:latest`\n+- Użycie: Self-hosted CI/CD runner\n+- Diagnostyka: `npm run diagnose`\n+\n+### Groq (Cloud)\n+- ✅ Skonfigurowane i działające  \n+- Model: `llama-3.1-8b-instant`\n+- Użycie: GitHub-hosted CI/CD\n+- Ultra-szybkie (~37s execution time)\n \n ## 📈 Metryki\n \n Projekt śledzi:\n - ⏱️ Czas realizacji zadań (cycle time)\n - 📊 Liczba otwartych vs zamkniętych issues\n-- 🔥 Burndown velocity\n-- 🎯 Postęp względem milestone'ów\n+- 🔥 Velocity (zadania per sprint)\n+- 🎯 Postęp względem celów\n \n ## 🛠️ Automatyzacje\n \n-- **Auto-assignment**: Dependabot PRs automatycznie przypisane do maintainera\n-- **Auto-labeling**: PRy otrzymują etykiety na podstawie ścieżek plików\n-- **Status sync**: Status PR synchronizuje się z kartą w projekcie\n-- **Stale issues**: Nieaktywne issue starsze niż 60 dni otrzymują ostrzeżenie\n+- **Dependabot**: Automatyczne PRy dla aktualizacji zależności\n+- **Husky**: Pre-commit hooks (ESLint + Prettier)\n+- **GitHub Actions**: \n+  - Automatyczne testy przy każdym push/PR\n+  - Deployment raportów na GitHub Pages\n+  - Scheduled runs\n \n-## 📝 Milestones\n+## 📝 Roadmap\n \n-Aktywne milestony:\n-- `v1.0` - Podstawowa funkcjonalność z Ollama\n-- `v1.1` - Integracja z Groq Cloud\n-- `v2.0` - Advanced AI features (context memory, self-healing)\n+### ✅ Completed\n+- Podstawowa integracja z Ollama\n+- Integracja z Groq Cloud API\n+- Self-hosted i GitHub-hosted workflows\n+- GitHub Pages deployment\n+- BDD z Playwright\n+\n+### 🚧 In Progress\n+- Sprawdź aktualny board projektu\n+\n+### 📝 Planned\n+- Advanced AI features (context memory)\n+- Self-healing tests\n+- Multi-model support\n+- Performance optimizations\n \n ## 💡 Wskazówki\n \n-- Używaj draft PR dla pracy w toku (work in progress)\n-- Linkuj issues w PR używając: `Closes #123` lub `Fixes #123`\n+- Używaj **draft PR** dla pracy w toku\n+- Linkuj issues: `Closes #123`, `Fixes #123`, `Relates to #123`\n - Dodawaj screenshoty/logi dla bugów\n - Aktualizuj dokumentację razem z kodem\n+- Testy muszą przejść przed merge\n+\n+## 📚 Dokumentacja\n+\n+- [README.md](./README.md) - Główna dokumentacja projektu\n+- [GITHUB_ACTIONS.md](./GITHUB_ACTIONS.md) - CI/CD i workflows\n+- [HUSKY.md](./HUSKY.md) - Git hooks\n+- [GROQ_SETUP.md](./GROQ_SETUP.md) - Konfiguracja Groq\n+- [DEPENDABOT.md](./DEPENDABOT.md) - Zarządzanie zależnościami\n \n ---\n \ndiff --git a/README.md b/README.md\nindex 7c51f16..225d763 100644\n--- a/README.md\n+++ b/README.md\n@@ -275,9 +275,10 @@ Zobacz szczegółowy przewodnik: **[GITHUB_ACTIONS.md](GITHUB_ACTIONS.md)**\n ## 📊 Project Management\n \n Projekt używa GitHub Projects do zarządzania zadaniami i workflow. Zobacz [PROJECTS.md](./PROJECTS.md) dla szczegółów dotyczących:\n-- Struktury projektu i workflow\n+- Struktury projektu i workflow (Todo → In Progress → Done)\n - Etykiet i priorytetów\n - Jak dodawać i zarządzać zadaniami\n+- Skonfigurowanych AI providers (Ollama + Groq)\n - Automatyzacji i metryk\n \n ## 🛠️ Troubleshooting",
+          "actualWorkers": 1
+        },
+        "id": "chromium",
+        "name": "chromium",
+        "testDir": "/home/runner/work/playwright-agents/playwright-agents/.features-gen",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 90000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "html",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "playwright-report/results.json"
+        }
+      ],
+      [
+        "github",
+        null
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "runAgents": "none",
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.58.2",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "features/shopping.feature.spec.js",
+      "file": "features/shopping.feature.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Shopping Cart",
+          "file": "features/shopping.feature.spec.js",
+          "line": 4,
+          "column": 6,
+          "specs": [
+            {
+              "title": "Add product to cart",
+              "ok": true,
+              "tags": [
+                "smoke",
+                "critical"
+              ],
+              "tests": [
+                {
+                  "timeout": 90000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 5459,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "📝 AI Log: AI Fill: username field = standard_user\n"
+                        },
+                        {
+                          "text": "📝 AI Log: AI Response (fill)\n"
+                        },
+                        {
+                          "text": "📝 AI Log: AI Response\n"
+                        },
+                        {
+                          "text": "📝 AI Log: Fill successful\n"
+                        },
+                        {
+                          "text": "📝 AI Log: AI Fill: password field = secret_sauce\n"
+                        },
+                        {
+                          "text": "📝 AI Log: AI Response (fill)\n"
+                        },
+                        {
+                          "text": "📝 AI Log: AI Response\n"
+                        },
+                        {
+                          "text": "📝 AI Log: Fill successful\n"
+                        },
+                        {
+                          "text": "📝 AI Log: AI Click: login button\n"
+                        },
+                        {
+                          "text": "📝 AI Log: AI Response (click)\n"
+                        },
+                        {
+                          "text": "📝 AI Log: Click successful\n"
+                        },
+                        {
+                          "text": "📝 AI Log: Logged in as standard_user and navigated to products page\n"
+                        },
+                        {
+                          "text": "📝 AI Log: AI Click: first add to cart button\n"
+                        },
+                        {
+                          "text": "📝 AI Log: AI Response (click)\n"
+                        },
+                        {
+                          "text": "📝 AI Log: Selector not found, trying fallback strategies\n"
+                        },
+                        {
+                          "text": "📝 AI Log: Trying getByRole button\n"
+                        },
+                        {
+                          "text": "📝 AI Log: Click successful\n"
+                        },
+                        {
+                          "text": "📝 AI Log: Clicked add to cart for first product\n"
+                        },
+                        {
+                          "text": "📝 AI Log: Cart counter shows: 1\n"
+                        },
+                        {
+                          "text": "📝 AI Log: AI Click: shopping cart icon\n"
+                        },
+                        {
+                          "text": "📝 AI Log: AI Response (click)\n"
+                        },
+                        {
+                          "text": "📝 AI Log: Selector not found, trying fallback strategies\n"
+                        },
+                        {
+                          "text": "📝 AI Log: Trying cart/icon fallback\n"
+                        },
+                        {
+                          "text": "📝 AI Log: Click successful\n"
+                        },
+                        {
+                          "text": "📝 AI Log: Verified product appears in cart\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "steps": [
+                        {
+                          "title": "Given I am logged in as \"standard_user\"",
+                          "duration": 1119
+                        },
+                        {
+                          "title": "When I click on \"Add to cart\" button for the first product",
+                          "duration": 316
+                        },
+                        {
+                          "title": "Then I should see the cart counter increase",
+                          "duration": 14
+                        },
+                        {
+                          "title": "And the product should appear in the cart",
+                          "duration": 3555
+                        }
+                      ],
+                      "startTime": "2026-02-17T21:04:05.231Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "c14a68548b5beb0557e1-6b735f2a547f903121fe",
+              "file": "features/shopping.feature.spec.js",
+              "line": 6,
+              "column": 3
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-02-17T21:04:03.910Z",
+    "duration": 8041.547,
+    "expected": 1,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

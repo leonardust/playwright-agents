@@ -1,0 +1,715 @@
+{
+  "config": {
+    "configFile": "/home/runner/work/playwright-agents/playwright-agents/playwright.config.ts",
+    "rootDir": "/home/runner/work/playwright-agents/playwright-agents/.features-gen",
+    "forbidOnly": true,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "ci": {
+        "commitHref": "https://github.com/leonardust/playwright-agents/commit/0bb909d0bc43f1e5c764dd99d6cd98eb49438c96",
+        "commitHash": "0bb909d0bc43f1e5c764dd99d6cd98eb49438c96",
+        "prHref": "https://github.com/leonardust/playwright-agents/pull/51",
+        "prTitle": "chore(deps)(deps-dev): bump @types/jsdom from 27.0.0 to 28.0.0",
+        "prBaseHash": "0bb909d0bc43f1e5c764dd99d6cd98eb49438c96",
+        "buildHref": "https://github.com/leonardust/playwright-agents/actions/runs/22445819047"
+      },
+      "gitCommit": {
+        "shortHash": "3fdc3c4",
+        "hash": "3fdc3c443a722e246f635234c69e79b8f76e3204",
+        "subject": "chore(deps)(deps-dev): bump @types/jsdom from 27.0.0 to 28.0.0",
+        "body": "chore(deps)(deps-dev): bump @types/jsdom from 27.0.0 to 28.0.0\n\nBumps [@types/jsdom](https://github.com/DefinitelyTyped/DefinitelyTyped/tree/HEAD/types/jsdom) from 27.0.0 to 28.0.0.\n- [Release notes](https://github.com/DefinitelyTyped/DefinitelyTyped/releases)\n- [Commits](https://github.com/DefinitelyTyped/DefinitelyTyped/commits/HEAD/types/jsdom)\n\n---\nupdated-dependencies:\n- dependency-name: \"@types/jsdom\"\n  dependency-version: 28.0.0\n  dependency-type: direct:development\n  update-type: version-update:semver-major\n...\n\nSigned-off-by: dependabot[bot] <support@github.com>",
+        "author": {
+          "name": "dependabot[bot]",
+          "email": "49699333+dependabot[bot]@users.noreply.github.com",
+          "time": 1772115152000
+        },
+        "committer": {
+          "name": "GitHub",
+          "email": "noreply@github.com",
+          "time": 1772115152000
+        },
+        "branch": "HEAD"
+      },
+      "gitDiff": "diff --git a/package-lock.json b/package-lock.json\nindex 677c3c4..2e2eecc 100644\n--- a/package-lock.json\n+++ b/package-lock.json\n@@ -19,7 +19,7 @@\n         \"@eslint/js\": \"^9.39.2\",\n         \"@playwright/test\": \"^1.58.2\",\n         \"@types/eslint\": \"^9.6.1\",\n-        \"@types/jsdom\": \"^27.0.0\",\n+        \"@types/jsdom\": \"^28.0.0\",\n         \"@types/node\": \"^25.3.0\",\n         \"@typescript-eslint/eslint-plugin\": \"^8.55.0\",\n         \"@typescript-eslint/parser\": \"^8.55.0\",\n@@ -842,15 +842,16 @@\n       \"license\": \"MIT\"\n     },\n     \"node_modules/@types/jsdom\": {\n-      \"version\": \"27.0.0\",\n-      \"resolved\": \"https://registry.npmjs.org/@types/jsdom/-/jsdom-27.0.0.tgz\",\n-      \"integrity\": \"sha512-NZyFl/PViwKzdEkQg96gtnB8wm+1ljhdDay9ahn4hgb+SfVtPCbm3TlmDUFXTA+MGN3CijicnMhG18SI5H3rFw==\",\n+      \"version\": \"28.0.0\",\n+      \"resolved\": \"https://registry.npmjs.org/@types/jsdom/-/jsdom-28.0.0.tgz\",\n+      \"integrity\": \"sha512-A8TBQQC/xAOojy9kM8E46cqT00sF0h7dWjV8t8BJhUi2rG6JRh7XXQo/oLoENuZIQEpXsxLccLCnknyQd7qssQ==\",\n       \"dev\": true,\n       \"license\": \"MIT\",\n       \"dependencies\": {\n         \"@types/node\": \"*\",\n         \"@types/tough-cookie\": \"*\",\n-        \"parse5\": \"^7.0.0\"\n+        \"parse5\": \"^7.0.0\",\n+        \"undici-types\": \"^7.21.0\"\n       }\n     },\n     \"node_modules/@types/jsdom/node_modules/parse5\": {\n@@ -866,6 +867,13 @@\n         \"url\": \"https://github.com/inikulin/parse5?sponsor=1\"\n       }\n     },\n+    \"node_modules/@types/jsdom/node_modules/undici-types\": {\n+      \"version\": \"7.22.0\",\n+      \"resolved\": \"https://registry.npmjs.org/undici-types/-/undici-types-7.22.0.tgz\",\n+      \"integrity\": \"sha512-RKZvifiL60xdsIuC80UY0dq8Z7DbJUV8/l2hOVbyZAxBzEeQU4Z58+4ZzJ6WN2Lidi9KzT5EbiGX+PI/UGYuRw==\",\n+      \"dev\": true,\n+      \"license\": \"MIT\"\n+    },\n     \"node_modules/@types/json-schema\": {\n       \"version\": \"7.0.15\",\n       \"resolved\": \"https://registry.npmjs.org/@types/json-schema/-/json-schema-7.0.15.tgz\",\ndiff --git a/package.json b/package.json\nindex 1c950fe..43bb475 100644\n--- a/package.json\n+++ b/package.json\n@@ -33,7 +33,7 @@\n     \"@eslint/js\": \"^9.39.2\",\n     \"@playwright/test\": \"^1.58.2\",\n     \"@types/eslint\": \"^9.6.1\",\n-    \"@types/jsdom\": \"^27.0.0\",\n+    \"@types/jsdom\": \"^28.0.0\",\n     \"@types/node\": \"^25.3.0\",\n     \"@typescript-eslint/eslint-plugin\": \"^8.55.0\",\n     \"@typescript-eslint/parser\": \"^8.55.0\",",
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/home/runner/work/playwright-agents/playwright-agents/test-results",
+        "repeatEach": 1,
+        "retries": 2,
+        "metadata": {
+          "ci": {
+            "commitHref": "https://github.com/leonardust/playwright-agents/commit/0bb909d0bc43f1e5c764dd99d6cd98eb49438c96",
+            "commitHash": "0bb909d0bc43f1e5c764dd99d6cd98eb49438c96",
+            "prHref": "https://github.com/leonardust/playwright-agents/pull/51",
+            "prTitle": "chore(deps)(deps-dev): bump @types/jsdom from 27.0.0 to 28.0.0",
+            "prBaseHash": "0bb909d0bc43f1e5c764dd99d6cd98eb49438c96",
+            "buildHref": "https://github.com/leonardust/playwright-agents/actions/runs/22445819047"
+          },
+          "gitCommit": {
+            "shortHash": "3fdc3c4",
+            "hash": "3fdc3c443a722e246f635234c69e79b8f76e3204",
+            "subject": "chore(deps)(deps-dev): bump @types/jsdom from 27.0.0 to 28.0.0",
+            "body": "chore(deps)(deps-dev): bump @types/jsdom from 27.0.0 to 28.0.0\n\nBumps [@types/jsdom](https://github.com/DefinitelyTyped/DefinitelyTyped/tree/HEAD/types/jsdom) from 27.0.0 to 28.0.0.\n- [Release notes](https://github.com/DefinitelyTyped/DefinitelyTyped/releases)\n- [Commits](https://github.com/DefinitelyTyped/DefinitelyTyped/commits/HEAD/types/jsdom)\n\n---\nupdated-dependencies:\n- dependency-name: \"@types/jsdom\"\n  dependency-version: 28.0.0\n  dependency-type: direct:development\n  update-type: version-update:semver-major\n...\n\nSigned-off-by: dependabot[bot] <support@github.com>",
+            "author": {
+              "name": "dependabot[bot]",
+              "email": "49699333+dependabot[bot]@users.noreply.github.com",
+              "time": 1772115152000
+            },
+            "committer": {
+              "name": "GitHub",
+              "email": "noreply@github.com",
+              "time": 1772115152000
+            },
+            "branch": "HEAD"
+          },
+          "gitDiff": "diff --git a/package-lock.json b/package-lock.json\nindex 677c3c4..2e2eecc 100644\n--- a/package-lock.json\n+++ b/package-lock.json\n@@ -19,7 +19,7 @@\n         \"@eslint/js\": \"^9.39.2\",\n         \"@playwright/test\": \"^1.58.2\",\n         \"@types/eslint\": \"^9.6.1\",\n-        \"@types/jsdom\": \"^27.0.0\",\n+        \"@types/jsdom\": \"^28.0.0\",\n         \"@types/node\": \"^25.3.0\",\n         \"@typescript-eslint/eslint-plugin\": \"^8.55.0\",\n         \"@typescript-eslint/parser\": \"^8.55.0\",\n@@ -842,15 +842,16 @@\n       \"license\": \"MIT\"\n     },\n     \"node_modules/@types/jsdom\": {\n-      \"version\": \"27.0.0\",\n-      \"resolved\": \"https://registry.npmjs.org/@types/jsdom/-/jsdom-27.0.0.tgz\",\n-      \"integrity\": \"sha512-NZyFl/PViwKzdEkQg96gtnB8wm+1ljhdDay9ahn4hgb+SfVtPCbm3TlmDUFXTA+MGN3CijicnMhG18SI5H3rFw==\",\n+      \"version\": \"28.0.0\",\n+      \"resolved\": \"https://registry.npmjs.org/@types/jsdom/-/jsdom-28.0.0.tgz\",\n+      \"integrity\": \"sha512-A8TBQQC/xAOojy9kM8E46cqT00sF0h7dWjV8t8BJhUi2rG6JRh7XXQo/oLoENuZIQEpXsxLccLCnknyQd7qssQ==\",\n       \"dev\": true,\n       \"license\": \"MIT\",\n       \"dependencies\": {\n         \"@types/node\": \"*\",\n         \"@types/tough-cookie\": \"*\",\n-        \"parse5\": \"^7.0.0\"\n+        \"parse5\": \"^7.0.0\",\n+        \"undici-types\": \"^7.21.0\"\n       }\n     },\n     \"node_modules/@types/jsdom/node_modules/parse5\": {\n@@ -866,6 +867,13 @@\n         \"url\": \"https://github.com/inikulin/parse5?sponsor=1\"\n       }\n     },\n+    \"node_modules/@types/jsdom/node_modules/undici-types\": {\n+      \"version\": \"7.22.0\",\n+      \"resolved\": \"https://registry.npmjs.org/undici-types/-/undici-types-7.22.0.tgz\",\n+      \"integrity\": \"sha512-RKZvifiL60xdsIuC80UY0dq8Z7DbJUV8/l2hOVbyZAxBzEeQU4Z58+4ZzJ6WN2Lidi9KzT5EbiGX+PI/UGYuRw==\",\n+      \"dev\": true,\n+      \"license\": \"MIT\"\n+    },\n     \"node_modules/@types/json-schema\": {\n       \"version\": \"7.0.15\",\n       \"resolved\": \"https://registry.npmjs.org/@types/json-schema/-/json-schema-7.0.15.tgz\",\ndiff --git a/package.json b/package.json\nindex 1c950fe..43bb475 100644\n--- a/package.json\n+++ b/package.json\n@@ -33,7 +33,7 @@\n     \"@eslint/js\": \"^9.39.2\",\n     \"@playwright/test\": \"^1.58.2\",\n     \"@types/eslint\": \"^9.6.1\",\n-    \"@types/jsdom\": \"^27.0.0\",\n+    \"@types/jsdom\": \"^28.0.0\",\n     \"@types/node\": \"^25.3.0\",\n     \"@typescript-eslint/eslint-plugin\": \"^8.55.0\",\n     \"@typescript-eslint/parser\": \"^8.55.0\",",
+          "actualWorkers": 1
+        },
+        "id": "chromium",
+        "name": "chromium",
+        "testDir": "/home/runner/work/playwright-agents/playwright-agents/.features-gen",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 90000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "html",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "playwright-report/results.json"
+        }
+      ],
+      [
+        "github",
+        null
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "runAgents": "none",
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.58.2",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "features/shopping.feature.spec.js",
+      "file": "features/shopping.feature.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Shopping Cart",
+          "file": "features/shopping.feature.spec.js",
+          "line": 4,
+          "column": 6,
+          "specs": [
+            {
+              "title": "Add product to cart",
+              "ok": false,
+              "tags": [
+                "smoke",
+                "critical"
+              ],
+              "tests": [
+                {
+                  "timeout": 90000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "failed",
+                      "duration": 807,
+                      "error": {
+                        "message": "Error: AI could not find selector for: username field",
+                        "stack": "Error: AI could not find selector for: username field\n    at AIHelper.fill (/home/runner/work/playwright-agents/playwright-agents/utils/ai-helper.ts:248:15)\n    at Object.<anonymous> (/home/runner/work/playwright-agents/playwright-agents/steps/shopping.steps.ts:16:3)\n    at /home/runner/work/playwright-agents/playwright-agents/.features-gen/features/shopping.feature.spec.js:7:5",
+                        "location": {
+                          "file": "/home/runner/work/playwright-agents/playwright-agents/utils/ai-helper.ts",
+                          "column": 15,
+                          "line": 248
+                        },
+                        "snippet": "   at ../utils/ai-helper.ts:248\n\n\u001b[0m \u001b[90m 246 |\u001b[39m\n \u001b[90m 247 |\u001b[39m       \u001b[36mif\u001b[39m (\u001b[33m!\u001b[39mselector) {\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 248 |\u001b[39m         \u001b[36mthrow\u001b[39m \u001b[36mnew\u001b[39m \u001b[33mError\u001b[39m(\u001b[32m`AI could not find selector for: ${description}`\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m               \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 249 |\u001b[39m       }\n \u001b[90m 250 |\u001b[39m\n \u001b[90m 251 |\u001b[39m       \u001b[90m// Wybierz locator\u001b[39m\u001b[0m"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/home/runner/work/playwright-agents/playwright-agents/utils/ai-helper.ts",
+                            "column": 15,
+                            "line": 248
+                          },
+                          "message": "Error: AI could not find selector for: username field\n\n   at ../utils/ai-helper.ts:248\n\n  246 |\n  247 |       if (!selector) {\n> 248 |         throw new Error(`AI could not find selector for: ${description}`);\n      |               ^\n  249 |       }\n  250 |\n  251 |       // Wybierz locator\n    at AIHelper.fill (/home/runner/work/playwright-agents/playwright-agents/utils/ai-helper.ts:248:15)\n    at Object.<anonymous> (/home/runner/work/playwright-agents/playwright-agents/steps/shopping.steps.ts:16:3)\n    at /home/runner/work/playwright-agents/playwright-agents/.features-gen/features/shopping.feature.spec.js:7:5"
+                        }
+                      ],
+                      "stdout": [
+                        {
+                          "text": "📝 AI Log: AI Fill: username field = standard_user\n"
+                        },
+                        {
+                          "text": "📝 AI Log: AI Response (fill)\n"
+                        },
+                        {
+                          "text": "📝 AI Log: AI Response\n"
+                        },
+                        {
+                          "text": "📝 AI Log: Fill failed\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "steps": [
+                        {
+                          "title": "Given I am logged in as \"standard_user\"",
+                          "duration": 502,
+                          "error": {
+                            "message": "Error: AI could not find selector for: username field",
+                            "stack": "Error: AI could not find selector for: username field\n    at AIHelper.fill (/home/runner/work/playwright-agents/playwright-agents/utils/ai-helper.ts:248:15)\n    at Object.<anonymous> (/home/runner/work/playwright-agents/playwright-agents/steps/shopping.steps.ts:16:3)\n    at /home/runner/work/playwright-agents/playwright-agents/.features-gen/features/shopping.feature.spec.js:7:5",
+                            "location": {
+                              "file": "/home/runner/work/playwright-agents/playwright-agents/utils/ai-helper.ts",
+                              "column": 15,
+                              "line": 248
+                            },
+                            "snippet": "   at ../utils/ai-helper.ts:248\n\n\u001b[0m \u001b[90m 246 |\u001b[39m\n \u001b[90m 247 |\u001b[39m       \u001b[36mif\u001b[39m (\u001b[33m!\u001b[39mselector) {\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 248 |\u001b[39m         \u001b[36mthrow\u001b[39m \u001b[36mnew\u001b[39m \u001b[33mError\u001b[39m(\u001b[32m`AI could not find selector for: ${description}`\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m               \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 249 |\u001b[39m       }\n \u001b[90m 250 |\u001b[39m\n \u001b[90m 251 |\u001b[39m       \u001b[90m// Wybierz locator\u001b[39m\u001b[0m"
+                          }
+                        }
+                      ],
+                      "startTime": "2026-02-26T14:13:29.882Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/home/runner/work/playwright-agents/playwright-agents/test-results/features-shopping.feature-Shopping-Cart-Add-product-to-cart-chromium/test-failed-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "/home/runner/work/playwright-agents/playwright-agents/test-results/features-shopping.feature-Shopping-Cart-Add-product-to-cart-chromium/video.webm"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/home/runner/work/playwright-agents/playwright-agents/test-results/features-shopping.feature-Shopping-Cart-Add-product-to-cart-chromium/error-context.md"
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/home/runner/work/playwright-agents/playwright-agents/test-results/features-shopping.feature-Shopping-Cart-Add-product-to-cart-chromium/trace.zip"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/home/runner/work/playwright-agents/playwright-agents/utils/ai-helper.ts",
+                        "column": 15,
+                        "line": 248
+                      }
+                    },
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "failed",
+                      "duration": 671,
+                      "error": {
+                        "message": "Error: AI could not find selector for: username field",
+                        "stack": "Error: AI could not find selector for: username field\n    at AIHelper.fill (/home/runner/work/playwright-agents/playwright-agents/utils/ai-helper.ts:248:15)\n    at Object.<anonymous> (/home/runner/work/playwright-agents/playwright-agents/steps/shopping.steps.ts:16:3)\n    at /home/runner/work/playwright-agents/playwright-agents/.features-gen/features/shopping.feature.spec.js:7:5",
+                        "location": {
+                          "file": "/home/runner/work/playwright-agents/playwright-agents/utils/ai-helper.ts",
+                          "column": 15,
+                          "line": 248
+                        },
+                        "snippet": "   at ../utils/ai-helper.ts:248\n\n\u001b[0m \u001b[90m 246 |\u001b[39m\n \u001b[90m 247 |\u001b[39m       \u001b[36mif\u001b[39m (\u001b[33m!\u001b[39mselector) {\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 248 |\u001b[39m         \u001b[36mthrow\u001b[39m \u001b[36mnew\u001b[39m \u001b[33mError\u001b[39m(\u001b[32m`AI could not find selector for: ${description}`\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m               \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 249 |\u001b[39m       }\n \u001b[90m 250 |\u001b[39m\n \u001b[90m 251 |\u001b[39m       \u001b[90m// Wybierz locator\u001b[39m\u001b[0m"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/home/runner/work/playwright-agents/playwright-agents/utils/ai-helper.ts",
+                            "column": 15,
+                            "line": 248
+                          },
+                          "message": "Error: AI could not find selector for: username field\n\n   at ../utils/ai-helper.ts:248\n\n  246 |\n  247 |       if (!selector) {\n> 248 |         throw new Error(`AI could not find selector for: ${description}`);\n      |               ^\n  249 |       }\n  250 |\n  251 |       // Wybierz locator\n    at AIHelper.fill (/home/runner/work/playwright-agents/playwright-agents/utils/ai-helper.ts:248:15)\n    at Object.<anonymous> (/home/runner/work/playwright-agents/playwright-agents/steps/shopping.steps.ts:16:3)\n    at /home/runner/work/playwright-agents/playwright-agents/.features-gen/features/shopping.feature.spec.js:7:5"
+                        }
+                      ],
+                      "stdout": [
+                        {
+                          "text": "📝 AI Log: AI Fill: username field = standard_user\n"
+                        },
+                        {
+                          "text": "📝 AI Log: AI Response (fill)\n"
+                        },
+                        {
+                          "text": "📝 AI Log: AI Response\n"
+                        },
+                        {
+                          "text": "📝 AI Log: Fill failed\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 1,
+                      "steps": [
+                        {
+                          "title": "Given I am logged in as \"standard_user\"",
+                          "duration": 365,
+                          "error": {
+                            "message": "Error: AI could not find selector for: username field",
+                            "stack": "Error: AI could not find selector for: username field\n    at AIHelper.fill (/home/runner/work/playwright-agents/playwright-agents/utils/ai-helper.ts:248:15)\n    at Object.<anonymous> (/home/runner/work/playwright-agents/playwright-agents/steps/shopping.steps.ts:16:3)\n    at /home/runner/work/playwright-agents/playwright-agents/.features-gen/features/shopping.feature.spec.js:7:5",
+                            "location": {
+                              "file": "/home/runner/work/playwright-agents/playwright-agents/utils/ai-helper.ts",
+                              "column": 15,
+                              "line": 248
+                            },
+                            "snippet": "   at ../utils/ai-helper.ts:248\n\n\u001b[0m \u001b[90m 246 |\u001b[39m\n \u001b[90m 247 |\u001b[39m       \u001b[36mif\u001b[39m (\u001b[33m!\u001b[39mselector) {\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 248 |\u001b[39m         \u001b[36mthrow\u001b[39m \u001b[36mnew\u001b[39m \u001b[33mError\u001b[39m(\u001b[32m`AI could not find selector for: ${description}`\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m               \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 249 |\u001b[39m       }\n \u001b[90m 250 |\u001b[39m\n \u001b[90m 251 |\u001b[39m       \u001b[90m// Wybierz locator\u001b[39m\u001b[0m"
+                          }
+                        }
+                      ],
+                      "startTime": "2026-02-26T14:13:33.824Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/home/runner/work/playwright-agents/playwright-agents/test-results/features-shopping.feature-Shopping-Cart-Add-product-to-cart-chromium-retry1/test-failed-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "/home/runner/work/playwright-agents/playwright-agents/test-results/features-shopping.feature-Shopping-Cart-Add-product-to-cart-chromium-retry1/video.webm"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/home/runner/work/playwright-agents/playwright-agents/test-results/features-shopping.feature-Shopping-Cart-Add-product-to-cart-chromium-retry1/error-context.md"
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/home/runner/work/playwright-agents/playwright-agents/test-results/features-shopping.feature-Shopping-Cart-Add-product-to-cart-chromium-retry1/trace.zip"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/home/runner/work/playwright-agents/playwright-agents/utils/ai-helper.ts",
+                        "column": 15,
+                        "line": 248
+                      }
+                    },
+                    {
+                      "workerIndex": 2,
+                      "parallelIndex": 0,
+                      "status": "failed",
+                      "duration": 696,
+                      "error": {
+                        "message": "Error: AI could not find selector for: username field",
+                        "stack": "Error: AI could not find selector for: username field\n    at AIHelper.fill (/home/runner/work/playwright-agents/playwright-agents/utils/ai-helper.ts:248:15)\n    at Object.<anonymous> (/home/runner/work/playwright-agents/playwright-agents/steps/shopping.steps.ts:16:3)\n    at /home/runner/work/playwright-agents/playwright-agents/.features-gen/features/shopping.feature.spec.js:7:5",
+                        "location": {
+                          "file": "/home/runner/work/playwright-agents/playwright-agents/utils/ai-helper.ts",
+                          "column": 15,
+                          "line": 248
+                        },
+                        "snippet": "   at ../utils/ai-helper.ts:248\n\n\u001b[0m \u001b[90m 246 |\u001b[39m\n \u001b[90m 247 |\u001b[39m       \u001b[36mif\u001b[39m (\u001b[33m!\u001b[39mselector) {\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 248 |\u001b[39m         \u001b[36mthrow\u001b[39m \u001b[36mnew\u001b[39m \u001b[33mError\u001b[39m(\u001b[32m`AI could not find selector for: ${description}`\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m               \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 249 |\u001b[39m       }\n \u001b[90m 250 |\u001b[39m\n \u001b[90m 251 |\u001b[39m       \u001b[90m// Wybierz locator\u001b[39m\u001b[0m"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/home/runner/work/playwright-agents/playwright-agents/utils/ai-helper.ts",
+                            "column": 15,
+                            "line": 248
+                          },
+                          "message": "Error: AI could not find selector for: username field\n\n   at ../utils/ai-helper.ts:248\n\n  246 |\n  247 |       if (!selector) {\n> 248 |         throw new Error(`AI could not find selector for: ${description}`);\n      |               ^\n  249 |       }\n  250 |\n  251 |       // Wybierz locator\n    at AIHelper.fill (/home/runner/work/playwright-agents/playwright-agents/utils/ai-helper.ts:248:15)\n    at Object.<anonymous> (/home/runner/work/playwright-agents/playwright-agents/steps/shopping.steps.ts:16:3)\n    at /home/runner/work/playwright-agents/playwright-agents/.features-gen/features/shopping.feature.spec.js:7:5"
+                        }
+                      ],
+                      "stdout": [
+                        {
+                          "text": "📝 AI Log: AI Fill: username field = standard_user\n"
+                        },
+                        {
+                          "text": "📝 AI Log: AI Response (fill)\n"
+                        },
+                        {
+                          "text": "📝 AI Log: AI Response\n"
+                        },
+                        {
+                          "text": "📝 AI Log: Fill failed\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 2,
+                      "steps": [
+                        {
+                          "title": "Given I am logged in as \"standard_user\"",
+                          "duration": 370,
+                          "error": {
+                            "message": "Error: AI could not find selector for: username field",
+                            "stack": "Error: AI could not find selector for: username field\n    at AIHelper.fill (/home/runner/work/playwright-agents/playwright-agents/utils/ai-helper.ts:248:15)\n    at Object.<anonymous> (/home/runner/work/playwright-agents/playwright-agents/steps/shopping.steps.ts:16:3)\n    at /home/runner/work/playwright-agents/playwright-agents/.features-gen/features/shopping.feature.spec.js:7:5",
+                            "location": {
+                              "file": "/home/runner/work/playwright-agents/playwright-agents/utils/ai-helper.ts",
+                              "column": 15,
+                              "line": 248
+                            },
+                            "snippet": "   at ../utils/ai-helper.ts:248\n\n\u001b[0m \u001b[90m 246 |\u001b[39m\n \u001b[90m 247 |\u001b[39m       \u001b[36mif\u001b[39m (\u001b[33m!\u001b[39mselector) {\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 248 |\u001b[39m         \u001b[36mthrow\u001b[39m \u001b[36mnew\u001b[39m \u001b[33mError\u001b[39m(\u001b[32m`AI could not find selector for: ${description}`\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m               \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 249 |\u001b[39m       }\n \u001b[90m 250 |\u001b[39m\n \u001b[90m 251 |\u001b[39m       \u001b[90m// Wybierz locator\u001b[39m\u001b[0m"
+                          }
+                        }
+                      ],
+                      "startTime": "2026-02-26T14:13:36.386Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/home/runner/work/playwright-agents/playwright-agents/test-results/features-shopping.feature-Shopping-Cart-Add-product-to-cart-chromium-retry2/test-failed-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "/home/runner/work/playwright-agents/playwright-agents/test-results/features-shopping.feature-Shopping-Cart-Add-product-to-cart-chromium-retry2/video.webm"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/home/runner/work/playwright-agents/playwright-agents/test-results/features-shopping.feature-Shopping-Cart-Add-product-to-cart-chromium-retry2/error-context.md"
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/home/runner/work/playwright-agents/playwright-agents/test-results/features-shopping.feature-Shopping-Cart-Add-product-to-cart-chromium-retry2/trace.zip"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/home/runner/work/playwright-agents/playwright-agents/utils/ai-helper.ts",
+                        "column": 15,
+                        "line": 248
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "c14a68548b5beb0557e1-6b735f2a547f903121fe",
+              "file": "features/shopping.feature.spec.js",
+              "line": 6,
+              "column": 3
+            },
+            {
+              "title": "Sort products using dropdown",
+              "ok": false,
+              "tags": [
+                "smoke",
+                "dropdown"
+              ],
+              "tests": [
+                {
+                  "timeout": 90000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 3,
+                      "parallelIndex": 0,
+                      "status": "failed",
+                      "duration": 671,
+                      "error": {
+                        "message": "Error: AI could not find selector for: username field",
+                        "stack": "Error: AI could not find selector for: username field\n    at AIHelper.fill (/home/runner/work/playwright-agents/playwright-agents/utils/ai-helper.ts:248:15)\n    at Object.<anonymous> (/home/runner/work/playwright-agents/playwright-agents/steps/shopping.steps.ts:16:3)\n    at /home/runner/work/playwright-agents/playwright-agents/.features-gen/features/shopping.feature.spec.js:14:5",
+                        "location": {
+                          "file": "/home/runner/work/playwright-agents/playwright-agents/utils/ai-helper.ts",
+                          "column": 15,
+                          "line": 248
+                        },
+                        "snippet": "   at ../utils/ai-helper.ts:248\n\n\u001b[0m \u001b[90m 246 |\u001b[39m\n \u001b[90m 247 |\u001b[39m       \u001b[36mif\u001b[39m (\u001b[33m!\u001b[39mselector) {\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 248 |\u001b[39m         \u001b[36mthrow\u001b[39m \u001b[36mnew\u001b[39m \u001b[33mError\u001b[39m(\u001b[32m`AI could not find selector for: ${description}`\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m               \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 249 |\u001b[39m       }\n \u001b[90m 250 |\u001b[39m\n \u001b[90m 251 |\u001b[39m       \u001b[90m// Wybierz locator\u001b[39m\u001b[0m"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/home/runner/work/playwright-agents/playwright-agents/utils/ai-helper.ts",
+                            "column": 15,
+                            "line": 248
+                          },
+                          "message": "Error: AI could not find selector for: username field\n\n   at ../utils/ai-helper.ts:248\n\n  246 |\n  247 |       if (!selector) {\n> 248 |         throw new Error(`AI could not find selector for: ${description}`);\n      |               ^\n  249 |       }\n  250 |\n  251 |       // Wybierz locator\n    at AIHelper.fill (/home/runner/work/playwright-agents/playwright-agents/utils/ai-helper.ts:248:15)\n    at Object.<anonymous> (/home/runner/work/playwright-agents/playwright-agents/steps/shopping.steps.ts:16:3)\n    at /home/runner/work/playwright-agents/playwright-agents/.features-gen/features/shopping.feature.spec.js:14:5"
+                        }
+                      ],
+                      "stdout": [
+                        {
+                          "text": "📝 AI Log: AI Fill: username field = standard_user\n"
+                        },
+                        {
+                          "text": "📝 AI Log: AI Response (fill)\n"
+                        },
+                        {
+                          "text": "📝 AI Log: AI Response\n"
+                        },
+                        {
+                          "text": "📝 AI Log: Fill failed\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "steps": [
+                        {
+                          "title": "Given I am logged in as \"standard_user\"",
+                          "duration": 346,
+                          "error": {
+                            "message": "Error: AI could not find selector for: username field",
+                            "stack": "Error: AI could not find selector for: username field\n    at AIHelper.fill (/home/runner/work/playwright-agents/playwright-agents/utils/ai-helper.ts:248:15)\n    at Object.<anonymous> (/home/runner/work/playwright-agents/playwright-agents/steps/shopping.steps.ts:16:3)\n    at /home/runner/work/playwright-agents/playwright-agents/.features-gen/features/shopping.feature.spec.js:14:5",
+                            "location": {
+                              "file": "/home/runner/work/playwright-agents/playwright-agents/utils/ai-helper.ts",
+                              "column": 15,
+                              "line": 248
+                            },
+                            "snippet": "   at ../utils/ai-helper.ts:248\n\n\u001b[0m \u001b[90m 246 |\u001b[39m\n \u001b[90m 247 |\u001b[39m       \u001b[36mif\u001b[39m (\u001b[33m!\u001b[39mselector) {\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 248 |\u001b[39m         \u001b[36mthrow\u001b[39m \u001b[36mnew\u001b[39m \u001b[33mError\u001b[39m(\u001b[32m`AI could not find selector for: ${description}`\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m               \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 249 |\u001b[39m       }\n \u001b[90m 250 |\u001b[39m\n \u001b[90m 251 |\u001b[39m       \u001b[90m// Wybierz locator\u001b[39m\u001b[0m"
+                          }
+                        }
+                      ],
+                      "startTime": "2026-02-26T14:13:38.993Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/home/runner/work/playwright-agents/playwright-agents/test-results/features-shopping.feature--19c71-ort-products-using-dropdown-chromium/test-failed-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "/home/runner/work/playwright-agents/playwright-agents/test-results/features-shopping.feature--19c71-ort-products-using-dropdown-chromium/video.webm"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/home/runner/work/playwright-agents/playwright-agents/test-results/features-shopping.feature--19c71-ort-products-using-dropdown-chromium/error-context.md"
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/home/runner/work/playwright-agents/playwright-agents/test-results/features-shopping.feature--19c71-ort-products-using-dropdown-chromium/trace.zip"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/home/runner/work/playwright-agents/playwright-agents/utils/ai-helper.ts",
+                        "column": 15,
+                        "line": 248
+                      }
+                    },
+                    {
+                      "workerIndex": 4,
+                      "parallelIndex": 0,
+                      "status": "failed",
+                      "duration": 654,
+                      "error": {
+                        "message": "Error: AI could not find selector for: username field",
+                        "stack": "Error: AI could not find selector for: username field\n    at AIHelper.fill (/home/runner/work/playwright-agents/playwright-agents/utils/ai-helper.ts:248:15)\n    at Object.<anonymous> (/home/runner/work/playwright-agents/playwright-agents/steps/shopping.steps.ts:16:3)\n    at /home/runner/work/playwright-agents/playwright-agents/.features-gen/features/shopping.feature.spec.js:14:5",
+                        "location": {
+                          "file": "/home/runner/work/playwright-agents/playwright-agents/utils/ai-helper.ts",
+                          "column": 15,
+                          "line": 248
+                        },
+                        "snippet": "   at ../utils/ai-helper.ts:248\n\n\u001b[0m \u001b[90m 246 |\u001b[39m\n \u001b[90m 247 |\u001b[39m       \u001b[36mif\u001b[39m (\u001b[33m!\u001b[39mselector) {\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 248 |\u001b[39m         \u001b[36mthrow\u001b[39m \u001b[36mnew\u001b[39m \u001b[33mError\u001b[39m(\u001b[32m`AI could not find selector for: ${description}`\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m               \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 249 |\u001b[39m       }\n \u001b[90m 250 |\u001b[39m\n \u001b[90m 251 |\u001b[39m       \u001b[90m// Wybierz locator\u001b[39m\u001b[0m"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/home/runner/work/playwright-agents/playwright-agents/utils/ai-helper.ts",
+                            "column": 15,
+                            "line": 248
+                          },
+                          "message": "Error: AI could not find selector for: username field\n\n   at ../utils/ai-helper.ts:248\n\n  246 |\n  247 |       if (!selector) {\n> 248 |         throw new Error(`AI could not find selector for: ${description}`);\n      |               ^\n  249 |       }\n  250 |\n  251 |       // Wybierz locator\n    at AIHelper.fill (/home/runner/work/playwright-agents/playwright-agents/utils/ai-helper.ts:248:15)\n    at Object.<anonymous> (/home/runner/work/playwright-agents/playwright-agents/steps/shopping.steps.ts:16:3)\n    at /home/runner/work/playwright-agents/playwright-agents/.features-gen/features/shopping.feature.spec.js:14:5"
+                        }
+                      ],
+                      "stdout": [
+                        {
+                          "text": "📝 AI Log: AI Fill: username field = standard_user\n"
+                        },
+                        {
+                          "text": "📝 AI Log: AI Response (fill)\n"
+                        },
+                        {
+                          "text": "📝 AI Log: AI Response\n"
+                        },
+                        {
+                          "text": "📝 AI Log: Fill failed\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 1,
+                      "steps": [
+                        {
+                          "title": "Given I am logged in as \"standard_user\"",
+                          "duration": 350,
+                          "error": {
+                            "message": "Error: AI could not find selector for: username field",
+                            "stack": "Error: AI could not find selector for: username field\n    at AIHelper.fill (/home/runner/work/playwright-agents/playwright-agents/utils/ai-helper.ts:248:15)\n    at Object.<anonymous> (/home/runner/work/playwright-agents/playwright-agents/steps/shopping.steps.ts:16:3)\n    at /home/runner/work/playwright-agents/playwright-agents/.features-gen/features/shopping.feature.spec.js:14:5",
+                            "location": {
+                              "file": "/home/runner/work/playwright-agents/playwright-agents/utils/ai-helper.ts",
+                              "column": 15,
+                              "line": 248
+                            },
+                            "snippet": "   at ../utils/ai-helper.ts:248\n\n\u001b[0m \u001b[90m 246 |\u001b[39m\n \u001b[90m 247 |\u001b[39m       \u001b[36mif\u001b[39m (\u001b[33m!\u001b[39mselector) {\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 248 |\u001b[39m         \u001b[36mthrow\u001b[39m \u001b[36mnew\u001b[39m \u001b[33mError\u001b[39m(\u001b[32m`AI could not find selector for: ${description}`\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m               \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 249 |\u001b[39m       }\n \u001b[90m 250 |\u001b[39m\n \u001b[90m 251 |\u001b[39m       \u001b[90m// Wybierz locator\u001b[39m\u001b[0m"
+                          }
+                        }
+                      ],
+                      "startTime": "2026-02-26T14:13:41.565Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/home/runner/work/playwright-agents/playwright-agents/test-results/features-shopping.feature--19c71-ort-products-using-dropdown-chromium-retry1/test-failed-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "/home/runner/work/playwright-agents/playwright-agents/test-results/features-shopping.feature--19c71-ort-products-using-dropdown-chromium-retry1/video.webm"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/home/runner/work/playwright-agents/playwright-agents/test-results/features-shopping.feature--19c71-ort-products-using-dropdown-chromium-retry1/error-context.md"
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/home/runner/work/playwright-agents/playwright-agents/test-results/features-shopping.feature--19c71-ort-products-using-dropdown-chromium-retry1/trace.zip"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/home/runner/work/playwright-agents/playwright-agents/utils/ai-helper.ts",
+                        "column": 15,
+                        "line": 248
+                      }
+                    },
+                    {
+                      "workerIndex": 5,
+                      "parallelIndex": 0,
+                      "status": "failed",
+                      "duration": 681,
+                      "error": {
+                        "message": "Error: AI could not find selector for: username field",
+                        "stack": "Error: AI could not find selector for: username field\n    at AIHelper.fill (/home/runner/work/playwright-agents/playwright-agents/utils/ai-helper.ts:248:15)\n    at Object.<anonymous> (/home/runner/work/playwright-agents/playwright-agents/steps/shopping.steps.ts:16:3)\n    at /home/runner/work/playwright-agents/playwright-agents/.features-gen/features/shopping.feature.spec.js:14:5",
+                        "location": {
+                          "file": "/home/runner/work/playwright-agents/playwright-agents/utils/ai-helper.ts",
+                          "column": 15,
+                          "line": 248
+                        },
+                        "snippet": "   at ../utils/ai-helper.ts:248\n\n\u001b[0m \u001b[90m 246 |\u001b[39m\n \u001b[90m 247 |\u001b[39m       \u001b[36mif\u001b[39m (\u001b[33m!\u001b[39mselector) {\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 248 |\u001b[39m         \u001b[36mthrow\u001b[39m \u001b[36mnew\u001b[39m \u001b[33mError\u001b[39m(\u001b[32m`AI could not find selector for: ${description}`\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m               \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 249 |\u001b[39m       }\n \u001b[90m 250 |\u001b[39m\n \u001b[90m 251 |\u001b[39m       \u001b[90m// Wybierz locator\u001b[39m\u001b[0m"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/home/runner/work/playwright-agents/playwright-agents/utils/ai-helper.ts",
+                            "column": 15,
+                            "line": 248
+                          },
+                          "message": "Error: AI could not find selector for: username field\n\n   at ../utils/ai-helper.ts:248\n\n  246 |\n  247 |       if (!selector) {\n> 248 |         throw new Error(`AI could not find selector for: ${description}`);\n      |               ^\n  249 |       }\n  250 |\n  251 |       // Wybierz locator\n    at AIHelper.fill (/home/runner/work/playwright-agents/playwright-agents/utils/ai-helper.ts:248:15)\n    at Object.<anonymous> (/home/runner/work/playwright-agents/playwright-agents/steps/shopping.steps.ts:16:3)\n    at /home/runner/work/playwright-agents/playwright-agents/.features-gen/features/shopping.feature.spec.js:14:5"
+                        }
+                      ],
+                      "stdout": [
+                        {
+                          "text": "📝 AI Log: AI Fill: username field = standard_user\n"
+                        },
+                        {
+                          "text": "📝 AI Log: AI Response (fill)\n"
+                        },
+                        {
+                          "text": "📝 AI Log: AI Response\n"
+                        },
+                        {
+                          "text": "📝 AI Log: Fill failed\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 2,
+                      "steps": [
+                        {
+                          "title": "Given I am logged in as \"standard_user\"",
+                          "duration": 366,
+                          "error": {
+                            "message": "Error: AI could not find selector for: username field",
+                            "stack": "Error: AI could not find selector for: username field\n    at AIHelper.fill (/home/runner/work/playwright-agents/playwright-agents/utils/ai-helper.ts:248:15)\n    at Object.<anonymous> (/home/runner/work/playwright-agents/playwright-agents/steps/shopping.steps.ts:16:3)\n    at /home/runner/work/playwright-agents/playwright-agents/.features-gen/features/shopping.feature.spec.js:14:5",
+                            "location": {
+                              "file": "/home/runner/work/playwright-agents/playwright-agents/utils/ai-helper.ts",
+                              "column": 15,
+                              "line": 248
+                            },
+                            "snippet": "   at ../utils/ai-helper.ts:248\n\n\u001b[0m \u001b[90m 246 |\u001b[39m\n \u001b[90m 247 |\u001b[39m       \u001b[36mif\u001b[39m (\u001b[33m!\u001b[39mselector) {\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 248 |\u001b[39m         \u001b[36mthrow\u001b[39m \u001b[36mnew\u001b[39m \u001b[33mError\u001b[39m(\u001b[32m`AI could not find selector for: ${description}`\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m               \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 249 |\u001b[39m       }\n \u001b[90m 250 |\u001b[39m\n \u001b[90m 251 |\u001b[39m       \u001b[90m// Wybierz locator\u001b[39m\u001b[0m"
+                          }
+                        }
+                      ],
+                      "startTime": "2026-02-26T14:13:44.091Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/home/runner/work/playwright-agents/playwright-agents/test-results/features-shopping.feature--19c71-ort-products-using-dropdown-chromium-retry2/test-failed-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "/home/runner/work/playwright-agents/playwright-agents/test-results/features-shopping.feature--19c71-ort-products-using-dropdown-chromium-retry2/video.webm"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/home/runner/work/playwright-agents/playwright-agents/test-results/features-shopping.feature--19c71-ort-products-using-dropdown-chromium-retry2/error-context.md"
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/home/runner/work/playwright-agents/playwright-agents/test-results/features-shopping.feature--19c71-ort-products-using-dropdown-chromium-retry2/trace.zip"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/home/runner/work/playwright-agents/playwright-agents/utils/ai-helper.ts",
+                        "column": 15,
+                        "line": 248
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "c14a68548b5beb0557e1-11500b2876215929671f",
+              "file": "features/shopping.feature.spec.js",
+              "line": 13,
+              "column": 3
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-02-26T14:13:28.472Z",
+    "duration": 17090.22,
+    "expected": 0,
+    "skipped": 0,
+    "unexpected": 2,
+    "flaky": 0
+  }
+}

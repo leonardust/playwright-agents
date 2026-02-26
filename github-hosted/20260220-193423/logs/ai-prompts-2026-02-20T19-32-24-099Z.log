@@ -1,0 +1,150 @@
+[2026-02-20T19:32:24.465Z] AI Fill: username field = standard_user
+{
+  "timestamp": "2026-02-20T19:32:24.465Z",
+  "action": "AI Fill: username field = standard_user",
+  "context": {
+    "description": "username field",
+    "value": "standard_user"
+  },
+  "url": "https://www.saucedemo.com/"
+}
+
+[2026-02-20T19:32:24.823Z] AI Response (fill)
+{
+  "timestamp": "2026-02-20T19:32:24.823Z",
+  "action": "AI Response (fill)",
+  "context": {
+    "rawSelector": "input[data-test=\"username\"]",
+    "cleanedSelector": "input[data-test=\"username\"]",
+    "description": "username field"
+  },
+  "url": "https://www.saucedemo.com/"
+}
+
+[2026-02-20T19:32:24.824Z] AI Response
+{
+  "timestamp": "2026-02-20T19:32:24.824Z",
+  "action": "AI Response",
+  "context": {
+    "selector": "input[data-test=\"username\"]",
+    "description": "username field"
+  },
+  "url": "https://www.saucedemo.com/"
+}
+
+[2026-02-20T19:32:24.910Z] Fill successful
+{
+  "timestamp": "2026-02-20T19:32:24.910Z",
+  "action": "Fill successful",
+  "context": {
+    "selector": "input[data-test=\"username\"]",
+    "value": "standard_user"
+  },
+  "url": "https://www.saucedemo.com/"
+}
+
+[2026-02-20T19:32:24.910Z] AI Fill: password field = secret_sauce
+{
+  "timestamp": "2026-02-20T19:32:24.910Z",
+  "action": "AI Fill: password field = secret_sauce",
+  "context": {
+    "description": "password field",
+    "value": "secret_sauce"
+  },
+  "url": "https://www.saucedemo.com/"
+}
+
+[2026-02-20T19:32:25.082Z] AI Response (fill)
+{
+  "timestamp": "2026-02-20T19:32:25.082Z",
+  "action": "AI Response (fill)",
+  "context": {
+    "rawSelector": "input[data-test=\"password\"]",
+    "cleanedSelector": "input[data-test=\"password\"]",
+    "description": "password field"
+  },
+  "url": "https://www.saucedemo.com/"
+}
+
+[2026-02-20T19:32:25.082Z] AI Response
+{
+  "timestamp": "2026-02-20T19:32:25.082Z",
+  "action": "AI Response",
+  "context": {
+    "selector": "input[data-test=\"password\"]",
+    "description": "password field"
+  },
+  "url": "https://www.saucedemo.com/"
+}
+
+[2026-02-20T19:32:25.105Z] Fill successful
+{
+  "timestamp": "2026-02-20T19:32:25.105Z",
+  "action": "Fill successful",
+  "context": {
+    "selector": "input[data-test=\"password\"]",
+    "value": "secret_sauce"
+  },
+  "url": "https://www.saucedemo.com/"
+}
+
+[2026-02-20T19:32:25.105Z] AI Click: login button
+{
+  "timestamp": "2026-02-20T19:32:25.105Z",
+  "action": "AI Click: login button",
+  "context": {
+    "description": "login button"
+  },
+  "url": "https://www.saucedemo.com/"
+}
+
+[2026-02-20T19:32:25.321Z] AI Response (click)
+{
+  "timestamp": "2026-02-20T19:32:25.321Z",
+  "action": "AI Response (click)",
+  "context": {
+    "rawSelector": "#login-button \n\nbutton[data-test=\"login-button\"] \n\nbutton[value=\"Login\"] \n\nbutton[type=\"submit\"]",
+    "cleanedSelector": "#login-button",
+    "description": "login button"
+  },
+  "url": "https://www.saucedemo.com/"
+}
+
+[2026-02-20T19:32:25.380Z] Click successful
+{
+  "timestamp": "2026-02-20T19:32:25.380Z",
+  "action": "Click successful",
+  "context": {
+    "selector": "#login-button"
+  },
+  "url": "https://www.saucedemo.com/inventory.html"
+}
+
+[2026-02-20T19:32:25.386Z] Logged in as standard_user and navigated to products page
+{
+  "timestamp": "2026-02-20T19:32:25.386Z",
+  "action": "Logged in as standard_user and navigated to products page",
+  "url": "https://www.saucedemo.com/inventory.html"
+}
+
+[2026-02-20T19:32:25.390Z] AI Click: first add to cart button
+{
+  "timestamp": "2026-02-20T19:32:25.390Z",
+  "action": "AI Click: first add to cart button",
+  "context": {
+    "description": "first add to cart button"
+  },
+  "url": "https://www.saucedemo.com/inventory.html"
+}
+
+[2026-02-20T19:32:59.615Z] Click failed
+{
+  "timestamp": "2026-02-20T19:32:59.615Z",
+  "action": "Click failed",
+  "context": {
+    "description": "first add to cart button",
+    "error": "Error: 429 Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01khhca75bfg881q0mh9zabnra` service tier `on_demand` on tokens per minute (TPM): Limit 6000, Used 4683, Requested 2070. Please try again in 7.53s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing"
+  },
+  "url": "https://www.saucedemo.com/inventory.html"
+}
+

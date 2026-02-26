@@ -1,0 +1,253 @@
+[2026-02-19T16:01:39.341Z] AI Fill: username field = standard_user
+{
+  "timestamp": "2026-02-19T16:01:39.341Z",
+  "action": "AI Fill: username field = standard_user",
+  "context": {
+    "description": "username field",
+    "value": "standard_user"
+  },
+  "url": "https://www.saucedemo.com/"
+}
+
+[2026-02-19T16:01:39.602Z] AI Response (fill)
+{
+  "timestamp": "2026-02-19T16:01:39.602Z",
+  "action": "AI Response (fill)",
+  "context": {
+    "rawSelector": "input[data-test=\"username\"]",
+    "cleanedSelector": "input[data-test=\"username\"]",
+    "description": "username field"
+  },
+  "url": "https://www.saucedemo.com/"
+}
+
+[2026-02-19T16:01:39.602Z] AI Response
+{
+  "timestamp": "2026-02-19T16:01:39.602Z",
+  "action": "AI Response",
+  "context": {
+    "selector": "input[data-test=\"username\"]",
+    "description": "username field"
+  },
+  "url": "https://www.saucedemo.com/"
+}
+
+[2026-02-19T16:01:39.680Z] Fill successful
+{
+  "timestamp": "2026-02-19T16:01:39.680Z",
+  "action": "Fill successful",
+  "context": {
+    "selector": "input[data-test=\"username\"]",
+    "value": "standard_user"
+  },
+  "url": "https://www.saucedemo.com/"
+}
+
+[2026-02-19T16:01:39.680Z] AI Fill: password field = secret_sauce
+{
+  "timestamp": "2026-02-19T16:01:39.680Z",
+  "action": "AI Fill: password field = secret_sauce",
+  "context": {
+    "description": "password field",
+    "value": "secret_sauce"
+  },
+  "url": "https://www.saucedemo.com/"
+}
+
+[2026-02-19T16:01:39.826Z] AI Response (fill)
+{
+  "timestamp": "2026-02-19T16:01:39.826Z",
+  "action": "AI Response (fill)",
+  "context": {
+    "rawSelector": "input[data-test=\"password\"]",
+    "cleanedSelector": "input[data-test=\"password\"]",
+    "description": "password field"
+  },
+  "url": "https://www.saucedemo.com/"
+}
+
+[2026-02-19T16:01:39.826Z] AI Response
+{
+  "timestamp": "2026-02-19T16:01:39.826Z",
+  "action": "AI Response",
+  "context": {
+    "selector": "input[data-test=\"password\"]",
+    "description": "password field"
+  },
+  "url": "https://www.saucedemo.com/"
+}
+
+[2026-02-19T16:01:39.844Z] Fill successful
+{
+  "timestamp": "2026-02-19T16:01:39.844Z",
+  "action": "Fill successful",
+  "context": {
+    "selector": "input[data-test=\"password\"]",
+    "value": "secret_sauce"
+  },
+  "url": "https://www.saucedemo.com/"
+}
+
+[2026-02-19T16:01:39.845Z] AI Click: login button
+{
+  "timestamp": "2026-02-19T16:01:39.845Z",
+  "action": "AI Click: login button",
+  "context": {
+    "description": "login button"
+  },
+  "url": "https://www.saucedemo.com/"
+}
+
+[2026-02-19T16:01:40.152Z] AI Response (click)
+{
+  "timestamp": "2026-02-19T16:01:40.152Z",
+  "action": "AI Response (click)",
+  "context": {
+    "rawSelector": "#login-button \n\nbutton[data-test=\"login-button\"] \n\nbutton[value=\"Login\"] \n\nbutton:has(+ .form_group) \n\nbutton:has(+ .form_input) \n\nbutton:has(+ .input_error) \n\nbutton:has(+ .form_input[type=\"text\"]) \n\nbutton:has(+ .form_input[type=\"password\"])",
+    "cleanedSelector": "#login-button",
+    "description": "login button"
+  },
+  "url": "https://www.saucedemo.com/"
+}
+
+[2026-02-19T16:01:40.213Z] Click successful
+{
+  "timestamp": "2026-02-19T16:01:40.213Z",
+  "action": "Click successful",
+  "context": {
+    "selector": "#login-button"
+  },
+  "url": "https://www.saucedemo.com/inventory.html"
+}
+
+[2026-02-19T16:01:40.217Z] Logged in as standard_user and navigated to products page
+{
+  "timestamp": "2026-02-19T16:01:40.217Z",
+  "action": "Logged in as standard_user and navigated to products page",
+  "url": "https://www.saucedemo.com/inventory.html"
+}
+
+[2026-02-19T16:01:40.220Z] AI Click: first add to cart button
+{
+  "timestamp": "2026-02-19T16:01:40.220Z",
+  "action": "AI Click: first add to cart button",
+  "context": {
+    "description": "first add to cart button"
+  },
+  "url": "https://www.saucedemo.com/inventory.html"
+}
+
+[2026-02-19T16:01:40.524Z] AI Response (click)
+{
+  "timestamp": "2026-02-19T16:01:40.524Z",
+  "action": "AI Response (click)",
+  "context": {
+    "rawSelector": "#menu_button_container button[data-test=\"add-to-cart\"]:first-child",
+    "cleanedSelector": "#menu_button_container button[data-test=\"add-to-cart\"]:first-child",
+    "description": "first add to cart button"
+  },
+  "url": "https://www.saucedemo.com/inventory.html"
+}
+
+[2026-02-19T16:01:40.528Z] Selector not found, trying fallback strategies
+{
+  "timestamp": "2026-02-19T16:01:40.528Z",
+  "action": "Selector not found, trying fallback strategies",
+  "context": {
+    "selector": "#menu_button_container button[data-test=\"add-to-cart\"]:first-child",
+    "description": "first add to cart button"
+  },
+  "url": "https://www.saucedemo.com/inventory.html"
+}
+
+[2026-02-19T16:01:40.528Z] Trying getByRole button
+{
+  "timestamp": "2026-02-19T16:01:40.528Z",
+  "action": "Trying getByRole button",
+  "context": {
+    "buttonText": "add to cart"
+  },
+  "url": "https://www.saucedemo.com/inventory.html"
+}
+
+[2026-02-19T16:01:40.558Z] Click successful
+{
+  "timestamp": "2026-02-19T16:01:40.558Z",
+  "action": "Click successful",
+  "context": {
+    "selector": "#menu_button_container button[data-test=\"add-to-cart\"]:first-child"
+  },
+  "url": "https://www.saucedemo.com/inventory.html"
+}
+
+[2026-02-19T16:01:40.559Z] Clicked add to cart for first product
+{
+  "timestamp": "2026-02-19T16:01:40.559Z",
+  "action": "Clicked add to cart for first product",
+  "url": "https://www.saucedemo.com/inventory.html"
+}
+
+[2026-02-19T16:01:40.572Z] Cart counter shows: 1
+{
+  "timestamp": "2026-02-19T16:01:40.572Z",
+  "action": "Cart counter shows: 1",
+  "url": "https://www.saucedemo.com/inventory.html"
+}
+
+[2026-02-19T16:01:40.575Z] AI Click: shopping cart icon
+{
+  "timestamp": "2026-02-19T16:01:40.575Z",
+  "action": "AI Click: shopping cart icon",
+  "context": {
+    "description": "shopping cart icon"
+  },
+  "url": "https://www.saucedemo.com/inventory.html"
+}
+
+[2026-02-19T16:01:49.026Z] AI Response (click)
+{
+  "timestamp": "2026-02-19T16:01:49.026Z",
+  "action": "AI Response (click)",
+  "context": {
+    "rawSelector": "#shopping-cart-icon\n[data-test=\"add-to-cart\"]:first-child\nbutton:has-text(\"Add to cart\"):first-child\nbutton[data-test=\"add-to-cart\"]:first-child\nbutton:has-text(\"Add to cart\"):nth-child(1)\nbutton[data-test=\"add-to-cart\"]:nth-child(1)\nbutton:has-text(\"Add to cart\"):first-of-type\nbutton[data-test=\"add-to-cart\"]:first-of-type",
+    "cleanedSelector": "#shopping-cart-icon",
+    "description": "shopping cart icon"
+  },
+  "url": "https://www.saucedemo.com/inventory.html"
+}
+
+[2026-02-19T16:01:49.029Z] Selector not found, trying fallback strategies
+{
+  "timestamp": "2026-02-19T16:01:49.029Z",
+  "action": "Selector not found, trying fallback strategies",
+  "context": {
+    "selector": "#shopping-cart-icon",
+    "description": "shopping cart icon"
+  },
+  "url": "https://www.saucedemo.com/inventory.html"
+}
+
+[2026-02-19T16:01:49.030Z] Trying cart/icon fallback
+{
+  "timestamp": "2026-02-19T16:01:49.030Z",
+  "action": "Trying cart/icon fallback",
+  "url": "https://www.saucedemo.com/inventory.html"
+}
+
+[2026-02-19T16:01:49.061Z] Click successful
+{
+  "timestamp": "2026-02-19T16:01:49.061Z",
+  "action": "Click successful",
+  "context": {
+    "selector": "#shopping-cart-icon"
+  },
+  "url": "https://www.saucedemo.com/cart.html"
+}
+
+[2026-02-19T16:01:49.066Z] Verified product appears in cart
+{
+  "timestamp": "2026-02-19T16:01:49.066Z",
+  "action": "Verified product appears in cart",
+  "url": "https://www.saucedemo.com/cart.html"
+}
+

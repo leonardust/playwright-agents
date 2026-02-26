@@ -1,0 +1,56 @@
+[2026-02-26T14:51:46.766Z] AI Fill: username field = standard_user
+{
+  "timestamp": "2026-02-26T14:51:46.766Z",
+  "action": "AI Fill: username field = standard_user",
+  "context": {
+    "description": "username field",
+    "value": "standard_user"
+  },
+  "url": "about:blank"
+}
+
+[2026-02-26T14:51:47.076Z] AI Response (fill)
+{
+  "timestamp": "2026-02-26T14:51:47.076Z",
+  "action": "AI Response (fill)",
+  "context": {
+    "rawSelector": "input[data-test=\"username-field\"]",
+    "cleanedSelector": "input[data-test=\"username-field\"]",
+    "description": "username field"
+  },
+  "url": "about:blank"
+}
+
+[2026-02-26T14:51:47.077Z] AI Response
+{
+  "timestamp": "2026-02-26T14:51:47.077Z",
+  "action": "AI Response",
+  "context": {
+    "selector": "input[data-test=\"username-field\"]",
+    "description": "username field"
+  },
+  "url": "about:blank"
+}
+
+[2026-02-26T14:52:17.113Z] Element check failed, trying direct fill
+{
+  "timestamp": "2026-02-26T14:52:17.113Z",
+  "action": "Element check failed, trying direct fill",
+  "context": {
+    "error": "TimeoutError: locator.evaluate: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('input[data-test=\"username-field\"]')\u001b[22m\n"
+  },
+  "url": "about:blank"
+}
+
+[2026-02-26T14:52:47.121Z] Fill failed
+{
+  "timestamp": "2026-02-26T14:52:47.121Z",
+  "action": "Fill failed",
+  "context": {
+    "description": "username field",
+    "value": "standard_user",
+    "error": "TimeoutError: locator.fill: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('input[data-test=\"username-field\"]')\u001b[22m\n"
+  },
+  "url": "about:blank"
+}
+

@@ -1,0 +1,382 @@
+{
+  "config": {
+    "configFile": "/home/runner/work/playwright-agents/playwright-agents/playwright.config.ts",
+    "rootDir": "/home/runner/work/playwright-agents/playwright-agents/.features-gen",
+    "forbidOnly": true,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "ci": {
+        "commitHref": "https://github.com/leonardust/playwright-agents/commit/c038d2792dbf0090a3258bb94b4d55a41803b670",
+        "commitHash": "c038d2792dbf0090a3258bb94b4d55a41803b670",
+        "prHref": "https://github.com/leonardust/playwright-agents/pull/47",
+        "prTitle": "feat(ai): add AI-driven dropdown selection and step definitions (#16)",
+        "prBaseHash": "40c2de055a0d3393a6d9013e7fae1ece76aaab56",
+        "buildHref": "https://github.com/leonardust/playwright-agents/actions/runs/22264480159"
+      },
+      "gitCommit": {
+        "shortHash": "c038d27",
+        "hash": "c038d2792dbf0090a3258bb94b4d55a41803b670",
+        "subject": "Merge 98deb0e85c6f4023b60ed06134979a99fde1ddbb into 40c2de055a0d3393a6d9013e7fae1ece76aaab56",
+        "body": "Merge 98deb0e85c6f4023b60ed06134979a99fde1ddbb into 40c2de055a0d3393a6d9013e7fae1ece76aaab56\n",
+        "author": {
+          "name": "Łukasz Komorowski",
+          "email": "luk.komorowski@gmail.com",
+          "time": 1771708454000
+        },
+        "committer": {
+          "name": "GitHub",
+          "email": "noreply@github.com",
+          "time": 1771708454000
+        },
+        "branch": "HEAD"
+      },
+      "gitDiff": "diff --git a/features/shopping.feature b/features/shopping.feature\nindex 79f2c0f..f0619c6 100644\n--- a/features/shopping.feature\n+++ b/features/shopping.feature\n@@ -9,3 +9,9 @@ Feature: Shopping Cart\n     When  I click on \"Add to cart\" button for the first product\n     Then  I should see the cart counter increase\n     And   the product should appear in the cart\n+\n+  @smoke @dropdown\n+  Scenario: Sort products using dropdown\n+    Given I am logged in as \"standard_user\"\n+    When  I select \"Price (low to high)\" from \"sort\" dropdown\n+    Then  the first product price should be \"$7.99\"\ndiff --git a/steps/shopping.steps.ts b/steps/shopping.steps.ts\nindex 2c9996e..e1280b0 100644\n--- a/steps/shopping.steps.ts\n+++ b/steps/shopping.steps.ts\n@@ -26,6 +26,16 @@ When('I click on \"Add to cart\" button for the first product', async () => {\n   aiHelper.logPrompt('Clicked add to cart for first product');\n });\n \n+When(\n+  'I select {string} from {string} dropdown',\n+  async ({ page }, option: string, dropdown: string) => {\n+    aiHelper = new AIHelper(page);\n+    // description includes the word dropdown so AI knows what to look for\n+    await aiHelper.selectDropdown(dropdown, option);\n+    aiHelper.logPrompt(`Selected '${option}' from '${dropdown}' dropdown`);\n+  },\n+);\n+\n Then('I should see the cart counter increase', async ({ page }) => {\n   const cartBadge = page.locator('.shopping_cart_badge');\n   await expect(cartBadge).toBeVisible({ timeout: 10000 });\n@@ -46,3 +56,11 @@ Then('the product should appear in the cart', async ({ page }) => {\n \n   aiHelper.logPrompt('Verified product appears in cart');\n });\n+\n+Then('the first product price should be {string}', async ({ page }, expectedPrice: string) => {\n+  const priceLocator = page.locator('.inventory_item_price').first();\n+  const text = await priceLocator.textContent();\n+  const actual = text?.trim();\n+  aiHelper.logPrompt('Checked first product price', { actual, expectedPrice });\n+  expect(actual).toBe(expectedPrice);\n+});\ndiff --git a/utils/ai-helper.ts b/utils/ai-helper.ts\nindex 39d7672..26e925e 100644\n--- a/utils/ai-helper.ts\n+++ b/utils/ai-helper.ts\n@@ -277,6 +277,94 @@ export class AIHelper {\n     }\n   }\n \n+  /**\n+   * Wybierz opcję z elementu <select> używając AI\n+   */\n+  async selectDropdown(description: string, option: string): Promise<void> {\n+    this.logPrompt(`AI SelectDropdown: ${description} -> ${option}`, { description, option });\n+\n+    try {\n+      const pageContent = await this.page.content();\n+\n+      const prompt = `Find a UNIQUE CSS selector for a DROPDOWN (<select>) element: \"${description}\". \n+      Page HTML structure: ${this.simplifyHtml(pageContent)}\n+      \n+      Must select the <select> element itself, not its wrapper. Return ONLY the CSS selector, nothing else. NO markdown, NO code blocks.`;\n+\n+      const response = await this.client.chat.completions.create({\n+        model: process.env.OLLAMA_MODEL || 'llama3.1:8b',\n+        messages: [\n+          {\n+            role: 'system',\n+            content:\n+              'You are a CSS selector generator for <select> dropdown elements. Return ONLY a plain CSS selector, NO markdown code blocks, NO explanations. Prefer [data-test=\"...\"] or unique ids. For the Saucedemo inventory page specifically, the sort dropdown has class \"product_sort_container\" so selectors like \".product_sort_container\" or \"select.product_sort_container\" are ideal. If description mentions \"dropdown\" or \"sort\" look for a <select> tag.',\n+          },\n+          {\n+            role: 'user',\n+            content: prompt,\n+          },\n+        ],\n+        temperature: parseFloat(process.env.OLLAMA_TEMPERATURE || '0'),\n+        max_tokens: 100,\n+      });\n+\n+      const rawSelector = response.choices[0]?.message?.content?.trim() || '';\n+      const selector = this.cleanSelector(rawSelector);\n+      this.logPrompt('AI Response (selectDropdown)', {\n+        rawSelector,\n+        cleanedSelector: selector,\n+        description,\n+        option,\n+      });\n+\n+      if (!selector) {\n+        throw new Error(`AI could not find selector for dropdown: ${description}`);\n+      }\n+\n+      let locator = this.page.locator(selector);\n+      const count = await locator.count();\n+\n+      if (count === 0) {\n+        // fallback: try accessible combobox by name\n+        this.logPrompt('Selector not found, trying dropdown fallback', { selector, description });\n+        locator = this.page.getByRole('combobox', { name: new RegExp(description, 'i') });\n+        let fallbackCount = await locator.count();\n+\n+        // if still nothing, look for known container or any select\n+        if (fallbackCount === 0) {\n+          locator = this.page.locator(\n+            'select.product_sort_container, .product_sort_container select, select',\n+          );\n+          fallbackCount = await locator.count();\n+        }\n+\n+        if (fallbackCount === 0) {\n+          throw new Error(`Dropdown selector ${selector} not found and fallback failed`);\n+        }\n+      } else if (count > 1) {\n+        this.logPrompt('Multiple dropdowns found, using .first()', { selector, count });\n+        locator = locator.first();\n+      }\n+\n+      // attempt selection by label then by value\n+      try {\n+        await locator.selectOption({ label: option });\n+      } catch (e1) {\n+        try {\n+          await locator.selectOption({ value: option });\n+        } catch (e2) {\n+          this.logPrompt('Dropdown selectOption error', { error1: String(e1), error2: String(e2) });\n+          throw e2;\n+        }\n+      }\n+\n+      this.logPrompt('SelectDropdown successful', { selector, option });\n+    } catch (error) {\n+      this.logPrompt('SelectDropdown failed', { description, option, error: String(error) });\n+      throw error;\n+    }\n+  }\n+\n   /**\n    * Weryfikuj obecność elementu używając AI\n    */",
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/home/runner/work/playwright-agents/playwright-agents/test-results",
+        "repeatEach": 1,
+        "retries": 2,
+        "metadata": {
+          "ci": {
+            "commitHref": "https://github.com/leonardust/playwright-agents/commit/c038d2792dbf0090a3258bb94b4d55a41803b670",
+            "commitHash": "c038d2792dbf0090a3258bb94b4d55a41803b670",
+            "prHref": "https://github.com/leonardust/playwright-agents/pull/47",
+            "prTitle": "feat(ai): add AI-driven dropdown selection and step definitions (#16)",
+            "prBaseHash": "40c2de055a0d3393a6d9013e7fae1ece76aaab56",
+            "buildHref": "https://github.com/leonardust/playwright-agents/actions/runs/22264480159"
+          },
+          "gitCommit": {
+            "shortHash": "c038d27",
+            "hash": "c038d2792dbf0090a3258bb94b4d55a41803b670",
+            "subject": "Merge 98deb0e85c6f4023b60ed06134979a99fde1ddbb into 40c2de055a0d3393a6d9013e7fae1ece76aaab56",
+            "body": "Merge 98deb0e85c6f4023b60ed06134979a99fde1ddbb into 40c2de055a0d3393a6d9013e7fae1ece76aaab56\n",
+            "author": {
+              "name": "Łukasz Komorowski",
+              "email": "luk.komorowski@gmail.com",
+              "time": 1771708454000
+            },
+            "committer": {
+              "name": "GitHub",
+              "email": "noreply@github.com",
+              "time": 1771708454000
+            },
+            "branch": "HEAD"
+          },
+          "gitDiff": "diff --git a/features/shopping.feature b/features/shopping.feature\nindex 79f2c0f..f0619c6 100644\n--- a/features/shopping.feature\n+++ b/features/shopping.feature\n@@ -9,3 +9,9 @@ Feature: Shopping Cart\n     When  I click on \"Add to cart\" button for the first product\n     Then  I should see the cart counter increase\n     And   the product should appear in the cart\n+\n+  @smoke @dropdown\n+  Scenario: Sort products using dropdown\n+    Given I am logged in as \"standard_user\"\n+    When  I select \"Price (low to high)\" from \"sort\" dropdown\n+    Then  the first product price should be \"$7.99\"\ndiff --git a/steps/shopping.steps.ts b/steps/shopping.steps.ts\nindex 2c9996e..e1280b0 100644\n--- a/steps/shopping.steps.ts\n+++ b/steps/shopping.steps.ts\n@@ -26,6 +26,16 @@ When('I click on \"Add to cart\" button for the first product', async () => {\n   aiHelper.logPrompt('Clicked add to cart for first product');\n });\n \n+When(\n+  'I select {string} from {string} dropdown',\n+  async ({ page }, option: string, dropdown: string) => {\n+    aiHelper = new AIHelper(page);\n+    // description includes the word dropdown so AI knows what to look for\n+    await aiHelper.selectDropdown(dropdown, option);\n+    aiHelper.logPrompt(`Selected '${option}' from '${dropdown}' dropdown`);\n+  },\n+);\n+\n Then('I should see the cart counter increase', async ({ page }) => {\n   const cartBadge = page.locator('.shopping_cart_badge');\n   await expect(cartBadge).toBeVisible({ timeout: 10000 });\n@@ -46,3 +56,11 @@ Then('the product should appear in the cart', async ({ page }) => {\n \n   aiHelper.logPrompt('Verified product appears in cart');\n });\n+\n+Then('the first product price should be {string}', async ({ page }, expectedPrice: string) => {\n+  const priceLocator = page.locator('.inventory_item_price').first();\n+  const text = await priceLocator.textContent();\n+  const actual = text?.trim();\n+  aiHelper.logPrompt('Checked first product price', { actual, expectedPrice });\n+  expect(actual).toBe(expectedPrice);\n+});\ndiff --git a/utils/ai-helper.ts b/utils/ai-helper.ts\nindex 39d7672..26e925e 100644\n--- a/utils/ai-helper.ts\n+++ b/utils/ai-helper.ts\n@@ -277,6 +277,94 @@ export class AIHelper {\n     }\n   }\n \n+  /**\n+   * Wybierz opcję z elementu <select> używając AI\n+   */\n+  async selectDropdown(description: string, option: string): Promise<void> {\n+    this.logPrompt(`AI SelectDropdown: ${description} -> ${option}`, { description, option });\n+\n+    try {\n+      const pageContent = await this.page.content();\n+\n+      const prompt = `Find a UNIQUE CSS selector for a DROPDOWN (<select>) element: \"${description}\". \n+      Page HTML structure: ${this.simplifyHtml(pageContent)}\n+      \n+      Must select the <select> element itself, not its wrapper. Return ONLY the CSS selector, nothing else. NO markdown, NO code blocks.`;\n+\n+      const response = await this.client.chat.completions.create({\n+        model: process.env.OLLAMA_MODEL || 'llama3.1:8b',\n+        messages: [\n+          {\n+            role: 'system',\n+            content:\n+              'You are a CSS selector generator for <select> dropdown elements. Return ONLY a plain CSS selector, NO markdown code blocks, NO explanations. Prefer [data-test=\"...\"] or unique ids. For the Saucedemo inventory page specifically, the sort dropdown has class \"product_sort_container\" so selectors like \".product_sort_container\" or \"select.product_sort_container\" are ideal. If description mentions \"dropdown\" or \"sort\" look for a <select> tag.',\n+          },\n+          {\n+            role: 'user',\n+            content: prompt,\n+          },\n+        ],\n+        temperature: parseFloat(process.env.OLLAMA_TEMPERATURE || '0'),\n+        max_tokens: 100,\n+      });\n+\n+      const rawSelector = response.choices[0]?.message?.content?.trim() || '';\n+      const selector = this.cleanSelector(rawSelector);\n+      this.logPrompt('AI Response (selectDropdown)', {\n+        rawSelector,\n+        cleanedSelector: selector,\n+        description,\n+        option,\n+      });\n+\n+      if (!selector) {\n+        throw new Error(`AI could not find selector for dropdown: ${description}`);\n+      }\n+\n+      let locator = this.page.locator(selector);\n+      const count = await locator.count();\n+\n+      if (count === 0) {\n+        // fallback: try accessible combobox by name\n+        this.logPrompt('Selector not found, trying dropdown fallback', { selector, description });\n+        locator = this.page.getByRole('combobox', { name: new RegExp(description, 'i') });\n+        let fallbackCount = await locator.count();\n+\n+        // if still nothing, look for known container or any select\n+        if (fallbackCount === 0) {\n+          locator = this.page.locator(\n+            'select.product_sort_container, .product_sort_container select, select',\n+          );\n+          fallbackCount = await locator.count();\n+        }\n+\n+        if (fallbackCount === 0) {\n+          throw new Error(`Dropdown selector ${selector} not found and fallback failed`);\n+        }\n+      } else if (count > 1) {\n+        this.logPrompt('Multiple dropdowns found, using .first()', { selector, count });\n+        locator = locator.first();\n+      }\n+\n+      // attempt selection by label then by value\n+      try {\n+        await locator.selectOption({ label: option });\n+      } catch (e1) {\n+        try {\n+          await locator.selectOption({ value: option });\n+        } catch (e2) {\n+          this.logPrompt('Dropdown selectOption error', { error1: String(e1), error2: String(e2) });\n+          throw e2;\n+        }\n+      }\n+\n+      this.logPrompt('SelectDropdown successful', { selector, option });\n+    } catch (error) {\n+      this.logPrompt('SelectDropdown failed', { description, option, error: String(error) });\n+      throw error;\n+    }\n+  }\n+\n   /**\n    * Weryfikuj obecność elementu używając AI\n    */",
+          "actualWorkers": 1
+        },
+        "id": "chromium",
+        "name": "chromium",
+        "testDir": "/home/runner/work/playwright-agents/playwright-agents/.features-gen",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 90000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "html",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "playwright-report/results.json"
+        }
+      ],
+      [
+        "github",
+        null
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "runAgents": "none",
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.58.2",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "features/shopping.feature.spec.js",
+      "file": "features/shopping.feature.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Shopping Cart",
+          "file": "features/shopping.feature.spec.js",
+          "line": 4,
+          "column": 6,
+          "specs": [
+            {
+              "title": "Add product to cart",
+              "ok": true,
+              "tags": [
+                "smoke",
+                "critical"
+              ],
+              "tests": [
+                {
+                  "timeout": 90000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 5539,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "📝 AI Log: AI Fill: username field = standard_user\n"
+                        },
+                        {
+                          "text": "📝 AI Log: AI Response (fill)\n"
+                        },
+                        {
+                          "text": "📝 AI Log: AI Response\n"
+                        },
+                        {
+                          "text": "📝 AI Log: Fill successful\n"
+                        },
+                        {
+                          "text": "📝 AI Log: AI Fill: password field = secret_sauce\n"
+                        },
+                        {
+                          "text": "📝 AI Log: AI Response (fill)\n"
+                        },
+                        {
+                          "text": "📝 AI Log: AI Response\n"
+                        },
+                        {
+                          "text": "📝 AI Log: Fill successful\n"
+                        },
+                        {
+                          "text": "📝 AI Log: AI Click: login button\n"
+                        },
+                        {
+                          "text": "📝 AI Log: AI Response (click)\n"
+                        },
+                        {
+                          "text": "📝 AI Log: Click successful\n"
+                        },
+                        {
+                          "text": "📝 AI Log: Logged in as standard_user and navigated to products page\n"
+                        },
+                        {
+                          "text": "📝 AI Log: AI Click: first add to cart button\n"
+                        },
+                        {
+                          "text": "📝 AI Log: AI Response (click)\n"
+                        },
+                        {
+                          "text": "📝 AI Log: Selector not found, trying fallback strategies\n"
+                        },
+                        {
+                          "text": "📝 AI Log: Trying getByRole button\n"
+                        },
+                        {
+                          "text": "📝 AI Log: Click successful\n"
+                        },
+                        {
+                          "text": "📝 AI Log: Clicked add to cart for first product\n"
+                        },
+                        {
+                          "text": "📝 AI Log: Cart counter shows: 1\n"
+                        },
+                        {
+                          "text": "📝 AI Log: AI Click: shopping cart icon\n"
+                        },
+                        {
+                          "text": "📝 AI Log: AI Response (click)\n"
+                        },
+                        {
+                          "text": "📝 AI Log: Selector not found, trying fallback strategies\n"
+                        },
+                        {
+                          "text": "📝 AI Log: Trying cart/icon fallback\n"
+                        },
+                        {
+                          "text": "📝 AI Log: Click successful\n"
+                        },
+                        {
+                          "text": "📝 AI Log: Verified product appears in cart\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "steps": [
+                        {
+                          "title": "Given I am logged in as \"standard_user\"",
+                          "duration": 1250
+                        },
+                        {
+                          "title": "When I click on \"Add to cart\" button for the first product",
+                          "duration": 422
+                        },
+                        {
+                          "title": "Then I should see the cart counter increase",
+                          "duration": 12
+                        },
+                        {
+                          "title": "And the product should appear in the cart",
+                          "duration": 3407
+                        }
+                      ],
+                      "startTime": "2026-02-21T21:14:32.820Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "c14a68548b5beb0557e1-6b735f2a547f903121fe",
+              "file": "features/shopping.feature.spec.js",
+              "line": 6,
+              "column": 3
+            },
+            {
+              "title": "Sort products using dropdown",
+              "ok": true,
+              "tags": [
+                "smoke",
+                "dropdown"
+              ],
+              "tests": [
+                {
+                  "timeout": 90000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 42666,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "📝 AI Log: AI Fill: username field = standard_user\n"
+                        },
+                        {
+                          "text": "📝 AI Log: AI Response (fill)\n"
+                        },
+                        {
+                          "text": "📝 AI Log: AI Response\n"
+                        },
+                        {
+                          "text": "📝 AI Log: Fill successful\n"
+                        },
+                        {
+                          "text": "📝 AI Log: AI Fill: password field = secret_sauce\n"
+                        },
+                        {
+                          "text": "📝 AI Log: AI Response (fill)\n"
+                        },
+                        {
+                          "text": "📝 AI Log: AI Response\n"
+                        },
+                        {
+                          "text": "📝 AI Log: Fill successful\n"
+                        },
+                        {
+                          "text": "📝 AI Log: AI Click: login button\n"
+                        },
+                        {
+                          "text": "📝 AI Log: AI Response (click)\n"
+                        },
+                        {
+                          "text": "📝 AI Log: Click successful\n"
+                        },
+                        {
+                          "text": "📝 AI Log: Logged in as standard_user and navigated to products page\n"
+                        },
+                        {
+                          "text": "📝 AI Log: AI SelectDropdown: sort -> Price (low to high)\n"
+                        },
+                        {
+                          "text": "📝 AI Log: AI Response (selectDropdown)\n"
+                        },
+                        {
+                          "text": "📝 AI Log: Selector not found, trying dropdown fallback\n"
+                        },
+                        {
+                          "text": "📝 AI Log: SelectDropdown successful\n"
+                        },
+                        {
+                          "text": "📝 AI Log: Selected 'Price (low to high)' from 'sort' dropdown\n"
+                        },
+                        {
+                          "text": "📝 AI Log: Checked first product price\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "steps": [
+                        {
+                          "title": "Given I am logged in as \"standard_user\"",
+                          "duration": 20993
+                        },
+                        {
+                          "title": "When I select \"Price (low to high)\" from \"sort\" dropdown",
+                          "duration": 20434
+                        },
+                        {
+                          "title": "Then the first product price should be \"$7.99\"",
+                          "duration": 12
+                        }
+                      ],
+                      "startTime": "2026-02-21T21:14:40.870Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "c14a68548b5beb0557e1-11500b2876215929671f",
+              "file": "features/shopping.feature.spec.js",
+              "line": 13,
+              "column": 3
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-02-21T21:14:31.427Z",
+    "duration": 52173.483,
+    "expected": 2,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

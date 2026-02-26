@@ -1,0 +1,513 @@
+{
+  "config": {
+    "configFile": "/home/runner/work/playwright-agents/playwright-agents/playwright.config.ts",
+    "rootDir": "/home/runner/work/playwright-agents/playwright-agents/.features-gen",
+    "forbidOnly": true,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "ci": {
+        "commitHref": "https://github.com/leonardust/playwright-agents/commit/de29def44ebc2a9bdf05e99be64dff259bbc6a6f",
+        "commitHash": "de29def44ebc2a9bdf05e99be64dff259bbc6a6f",
+        "prHref": "https://github.com/leonardust/playwright-agents/pull/33",
+        "prTitle": "Potential fix for code scanning alert no. 24: Incomplete multi-character sanitization",
+        "prBaseHash": "701787e9af026b72408089c6f590704abf477d9a",
+        "buildHref": "https://github.com/leonardust/playwright-agents/actions/runs/22225014169"
+      },
+      "gitCommit": {
+        "shortHash": "de29def",
+        "hash": "de29def44ebc2a9bdf05e99be64dff259bbc6a6f",
+        "subject": "Merge 203ed99749c4c14660af04baae0c21ad331a04ee into 701787e9af026b72408089c6f590704abf477d9a",
+        "body": "Merge 203ed99749c4c14660af04baae0c21ad331a04ee into 701787e9af026b72408089c6f590704abf477d9a\n",
+        "author": {
+          "name": "Łukasz Komorowski",
+          "email": "luk.komorowski@gmail.com",
+          "time": 1771592273000
+        },
+        "committer": {
+          "name": "GitHub",
+          "email": "noreply@github.com",
+          "time": 1771592273000
+        },
+        "branch": "HEAD"
+      },
+      "gitDiff": "diff --git a/utils/ai-helper.ts b/utils/ai-helper.ts\nindex 8865a83..59d6712 100644\n--- a/utils/ai-helper.ts\n+++ b/utils/ai-helper.ts\n@@ -380,19 +380,47 @@ export class AIHelper {\n         }\n       } while (simplified !== previous);\n \n+      // Ostatecznie usuń wszelkie pozostałe fragmenty <script>/<style> oraz znaczniki HTML\n+      simplified = simplified\n+        .replace(/<\\s*\\/?\\s*script/gi, ' ')\n+        .replace(/<\\s*\\/?\\s*style/gi, ' ')\n+        .replace(/[<>]/g, ' ');\n+      // Ponownie zredukuj białe znaki po ostatecznym czyszczeniu\n+      simplified = simplified.replace(/\\s+/g, ' ').trim();\n+\n       return simplified;\n     } catch (e) {\n       void e;\n       // W razie problemów z parserem, zastosuj uproszczone czyszczenie\n-      let simplified = html.replace(/<!--[\\s\\S]*?--\\s*>/g, '');\n+      let simplified = html;\n+      let previous = '';\n \n-      simplified = simplified\n-        .replace(/<\\s*script[^>]*>/gi, '')\n-        .replace(/<\\s*\\/\\s*script/gi, '')\n-        .replace(/<\\s*style[^>]*>/gi, '')\n-        .replace(/<\\s*\\/\\s*style/gi, '')\n-        .replace(/\\s+/g, ' ');\n+      do {\n+        previous = simplified;\n \n+        simplified = simplified\n+          // Usuń komentarze HTML (uwzględniając warianty typu `--!>`)\n+          .replace(/<!--[\\s\\S]*?--\\s*>/g, '')\n+          // usuń otwierające tagi <script> i <style>\n+          .replace(/<\\s*script[^>]*>/gi, '')\n+          .replace(/<\\s*style[^>]*>/gi, '')\n+          // usuń ewentualne kończące tagi (mogą być niekompletne)\n+          .replace(/<\\s*\\/\\s*script[^>]*/gi, '')\n+          .replace(/<\\s*\\/\\s*style[^>]*/gi, '')\n+          // Zredukuj białe znaki\n+          .replace(/\\s+/g, ' ');\n+      } while (simplified !== previous);\n+\n+      // Ostatecznie usuń wszelkie pozostałe fragmenty <script>/<style> oraz znaczniki HTML\n+      simplified = simplified\n+        // dodatkowe zabezpieczenie przed pozostałościami nazw tagów\n+        .replace(/script\\b/gi, ' ')\n+        .replace(/style\\b/gi, ' ')\n+        .replace(/[<>]/g, ' ');\n+      // Ponownie zredukuj białe znaki po ostatecznym czyszczeniu\n+      simplified = simplified.replace(/\\s+/g, ' ').trim();\n+\n+      // Ogranicz długość do 4000 znaków (zachowaj miejsce na prompt)\n       if (simplified.length > 4000) {\n         simplified = simplified.substring(0, 4000) + '...';\n       }",
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/home/runner/work/playwright-agents/playwright-agents/test-results",
+        "repeatEach": 1,
+        "retries": 2,
+        "metadata": {
+          "ci": {
+            "commitHref": "https://github.com/leonardust/playwright-agents/commit/de29def44ebc2a9bdf05e99be64dff259bbc6a6f",
+            "commitHash": "de29def44ebc2a9bdf05e99be64dff259bbc6a6f",
+            "prHref": "https://github.com/leonardust/playwright-agents/pull/33",
+            "prTitle": "Potential fix for code scanning alert no. 24: Incomplete multi-character sanitization",
+            "prBaseHash": "701787e9af026b72408089c6f590704abf477d9a",
+            "buildHref": "https://github.com/leonardust/playwright-agents/actions/runs/22225014169"
+          },
+          "gitCommit": {
+            "shortHash": "de29def",
+            "hash": "de29def44ebc2a9bdf05e99be64dff259bbc6a6f",
+            "subject": "Merge 203ed99749c4c14660af04baae0c21ad331a04ee into 701787e9af026b72408089c6f590704abf477d9a",
+            "body": "Merge 203ed99749c4c14660af04baae0c21ad331a04ee into 701787e9af026b72408089c6f590704abf477d9a\n",
+            "author": {
+              "name": "Łukasz Komorowski",
+              "email": "luk.komorowski@gmail.com",
+              "time": 1771592273000
+            },
+            "committer": {
+              "name": "GitHub",
+              "email": "noreply@github.com",
+              "time": 1771592273000
+            },
+            "branch": "HEAD"
+          },
+          "gitDiff": "diff --git a/utils/ai-helper.ts b/utils/ai-helper.ts\nindex 8865a83..59d6712 100644\n--- a/utils/ai-helper.ts\n+++ b/utils/ai-helper.ts\n@@ -380,19 +380,47 @@ export class AIHelper {\n         }\n       } while (simplified !== previous);\n \n+      // Ostatecznie usuń wszelkie pozostałe fragmenty <script>/<style> oraz znaczniki HTML\n+      simplified = simplified\n+        .replace(/<\\s*\\/?\\s*script/gi, ' ')\n+        .replace(/<\\s*\\/?\\s*style/gi, ' ')\n+        .replace(/[<>]/g, ' ');\n+      // Ponownie zredukuj białe znaki po ostatecznym czyszczeniu\n+      simplified = simplified.replace(/\\s+/g, ' ').trim();\n+\n       return simplified;\n     } catch (e) {\n       void e;\n       // W razie problemów z parserem, zastosuj uproszczone czyszczenie\n-      let simplified = html.replace(/<!--[\\s\\S]*?--\\s*>/g, '');\n+      let simplified = html;\n+      let previous = '';\n \n-      simplified = simplified\n-        .replace(/<\\s*script[^>]*>/gi, '')\n-        .replace(/<\\s*\\/\\s*script/gi, '')\n-        .replace(/<\\s*style[^>]*>/gi, '')\n-        .replace(/<\\s*\\/\\s*style/gi, '')\n-        .replace(/\\s+/g, ' ');\n+      do {\n+        previous = simplified;\n \n+        simplified = simplified\n+          // Usuń komentarze HTML (uwzględniając warianty typu `--!>`)\n+          .replace(/<!--[\\s\\S]*?--\\s*>/g, '')\n+          // usuń otwierające tagi <script> i <style>\n+          .replace(/<\\s*script[^>]*>/gi, '')\n+          .replace(/<\\s*style[^>]*>/gi, '')\n+          // usuń ewentualne kończące tagi (mogą być niekompletne)\n+          .replace(/<\\s*\\/\\s*script[^>]*/gi, '')\n+          .replace(/<\\s*\\/\\s*style[^>]*/gi, '')\n+          // Zredukuj białe znaki\n+          .replace(/\\s+/g, ' ');\n+      } while (simplified !== previous);\n+\n+      // Ostatecznie usuń wszelkie pozostałe fragmenty <script>/<style> oraz znaczniki HTML\n+      simplified = simplified\n+        // dodatkowe zabezpieczenie przed pozostałościami nazw tagów\n+        .replace(/script\\b/gi, ' ')\n+        .replace(/style\\b/gi, ' ')\n+        .replace(/[<>]/g, ' ');\n+      // Ponownie zredukuj białe znaki po ostatecznym czyszczeniu\n+      simplified = simplified.replace(/\\s+/g, ' ').trim();\n+\n+      // Ogranicz długość do 4000 znaków (zachowaj miejsce na prompt)\n       if (simplified.length > 4000) {\n         simplified = simplified.substring(0, 4000) + '...';\n       }",
+          "actualWorkers": 1
+        },
+        "id": "chromium",
+        "name": "chromium",
+        "testDir": "/home/runner/work/playwright-agents/playwright-agents/.features-gen",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 90000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "html",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "playwright-report/results.json"
+        }
+      ],
+      [
+        "github",
+        null
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "runAgents": "none",
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.58.2",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "features/shopping.feature.spec.js",
+      "file": "features/shopping.feature.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Shopping Cart",
+          "file": "features/shopping.feature.spec.js",
+          "line": 4,
+          "column": 6,
+          "specs": [
+            {
+              "title": "Add product to cart",
+              "ok": true,
+              "tags": [
+                "smoke",
+                "critical"
+              ],
+              "tests": [
+                {
+                  "timeout": 90000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "failed",
+                      "duration": 40714,
+                      "error": {
+                        "message": "Error: 429 Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01khhca75bfg881q0mh9zabnra` service tier `on_demand` on tokens per minute (TPM): Limit 6000, Used 4690, Requested 2059. Please try again in 7.49s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing",
+                        "stack": "Error: 429 Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01khhca75bfg881q0mh9zabnra` service tier `on_demand` on tokens per minute (TPM): Limit 6000, Used 4690, Requested 2059. Please try again in 7.49s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing\n    at Function.generate (/home/runner/work/playwright-agents/playwright-agents/node_modules/openai/src/core/error.ts:96:14)\n    at OpenAI.makeStatusError (/home/runner/work/playwright-agents/playwright-agents/node_modules/openai/src/client.ts:478:28)\n    at OpenAI.makeRequest (/home/runner/work/playwright-agents/playwright-agents/node_modules/openai/src/client.ts:728:24)\n    at AIHelper.click (/home/runner/work/playwright-agents/playwright-agents/utils/ai-helper.ts:96:24)\n    at Object.<anonymous> (/home/runner/work/playwright-agents/playwright-agents/steps/shopping.steps.ts:25:3)\n    at /home/runner/work/playwright-agents/playwright-agents/.features-gen/features/shopping.feature.spec.js:8:5",
+                        "location": {
+                          "file": "/home/runner/work/playwright-agents/playwright-agents/utils/ai-helper.ts",
+                          "column": 24,
+                          "line": 96
+                        },
+                        "snippet": "   at ../utils/ai-helper.ts:96\n\n\u001b[0m \u001b[90m 94 |\u001b[39m \u001b[32m      Return ONLY the CSS selector, nothing else. NO markdown, NO code blocks.`\u001b[39m\u001b[33m;\u001b[39m\n \u001b[90m 95 |\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 96 |\u001b[39m       \u001b[36mconst\u001b[39m response \u001b[33m=\u001b[39m \u001b[36mawait\u001b[39m \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mclient\u001b[33m.\u001b[39mchat\u001b[33m.\u001b[39mcompletions\u001b[33m.\u001b[39mcreate({\n \u001b[90m    |\u001b[39m                        \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 97 |\u001b[39m         model\u001b[33m:\u001b[39m process\u001b[33m.\u001b[39menv\u001b[33m.\u001b[39m\u001b[33mOLLAMA_MODEL\u001b[39m \u001b[33m||\u001b[39m \u001b[32m'llama3.1:8b'\u001b[39m\u001b[33m,\u001b[39m\n \u001b[90m 98 |\u001b[39m         messages\u001b[33m:\u001b[39m [\n \u001b[90m 99 |\u001b[39m           {\u001b[0m"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/home/runner/work/playwright-agents/playwright-agents/utils/ai-helper.ts",
+                            "column": 24,
+                            "line": 96
+                          },
+                          "message": "Error: 429 Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01khhca75bfg881q0mh9zabnra` service tier `on_demand` on tokens per minute (TPM): Limit 6000, Used 4690, Requested 2059. Please try again in 7.49s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing\n\n   at ../utils/ai-helper.ts:96\n\n  94 |       Return ONLY the CSS selector, nothing else. NO markdown, NO code blocks.`;\n  95 |\n> 96 |       const response = await this.client.chat.completions.create({\n     |                        ^\n  97 |         model: process.env.OLLAMA_MODEL || 'llama3.1:8b',\n  98 |         messages: [\n  99 |           {\n    at Function.generate (/home/runner/work/playwright-agents/playwright-agents/node_modules/openai/src/core/error.ts:96:14)\n    at OpenAI.makeStatusError (/home/runner/work/playwright-agents/playwright-agents/node_modules/openai/src/client.ts:478:28)\n    at OpenAI.makeRequest (/home/runner/work/playwright-agents/playwright-agents/node_modules/openai/src/client.ts:728:24)\n    at AIHelper.click (/home/runner/work/playwright-agents/playwright-agents/utils/ai-helper.ts:96:24)\n    at Object.<anonymous> (/home/runner/work/playwright-agents/playwright-agents/steps/shopping.steps.ts:25:3)\n    at /home/runner/work/playwright-agents/playwright-agents/.features-gen/features/shopping.feature.spec.js:8:5"
+                        }
+                      ],
+                      "stdout": [
+                        {
+                          "text": "📝 AI Log: AI Fill: username field = standard_user\n"
+                        },
+                        {
+                          "text": "📝 AI Log: AI Response (fill)\n"
+                        },
+                        {
+                          "text": "📝 AI Log: AI Response\n"
+                        },
+                        {
+                          "text": "📝 AI Log: Fill successful\n"
+                        },
+                        {
+                          "text": "📝 AI Log: AI Fill: password field = secret_sauce\n"
+                        },
+                        {
+                          "text": "📝 AI Log: AI Response (fill)\n"
+                        },
+                        {
+                          "text": "📝 AI Log: AI Response\n"
+                        },
+                        {
+                          "text": "📝 AI Log: Fill successful\n"
+                        },
+                        {
+                          "text": "📝 AI Log: AI Click: login button\n"
+                        },
+                        {
+                          "text": "📝 AI Log: AI Response (click)\n"
+                        },
+                        {
+                          "text": "📝 AI Log: Click successful\n"
+                        },
+                        {
+                          "text": "📝 AI Log: Logged in as standard_user and navigated to products page\n"
+                        },
+                        {
+                          "text": "📝 AI Log: AI Click: first add to cart button\n"
+                        },
+                        {
+                          "text": "📝 AI Log: Click failed\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "steps": [
+                        {
+                          "title": "Given I am logged in as \"standard_user\"",
+                          "duration": 4357
+                        },
+                        {
+                          "title": "When I click on \"Add to cart\" button for the first product",
+                          "duration": 34460,
+                          "error": {
+                            "message": "Error: 429 Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01khhca75bfg881q0mh9zabnra` service tier `on_demand` on tokens per minute (TPM): Limit 6000, Used 4690, Requested 2059. Please try again in 7.49s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing",
+                            "stack": "Error: 429 Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01khhca75bfg881q0mh9zabnra` service tier `on_demand` on tokens per minute (TPM): Limit 6000, Used 4690, Requested 2059. Please try again in 7.49s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing\n    at Function.generate (/home/runner/work/playwright-agents/playwright-agents/node_modules/openai/src/core/error.ts:96:14)\n    at OpenAI.makeStatusError (/home/runner/work/playwright-agents/playwright-agents/node_modules/openai/src/client.ts:478:28)\n    at OpenAI.makeRequest (/home/runner/work/playwright-agents/playwright-agents/node_modules/openai/src/client.ts:728:24)\n    at AIHelper.click (/home/runner/work/playwright-agents/playwright-agents/utils/ai-helper.ts:96:24)\n    at Object.<anonymous> (/home/runner/work/playwright-agents/playwright-agents/steps/shopping.steps.ts:25:3)\n    at /home/runner/work/playwright-agents/playwright-agents/.features-gen/features/shopping.feature.spec.js:8:5",
+                            "location": {
+                              "file": "/home/runner/work/playwright-agents/playwright-agents/utils/ai-helper.ts",
+                              "column": 24,
+                              "line": 96
+                            },
+                            "snippet": "   at ../utils/ai-helper.ts:96\n\n\u001b[0m \u001b[90m 94 |\u001b[39m \u001b[32m      Return ONLY the CSS selector, nothing else. NO markdown, NO code blocks.`\u001b[39m\u001b[33m;\u001b[39m\n \u001b[90m 95 |\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 96 |\u001b[39m       \u001b[36mconst\u001b[39m response \u001b[33m=\u001b[39m \u001b[36mawait\u001b[39m \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mclient\u001b[33m.\u001b[39mchat\u001b[33m.\u001b[39mcompletions\u001b[33m.\u001b[39mcreate({\n \u001b[90m    |\u001b[39m                        \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 97 |\u001b[39m         model\u001b[33m:\u001b[39m process\u001b[33m.\u001b[39menv\u001b[33m.\u001b[39m\u001b[33mOLLAMA_MODEL\u001b[39m \u001b[33m||\u001b[39m \u001b[32m'llama3.1:8b'\u001b[39m\u001b[33m,\u001b[39m\n \u001b[90m 98 |\u001b[39m         messages\u001b[33m:\u001b[39m [\n \u001b[90m 99 |\u001b[39m           {\u001b[0m"
+                          }
+                        }
+                      ],
+                      "startTime": "2026-02-20T12:58:17.996Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/home/runner/work/playwright-agents/playwright-agents/test-results/features-shopping.feature-Shopping-Cart-Add-product-to-cart-chromium/test-failed-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "/home/runner/work/playwright-agents/playwright-agents/test-results/features-shopping.feature-Shopping-Cart-Add-product-to-cart-chromium/video.webm"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/home/runner/work/playwright-agents/playwright-agents/test-results/features-shopping.feature-Shopping-Cart-Add-product-to-cart-chromium/error-context.md"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/home/runner/work/playwright-agents/playwright-agents/utils/ai-helper.ts",
+                        "column": 24,
+                        "line": 96
+                      }
+                    },
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "failed",
+                      "duration": 42671,
+                      "error": {
+                        "message": "Error: 429 Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01khhca75bfg881q0mh9zabnra` service tier `on_demand` on tokens per minute (TPM): Limit 6000, Used 4641, Requested 2059. Please try again in 7s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing",
+                        "stack": "Error: 429 Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01khhca75bfg881q0mh9zabnra` service tier `on_demand` on tokens per minute (TPM): Limit 6000, Used 4641, Requested 2059. Please try again in 7s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing\n    at Function.generate (/home/runner/work/playwright-agents/playwright-agents/node_modules/openai/src/core/error.ts:96:14)\n    at OpenAI.makeStatusError (/home/runner/work/playwright-agents/playwright-agents/node_modules/openai/src/client.ts:478:28)\n    at OpenAI.makeRequest (/home/runner/work/playwright-agents/playwright-agents/node_modules/openai/src/client.ts:728:24)\n    at AIHelper.click (/home/runner/work/playwright-agents/playwright-agents/utils/ai-helper.ts:96:24)\n    at Object.<anonymous> (/home/runner/work/playwright-agents/playwright-agents/steps/shopping.steps.ts:25:3)\n    at /home/runner/work/playwright-agents/playwright-agents/.features-gen/features/shopping.feature.spec.js:8:5",
+                        "location": {
+                          "file": "/home/runner/work/playwright-agents/playwright-agents/utils/ai-helper.ts",
+                          "column": 24,
+                          "line": 96
+                        },
+                        "snippet": "   at ../utils/ai-helper.ts:96\n\n\u001b[0m \u001b[90m 94 |\u001b[39m \u001b[32m      Return ONLY the CSS selector, nothing else. NO markdown, NO code blocks.`\u001b[39m\u001b[33m;\u001b[39m\n \u001b[90m 95 |\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 96 |\u001b[39m       \u001b[36mconst\u001b[39m response \u001b[33m=\u001b[39m \u001b[36mawait\u001b[39m \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mclient\u001b[33m.\u001b[39mchat\u001b[33m.\u001b[39mcompletions\u001b[33m.\u001b[39mcreate({\n \u001b[90m    |\u001b[39m                        \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 97 |\u001b[39m         model\u001b[33m:\u001b[39m process\u001b[33m.\u001b[39menv\u001b[33m.\u001b[39m\u001b[33mOLLAMA_MODEL\u001b[39m \u001b[33m||\u001b[39m \u001b[32m'llama3.1:8b'\u001b[39m\u001b[33m,\u001b[39m\n \u001b[90m 98 |\u001b[39m         messages\u001b[33m:\u001b[39m [\n \u001b[90m 99 |\u001b[39m           {\u001b[0m"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/home/runner/work/playwright-agents/playwright-agents/utils/ai-helper.ts",
+                            "column": 24,
+                            "line": 96
+                          },
+                          "message": "Error: 429 Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01khhca75bfg881q0mh9zabnra` service tier `on_demand` on tokens per minute (TPM): Limit 6000, Used 4641, Requested 2059. Please try again in 7s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing\n\n   at ../utils/ai-helper.ts:96\n\n  94 |       Return ONLY the CSS selector, nothing else. NO markdown, NO code blocks.`;\n  95 |\n> 96 |       const response = await this.client.chat.completions.create({\n     |                        ^\n  97 |         model: process.env.OLLAMA_MODEL || 'llama3.1:8b',\n  98 |         messages: [\n  99 |           {\n    at Function.generate (/home/runner/work/playwright-agents/playwright-agents/node_modules/openai/src/core/error.ts:96:14)\n    at OpenAI.makeStatusError (/home/runner/work/playwright-agents/playwright-agents/node_modules/openai/src/client.ts:478:28)\n    at OpenAI.makeRequest (/home/runner/work/playwright-agents/playwright-agents/node_modules/openai/src/client.ts:728:24)\n    at AIHelper.click (/home/runner/work/playwright-agents/playwright-agents/utils/ai-helper.ts:96:24)\n    at Object.<anonymous> (/home/runner/work/playwright-agents/playwright-agents/steps/shopping.steps.ts:25:3)\n    at /home/runner/work/playwright-agents/playwright-agents/.features-gen/features/shopping.feature.spec.js:8:5"
+                        }
+                      ],
+                      "stdout": [
+                        {
+                          "text": "📝 AI Log: AI Fill: username field = standard_user\n"
+                        },
+                        {
+                          "text": "📝 AI Log: AI Response (fill)\n"
+                        },
+                        {
+                          "text": "📝 AI Log: AI Response\n"
+                        },
+                        {
+                          "text": "📝 AI Log: Fill successful\n"
+                        },
+                        {
+                          "text": "📝 AI Log: AI Fill: password field = secret_sauce\n"
+                        },
+                        {
+                          "text": "📝 AI Log: AI Response (fill)\n"
+                        },
+                        {
+                          "text": "📝 AI Log: AI Response\n"
+                        },
+                        {
+                          "text": "📝 AI Log: Fill successful\n"
+                        },
+                        {
+                          "text": "📝 AI Log: AI Click: login button\n"
+                        },
+                        {
+                          "text": "📝 AI Log: AI Response (click)\n"
+                        },
+                        {
+                          "text": "📝 AI Log: Click successful\n"
+                        },
+                        {
+                          "text": "📝 AI Log: Logged in as standard_user and navigated to products page\n"
+                        },
+                        {
+                          "text": "📝 AI Log: AI Click: first add to cart button\n"
+                        },
+                        {
+                          "text": "📝 AI Log: Click failed\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 1,
+                      "steps": [
+                        {
+                          "title": "Given I am logged in as \"standard_user\"",
+                          "duration": 5163
+                        },
+                        {
+                          "title": "When I click on \"Add to cart\" button for the first product",
+                          "duration": 35258,
+                          "error": {
+                            "message": "Error: 429 Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01khhca75bfg881q0mh9zabnra` service tier `on_demand` on tokens per minute (TPM): Limit 6000, Used 4641, Requested 2059. Please try again in 7s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing",
+                            "stack": "Error: 429 Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01khhca75bfg881q0mh9zabnra` service tier `on_demand` on tokens per minute (TPM): Limit 6000, Used 4641, Requested 2059. Please try again in 7s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing\n    at Function.generate (/home/runner/work/playwright-agents/playwright-agents/node_modules/openai/src/core/error.ts:96:14)\n    at OpenAI.makeStatusError (/home/runner/work/playwright-agents/playwright-agents/node_modules/openai/src/client.ts:478:28)\n    at OpenAI.makeRequest (/home/runner/work/playwright-agents/playwright-agents/node_modules/openai/src/client.ts:728:24)\n    at AIHelper.click (/home/runner/work/playwright-agents/playwright-agents/utils/ai-helper.ts:96:24)\n    at Object.<anonymous> (/home/runner/work/playwright-agents/playwright-agents/steps/shopping.steps.ts:25:3)\n    at /home/runner/work/playwright-agents/playwright-agents/.features-gen/features/shopping.feature.spec.js:8:5",
+                            "location": {
+                              "file": "/home/runner/work/playwright-agents/playwright-agents/utils/ai-helper.ts",
+                              "column": 24,
+                              "line": 96
+                            },
+                            "snippet": "   at ../utils/ai-helper.ts:96\n\n\u001b[0m \u001b[90m 94 |\u001b[39m \u001b[32m      Return ONLY the CSS selector, nothing else. NO markdown, NO code blocks.`\u001b[39m\u001b[33m;\u001b[39m\n \u001b[90m 95 |\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 96 |\u001b[39m       \u001b[36mconst\u001b[39m response \u001b[33m=\u001b[39m \u001b[36mawait\u001b[39m \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mclient\u001b[33m.\u001b[39mchat\u001b[33m.\u001b[39mcompletions\u001b[33m.\u001b[39mcreate({\n \u001b[90m    |\u001b[39m                        \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 97 |\u001b[39m         model\u001b[33m:\u001b[39m process\u001b[33m.\u001b[39menv\u001b[33m.\u001b[39m\u001b[33mOLLAMA_MODEL\u001b[39m \u001b[33m||\u001b[39m \u001b[32m'llama3.1:8b'\u001b[39m\u001b[33m,\u001b[39m\n \u001b[90m 98 |\u001b[39m         messages\u001b[33m:\u001b[39m [\n \u001b[90m 99 |\u001b[39m           {\u001b[0m"
+                          }
+                        }
+                      ],
+                      "startTime": "2026-02-20T12:59:01.489Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/home/runner/work/playwright-agents/playwright-agents/test-results/features-shopping.feature-Shopping-Cart-Add-product-to-cart-chromium-retry1/test-failed-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "/home/runner/work/playwright-agents/playwright-agents/test-results/features-shopping.feature-Shopping-Cart-Add-product-to-cart-chromium-retry1/video.webm"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/home/runner/work/playwright-agents/playwright-agents/test-results/features-shopping.feature-Shopping-Cart-Add-product-to-cart-chromium-retry1/error-context.md"
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/home/runner/work/playwright-agents/playwright-agents/test-results/features-shopping.feature-Shopping-Cart-Add-product-to-cart-chromium-retry1/trace.zip"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/home/runner/work/playwright-agents/playwright-agents/utils/ai-helper.ts",
+                        "column": 24,
+                        "line": 96
+                      }
+                    },
+                    {
+                      "workerIndex": 2,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 47484,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "📝 AI Log: AI Fill: username field = standard_user\n"
+                        },
+                        {
+                          "text": "📝 AI Log: AI Response (fill)\n"
+                        },
+                        {
+                          "text": "📝 AI Log: AI Response\n"
+                        },
+                        {
+                          "text": "📝 AI Log: Fill successful\n"
+                        },
+                        {
+                          "text": "📝 AI Log: AI Fill: password field = secret_sauce\n"
+                        },
+                        {
+                          "text": "📝 AI Log: AI Response (fill)\n"
+                        },
+                        {
+                          "text": "📝 AI Log: AI Response\n"
+                        },
+                        {
+                          "text": "📝 AI Log: Fill successful\n"
+                        },
+                        {
+                          "text": "📝 AI Log: AI Click: login button\n"
+                        },
+                        {
+                          "text": "📝 AI Log: AI Response (click)\n"
+                        },
+                        {
+                          "text": "📝 AI Log: Click successful\n"
+                        },
+                        {
+                          "text": "📝 AI Log: Logged in as standard_user and navigated to products page\n"
+                        },
+                        {
+                          "text": "📝 AI Log: AI Click: first add to cart button\n"
+                        },
+                        {
+                          "text": "📝 AI Log: AI Response (click)\n"
+                        },
+                        {
+                          "text": "📝 AI Log: Selector not found, trying fallback strategies\n"
+                        },
+                        {
+                          "text": "📝 AI Log: Trying getByRole button\n"
+                        },
+                        {
+                          "text": "📝 AI Log: Click successful\n"
+                        },
+                        {
+                          "text": "📝 AI Log: Clicked add to cart for first product\n"
+                        },
+                        {
+                          "text": "📝 AI Log: Cart counter shows: 1\n"
+                        },
+                        {
+                          "text": "📝 AI Log: AI Click: shopping cart icon\n"
+                        },
+                        {
+                          "text": "📝 AI Log: AI Response (click)\n"
+                        },
+                        {
+                          "text": "📝 AI Log: Selector not found, trying fallback strategies\n"
+                        },
+                        {
+                          "text": "📝 AI Log: Trying cart/icon fallback\n"
+                        },
+                        {
+                          "text": "📝 AI Log: Click successful\n"
+                        },
+                        {
+                          "text": "📝 AI Log: Verified product appears in cart\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 2,
+                      "steps": [
+                        {
+                          "title": "Given I am logged in as \"standard_user\"",
+                          "duration": 4125
+                        },
+                        {
+                          "title": "When I click on \"Add to cart\" button for the first product",
+                          "duration": 21578
+                        },
+                        {
+                          "title": "Then I should see the cart counter increase",
+                          "duration": 16
+                        },
+                        {
+                          "title": "And the product should appear in the cart",
+                          "duration": 20641
+                        }
+                      ],
+                      "startTime": "2026-02-20T12:59:46.149Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "flaky"
+                }
+              ],
+              "id": "c14a68548b5beb0557e1-6b735f2a547f903121fe",
+              "file": "features/shopping.feature.spec.js",
+              "line": 6,
+              "column": 3
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-02-20T12:58:16.532Z",
+    "duration": 137808.232,
+    "expected": 0,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 1
+  }
+}

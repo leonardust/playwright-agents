@@ -1,0 +1,276 @@
+{
+  "config": {
+    "configFile": "/home/runner/work/playwright-agents/playwright-agents/playwright.config.ts",
+    "rootDir": "/home/runner/work/playwright-agents/playwright-agents/.features-gen",
+    "forbidOnly": true,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "ci": {
+        "commitHref": "https://github.com/leonardust/playwright-agents/commit/87f6816dd6db4165acd3c94e869c64be01e1307f",
+        "commitHash": "87f6816dd6db4165acd3c94e869c64be01e1307f",
+        "prHref": "https://github.com/leonardust/playwright-agents/pull/45",
+        "prTitle": "fix: minimatch override",
+        "prBaseHash": "7d12b77cded8785917777113341a00ef595e6f58",
+        "buildHref": "https://github.com/leonardust/playwright-agents/actions/runs/22239138232"
+      },
+      "gitCommit": {
+        "shortHash": "87f6816",
+        "hash": "87f6816dd6db4165acd3c94e869c64be01e1307f",
+        "subject": "Merge 9b61391541a82e42907c9a61b9d53493df9f3194 into 7d12b77cded8785917777113341a00ef595e6f58",
+        "body": "Merge 9b61391541a82e42907c9a61b9d53493df9f3194 into 7d12b77cded8785917777113341a00ef595e6f58\n",
+        "author": {
+          "name": "Łukasz Komorowski",
+          "email": "luk.komorowski@gmail.com",
+          "time": 1771617685000
+        },
+        "committer": {
+          "name": "GitHub",
+          "email": "noreply@github.com",
+          "time": 1771617685000
+        },
+        "branch": "HEAD"
+      },
+      "gitDiff": "diff --git a/package-lock.json b/package-lock.json\nindex 92dab5c..5540ef7 100644\n--- a/package-lock.json\n+++ b/package-lock.json\n@@ -1082,32 +1082,6 @@\n         \"typescript\": \">=4.8.4 <6.0.0\"\n       }\n     },\n-    \"node_modules/@typescript-eslint/typescript-estree/node_modules/brace-expansion\": {\n-      \"version\": \"2.0.2\",\n-      \"resolved\": \"https://registry.npmjs.org/brace-expansion/-/brace-expansion-2.0.2.tgz\",\n-      \"integrity\": \"sha512-Jt0vHyM+jmUBqojB7E1NIYadt0vI0Qxjxd2TErW94wDz+E2LAm5vKMXXwg6ZZBTHPuUlDgQHKXvjGBdfcF1ZDQ==\",\n-      \"dev\": true,\n-      \"license\": \"MIT\",\n-      \"dependencies\": {\n-        \"balanced-match\": \"^1.0.0\"\n-      }\n-    },\n-    \"node_modules/@typescript-eslint/typescript-estree/node_modules/minimatch\": {\n-      \"version\": \"9.0.5\",\n-      \"resolved\": \"https://registry.npmjs.org/minimatch/-/minimatch-9.0.5.tgz\",\n-      \"integrity\": \"sha512-G6T0ZX48xgozx7587koeX9Ys2NYy6Gmv//P89sEte9V9whIapMNF4idKxnW2QtCcLiTWlb/wfCabAtAFWhhBow==\",\n-      \"dev\": true,\n-      \"license\": \"ISC\",\n-      \"dependencies\": {\n-        \"brace-expansion\": \"^2.0.1\"\n-      },\n-      \"engines\": {\n-        \"node\": \">=16 || 14 >=14.17\"\n-      },\n-      \"funding\": {\n-        \"url\": \"https://github.com/sponsors/isaacs\"\n-      }\n-    },\n     \"node_modules/@typescript-eslint/utils\": {\n       \"version\": \"8.56.0\",\n       \"resolved\": \"https://registry.npmjs.org/@typescript-eslint/utils/-/utils-8.56.0.tgz\",\n@@ -1270,13 +1244,6 @@\n         \"repeat-string\": \"^1.6.1\"\n       }\n     },\n-    \"node_modules/balanced-match\": {\n-      \"version\": \"1.0.2\",\n-      \"resolved\": \"https://registry.npmjs.org/balanced-match/-/balanced-match-1.0.2.tgz\",\n-      \"integrity\": \"sha512-3oSeUO0TMV67hN1AmbXsK4yaqU7tjiHlbxRDZOpH0KW9+CeX4bRAaX0Anxt0tx2MrpRpWwQaPwIlISEJhYU5Pw==\",\n-      \"dev\": true,\n-      \"license\": \"MIT\"\n-    },\n     \"node_modules/bidi-js\": {\n       \"version\": \"1.0.3\",\n       \"resolved\": \"https://registry.npmjs.org/bidi-js/-/bidi-js-1.0.3.tgz\",\n@@ -2779,16 +2746,16 @@\n       }\n     },\n     \"node_modules/minimatch\": {\n-      \"version\": \"10.2.1\",\n-      \"resolved\": \"https://registry.npmjs.org/minimatch/-/minimatch-10.2.1.tgz\",\n-      \"integrity\": \"sha512-MClCe8IL5nRRmawL6ib/eT4oLyeKMGCghibcDWK+J0hh0Q8kqSdia6BvbRMVk6mPa6WqUa5uR2oxt6C5jd533A==\",\n+      \"version\": \"10.2.2\",\n+      \"resolved\": \"https://registry.npmjs.org/minimatch/-/minimatch-10.2.2.tgz\",\n+      \"integrity\": \"sha512-+G4CpNBxa5MprY+04MbgOw1v7So6n5JY166pFi9KfYwT78fxScCeSNQSNzp6dpPSW2rONOps6Ocam1wFhCgoVw==\",\n       \"dev\": true,\n       \"license\": \"BlueOak-1.0.0\",\n       \"dependencies\": {\n         \"brace-expansion\": \"^5.0.2\"\n       },\n       \"engines\": {\n-        \"node\": \"20 || >=22\"\n+        \"node\": \"18 || 20 || >=22\"\n       },\n       \"funding\": {\n         \"url\": \"https://github.com/sponsors/isaacs\"\ndiff --git a/package.json b/package.json\nindex 503813a..1c950fe 100644\n--- a/package.json\n+++ b/package.json\n@@ -56,6 +56,9 @@\n     \"jsdom\": \"^28.1.0\",\n     \"openai\": \"^6.16.0\"\n   },\n+  \"overrides\": {\n+    \"minimatch\": \">=10.2.1\"\n+  },\n   \"lint-staged\": {\n     \"*.{ts,js}\": [\n       \"eslint --fix\",",
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/home/runner/work/playwright-agents/playwright-agents/test-results",
+        "repeatEach": 1,
+        "retries": 2,
+        "metadata": {
+          "ci": {
+            "commitHref": "https://github.com/leonardust/playwright-agents/commit/87f6816dd6db4165acd3c94e869c64be01e1307f",
+            "commitHash": "87f6816dd6db4165acd3c94e869c64be01e1307f",
+            "prHref": "https://github.com/leonardust/playwright-agents/pull/45",
+            "prTitle": "fix: minimatch override",
+            "prBaseHash": "7d12b77cded8785917777113341a00ef595e6f58",
+            "buildHref": "https://github.com/leonardust/playwright-agents/actions/runs/22239138232"
+          },
+          "gitCommit": {
+            "shortHash": "87f6816",
+            "hash": "87f6816dd6db4165acd3c94e869c64be01e1307f",
+            "subject": "Merge 9b61391541a82e42907c9a61b9d53493df9f3194 into 7d12b77cded8785917777113341a00ef595e6f58",
+            "body": "Merge 9b61391541a82e42907c9a61b9d53493df9f3194 into 7d12b77cded8785917777113341a00ef595e6f58\n",
+            "author": {
+              "name": "Łukasz Komorowski",
+              "email": "luk.komorowski@gmail.com",
+              "time": 1771617685000
+            },
+            "committer": {
+              "name": "GitHub",
+              "email": "noreply@github.com",
+              "time": 1771617685000
+            },
+            "branch": "HEAD"
+          },
+          "gitDiff": "diff --git a/package-lock.json b/package-lock.json\nindex 92dab5c..5540ef7 100644\n--- a/package-lock.json\n+++ b/package-lock.json\n@@ -1082,32 +1082,6 @@\n         \"typescript\": \">=4.8.4 <6.0.0\"\n       }\n     },\n-    \"node_modules/@typescript-eslint/typescript-estree/node_modules/brace-expansion\": {\n-      \"version\": \"2.0.2\",\n-      \"resolved\": \"https://registry.npmjs.org/brace-expansion/-/brace-expansion-2.0.2.tgz\",\n-      \"integrity\": \"sha512-Jt0vHyM+jmUBqojB7E1NIYadt0vI0Qxjxd2TErW94wDz+E2LAm5vKMXXwg6ZZBTHPuUlDgQHKXvjGBdfcF1ZDQ==\",\n-      \"dev\": true,\n-      \"license\": \"MIT\",\n-      \"dependencies\": {\n-        \"balanced-match\": \"^1.0.0\"\n-      }\n-    },\n-    \"node_modules/@typescript-eslint/typescript-estree/node_modules/minimatch\": {\n-      \"version\": \"9.0.5\",\n-      \"resolved\": \"https://registry.npmjs.org/minimatch/-/minimatch-9.0.5.tgz\",\n-      \"integrity\": \"sha512-G6T0ZX48xgozx7587koeX9Ys2NYy6Gmv//P89sEte9V9whIapMNF4idKxnW2QtCcLiTWlb/wfCabAtAFWhhBow==\",\n-      \"dev\": true,\n-      \"license\": \"ISC\",\n-      \"dependencies\": {\n-        \"brace-expansion\": \"^2.0.1\"\n-      },\n-      \"engines\": {\n-        \"node\": \">=16 || 14 >=14.17\"\n-      },\n-      \"funding\": {\n-        \"url\": \"https://github.com/sponsors/isaacs\"\n-      }\n-    },\n     \"node_modules/@typescript-eslint/utils\": {\n       \"version\": \"8.56.0\",\n       \"resolved\": \"https://registry.npmjs.org/@typescript-eslint/utils/-/utils-8.56.0.tgz\",\n@@ -1270,13 +1244,6 @@\n         \"repeat-string\": \"^1.6.1\"\n       }\n     },\n-    \"node_modules/balanced-match\": {\n-      \"version\": \"1.0.2\",\n-      \"resolved\": \"https://registry.npmjs.org/balanced-match/-/balanced-match-1.0.2.tgz\",\n-      \"integrity\": \"sha512-3oSeUO0TMV67hN1AmbXsK4yaqU7tjiHlbxRDZOpH0KW9+CeX4bRAaX0Anxt0tx2MrpRpWwQaPwIlISEJhYU5Pw==\",\n-      \"dev\": true,\n-      \"license\": \"MIT\"\n-    },\n     \"node_modules/bidi-js\": {\n       \"version\": \"1.0.3\",\n       \"resolved\": \"https://registry.npmjs.org/bidi-js/-/bidi-js-1.0.3.tgz\",\n@@ -2779,16 +2746,16 @@\n       }\n     },\n     \"node_modules/minimatch\": {\n-      \"version\": \"10.2.1\",\n-      \"resolved\": \"https://registry.npmjs.org/minimatch/-/minimatch-10.2.1.tgz\",\n-      \"integrity\": \"sha512-MClCe8IL5nRRmawL6ib/eT4oLyeKMGCghibcDWK+J0hh0Q8kqSdia6BvbRMVk6mPa6WqUa5uR2oxt6C5jd533A==\",\n+      \"version\": \"10.2.2\",\n+      \"resolved\": \"https://registry.npmjs.org/minimatch/-/minimatch-10.2.2.tgz\",\n+      \"integrity\": \"sha512-+G4CpNBxa5MprY+04MbgOw1v7So6n5JY166pFi9KfYwT78fxScCeSNQSNzp6dpPSW2rONOps6Ocam1wFhCgoVw==\",\n       \"dev\": true,\n       \"license\": \"BlueOak-1.0.0\",\n       \"dependencies\": {\n         \"brace-expansion\": \"^5.0.2\"\n       },\n       \"engines\": {\n-        \"node\": \"20 || >=22\"\n+        \"node\": \"18 || 20 || >=22\"\n       },\n       \"funding\": {\n         \"url\": \"https://github.com/sponsors/isaacs\"\ndiff --git a/package.json b/package.json\nindex 503813a..1c950fe 100644\n--- a/package.json\n+++ b/package.json\n@@ -56,6 +56,9 @@\n     \"jsdom\": \"^28.1.0\",\n     \"openai\": \"^6.16.0\"\n   },\n+  \"overrides\": {\n+    \"minimatch\": \">=10.2.1\"\n+  },\n   \"lint-staged\": {\n     \"*.{ts,js}\": [\n       \"eslint --fix\",",
+          "actualWorkers": 1
+        },
+        "id": "chromium",
+        "name": "chromium",
+        "testDir": "/home/runner/work/playwright-agents/playwright-agents/.features-gen",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 90000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "html",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "playwright-report/results.json"
+        }
+      ],
+      [
+        "github",
+        null
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "runAgents": "none",
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.58.2",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "features/shopping.feature.spec.js",
+      "file": "features/shopping.feature.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Shopping Cart",
+          "file": "features/shopping.feature.spec.js",
+          "line": 4,
+          "column": 6,
+          "specs": [
+            {
+              "title": "Add product to cart",
+              "ok": true,
+              "tags": [
+                "smoke",
+                "critical"
+              ],
+              "tests": [
+                {
+                  "timeout": 90000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 7148,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "📝 AI Log: AI Fill: username field = standard_user\n"
+                        },
+                        {
+                          "text": "📝 AI Log: AI Response (fill)\n"
+                        },
+                        {
+                          "text": "📝 AI Log: AI Response\n"
+                        },
+                        {
+                          "text": "📝 AI Log: Fill successful\n"
+                        },
+                        {
+                          "text": "📝 AI Log: AI Fill: password field = secret_sauce\n"
+                        },
+                        {
+                          "text": "📝 AI Log: AI Response (fill)\n"
+                        },
+                        {
+                          "text": "📝 AI Log: AI Response\n"
+                        },
+                        {
+                          "text": "📝 AI Log: Fill successful\n"
+                        },
+                        {
+                          "text": "📝 AI Log: AI Click: login button\n"
+                        },
+                        {
+                          "text": "📝 AI Log: AI Response (click)\n"
+                        },
+                        {
+                          "text": "📝 AI Log: Click successful\n"
+                        },
+                        {
+                          "text": "📝 AI Log: Logged in as standard_user and navigated to products page\n"
+                        },
+                        {
+                          "text": "📝 AI Log: AI Click: first add to cart button\n"
+                        },
+                        {
+                          "text": "📝 AI Log: AI Response (click)\n"
+                        },
+                        {
+                          "text": "📝 AI Log: Selector not found, trying fallback strategies\n"
+                        },
+                        {
+                          "text": "📝 AI Log: Trying getByRole button\n"
+                        },
+                        {
+                          "text": "📝 AI Log: Click successful\n"
+                        },
+                        {
+                          "text": "📝 AI Log: Clicked add to cart for first product\n"
+                        },
+                        {
+                          "text": "📝 AI Log: Cart counter shows: 1\n"
+                        },
+                        {
+                          "text": "📝 AI Log: AI Click: shopping cart icon\n"
+                        },
+                        {
+                          "text": "📝 AI Log: AI Response (click)\n"
+                        },
+                        {
+                          "text": "📝 AI Log: Selector not found, trying fallback strategies\n"
+                        },
+                        {
+                          "text": "📝 AI Log: Trying cart/icon fallback\n"
+                        },
+                        {
+                          "text": "📝 AI Log: Click successful\n"
+                        },
+                        {
+                          "text": "📝 AI Log: Verified product appears in cart\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "steps": [
+                        {
+                          "title": "Given I am logged in as \"standard_user\"",
+                          "duration": 1017
+                        },
+                        {
+                          "title": "When I click on \"Add to cart\" button for the first product",
+                          "duration": 362
+                        },
+                        {
+                          "title": "Then I should see the cart counter increase",
+                          "duration": 10
+                        },
+                        {
+                          "title": "And the product should appear in the cart",
+                          "duration": 5245
+                        }
+                      ],
+                      "startTime": "2026-02-20T20:02:24.243Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "c14a68548b5beb0557e1-6b735f2a547f903121fe",
+              "file": "features/shopping.feature.spec.js",
+              "line": 6,
+              "column": 3
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-02-20T20:02:22.926Z",
+    "duration": 9311.58,
+    "expected": 1,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}
