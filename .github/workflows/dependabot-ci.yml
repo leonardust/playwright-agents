@@ -6,7 +6,8 @@
 name: Dependabot CI with secrets
 
 permissions:
-  contents: read
+  contents: write # needed for deploy step to push pages artifact
+  pages: write # allow publishing to GitHub Pages
 
 on:
   pull_request_target:
