@@ -24,7 +24,7 @@ export default defineConfig({
   },
 
   use: {
-    baseURL: 'https://demo.playwright.dev',
+    baseURL: 'https://www.saucedemo.com/',
     // capture trace and screenshots on every run when running in CI/PR environments
     // this makes debugging easier since artifacts are always available
     trace: process.env.CI ? 'on' : 'on-first-retry',

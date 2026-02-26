@@ -8,8 +8,6 @@ let aiHelper: AIHelper;
 
 Given('I am logged in as {string}', async ({ page }, username: string) => {
   aiHelper = new AIHelper(page);
-  await page.goto('https://www.saucedemo.com/');
-
   const password = process.env.TEST_PASSWORD || 'secret_sauce';
 
   // Login z użyciem AI

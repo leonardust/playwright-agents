@@ -4,13 +4,25 @@ import * as fs from 'fs';
 import * as path from 'path';
 import { JSDOM } from 'jsdom';
 
+// typ dla uproszczonego stubu używanego przy testach Dependabot
+export type OllamaStub = {
+  chat: {
+    completions: {
+      create: (
+        opts: Record<string, unknown>,
+      ) => Promise<{ choices: { message: { content: string } }[] }>;
+    };
+  };
+};
+
 /**
  * AIHelper - wrapper dla lokalnego LLM (Ollama) do automatyzacji UI
  * Loguje wszystkie prompty wysyłane do modelu dla celów debugowania
  */
 export class AIHelper {
   private page: Page;
-  private client: any;
+  // klient OpenAI (lub stub używany w testach dependabot)
+  private client: OpenAI | OllamaStub;
   private logFile: string;
 
   constructor(page: Page) {
@@ -22,7 +34,9 @@ export class AIHelper {
       this.client = {
         chat: {
           completions: {
-            create: async (_opts: any) => ({ choices: [{ message: { content: '' } }] }),
+            create: async (_opts: { [key: string]: unknown }) => ({
+              choices: [{ message: { content: '' } }],
+            }),
           },
         },
       };
