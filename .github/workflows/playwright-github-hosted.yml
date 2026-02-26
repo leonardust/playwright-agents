@@ -82,6 +82,7 @@ jobs:
           path: |
             playwright-report/
             logs/
+            test-results/
           retention-days: 7
 
   deploy:
