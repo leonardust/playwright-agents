@@ -82,12 +82,13 @@ jobs:
           path: |
             playwright-report/
             logs/
+            test-results/
           retention-days: 7
 
   deploy:
     needs: test
-    # run deploy only for push or manual dispatch (skip all pull requests)
-    if: ${{ github.event_name == 'push' || github.event_name == 'workflow_dispatch' }}
+    # run deploy when build is triggered by push/dispatch OR on a PR **only if tests did not succeed**
+    if: ${{ github.event_name == 'push' || github.event_name == 'workflow_dispatch' || (github.event_name == 'pull_request' && needs.test.result != 'success') }}
     runs-on: ubuntu-latest
     concurrency:
       group: gh-pages-deploy

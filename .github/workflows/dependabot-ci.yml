@@ -5,6 +5,9 @@
 
 name: Dependabot CI with secrets
 
+permissions:
+  contents: read
+
 on:
   pull_request_target:
     types: [opened, synchronize, reopened]
@@ -57,3 +60,33 @@ jobs:
           OLLAMA_API_KEY: ${{ secrets.GROQ_API_KEY }}
           OLLAMA_BASE_URL: ${{ secrets.OLLAMA_BASE_URL }}
         run: npm run test:smoke
+
+      - name: Upload test artifacts for debugging
+        uses: actions/upload-artifact@v6
+        if: always()
+        with:
+          name: dependabot-playwright-report-${{ github.run_number }}
+          path: |
+            playwright-report/
+            test-results/
+            logs/
+          retention-days: 7
+
+  deploy:
+    needs: dependabot-tests
+    runs-on: ubuntu-latest
+    # only run on dependabot PRs when tests failed (avoid noise on green runs)
+    if: ${{ github.event_name == 'pull_request' && needs.dependabot-tests.result != 'success' }}
+    concurrency:
+      group: gh-pages-deploy-dependabot
+      cancel-in-progress: false
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Deploy to GitHub Pages
+        uses: ./.github/actions/deploy-to-pages
+        with:
+          artifact-name: dependabot-playwright-report-${{ github.run_number }}
+          report-type: github-hosted
+          github-token: ${{ secrets.GITHUB_TOKEN }}
