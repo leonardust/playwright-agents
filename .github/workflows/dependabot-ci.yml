@@ -63,7 +63,7 @@ jobs:
 
       - name: Upload test artifacts for debugging
         uses: actions/upload-artifact@v6
-        if: steps.tests.outcome == 'success' || steps.tests.outcome == 'failure'
+        if: failure()
         with:
           name: dependabot-playwright-report-${{ github.run_number }}
           path: |
