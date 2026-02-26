@@ -76,7 +76,7 @@ jobs:
     needs: dependabot-tests
     runs-on: ubuntu-latest
     # only run on dependabot PRs when tests failed (avoid noise on green runs/skips)
-    if: ${{ needs.dependabot-tests.result == 'failure' }}
+    if: always() && needs.dependabot-tests.result == 'failure'
     concurrency:
       group: gh-pages-deploy-dependabot
       cancel-in-progress: false
