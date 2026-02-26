@@ -78,10 +78,7 @@ jobs:
     runs-on: ubuntu-latest
     # only run on dependabot PRs when tests failed (avoid noise on green runs)
     # simpler: actor must contain dependabot and previous job must not succeed
-    if: ${{ always()
-      && contains(github.actor, 'dependabot')
-      && needs.dependabot-tests.result != 'success'
-      }}
+    if: ${{ contains(github.actor, 'dependabot') && needs.dependabot-tests.result != 'success'}}
     concurrency:
       group: gh-pages-deploy-dependabot
       cancel-in-progress: false
