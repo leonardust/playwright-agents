@@ -10,6 +10,9 @@ Given('I am logged in as {string}', async ({ page }, username: string) => {
   aiHelper = new AIHelper(page);
   const password = process.env.TEST_PASSWORD || 'secret_sauce';
 
+  // Ensure we start from the login page
+  await page.goto('/');
+
   // Login z użyciem AI
   await aiHelper.fill('username field', username);
   await aiHelper.fill('password field', password);
