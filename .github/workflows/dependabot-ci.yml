@@ -63,7 +63,7 @@ jobs:
 
       - name: Upload test artifacts for debugging
         uses: actions/upload-artifact@v6
-        if: always()
+        if: steps.tests.outcome == 'success' || steps.tests.outcome == 'failure'
         with:
           name: dependabot-playwright-report-${{ github.run_number }}
           path: |
@@ -75,9 +75,8 @@ jobs:
   deploy:
     needs: dependabot-tests
     runs-on: ubuntu-latest
-    # only run on dependabot PRs when tests failed (avoid noise on green runs)
-    # workflow uses pull_request_target so accept either event name and make sure job executes even on failure
-    if: ${{ always() && (github.event_name == 'pull_request' || github.event_name == 'pull_request_target') && needs.dependabot-tests.result != 'success' }}
+    # only run on dependabot PRs when tests failed (avoid noise on green runs/skips)
+    if: ${{ needs.dependabot-tests.result == 'failure' }}
     concurrency:
       group: gh-pages-deploy-dependabot
       cancel-in-progress: false
