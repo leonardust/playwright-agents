@@ -75,10 +75,8 @@ jobs:
   deploy:
     needs: dependabot-tests
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
-    # only run on dependabot PRs (workflow is already limited) and avoid spamming by use if
-    if: always()
+    # only run on dependabot PRs when tests failed (avoid noise on green runs)
+    if: ${{ github.event_name == 'pull_request' && needs.dependabot-tests.result != 'success' }}
     concurrency:
       group: gh-pages-deploy-dependabot
       cancel-in-progress: false
