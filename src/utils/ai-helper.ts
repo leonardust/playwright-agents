@@ -222,7 +222,8 @@ export class AIHelper {
    * Fill a form field using AI
    */
   async fill(description: string, value: string): Promise<void> {
-    this.logPrompt(`AI Fill: ${description} = ${value}`, { description, value });
+    // Avoid logging sensitive field values (e.g., passwords) in clear text
+    this.logPrompt(`AI Fill requested for: ${description}`, { description, value: '[REDACTED]' });
 
     try {
       let selector: string | undefined;
