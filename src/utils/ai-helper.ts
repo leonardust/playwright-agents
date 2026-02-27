@@ -504,34 +504,19 @@ export class AIHelper {
       void e;
       // If the parser fails, apply a simplified cleaning routine
       let simplified = html;
-      let previous = '';
 
-      do {
-        previous = simplified;
-
-        simplified = simplified
-          // Remove HTML comments.
-          .replace(/<!--[\s\S]*?-->/g, '')
-          // Remove all angle brackets to prevent forming tags.
-          .replace(/[<>]/g, ' ')
-          // Reduce whitespace
-          .replace(/\s+/g, ' ');
-      } while (simplified !== previous);
-
-      // Ensure that no remaining comment delimiters remain in the text.
-      let prevComments = '';
-      do {
-        prevComments = simplified;
-        simplified = simplified.replace(/<!--/g, ' ').replace(/--!?>/g, ' ');
-      } while (simplified !== prevComments);
-
-      // Finally remove any remaining <script>/<style> fragments and HTML tags
+      // Aggressively strip characters that can participate in HTML tags
+      // or comment delimiters to avoid incomplete multi-character
+      // sanitization issues (e.g., with "<!--" / "-->").
       simplified = simplified
+        // Remove all angle brackets and common comment punctuation
+        // so that sequences like "<!--" or "-->" cannot be formed.
+        .replace(/[<>!-]/g, ' ')
         // additional guard against leftover tag names
         .replace(/script\b/gi, ' ')
-        .replace(/style\b/gi, ' ')
-        .replace(/[<>]/g, ' ');
-      // Reduce whitespace again after final cleaning
+        .replace(/style\b/gi, ' ');
+
+      // Reduce whitespace and trim
       simplified = simplified.replace(/\s+/g, ' ').trim();
 
       // Limit length to 4000 characters (leave room for prompt)
