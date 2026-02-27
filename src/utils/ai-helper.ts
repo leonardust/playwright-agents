@@ -4,51 +4,39 @@ import * as fs from 'fs';
 import * as path from 'path';
 import { JSDOM } from 'jsdom';
 
-// typ dla uproszczonego stubu używanego przy testach Dependabot
-export type OllamaStub = {
-  chat: {
-    completions: {
-      create: (
-        opts: Record<string, unknown>,
-      ) => Promise<{ choices: { message: { content: string } }[] }>;
-    };
-  };
-};
-
 /**
- * AIHelper - wrapper dla lokalnego LLM (Ollama) do automatyzacji UI
- * Loguje wszystkie prompty wysyłane do modelu dla celów debugowania
+ * AIHelper - wrapper for a local LLM (Ollama) used for UI automation
+ * Logs all prompts sent to the model for debugging purposes
  */
 export class AIHelper {
   private page: Page;
-  // klient OpenAI (lub stub używany w testach dependabot)
-  private client: OpenAI | OllamaStub;
+  private client: OpenAI;
   private logFile: string;
 
   constructor(page: Page) {
     this.page = page;
 
-    // Konfiguracja klienta OpenAI dla Ollama. Zakładamy, że każdy workflow
-    // (w tym Dependabot) będzie podawał odpowiednie zmienne środowiskowe
-    // albo� model może być nieosiągalny – wtedy nadal użyjemy heurystyk.
+    // Configure OpenAI client for Ollama. We assume each workflow
+    // (including Dependabot) will provide the required environment variables.
+    // If the model is unreachable, heuristics will be used as a fallback.
     this.client = new OpenAI({
       baseURL: process.env.OLLAMA_BASE_URL || 'http://localhost:11434/v1',
       apiKey: process.env.OLLAMA_API_KEY || 'ollama',
     });
 
-    // Utwórz katalog dla logów jeśli nie istnieje
+    // Create logs directory if it doesn't exist
     const logsDir = path.join(process.cwd(), 'logs');
     if (!fs.existsSync(logsDir)) {
       fs.mkdirSync(logsDir, { recursive: true });
     }
 
-    // Plik logu z timestampem
+    // Log filename with timestamp
     const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
     this.logFile = path.join(logsDir, `ai-prompts-${timestamp}.log`);
   }
 
   /**
-   * Loguje prompt wysłany do AI wraz z kontekstem
+   * Log a prompt sent to the AI along with context
    */
   logPrompt(action: string, context?: unknown) {
     const timestamp = new Date().toISOString();
@@ -66,38 +54,37 @@ export class AIHelper {
   }
 
   /**
-   * Czyści odpowiedź AI z markdown code blocks i nadmiarowych znaków
+   * Clean AI response from markdown code blocks and extraneous characters
    */
   private cleanSelector(selector: string): string {
-    // Usuń markdown code blocks (```css ... ``` lub ``` ... ```)
+    // Remove markdown code blocks (```css ... ``` or ``` ... ```)
     let cleaned = selector.replace(/```(?:css|html|javascript|)?\s*/g, '').replace(/```\s*/g, '');
 
-    // Usuń komentarze CSS
+    // Remove CSS comments
     cleaned = cleaned.replace(/\/\*[\s\S]*?\*\//g, '');
 
-    // Usuń nawiasy klamrowe i zawartość (reguły CSS)
+    // Remove curly braces and their contents (CSS rules)
     cleaned = cleaned.replace(/\{[\s\S]*?\}/g, '');
 
-    // Weź tylko pierwszą linię (selector), usuń resztę
+    // Take only the first line (selector), discard the rest
     cleaned = cleaned.split('\n')[0].trim();
 
-    // Usuń średniki na końcu
+    // Remove trailing semicolons
     cleaned = cleaned.replace(/;+$/, '');
 
-    // Usuń przypadkowe spacje wokół dwukropków (np. ": nth-child" -> ":nth-child")
+    // Remove accidental spaces around colons (e.g. ": nth-child" -> ":nth-child")
     cleaned = cleaned.replace(/\s*:\s*/g, ':');
 
     return cleaned.trim();
   }
 
   /**
-   * Znajdź element używając AI i kliknij go
+   * Find an element using AI and click it
    */
   /**
-   * Proste heurystyki bez AI – przydatne jako bezpieczny fallback,
-   * używane gdy model zwróci pusty selektor lub gdy dostęp do modelu
-   * jest niemożliwy. Logika pochodzi z wcześniejszego getStubSelector,
-   * ale zawsze działa, niezależnie od aktora.
+   * Simple heuristics without AI — useful as a safe fallback,
+   * used when the model returns an empty selector or when the model
+   * is not available. Heuristics work independently of the model's availability.
    */
   private heuristicSelector(description: string): string | undefined {
     const desc = description.toLowerCase();
@@ -117,18 +104,11 @@ export class AIHelper {
     this.logPrompt(`AI Click: ${description}`, { description });
 
     try {
-      // Najpierw spróbuj AI, jeżeli jest dostępne.
+      // Try AI first, if available.
       let selector: string | undefined;
       try {
         const pageContent = await this.page.content();
-        const prompt = `Find a UNIQUE CSS selector for a CLICKABLE element: "${description}". 
-      Page HTML structure: ${this.simplifyHtml(pageContent)}
-      
-      For buttons: Look for <button> tags, prefer [data-test="add-to-cart"] or button text content.
-      For "first": Select the FIRST matching element in DOM order, use :first-child or :nth-child(1).
-      For "add to cart button": Look for <button> with text "Add to cart", NOT menu buttons.
-      Prefer [data-test="..."] attributes on clickable elements like buttons, links.
-      Return ONLY the CSS selector, nothing else. NO markdown, NO code blocks.`;
+        const prompt = `Find a UNIQUE CSS selector for a CLICKABLE element: "${description}". \n      Page HTML structure: ${this.simplifyHtml(pageContent)}\n      \n      For buttons: Look for <button> tags, prefer [data-test="add-to-cart"] or button text content.\n      For "first": Select the FIRST matching element in DOM order, use :first-child or :nth-child(1).\n      For "add to cart button": Look for <button> with text "Add to cart", NOT menu buttons.\n      Prefer [data-test="..."] attributes on clickable elements like buttons, links.\n      Return ONLY the CSS selector, nothing else. NO markdown, NO code blocks.`;
 
         const response = await this.client.chat.completions.create({
           model: process.env.OLLAMA_MODEL || 'llama3.1:8b',
@@ -155,26 +135,29 @@ export class AIHelper {
           description,
         });
       } catch (e) {
-        // jeżeli wywołanie modelu cokolwiek rzuci, zostaw selector undefined
+        // if the model call throws, leave selector undefined
         this.logPrompt('AI call failed, falling back', { error: String(e) });
       }
 
-      // jeżeli AI nie dostarczy selektora, użyj heurystyki
+      // if AI does not provide a selector, use heuristics
       if (!selector) {
         selector = this.heuristicSelector(description);
         this.logPrompt('Heuristic selector used', { description, selector });
       }
 
-      // Wybierz locator
+      // Choose locator
+      if (!selector) {
+        throw new Error('No selector found for fill operation');
+      }
       let locator = this.page.locator(selector);
       const count = await locator.count();
 
       if (count === 0) {
-        // Fallback: użyj getByRole lub innych strategii
+        // Fallback: use getByRole or other strategies
         this.logPrompt('Selector not found, trying fallback strategies', { selector, description });
 
         if (description.toLowerCase().includes('button')) {
-          // Fallback dla przycisków
+          // Fallback for buttons
           const buttonText = description
             .replace(/^(first|second|last|)\s*/i, '')
             .replace(/\s*button$/i, '')
@@ -189,13 +172,13 @@ export class AIHelper {
           description.toLowerCase().includes('cart') ||
           description.toLowerCase().includes('icon')
         ) {
-          // Fallback dla ikon/linków koszyka
+          // Fallback for cart icons/links
           this.logPrompt('Trying cart/icon fallback');
           locator = this.page
             .locator('.shopping_cart_link, [data-test="shopping-cart-link"], a.shopping_cart_link')
             .first();
         } else if (description.toLowerCase().includes('link')) {
-          // Fallback dla linków
+          // Fallback for links
           const linkText = description
             .replace(/^(first|second|last|)\s*/i, '')
             .replace(/\s*(link|icon)$/i, '')
@@ -207,7 +190,7 @@ export class AIHelper {
             locator = locator.first();
           }
         } else {
-          // Ostatnia deska ratunku - szukaj po tekście
+          // Last resort - search by text
           this.logPrompt('Trying text-based fallback');
           const text = description.replace(/^(first|second|last|)\s*/i, '').trim();
           locator = this.page.getByText(new RegExp(text, 'i'));
@@ -217,7 +200,7 @@ export class AIHelper {
           }
         }
 
-        // Sprawdź czy fallback znalazł coś
+        // Check if fallback found anything
         const fallbackCount = await locator.count();
         if (fallbackCount === 0) {
           throw new Error(`Selector ${selector} not found and fallback strategies failed`);
@@ -236,7 +219,7 @@ export class AIHelper {
   }
 
   /**
-   * Wypełnij pole formularza używając AI
+   * Fill a form field using AI
    */
   async fill(description: string, value: string): Promise<void> {
     this.logPrompt(`AI Fill: ${description} = ${value}`, { description, value });
@@ -247,12 +230,7 @@ export class AIHelper {
       try {
         const pageContent = await this.page.content();
 
-        const prompt = `Find a UNIQUE CSS selector for an INPUT element: "${description}". 
-      Page HTML structure: ${this.simplifyHtml(pageContent)}
-      
-      Must select <input>, <textarea>, or <select> element directly, NOT wrapper divs.
-      Prefer [data-test="..."] attributes on the input element itself.
-      Return ONLY the CSS selector, nothing else. NO markdown, NO code blocks.`;
+        const prompt = `Find a UNIQUE CSS selector for an INPUT element: "${description}". \n      Page HTML structure: ${this.simplifyHtml(pageContent)}\n      \n      Must select <input>, <textarea>, or <select> element directly, NOT wrapper divs.\n      Prefer [data-test="..."] attributes on the input element itself.\n      Return ONLY the CSS selector, nothing else. NO markdown, NO code blocks.`;
 
         const response = await this.client.chat.completions.create({
           model: process.env.OLLAMA_MODEL || 'llama3.1:8b',
@@ -288,7 +266,10 @@ export class AIHelper {
         this.logPrompt('Heuristic selector used for fill', { description, selector });
       }
 
-      // Wybierz locator
+      // Choose locator
+      if (!selector) {
+        throw new Error('No selector found for fill operation');
+      }
       let locator = this.page.locator(selector);
       const count = await locator.count();
 
@@ -297,7 +278,7 @@ export class AIHelper {
         locator = locator.first();
       }
 
-      // Sprawdź czy to edytowalny element - jeśli nie, szukaj input w środku
+      // Check if this is an editable element - if not, search for an input inside
       try {
         const tagName = await locator.evaluate(el => el.tagName.toLowerCase());
 
@@ -329,7 +310,7 @@ export class AIHelper {
   }
 
   /**
-   * Wybierz opcję z elementu <select> używając AI
+   * Select an option from a <select> element using AI
    */
   async selectDropdown(description: string, option: string): Promise<void> {
     this.logPrompt(`AI SelectDropdown: ${description} -> ${option}`, { description, option });
@@ -340,10 +321,7 @@ export class AIHelper {
       try {
         const pageContent = await this.page.content();
 
-        const prompt = `Find a UNIQUE CSS selector for a DROPDOWN (<select>) element: "${description}". 
-      Page HTML structure: ${this.simplifyHtml(pageContent)}
-      
-      Must select the <select> element itself, not its wrapper. Return ONLY the CSS selector, nothing else. NO markdown, NO code blocks.`;
+        const prompt = `Find a UNIQUE CSS selector for a DROPDOWN (<select>) element: "${description}". \n      Page HTML structure: ${this.simplifyHtml(pageContent)}\n      \n      Must select the <select> element itself, not its wrapper. Return ONLY the CSS selector, nothing else. NO markdown, NO code blocks.`;
 
         const response = await this.client.chat.completions.create({
           model: process.env.OLLAMA_MODEL || 'llama3.1:8b',
@@ -435,11 +413,7 @@ export class AIHelper {
       try {
         const pageContent = await this.page.content();
 
-        const prompt = `Find a UNIQUE CSS selector for: "${description}". 
-      Page HTML structure: ${this.simplifyHtml(pageContent)}
-      
-      Prefer data-test attributes, unique IDs, or use :nth-child() for uniqueness.
-      Return ONLY the CSS selector, nothing else. NO markdown, NO code blocks.`;
+        const prompt = `Find a UNIQUE CSS selector for: "${description}". \n      Page HTML structure: ${this.simplifyHtml(pageContent)}\n      \n      Prefer data-test attributes, unique IDs, or use :nth-child() for uniqueness.\n      Return ONLY the CSS selector, nothing else. NO markdown, NO code blocks.`;
 
         const response = await this.client.chat.completions.create({
           model: process.env.OLLAMA_MODEL || 'llama3.1:8b',
@@ -478,7 +452,7 @@ export class AIHelper {
         }
       }
 
-      // Fallback: jeśli selektor znajduje >1 element, użyj .first()
+      // Fallback: if selector matches >1 elements, use .first()
       const count = await this.page.locator(selector).count();
       let isVisible: boolean;
 
@@ -499,28 +473,28 @@ export class AIHelper {
   }
 
   /**
-   * Upraszcza HTML do podstawowej struktury dla zmniejszenia tokenu
+   * Simplify HTML to a basic structure to reduce token usage
    */
   private simplifyHtml(html: string): string {
-    // Usuń style, skrypty i komentarze z użyciem parsera HTML,
-    // aby poprawnie obsłużyć różne formy znaczników kończących.
+    // Remove styles, scripts and comments using an HTML parser
+    // to correctly handle different forms of closing tags.
     try {
       const dom = new JSDOM(html);
       const { document } = dom.window;
 
-      // Usuń wszystkie elementy <script> i <style>
+      // Remove all <script> and <style> elements
       document.querySelectorAll('script, style').forEach(el => el.remove());
 
-      // Zserializuj z powrotem do HTML
+      // Serialize back to HTML
       let simplified = dom.serialize();
 
-      // Usuń znaczniki HTML poprzez usunięcie znaków `<` i `>`
+      // Remove HTML angle brackets by replacing `<` and `>`
       simplified = simplified.replace(/[<>]/g, ' ');
 
-      // Zredukuj białe znaki
+      // Reduce whitespace
       simplified = simplified.replace(/\s+/g, ' ').trim();
 
-      // Ogranicz długość do 4000 znaków (zachowaj miejsce na prompt)
+      // Limit length to 4000 characters (leave room for prompt)
       if (simplified.length > 4000) {
         simplified = simplified.substring(0, 4000) + '...';
       }
@@ -528,7 +502,7 @@ export class AIHelper {
       return simplified;
     } catch (e) {
       void e;
-      // W razie problemów z parserem, zastosuj uproszczone czyszczenie
+      // If the parser fails, apply a simplified cleaning routine
       let simplified = html;
       let previous = '';
 
@@ -536,31 +510,31 @@ export class AIHelper {
         previous = simplified;
 
         simplified = simplified
-          // Usuń komentarze HTML.
+          // Remove HTML comments.
           .replace(/<!--[\s\S]*?-->/g, '')
-          // Usuń wszystkie nawiasy ostre, aby uniemożliwić tworzenie znaczników.
+          // Remove all angle brackets to prevent forming tags.
           .replace(/[<>]/g, ' ')
-          // Zredukuj białe znaki
+          // Reduce whitespace
           .replace(/\s+/g, ' ');
       } while (simplified !== previous);
 
-      // Upewnij się, że żadne pozostałe delimitery komentarzy nie zostaną w tekście.
+      // Ensure that no remaining comment delimiters remain in the text.
       let prevComments = '';
       do {
         prevComments = simplified;
         simplified = simplified.replace(/<!--/g, ' ').replace(/--!?>/g, ' ');
       } while (simplified !== prevComments);
 
-      // Ostatecznie usuń wszelkie pozostałe fragmenty <script>/<style> oraz znaczniki HTML
+      // Finally remove any remaining <script>/<style> fragments and HTML tags
       simplified = simplified
-        // dodatkowe zabezpieczenie przed pozostałościami nazw tagów
+        // additional guard against leftover tag names
         .replace(/script\b/gi, ' ')
         .replace(/style\b/gi, ' ')
         .replace(/[<>]/g, ' ');
-      // Ponownie zredukuj białe znaki po ostatecznym czyszczeniu
+      // Reduce whitespace again after final cleaning
       simplified = simplified.replace(/\s+/g, ' ').trim();
 
-      // Ogranicz długość do 4000 znaków (zachowaj miejsce na prompt)
+      // Limit length to 4000 characters (leave room for prompt)
       if (simplified.length > 4000) {
         simplified = simplified.substring(0, 4000) + '...';
       }
