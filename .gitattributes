@@ -1,0 +1,15 @@
+# Auto normalize line endings for repository
+* text=auto
+
+# Ensure these text files use LF in repository and when checked out
+*.ts eol=lf
+*.js eol=lf
+*.json eol=lf
+*.md eol=lf
+
+# Binary files
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary

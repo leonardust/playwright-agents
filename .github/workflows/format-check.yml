@@ -1,0 +1,21 @@
+name: Format Check
+
+on:
+  pull_request:
+    paths:
+      - '**/*'
+
+jobs:
+  prettier-check:
+    name: Prettier check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Use Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+      - name: Install dependencies
+        run: npm ci
+      - name: Run Prettier check
+        run: npm run format:check
