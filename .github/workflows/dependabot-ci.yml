@@ -61,7 +61,7 @@ jobs:
         run: npm run test:smoke
 
       - name: Upload test artifacts for debugging
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v7
         if: failure()
         with:
           name: dependabot-playwright-report-${{ github.run_number }}
