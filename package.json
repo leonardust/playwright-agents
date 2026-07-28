@@ -54,7 +54,7 @@
   "dependencies": {
     "dotenv": "^17.4.2",
     "jsdom": "^29.1.1",
-    "openai": "^6.49.0"
+    "openai": "^7.0.0"
   },
   "overrides": {
     "minimatch": ">=10.2.1"
