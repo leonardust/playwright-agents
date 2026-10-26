@@ -52,7 +52,7 @@
     "typescript-eslint": "^8.72.0"
   },
   "dependencies": {
-    "dotenv": "^18.0.8",
+    "dotenv": "^18.0.9",
     "jsdom": "^29.1.1",
     "openai": "^7.39.0"
   },
